@@ -1,0 +1,67 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab2.MainPage">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label 
+                Text="Clue Compendium" 
+                FontSize="75"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center"
+                Margin="0, 10, 0, 50"/>
+            <HorizontalStackLayout>
+                <!-- Houses buttons (Add Entry, Delete Entry, Edit Entry) -->
+                <VerticalStackLayout>
+                    <Button
+                        x:Name="AddEntryButton"
+                        Text="Add Entry"
+                        TextColor="Black"
+                        FontSize="25"
+                        BackgroundColor="LightGray"
+                        BorderWidth="2"
+                        BorderColor="Black"
+                        Padding="25"
+                        Margin="10"
+                        Clicked="AddEntryButtonClick"/>
+                    <Button
+                        x:Name="DeleteEntryButton"
+                        Text="Delete Entry"
+                        TextColor="Black"
+                        FontSize="25"
+                        BackgroundColor="LightGray"
+                        BorderWidth="2"
+                        BorderColor="Black"
+                        Padding="25"
+                        Margin="10"
+                        Clicked="DeleteEntryButtonClick"/>
+                    <Button
+                        x:Name="EditEntryButton"
+                        Text="Edit Entry"
+                        TextColor="Black"
+                        FontSize="25"
+                        BackgroundColor="LightGray"
+                        BorderWidth="2"
+                        BorderColor="Black"
+                        Padding="25"
+                        Margin="10"
+                        Clicked="EditEntryButtonClick"/>
+                </VerticalStackLayout>
+                <!-- Adding list for all the different Entries -->
+                <ListView x:Name="EntryList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
