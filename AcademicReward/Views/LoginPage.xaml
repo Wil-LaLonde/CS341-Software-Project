@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.LoginPage"
+             Title="User Login">
+    <Grid>
+        <StackLayout Margin="20">
+            <!-- Title section -->
+            <StackLayout>
+                <Frame BorderColor="Black" CornerRadius="0">
+                    <Label
+                        Text="AcademicRewards"
+                        FontSize="75"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                </Frame>
+            </StackLayout>
+            <!-- Welcome Back message -->
+            <StackLayout Margin="0, 40">
+                <Label
+                    Text="Welcome back"
+                    FontSize="40"/>
+                <Label
+                    Text="Please log in to continue"
+                    FontSize="18"
+                    FontAttributes="Italic"/>
+            </StackLayout>
+            <!-- Username/Password section -->
+            <StackLayout>
+                <Label
+                    Text="USERNAME: "
+                    FontSize="20"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="Transparent" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
+                    <Entry FontSize="20" Placeholder="Username..." IsPassword="False"/>
+                </Frame>
+                <Label
+                    Text="PASSWORD: "
+                    FontSize="20"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="Transparent" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
+                    <Entry FontSize="20" Placeholder="Password..." IsPassword="True"/>
+                </Frame>
+                <Button
+                    Text="Log in"
+                    Clicked="LogInButtonClicked"
+                    FontSize="25"
+                    Background="Gray"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    CornerRadius="0"
+                    Margin="0, 40"/>
+            </StackLayout>
+            <!-- Add Account section -->
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="End" Orientation="Horizontal" Margin="0, 10">
+                <Label
+                    Text="ADD ACCOUNT: "
+                    FontSize="20"
+                    VerticalOptions="Center"/>
+                <Button
+                    Text="+"
+                    Clicked="AddAccountButtonClicked"
+                    FontSize="20"
+                    Padding="20, 12"
+                    FontAttributes="Bold"
+                    Background="Gray"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    CornerRadius="0"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
