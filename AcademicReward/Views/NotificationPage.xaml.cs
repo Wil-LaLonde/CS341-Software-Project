@@ -1,9 +1,7 @@
 namespace AcademicReward.Views;
 
-public partial class Notification : ContentPage
-{
-	public Notification()
-	{
+public partial class NotificationPage : ContentPage {
+	public NotificationPage() {
 		InitializeComponent();
 	}
 }

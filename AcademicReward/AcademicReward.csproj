@@ -55,15 +55,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\NotificationPage.xaml.cs">
-	    <DependentUpon>NotificationPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\TaskPage.xaml.cs">
-	    <DependentUpon>TaskPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
