@@ -35,7 +35,7 @@
                 FontSize="18"
                 FontAttributes="Italic"/>
         </StackLayout>
-        <StackLayout Margin="10, 0">
+        <StackLayout Margin="10">
             <Label
                 Text="USERNAME: "
                 FontSize="20"
@@ -63,6 +63,26 @@
             <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
                 <Entry FontSize="20" Placeholder="Re-enter Password..." IsPassword="True"/>
             </Frame>
+        </StackLayout>
+        <StackLayout Margin="10, 0" Orientation="Horizontal">
+            <Label
+                Text="ACCOUNT TYPE: "
+                FontSize="20"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <RadioButton 
+                Content="Admin"
+                FontSize="20"
+                VerticalOptions="Center"/>
+            <Label
+                Text=" // "
+                FontSize="20"
+                VerticalOptions="Center"/>
+            <RadioButton
+                Content="Member"
+                FontSize="20"
+                VerticalOptions="Center"/>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
             <Button 
