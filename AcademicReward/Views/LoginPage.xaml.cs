@@ -1,5 +1,8 @@
 namespace AcademicReward.Views;
 
+using CommunityToolkit.Maui.Views;
+using AcademicReward.PopUps;
+
 public partial class LoginPage : ContentPage {
 	public LoginPage() {
 		InitializeComponent();
@@ -13,5 +16,7 @@ public partial class LoginPage : ContentPage {
 
 	private void AddAccountButtonClicked(object sender, EventArgs e) {
 		//create a pop up window to allow the user to create an account.
+		LoginPopUp loginPopUp = new LoginPopUp();
+		this.ShowPopup(loginPopUp);
 	}
 }
