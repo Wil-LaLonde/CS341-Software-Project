@@ -3,11 +3,100 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.TaskPage"
              Title="Task">
-    <VerticalStackLayout>
-        <Label 
-            Text="Task Page Goes Here..."
-            FontSize="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout Margin="20">
+        <StackLayout Orientation="Horizontal">
+            <Label 
+                Text="Notification:"
+                FontSize="45"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"/>
+            <Button
+                Text="+"
+                Clicked="AddNotificationButtonClicked"
+                FontSize="40"
+                Padding="28, 12"
+                FontAttributes="Bold"
+                Background="Gray"
+                BorderColor="Black"
+                BorderWidth="2"
+                CornerRadius="0"
+                VerticalOptions="Center"
+                HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+        <StackLayout Margin="0, 30">
+            <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                <ListView x:Name="NotificationList" SeparatorColor="Black" ItemsSource="{Binding TestNotifications}" MaximumHeightRequest="300">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Row="0" 
+                                        Grid.Column="0" 
+                                        Text="{Binding TestNotificationValue}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label
+                Text="Task:"
+                FontSize="45"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"/>
+            <Button
+                Text="+"
+                Clicked="AddTaskButtonClicked"
+                FontSize="40"
+                Padding="28, 12"
+                FontAttributes="Bold"
+                Background="Gray"
+                BorderColor="Black"
+                BorderWidth="2"
+                CornerRadius="0"
+                VerticalOptions="Center"
+                HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+        <StackLayout Margin="0, 30">
+            <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                <ListView x:Name="TaskList" SeparatorColor="Black" ItemsSource="{Binding TestTasks}" MaximumHeightRequest="300">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Row="0" 
+                                        Grid.Column="0" 
+                                        Text="{Binding TestTaskValue}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
