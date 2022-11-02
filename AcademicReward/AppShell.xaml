@@ -14,21 +14,21 @@
         Shell.TabBarIsVisible="False"/>
 
     <TabBar>
-        <Tab Title="Home">
-            <ShellContent Title="Home" ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
         </Tab>
         <!-- Will need to investigate how to change tabs depending on user type (memeber/admin) -->
-        <!-- <Tab Title="Notification">
+        <!-- <Tab Title="Notification" Icon="bell.png">
             <ShellContent ContentTemplate="{DataTemplate views:NotificationPage}" Route="NotificationPage"/>
         </Tab> -->
-        <Tab Title="Task">
-            <ShellContent Title="Task" ContentTemplate="{DataTemplate views:TaskPage}" Route="TaskPage"/>
+        <Tab Title="Task" Icon="plus.png">
+            <ShellContent ContentTemplate="{DataTemplate views:TaskPage}" Route="TaskPage"/>
         </Tab>
-        <Tab Title="Shop">
-            <ShellContent Title="Shop" ContentTemplate="{DataTemplate views:ShopPage}" Route="ShopPage"/>
+        <Tab Title="Shop" Icon="shop.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ShopPage}" Route="ShopPage"/>
         </Tab>
-        <Tab Title="Profile">
-            <ShellContent Title="Profile" ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage"/>
+        <Tab Title="Profile" Icon="profile.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage"/>
         </Tab>
     </TabBar>
 </Shell>
