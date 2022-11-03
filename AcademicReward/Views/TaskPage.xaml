@@ -26,7 +26,7 @@
         </StackLayout>
         <StackLayout Margin="0, 30">
             <Frame BorderColor="Black" CornerRadius="0" Padding="0">
-                <ListView x:Name="NotificationList" SeparatorColor="Black" ItemsSource="{Binding TestNotifications}" MaximumHeightRequest="300">
+                <ListView x:Name="NotificationList" SeparatorColor="Black" MaximumHeightRequest="300">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -73,7 +73,7 @@
         </StackLayout>
         <StackLayout Margin="0, 30">
             <Frame BorderColor="Black" CornerRadius="0" Padding="0">
-                <ListView x:Name="TaskList" SeparatorColor="Black" ItemsSource="{Binding TestTasks}" MaximumHeightRequest="300">
+                <ListView x:Name="TaskList" SeparatorColor="Black" MaximumHeightRequest="300">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
