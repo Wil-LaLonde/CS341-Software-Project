@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+               x:Class="AcademicReward.PopUps.TaskPopUp"
+               CanBeDismissedByTappingOutsideOfPopup="False">
+    <!--Layout of the popup-->
+    <StackLayout Margin="25" WidthRequest="600" HeightRequest="800">
+     <!--Layout of the popup-->
+        
+        <StackLayout Orientation="Horizontal" Margin="0, 30">
+            <!--Backbutton-->
+            <Button 
+                Text="&lt;"
+                Clicked="BackButtonClicked"
+                FontAttributes="Bold"
+                FontSize="25"
+                Background="Gray"
+                BorderColor="Black"
+                BorderWidth="2"
+                CornerRadius="0"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Padding="12, 5"
+                Margin="10, 0"/>
+            <!--Backbutton-->
+            <Frame BorderColor="Gray" CornerRadius="0" WidthRequest="500">
+                <Label
+                    x:Name="title"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"/>
+            </Frame>
+        </StackLayout>
+        <StackLayout Margin="10">
+            <!--Description-->
+            <Label
+                Text="Description:"
+                FontSize="28"
+                Margin="0, 5"
+                FontAttributes="Bold"/>
+            <Label
+                x:Name="description"
+                FontSize="20" 
+                Margin="0, 5"/>
+            <!--Description-->
+            
+            <!--Points-->
+            <HorizontalStackLayout >
+                <Label
+                Text="Points:"
+                FontSize="28"
+                Margin="0, 5, 10,0"
+                FontAttributes="Bold"/>
+                <Label
+                x:Name="points"
+                FontSize="28"
+                Margin="0, 5"/>
+            </HorizontalStackLayout>
+            <!--Points-->
+
+            <!--Date-->
+            <HorizontalStackLayout >
+                <Label
+                Text="Date:"
+                FontSize="28"
+                Margin="0, 5, 10,0" 
+                FontAttributes="Bold"/>
+                <Label
+                x:Name="date"
+                FontSize="28"
+                Margin="0, 5"
+                />
+            </HorizontalStackLayout>
+            <!--Date-->
+
+            <!--Feedback-->
+            <Label
+                Text="Feedback:"
+                FontSize="28"
+                Margin="0, 5"
+                FontAttributes="Bold"/>
+            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
+                <Editor FontSize="20" Placeholder="Write Feedback Here" HeightRequest="250"/>
+            </Frame>
+            <!--Feedback-->
+
+            <!--SubmitButton-->
+        </StackLayout>
+        <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
+            <Button 
+                Text="Submit" 
+                Clicked="SubmitTask"
+                FontSize="25"
+                Background="Gray"
+                BorderColor="Black"
+                BorderWidth="2"
+                CornerRadius="0"/>
+        </StackLayout>
+        <!--SubmitButton-->
+    </StackLayout>
+
+</toolkit:Popup>
