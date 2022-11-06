@@ -40,11 +40,11 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-		<MauiImage Include="Resources\Images\home.png" Color="Black"/>
-		<MauiImage Include="Resources\Images\plus.png" Color="Black"/>
-		<MauiImage Include="Resources\Images\bell.png" Color="Black"/>
-		<MauiImage Include="Resources\Images\shop.png" Color="Black"/>
-		<MauiImage Include="Resources\Images\profile.png" Color="Black"/>
+		<MauiImage Include="Resources\Images\home.png" Color="Black" />
+		<MauiImage Include="Resources\Images\plus.png" Color="Black" />
+		<MauiImage Include="Resources\Images\bell.png" Color="Black" />
+		<MauiImage Include="Resources\Images\shop.png" Color="Black" />
+		<MauiImage Include="Resources\Images\profile.png" Color="Black" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -66,7 +66,16 @@
 	  <MauiXaml Update="PopUps\AddTaskPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <Compile Update="PopUps\TaskPopup.xaml.cs">
+	    <DependentUpon>TaskPopup.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="PopUps\LoginPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopUps\TaskPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
