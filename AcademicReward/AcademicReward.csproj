@@ -60,6 +60,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="PopUps\AddNotificationPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopUps\AddTaskPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <Compile Update="PopUps\TaskPopup.xaml.cs">
 	    <DependentUpon>TaskPopup.xaml</DependentUpon>
 	  </Compile>
