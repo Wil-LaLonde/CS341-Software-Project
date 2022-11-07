@@ -29,4 +29,14 @@ public partial class GroupsPage : ContentPage
     {
         public string Name { get; set; }
     }
+
+    private void AddGroup(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new CreateGroupPage());
+    }
+
+    private void ShowSampleGroupPage(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new GroupPage());
+    }
 }

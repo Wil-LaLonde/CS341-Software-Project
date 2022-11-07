@@ -4,12 +4,16 @@
              x:Class="AcademicReward.Views.GroupsPage"
              Title="Your Groups">
 
-    <VerticalStackLayout>
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Button Text="Add Group" Clicked="AddGroup" />
+
         <ListView x:Name="GroupsLV" ItemsSource="{Binding Groups}" VerticalOptions="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Button Text="{Binding Name}" Command="{Binding Path=BindingContext.GroupSelectedCommand, Source={x:Reference GroupsLV}}" CommandParameter="{Binding .}" />
+                        <HorizontalStackLayout HorizontalOptions="Center">
+                            <Button Text="{Binding Name}" Clicked="ShowSampleGroupPage" />
+                        </HorizontalStackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
