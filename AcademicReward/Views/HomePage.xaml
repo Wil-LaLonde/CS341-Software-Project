@@ -3,11 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.HomePage"
              Title="Home">
-    <VerticalStackLayout>
-        <Label 
-            Text="Home Page Goes Here..."
-            FontSize="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <StackLayout Grid.Row="0" Grid.Column="0" Margin="10" HorizontalOptions="StartAndExpand">
+            
+            <Label 
+                Text="UserName" FontSize="50" VerticalOptions="Center"  />
+
+            <Line X1="0"
+      Y1="0"
+      X2="500"
+      Y2="0" Stroke="Black"  />
+
+            <Label Text="Task" FontSize="20" VerticalOptions="Center" />
+
+            <Line X1="0"
+      Y1="0"
+      X2="100"
+      Y2="0" Stroke="Black"  />
+            
+            <ListView x:Name="TaskLV" HeightRequest="800">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowSpacing="1" ColumnSpacing="1" Padding="10">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                      
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox x:Name="checkBox3" Color="Violet" IsChecked="True" Margin="15" Grid.Row="0" Grid.Column="0"  />
+                                <!--CheckedChanged="nameOfMethod"-->
+                                
+                                <Label Grid.Row="0" Grid.Column="1" Text="This is a Task" TextColor="Black" FontSize="20.0"/>
+                              
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+    </ScrollView>
+
 </ContentPage>
