@@ -8,7 +8,9 @@
         <ListView x:Name="GroupsLV" ItemsSource="{Binding Groups}" VerticalOptions="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Text="{Binding Name}" Command="{Binding Path=BindingContext.SelectGroupCommand, Source={x:Reference Name=GroupsPage}}" CommandParameter="{Binding .}" />
+                    <ViewCell>
+                        <Button Text="{Binding Name}" Command="{Binding Path=BindingContext.GroupSelectedCommand, Source={x:Reference GroupsLV}}" CommandParameter="{Binding .}" />
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
