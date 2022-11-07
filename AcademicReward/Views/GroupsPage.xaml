@@ -4,20 +4,26 @@
              x:Class="AcademicReward.Views.GroupsPage"
              Title="Your Groups">
 
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Button Text="Add Group" Clicked="AddGroup" />
 
         <ListView x:Name="GroupsLV" ItemsSource="{Binding Groups}" VerticalOptions="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <HorizontalStackLayout HorizontalOptions="Center">
-                            <Button Text="{Binding Name}" Clicked="ShowSampleGroupPage" />
-                        </HorizontalStackLayout>
+                        <!--Having a hard time trying to style this-->
+                        <Button Text="{Binding Name}" Clicked="ShowSampleGroupPage" />
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </VerticalStackLayout>
+    </StackLayout>
 
 </ContentPage>
