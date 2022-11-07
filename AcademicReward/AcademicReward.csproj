@@ -40,6 +40,11 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<MauiImage Include="Resources\Images\home.png" Color="Black" />
+		<MauiImage Include="Resources\Images\plus.png" Color="Black" />
+		<MauiImage Include="Resources\Images\bell.png" Color="Black" />
+		<MauiImage Include="Resources\Images\shop.png" Color="Black" />
+		<MauiImage Include="Resources\Images\profile.png" Color="Black" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -55,19 +60,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\EditProfilePage.xaml.cs">
-	    <DependentUpon>EditProfilePage.xaml</DependentUpon>
+	  <MauiXaml Update="PopUps\AddNotificationPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopUps\AddTaskPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <Compile Update="PopUps\TaskPopup.xaml.cs">
+	    <DependentUpon>TaskPopup.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\GroupsPage.xaml">
+	  <MauiXaml Update="PopUps\LoginPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\HistoryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="LoginPopUp.xaml">
+	  <MauiXaml Update="PopUps\TaskPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
@@ -76,16 +84,10 @@
 	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\EditProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\NotificationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\PurchaseHistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ShopPage.xaml">

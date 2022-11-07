@@ -1,8 +1,7 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
-               x:Class="AcademicReward.PopUps.LoginPopUp"
-               CanBeDismissedByTappingOutsideOfPopup="False">
+               x:Class="AcademicReward.PopUps.AddTaskPopUp">
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <Button
@@ -20,74 +19,67 @@
                 Margin="10, 0"/>
             <Frame BorderColor="Gray" CornerRadius="0" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                 <Label
-                    Text="Create An Account"
+                    Text="Create Task"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
             </Frame>
         </StackLayout>
-        <StackLayout Margin="10, 30">
-            <Label
-                Text="Welcome!"
-                FontSize="38"/>
-            <Label
-                Text="Please provide the information below to get started"
-                FontSize="18"
-                FontAttributes="Italic"/>
-        </StackLayout>
         <StackLayout Margin="10">
             <Label
-                Text="USERNAME: "
+                Text="Title: "
                 FontSize="20"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Username..." IsPassword="False"/>
+                <Entry FontSize="20" Placeholder="Title Goes Here..."/>
             </Frame>
             <Label
-                Text="PASSWORD: "
+                Text="Description: "
                 FontSize="20"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Password..." IsPassword="True"/>
+                <Entry FontSize="20" Placeholder="Description Goes Here..."/>
             </Frame>
             <Label
-                Text="RE-ENTER PASSWORD: "
+                Text="Points: "
                 FontSize="20"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Re-enter Password..." IsPassword="True"/>
+                <Entry FontSize="20" Placeholder="Points Go Here..."/>
             </Frame>
-        </StackLayout>
-        <StackLayout Margin="10, 0" Orientation="Horizontal">
             <Label
-                Text="ACCOUNT TYPE: "
+                Text="Group: "
                 FontSize="20"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
-            <RadioButton 
-                Content="Admin"
-                FontSize="20"
-                VerticalOptions="Center"/>
-            <Label
-                Text=" // "
-                FontSize="20"
-                VerticalOptions="Center"/>
-            <RadioButton
-                Content="Member"
-                FontSize="20"
-                VerticalOptions="Center"/>
+            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
+                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Group 1</x:String>
+                            <x:String>Group 2</x:String>
+                            <x:String>Group 3</x:String>
+                            <x:String>Group 4</x:String>
+                            <x:String>Group 5</x:String>
+                            <x:String>Group 6</x:String>
+                            <x:String>Group 7</x:String>
+                            <x:String>Group 8</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
             <Button 
-                Text="SIGN UP" 
-                Clicked="SignUpButtonClicked"
+                Text="CREATE" 
+                Clicked="CreateTaskButtonClicked"
                 FontSize="25"
                 Background="Gray"
                 BorderColor="Black"
