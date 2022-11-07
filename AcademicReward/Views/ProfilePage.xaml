@@ -27,12 +27,6 @@
                     HorizontalOptions="Center" 
                     Margin="0,5,15,0"/>
 
-            <Button Text="Purchase History" 
-                    Clicked="ShowPurchaseHistoryView" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center" 
-                    Margin="0,5,15,0"/>
-
             <Button Text="Groups" 
                     Clicked="ShowGroupsView" 
                     VerticalOptions="Center" 
