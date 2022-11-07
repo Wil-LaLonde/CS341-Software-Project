@@ -5,8 +5,12 @@
              Title="Edit Profile">
 
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Entry Placeholder="New Username" />
-        <Entry Placeholder="New Password" />
+        <Label Text="New Username" FontSize="Large" />
+        <Entry Placeholder="Eg. John" />
+        
+        <Label Text="New Password" FontSize="Large" />
+        <Entry Placeholder="Eg. 123456" IsPassword="True" />
+        
         <Button Text="Save" />
     </StackLayout>
     
