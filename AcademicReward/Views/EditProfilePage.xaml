@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.EditProfilePage"
+             Title="Edit Profile">
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="New Username" FontSize="Large" />
+        <Entry Placeholder="Eg. John" />
+        
+        <Label Text="New Password" FontSize="Large" />
+        <Entry Placeholder="Eg. 123456" IsPassword="True" />
+        
+        <Button Text="Save" />
+    </StackLayout>
+    
+</ContentPage>

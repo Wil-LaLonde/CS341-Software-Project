@@ -9,7 +9,7 @@ public partial class HomePage : ContentPage {
 		TaskLV.ItemsSource = GetTasks();//need to get all tasks... hardcode some tasks
     }
 
-	//hardcoded this until we do get a database 
+	//hardcoded this until we do get a database
     ObservableCollection<Task> tasks = new ObservableCollection<Task> {
 		new Task(false, "Complete 5 tasks", "You need to complete 5 tasks to finish this task", 4, "May 16, 2023"),
 		new Task(false, "Level up to 4", "You have leveled up to 4", 5, "June 10, 2023"),
@@ -18,7 +18,7 @@ public partial class HomePage : ContentPage {
 
 	//Tasks are true and checked off
 	private void TaskCheckBox(object sender, CheckedChangedEventArgs e){
-		
+
 	}
 
 	//this will return the ObservableCollection that will contain all the Task objects to be displayed in the the list view
