@@ -5,29 +5,9 @@
              Title="Shop">
     <VerticalStackLayout>
         <Label 
-            Text="Shop"
+            Text="Shop Page Goes Here..."
             FontSize="50"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-
-        <HorizontalStackLayout>
-            <Button ImageSource="shopdemoticket.png"
-                Clicked="Ticket_Clicked" Scale="0.25"
-                WidthRequest="300" />
-
-            <Button ImageSource="shirt.png"
-                Clicked="Shirt_Clicked" WidthRequest="300" />
-        </HorizontalStackLayout>
-            
-        
-        <Button
-                Text="Add Shop Item"
-                Clicked="Button_Clicked"    
-                FontSize="25"
-                Background="Gray"
-                BorderColor="Black"
-                BorderWidth="2"
-                CornerRadius="0"
-                Margin="0, 40"/>
     </VerticalStackLayout>
 </ContentPage>
