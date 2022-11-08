@@ -5,7 +5,7 @@
                x:Class="AcademicReward.PopUps.TaskPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False">
     <!--Layout of the popup-->
-    <StackLayout Margin="25" WidthRequest="600" HeightRequest="800">
+    <StackLayout Margin="25" WidthRequest="600" HeightRequest="800" BackgroundColor="White">
      <!--Layout of the popup-->
         
         <StackLayout Orientation="Horizontal" Margin="0, 30">
@@ -15,7 +15,7 @@
                 Clicked="BackButtonClicked"
                 FontAttributes="Bold"
                 FontSize="25"
-                Background="Gray"
+                Background="#476AFF"
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"
@@ -24,7 +24,7 @@
                 Padding="12, 5"
                 Margin="10, 0"/>
             <!--Backbutton-->
-            <Frame BorderColor="Gray" CornerRadius="0" WidthRequest="500">
+            <Frame BorderColor="Black" CornerRadius="0" WidthRequest="500">
                 <Label
                     x:Name="title"
                     FontSize="28"
@@ -80,7 +80,7 @@
                 FontSize="28"
                 Margin="0, 5"
                 FontAttributes="Bold"/>
-            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
+            <Frame BackgroundColor="White" BorderColor="Black" CornerRadius="10" Margin="0, 5">
                 <Editor FontSize="20" Placeholder="Write Feedback Here" HeightRequest="250"/>
             </Frame>
             <!--Feedback-->
@@ -92,7 +92,7 @@
                 Text="Submit" 
                 Clicked="SubmitTask"
                 FontSize="25"
-                Background="Gray"
+                Background="#476AFF"
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"/>

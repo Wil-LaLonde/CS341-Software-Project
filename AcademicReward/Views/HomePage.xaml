@@ -13,21 +13,28 @@
             <Line X1="0" Y1="0" X2="1000" Y2="0" Stroke="Black"/>
             <!--This is the line that is right under the Username -->
 
-            <Label Text="Task" FontSize="30" VerticalOptions="Center" Padding="20, 100, 0, 0" FontAttributes="Bold"/>
-
-
             <VerticalStackLayout Padding="20">
                 <!--Borders the Listview-->
                 <Border Padding="10" StrokeThickness="2">
                     <!--Listview-->
-                    <ListView x:Name="TaskLV" HeightRequest="750" ItemSelected="SelectedTask">
-                    <ListView.ItemTemplate>
+                    <ListView x:Name="TaskLV" HeightRequest="850" ItemSelected="SelectedTask" SeparatorColor="Black">
+                        <ListView.Header>
+                            <StackLayout BackgroundColor="LightGray">
+                                <Label Margin="10,10,0,0"
+                                        Text="Task"
+                                        FontSize="30"
+                                        FontAttributes="Bold" 
+                                       />
+                            </StackLayout>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid RowSpacing="1" ColumnSpacing="1">
+                                <Grid RowSpacing="3" ColumnSpacing="1">
 
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
+
                                     </Grid.RowDefinitions>
 
                                     <Grid.ColumnDefinitions>

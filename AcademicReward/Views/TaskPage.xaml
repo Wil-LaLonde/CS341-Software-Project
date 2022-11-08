@@ -17,7 +17,7 @@
                 FontSize="40"
                 Padding="28, 12"
                 FontAttributes="Bold"
-                Background="Gray"
+                
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"
@@ -64,7 +64,7 @@
                 FontSize="40"
                 Padding="28, 12"
                 FontAttributes="Bold"
-                Background="Gray"
+                
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"
