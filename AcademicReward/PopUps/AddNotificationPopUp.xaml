@@ -8,8 +8,7 @@
                 Text="&lt;"
                 Clicked="BackButtonClicked"
                 FontAttributes="Bold"
-                FontSize="25"
-                Background="Gray"
+                FontSize="25"          
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"
@@ -72,7 +71,7 @@
                 Text="CREATE" 
                 Clicked="CreateNotificationButtonClicked"
                 FontSize="25"
-                Background="Gray"
+               
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"/>

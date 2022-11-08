@@ -49,7 +49,7 @@
                 Text="Log in"
                 Clicked="LogInButtonClicked"
                 FontSize="25"
-                Background="Gray"
+                
                 BorderColor="Black"
                 BorderWidth="2"
                 CornerRadius="0"
