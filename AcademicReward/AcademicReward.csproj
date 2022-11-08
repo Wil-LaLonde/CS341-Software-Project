@@ -54,23 +54,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\shirt.png" />
-	  <None Remove="Resources\Images\ShopDemoTicket.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.3.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="Npgsql" Version="6.0.7" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AddShopItemPage.xaml.cs">
-	    <DependentUpon>AddShopItemPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\ViewShopItemPage.xaml.cs">
-	    <DependentUpon>ViewShopItemPage.xaml</DependentUpon>
-
 	  <MauiXaml Update="PopUps\AddNotificationPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -83,14 +72,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-
-	  <MauiXaml Update="AddShopItemPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="PopUps\LoginPopUp.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ViewShopItemPage.xaml">
 	  <MauiXaml Update="PopUps\LoginPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
