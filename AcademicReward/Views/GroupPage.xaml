@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.GroupPage"
+             Title="Group">
+    <VerticalStackLayout>
+        <Label
+            FontSize="Large"
+            Text="Example Group Name"
+            VerticalOptions="Center"
+            HorizontalOptions="Center" />
+        <Label
+            FontSize="Medium"
+            Text="This is where the description will go"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Margin="20,20,20,20"/>
+
+        <Label
+            FontSize="Medium"
+            Text="Members:"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Margin="20,20,20,20"/>
+        <ListView
+            x:Name="MembersLV"
+            ItemsSource="{Binding Members}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label
+                            FontSize="Large"
+                            Text="{Binding Name}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

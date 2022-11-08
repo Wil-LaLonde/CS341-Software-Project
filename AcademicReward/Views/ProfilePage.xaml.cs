@@ -1,7 +1,30 @@
 namespace AcademicReward.Views;
 
-public partial class ProfilePage : ContentPage {
-	public ProfilePage() {
+public partial class ProfilePage : ContentPage
+{
+	public ProfilePage()
+	{
 		InitializeComponent();
 	}
+
+	private async void ShowEditProfileView(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new EditProfilePage());
+	}
+
+	private async void ShowHistoryView(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new HistoryPage());
+	}
+
+	private async void ShowPurchaseHistoryView(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new PurchaseHistoryPage());
+	}
+
+	private async void ShowGroupsView(object sender, EventArgs e)
+	{
+		await Navigation.PushAsync(new GroupsPage());
+	}
+
 }
