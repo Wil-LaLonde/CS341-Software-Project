@@ -4,14 +4,50 @@
              x:Class="AcademicReward.Views.EditProfilePage"
              Title="Edit Profile">
 
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="New Username" FontSize="Large" />
-        <Entry Placeholder="Eg. John" />
-        
-        <Label Text="New Password" FontSize="Large" />
-        <Entry Placeholder="Eg. 123456" IsPassword="True" />
-        
-        <Button Text="Save" />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Vertical">
+                    <Label
+                        Text="Edit Profile"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        TextDecorations="Underline"/>
+                    <Label
+                        Text="Provide the information below to update your profile"
+                        FontFamily="SecondaryFont"
+                        FontSize="20"
+                        FontAttributes="Italic"
+                        TextColor="{StaticResource Gray600}"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Margin="0, 20">
+                <Label
+                    Text="Username:"
+                    FontSize="26"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry FontSize="22" Placeholder="New Username..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
+                <Label
+                    Text="Password:"
+                    FontSize="26"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry FontSize="22" Placeholder="New Password..." IsPassword="True" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
+                <Button 
+                    Text="Save" 
+                    FontSize="25"
+                    FontFamily="BoldFont"
+                    Margin="200, 45"/>
+            </StackLayout>
+        </StackLayout>
+
+    </ScrollView>
     
 </ContentPage>

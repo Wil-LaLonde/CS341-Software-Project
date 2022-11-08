@@ -3,35 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.ProfilePage"
              Title="Profile">
-    <VerticalStackLayout>
-        <StackLayout Orientation="Horizontal" Margin="0, 10">
-            <StackLayout Orientation="Vertical">
-                <Label Text="Username" FontSize="30" Margin="0, 0, 0, 10" 
-                       VerticalOptions="Center" 
-                       HorizontalOptions="Center"/>
-                <Label Text="Level 1" FontSize="20"/>
-                <Label Text="Experience: 248/500" FontSize="20"/>
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout>
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="0, 10">
+                            <Label
+                                Text="Username: John Doe"
+                                FontSize="45"
+                                FontAttributes="Bold"/>
+                            <Label
+                                Text="Points: 46"
+                                FontSize="35"
+                                FontFamily="SecondaryFont"
+                                TextColor="{StaticResource Gray600}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand" Margin="0, 10">
+                            <Label
+                                Text="Level 1"
+                                FontSize="45"/>
+                        </StackLayout>
+                        
+                        
+                    </StackLayout>
+                    <ProgressBar Progress="0.75" ProgressColor="{StaticResource BlueButton}"/>
+                    <Label
+                        Text="XP: 75/100"
+                        FontSize="20"
+                        Margin="0, 5"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Orientation="Vertical" Margin="0, 40" Spacing="15">
+                <Button Text="Groups" 
+                        FontSize="42"
+                        FontFamily="BoldFont"
+                        Clicked="ShowGroupsView"
+                        Margin="65, 5"
+                        Padding="0, 25"/>
+                <Button Text="History" 
+                        FontSize="42"
+                        FontFamily="BoldFont"
+                        Clicked="ShowHistoryView"
+                        Margin="65, 5"
+                        Padding="0, 25"/>
+                <Button Text="Edit Profile" 
+                        FontSize="42"
+                        FontFamily="BoldFont"
+                        Clicked="ShowEditProfileView"
+                        Margin="65, 5"
+                        Padding="0, 25"/>
             </StackLayout>
+            <Button Text="Sign Out"
+                        FontSize="42"
+                        FontFamily="BoldFont"
+                        Clicked="SignOutButtonClicked"
+                        Margin="250, 5"
+                        Padding="0, 25"
+                        VerticalOptions="EndAndExpand"/>
         </StackLayout>
-
-        <VerticalStackLayout Margin="0, 10" Padding="0,20,0,0">
-            <Button Text="Edit Profile" 
-                    Clicked="ShowEditProfileView" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                    Margin="0,5,15,0"/>
-
-            <Button Text="History" 
-                    Clicked="ShowHistoryView" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center" 
-                    Margin="0,5,15,0"/>
-
-            <Button Text="Groups" 
-                    Clicked="ShowGroupsView" 
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Center"
-                    Margin="0,5,15,0"/>
-        </VerticalStackLayout>
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

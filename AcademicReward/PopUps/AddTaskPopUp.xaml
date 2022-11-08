@@ -1,64 +1,61 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
-               x:Class="AcademicReward.PopUps.AddTaskPopUp">
+               x:Class="AcademicReward.PopUps.AddTaskPopUp"
+               Color="White">
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
-            <Button
-                Text="&lt;"
+            <ImageButton
+                Source="blueback.png"
+                WidthRequest="50"
+                HeightRequest="50"
                 Clicked="BackButtonClicked"
-                FontAttributes="Bold"
-                FontSize="25"
-                BorderColor="Black"
-                BorderWidth="2"
-                CornerRadius="0"
                 VerticalOptions="Start"
-                HorizontalOptions="Start"
-                Padding="12, 5"
-                Margin="10, 0"/>
-            <Frame BorderColor="Gray" CornerRadius="0" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                Margin="10"/>
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                 <Label
                     Text="Create Task"
                     FontSize="50"
                     FontAttributes="Bold"
+                    TextDecorations="Underline"
                     VerticalOptions="Center"/>
             </Frame>
         </StackLayout>
         <StackLayout Margin="10">
             <Label
                 Text="Title: "
-                FontSize="20"
+                FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
-            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Title Goes Here..."/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Entry FontSize="20" Placeholder="Title Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Description: "
-                FontSize="20"
+                FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
-            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Description Goes Here..."/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Entry FontSize="20" Placeholder="Description Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Points: "
-                FontSize="20"
+                FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
-            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Points Go Here..."/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Entry FontSize="20" Placeholder="Points Go Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Group: "
-                FontSize="20"
+                FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
-            <Frame BackgroundColor="White" BorderColor="Gray" CornerRadius="0" Margin="0, 5">
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
                 <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
@@ -77,12 +74,11 @@
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
             <Button 
-                Text="CREATE" 
+                Text="Create" 
                 Clicked="CreateTaskButtonClicked"
                 FontSize="25"
-                BorderColor="Black"
-                BorderWidth="2"
-                CornerRadius="0"/>
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}"/>
         </StackLayout>
     </StackLayout>
 </toolkit:Popup>

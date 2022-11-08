@@ -4,14 +4,35 @@
              x:Class="AcademicReward.Views.HistoryPage"
              Title="History">
 
-    <VerticalStackLayout>
-        <ListView x:Name="HistoryItemsLV" ItemsSource="{Binding HistoryItems}" VerticalOptions="Center">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}" Detail="{Binding Description}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-    </VerticalStackLayout>
-
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout>
+                    <Label
+                        Text="History"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        TextDecorations="Underline"/>
+                    <Label
+                        Text="A list of all previous events on your account"
+                        FontFamily="SecondaryFont"
+                        FontSize="20"
+                        FontAttributes="Italic"
+                        TextColor="{StaticResource Gray600}"/>
+                </StackLayout>
+            </Frame>
+            <Frame BorderColor="Black" CornerRadius="0" Padding="0" Margin="0, 20, 0, 0">
+                <ListView x:Name="HistoryItemsLV" ItemsSource="{Binding HistoryItems}" VerticalOptions="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
+                                Text="{Binding Name}" 
+                                Detail="{Binding Description}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
+    
