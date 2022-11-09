@@ -1,24 +1,14 @@
 namespace AcademicReward;
 using CommunityToolkit.Maui.Views;
-public partial class ViewShopItemPage : Popup
-{
-	public ViewShopItemPage()
-	{
+
+public partial class ViewShopItemPage : Popup {
+	public ViewShopItemPage() {
 		InitializeComponent();
 	}
 
-    private void BuyClicked(object sender, EventArgs e)
-    {
-        
-    }
+    private void EditClicked(object sender, EventArgs e) => Close();
 
-    private void CancelClicked(object sender, EventArgs e)
-    {
+    private void BackButtonClicked(object sender, EventArgs e) => Close();
 
-    }
-
-    private void DeleteClicked(object sender, EventArgs e)
-    {
-
-    }
+	private void DeleteClicked(object sender, EventArgs e) => Close();
 }

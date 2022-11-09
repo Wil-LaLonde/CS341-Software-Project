@@ -7,18 +7,15 @@ public partial class ShopPage : ContentPage {
 		InitializeComponent();
 	}
 
-	private void Button_Clicked(object sender, EventArgs e)
-	{
+	private void Button_Clicked(object sender, EventArgs e) {
 		this.ShowPopup(new AddShopItemPage());
 	}
 
-    private void Ticket_Clicked(object sender, EventArgs e)
-    {
+    private void Ticket_Clicked(object sender, EventArgs e) {
        this.ShowPopup(new ViewShopItemPage());
     }
 
-    private void Shirt_Clicked(object sender, EventArgs e)
-    {
+    private void Shirt_Clicked(object sender, EventArgs e) {
         
     }
 }
