@@ -4,26 +4,61 @@
              x:Class="AcademicReward.Views.GroupsPage"
              Title="Your Groups">
 
-    <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="VerticalOptions" Value="Center" />
-        </Style>
-    </ContentPage.Resources>
-
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Button Text="Add Group" Clicked="AddGroup" />
-
-        <ListView x:Name="GroupsLV" ItemsSource="{Binding Groups}" VerticalOptions="Center">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <!--Having a hard time trying to style this-->
-                        <Button Text="{Binding Name}" Clicked="ShowSampleGroupPage" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
-
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical">
+                        <Label
+                            Text="Groups:"
+                            FontSize="45"
+                            FontAttributes="Bold"
+                            TextDecorations="Underline"/>
+                        <Label
+                            Text="Press the plus button to create a new group"
+                            FontFamily="SecondaryFont"
+                            FontSize="20"
+                            FontAttributes="Italic"
+                            TextColor="{StaticResource Gray600}"/>
+                    </StackLayout>
+                    <Button
+                        Text="+"
+                        Clicked="AddGroup"
+                        FontSize="40"
+                        Padding="28, 12"
+                        FontAttributes="Bold"
+                        FontFamily="BoldFont"
+                        BorderColor="{StaticResource BlueButton}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <ListView x:Name="GroupsLV" ItemsSource="{Binding Groups}" SeparatorVisibility="None" Margin="0, 20" SelectionMode="None" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button 
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="{Binding Name}"
+                                    FontSize="45"
+                                    FontFamily="BoldFont"
+                                    Clicked="ShowSampleGroupPage"
+                                    Margin="70, 8"
+                                    Padding="0, 15"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
+    

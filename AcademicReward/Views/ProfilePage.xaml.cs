@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace AcademicReward.Views;
 
 public partial class ProfilePage : ContentPage
@@ -27,4 +29,8 @@ public partial class ProfilePage : ContentPage
 		await Navigation.PushAsync(new GroupsPage());
 	}
 
+	private async void SignOutButtonClicked(object sender, EventArgs e)
+	{
+        await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+    }
 }

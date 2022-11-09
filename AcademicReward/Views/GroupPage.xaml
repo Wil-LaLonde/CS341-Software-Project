@@ -3,41 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.GroupPage"
              Title="Group">
-    <VerticalStackLayout>
-        <Label
-            FontSize="Large"
-            Text="Example Group Name"
-            VerticalOptions="Center"
-            HorizontalOptions="Center" />
-        <Label
-            FontSize="Medium"
-            Text="This is where the description will go"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Margin="20,20,20,20"/>
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Vertical">
+                    <Label
+                        Text="Example Group Name"
+                        FontSize="45"
+                        TextDecorations="Underline"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="Admin: John Doe"
+                        FontSize="35"
+                        FontFamily="SecondaryFont"
+                        TextColor="{StaticResource Gray600}"
+                        HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <Label
+                Text="Members:"
+                FontSize="32"
+                FontAttributes="Bold"
+                Margin="0, 10"
+                TextDecorations="Underline"/>
+            <Frame CornerRadius="0" BorderColor="Black" Padding="0">
+                <ListView x:Name="MembersLV" ItemsSource="{Binding Members}" SeparatorColor="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label
+                                    FontSize="25"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                            </ViewCell>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+             </ListView>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 
-        <Label
-            FontSize="Medium"
-            Text="Members:"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Margin="20,20,20,20"/>
-        <ListView
-            x:Name="MembersLV"
-            ItemsSource="{Binding Members}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Label
-                            FontSize="Large"
-                            Text="{Binding Name}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center" />
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
 </ContentPage>

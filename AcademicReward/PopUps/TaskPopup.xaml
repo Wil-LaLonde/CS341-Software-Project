@@ -10,25 +10,20 @@
         
         <StackLayout Orientation="Horizontal" Margin="0, 30">
             <!--Backbutton-->
-            <Button 
-                Text="&lt;"
+            <ImageButton
+                Source="blueback.png"
+                WidthRequest="50"
+                HeightRequest="50"
                 Clicked="BackButtonClicked"
-                FontAttributes="Bold"
-                FontSize="25"
-                Background="#476AFF"
-                BorderColor="Black"
-                BorderWidth="2"
-                CornerRadius="0"
                 VerticalOptions="Start"
-                HorizontalOptions="Start"
-                Padding="12, 5"
-                Margin="10, 0"/>
+                Margin="10"/>
             <!--Backbutton-->
-            <Frame BorderColor="Black" CornerRadius="0" WidthRequest="500">
+            <Frame BorderColor="{StaticResource BlueButton}" WidthRequest="500">
                 <Label
                     x:Name="title"
                     FontSize="28"
                     FontAttributes="Bold"
+                    TextDecorations="Underline"
                     HorizontalOptions="Center"/>
             </Frame>
         </StackLayout>
@@ -39,10 +34,13 @@
                 FontSize="28"
                 Margin="0, 5"
                 FontAttributes="Bold"/>
-            <Label
-                x:Name="description"
-                FontSize="20" 
-                Margin="0, 5"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label
+                    x:Name="description"
+                    FontSize="20" 
+                    Margin="0, 5"
+                    BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
             <!--Description-->
             
             <!--Points-->
@@ -80,8 +78,8 @@
                 FontSize="28"
                 Margin="0, 5"
                 FontAttributes="Bold"/>
-            <Frame BackgroundColor="White" BorderColor="Black" CornerRadius="10" Margin="0, 5">
-                <Editor FontSize="20" Placeholder="Write Feedback Here" HeightRequest="250"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Editor FontSize="20" Placeholder="Write Feedback Here" PlaceholderColor="{StaticResource Gray400}" HeightRequest="250" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <!--Feedback-->
 
@@ -92,10 +90,8 @@
                 Text="Submit" 
                 Clicked="SubmitTask"
                 FontSize="25"
-                Background="#476AFF"
-                BorderColor="Black"
-                BorderWidth="2"
-                CornerRadius="0"/>
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}"/>
         </StackLayout>
         <!--SubmitButton-->
     </StackLayout>
