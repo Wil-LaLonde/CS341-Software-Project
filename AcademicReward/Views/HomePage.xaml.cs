@@ -2,6 +2,7 @@ namespace AcademicReward.Views;
 using CommunityToolkit.Maui.Views;
 using AcademicReward.PopUps;
 using System.Collections.ObjectModel;
+using AcademicReward.ModelClass;
 
 public partial class HomePage : ContentPage {
 	public HomePage() {
