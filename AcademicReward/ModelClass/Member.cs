@@ -27,6 +27,7 @@ namespace AcademicReward.ModelClass {
             //This could call the LevelUpMember method to do so.
             if(xp > 0) {
                 XP += xp;
+                LevelUpMember();
             }
         }
 

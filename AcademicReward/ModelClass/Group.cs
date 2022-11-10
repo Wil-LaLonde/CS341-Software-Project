@@ -3,34 +3,86 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
     public class Group : ObservableObject {
-        private ObservableCollection<Profile> groupProfileList;
+        private ObservableCollection<Member> groupMemberList;
+        private ObservableCollection<Task> groupTaskList;
+        private ObservableCollection<Notification> groupNotificationList;
 
         public string GroupName { get; set; }
-        public ObservableCollection<Profile> GroupAccountList { get { return groupProfileList; } }
+        public string GroupDescription { get; set; }
+        public Admin GroupAdmin { get; private set; }
+        public ObservableCollection<Member> GroupMemberList { get { return groupMemberList; } }
+        public ObservableCollection<Task> GroupTaskList { get { return groupTaskList; } }
+        public ObservableCollection<Notification> GroupNotificationList { get { return groupNotificationList; } }
 
         /// <summary>
         /// Group constructor
         /// </summary>
         /// <param name="groupName">string groupName</param>
-        public Group(string groupName) {
+        /// <param name="groupDescription">string groupDescription</param>
+        /// <param name="groupAdmin">Admin groupAdmin</param>
+        public Group(string groupName, string groupDescription, Admin groupAdmin) {
             GroupName = groupName;
-            groupProfileList = new ObservableCollection<Profile>();
+            GroupDescription = groupDescription;
+            GroupAdmin = groupAdmin;
+            groupMemberList = new ObservableCollection<Member>();
+            groupTaskList = new ObservableCollection<Task>();
+            groupNotificationList = new ObservableCollection<Notification>();
         }
 
         /// <summary>
-        /// Adding a Profile to a Group
+        /// Adds a Member to a Group
         /// </summary>
-        /// <param name="profile">Profile profile</param>
-        public void AddAccountToGroup(Profile profile) {
-            groupProfileList.Add(profile);
+        /// <param name="member">Member member</param>
+        public void AddMemberToGroup(Member member) {
+            groupMemberList.Add(member);
         }
 
         /// <summary>
-        /// Removing a Profile from a Group
+        /// Removes a Member from a Group
         /// </summary>
-        /// <param name="profile">Profile profile</param>
-        public void RemoveAccountFromGroup(Profile profile) {
-            groupProfileList.Remove(profile);
+        /// <param name="member">Member member</param>
+        public void RemoveMemberFromGroup(Member member) {
+            groupMemberList.Remove(member);
+        }
+
+        /// <summary>
+        /// Updates the Group Admin
+        /// </summary>
+        /// <param name="admin">Admin admin</param>
+        public void UpdateGroupAdmin(Admin admin) {
+            GroupAdmin = admin;
+        }
+
+        /// <summary>
+        /// Adds a Task to a Group
+        /// </summary>
+        /// <param name="task">Task task</param>
+        public void AddTaskToGroup(Task task) {
+            groupTaskList.Add(task);
+        }
+
+        /// <summary>
+        /// Removes a Task from a Group
+        /// </summary>
+        /// <param name="task">Task task</param>
+        public void RemoveTaskFromGroup(Task task) {
+            groupTaskList.Remove(task);
+        }
+
+        /// <summary>
+        /// Adds a Notification to a Group
+        /// </summary>
+        /// <param name="notification">Notification notification</param>
+        public void AddNotificationToGroup(Notification notification) {
+            groupNotificationList.Add(notification);
+        }
+
+        /// <summary>
+        /// Removes a Notification from a Group
+        /// </summary>
+        /// <param name="notification">Notification notification</param>
+        public void RemoveNotificationFromGroup(Notification notification) {
+            groupNotificationList.Remove(notification);
         }
     }
 }

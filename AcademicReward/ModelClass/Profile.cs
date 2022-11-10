@@ -50,7 +50,7 @@ namespace AcademicReward.ModelClass {
         /// </summary>
         /// <param name="password">string password</param>
         public void UpdateProfilePassword(string password) {
-
+            Password = password;
         }
     }
 }
