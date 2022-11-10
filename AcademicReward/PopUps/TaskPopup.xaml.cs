@@ -4,13 +4,13 @@ namespace AcademicReward.PopUps;
 
 public partial class TaskPopUp : Popup {
 
-    public Views.Task SelectedTask { get; }
+    public ModelClass.Task SelectedTask { get; }
     public TaskPopUp() {
 		InitializeComponent();
 		
 	}
 
-	public TaskPopUp(Views.Task selectedTask) {
+	public TaskPopUp(ModelClass.Task selectedTask) {
         InitializeComponent();
         SelectedTask = selectedTask;
         title.Text = selectedTask.Title;
