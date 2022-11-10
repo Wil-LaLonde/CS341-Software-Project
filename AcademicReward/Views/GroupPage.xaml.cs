@@ -1,3 +1,5 @@
+using AcademicReward.PopUps;
+using CommunityToolkit.Maui.Views;
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
@@ -26,5 +28,10 @@ public partial class GroupPage : ContentPage
     public class Member
     {
         public string Name { get; set; }
+    }
+
+    public void AddMemberButtonClicked(object sender, EventArgs e) {
+        AddMemberPopUp addMemberPopUp = new AddMemberPopUp();
+        this.ShowPopup(addMemberPopUp);
     }
 }
