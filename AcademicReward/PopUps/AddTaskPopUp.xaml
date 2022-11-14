@@ -1,0 +1,86 @@
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+               x:Class="AcademicReward.PopUps.AddTaskPopUp"
+               CanBeDismissedByTappingOutsideOfPopup="False"
+               Color="White">
+    <StackLayout Margin="25">
+        <StackLayout Orientation="Horizontal" Margin="0, 20">
+            <ImageButton
+                Source="blueback.png"
+                WidthRequest="50"
+                HeightRequest="50"
+                Clicked="BackButtonClicked"
+                VerticalOptions="Start"
+                Margin="10"/>
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                <Label
+                    Text="Create Task"
+                    FontSize="50"
+                    FontAttributes="Bold"
+                    TextDecorations="Underline"
+                    VerticalOptions="Center"/>
+            </Frame>
+        </StackLayout>
+        <StackLayout Margin="10">
+            <Label
+                Text="Title: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Entry FontSize="20" Placeholder="Title Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+            <Label
+                Text="Description: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Entry FontSize="20" Placeholder="Description Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+            <Label
+                Text="Points: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Entry FontSize="20" Placeholder="Points Go Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+            <Label
+                Text="Group: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Group 1</x:String>
+                            <x:String>Group 2</x:String>
+                            <x:String>Group 3</x:String>
+                            <x:String>Group 4</x:String>
+                            <x:String>Group 5</x:String>
+                            <x:String>Group 6</x:String>
+                            <x:String>Group 7</x:String>
+                            <x:String>Group 8</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
+        </StackLayout>
+        <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
+            <Button 
+                Text="Create" 
+                Clicked="CreateTaskButtonClicked"
+                FontSize="25"
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}"/>
+        </StackLayout>
+    </StackLayout>
+</toolkit:Popup>
+    

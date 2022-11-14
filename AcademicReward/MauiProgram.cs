@@ -1,4 +1,6 @@
-﻿namespace AcademicReward;
+﻿using CommunityToolkit.Maui;
+
+namespace AcademicReward;
 
 public static class MauiProgram
 {
@@ -11,8 +13,11 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				fonts.AddFont("Nunito-Black.ttf", "BoldFont");
+				fonts.AddFont("Nunito-Medium.ttf", "PrimaryFont");
+				fonts.AddFont("Nunito-Regular.ttf", "SecondaryFont");
 			});
-
-		return builder.Build();
+        builder.UseMauiCommunityToolkit();
+        return builder.Build();
 	}
 }

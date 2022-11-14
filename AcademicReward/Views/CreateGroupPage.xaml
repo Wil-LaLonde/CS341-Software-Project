@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.CreateGroupPage"
+             Title="Create Group">
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Vertical">
+                    <Label
+                        Text="Create Group"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        TextDecorations="Underline"/>
+                    <Label
+                        Text="Provide the information below to create a new group"
+                        FontFamily="SecondaryFont"
+                        FontSize="20"
+                        FontAttributes="Italic"
+                        TextColor="{StaticResource Gray600}"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Margin="0, 20">
+                <Label
+                    Text="Group Name:"
+                    FontSize="26"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry FontSize="22" Placeholder="Eg. Group 1" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
+                <Label
+                    Text="Description:"
+                    FontSize="26"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry FontSize="22" Placeholder="Eg. This is a sample group" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
+                <Button 
+                    Text="Create Group" 
+                    FontSize="25"
+                    FontFamily="BoldFont"
+                    Margin="100, 45"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+    

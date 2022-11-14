@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.GroupPage"
+             Title="Group">
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Vertical">
+                    <Label
+                        Text="Example Group Name"
+                        FontSize="45"
+                        TextDecorations="Underline"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        Text="Admin: John Doe"
+                        FontSize="35"
+                        FontFamily="SecondaryFont"
+                        TextColor="{StaticResource Gray600}"
+                        HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Margin="0, 10" Orientation="Horizontal">
+                <Label
+                    Text="Members:"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    Margin="0, 10"
+                    TextDecorations="Underline"
+                    VerticalOptions="Center"/>
+                <Label
+                    Text="Add Member:  "
+                    FontFamily="SecondaryFont"
+                    FontSize="24"
+                    TextColor="{StaticResource Gray600}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="EndAndExpand"/>
+                <Button
+                    Text="+"
+                    Clicked="AddMemberButtonClicked"
+                    FontSize="30"
+                    Padding="18, 8"
+                    FontAttributes="Bold"
+                    FontFamily="BoldFont"
+                    BorderColor="{StaticResource BlueButton}"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <Frame CornerRadius="0" BorderColor="Black" Padding="0">
+                <ListView x:Name="MembersLV" ItemsSource="{Binding Members}" SeparatorColor="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label
+                                    FontSize="25"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                            </ViewCell>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+             </ListView>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

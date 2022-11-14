@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.TaskPage"
+             Title="Task">
+    <ScrollView>
+        <StackLayout Margin="20">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical">
+                        <Label 
+                            Text="Notification:"
+                            FontSize="45"
+                            FontAttributes="Bold"
+                            TextDecorations="Underline"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"/>
+                        <Label
+                            Text="Press the plus button to create a notification"
+                            FontFamily="SecondaryFont"
+                            FontSize="20"
+                            FontAttributes="Italic"
+                            TextColor="{StaticResource Gray600}"/>
+                    </StackLayout>
+                    <Button
+                        Text="+"
+                        Clicked="AddNotificationButtonClicked"
+                        FontSize="40"
+                        Padding="28, 12"
+                        FontAttributes="Bold"
+                        FontFamily="BoldFont"
+                        BorderColor="{StaticResource BlueButton}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Margin="0, 20">
+                <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                    <ListView x:Name="NotificationList" SeparatorColor="Black" MaximumHeightRequest="320">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Grid.Row="0" 
+                                            Grid.Column="0" 
+                                            Text="{Binding TestNotificationValue}"
+                                            FontSize="25"
+                                            Padding="5"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </StackLayout>
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical">
+                        <Label 
+                            Text="Task:"
+                            FontSize="45"
+                            FontAttributes="Bold"
+                            TextDecorations="Underline"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"/>
+                        <Label
+                            Text="Press the plus button to create a task"
+                            FontFamily="SecondaryFont"
+                            FontSize="20"
+                            FontAttributes="Italic"
+                            TextColor="{StaticResource Gray600}"/>
+                    </StackLayout>
+                    <Button
+                        Text="+"
+                        Clicked="AddTaskButtonClicked"
+                        FontSize="40"
+                        Padding="28, 12"
+                        FontAttributes="Bold"
+                        FontFamily="BoldFont"
+                        BorderColor="{StaticResource BlueButton}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Margin="0, 20">
+                <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                    <ListView x:Name="TaskList" SeparatorColor="Black" MaximumHeightRequest="320">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Grid.Row="0" 
+                                            Grid.Column="0" 
+                                            Text="{Binding TestTaskValue}"
+                                            FontSize="25"
+                                            Padding="5"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

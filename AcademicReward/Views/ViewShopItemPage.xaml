@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            x:Class="AcademicReward.ViewShopItemPage"
+            CanBeDismissedByTappingOutsideOfPopup="False"
+            Color="White">
+
+    <StackLayout Margin="25">
+        <StackLayout Orientation="Horizontal" Margin="0, 20">
+            <ImageButton
+                Source="blueback.png"
+                WidthRequest="50"
+                HeightRequest="50"
+                Clicked="BackButtonClicked"
+                VerticalOptions="Start"
+                Margin="10"/>
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                <Label
+                    Text="Free Ticket!!!"
+                    FontSize="50"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"
+                    TextDecorations="Underline"/>
+            </Frame>
+        </StackLayout>
+        <StackLayout Margin="10" HorizontalOptions="Center">
+            <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                <Image
+                    Source="shopdemoticket.png"
+                    Scale="0.5"/>
+            </Frame>
+        </StackLayout>
+        <StackLayout Margin="10">
+            <Label
+                Text="Item Cost: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label 
+                    Text="25 Points"
+                    FontSize="20"
+                    TextColor="{StaticResource Gray400}"
+                    BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+            <Label
+                Text="Item Description: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label 
+                    Text="Item Description Goes Here..."
+                    FontSize="20"
+                    TextColor="{StaticResource Gray400}"
+                    BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+        </StackLayout>
+        <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" Orientation="Horizontal">
+            <Button 
+                Text="Delete" 
+                Clicked="DeleteClicked"
+                FontSize="25"
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}"
+                Margin="10, 0"/>
+            <Button 
+                Text="Edit" 
+                Clicked="EditClicked"
+                FontSize="25"
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}"/>
+        </StackLayout>
+    </StackLayout>
+</mct:Popup>

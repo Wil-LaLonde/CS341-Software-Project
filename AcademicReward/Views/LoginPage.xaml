@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.LoginPage"
+             Title="User Login">
+    <ScrollView>
+        <StackLayout Margin="20">
+            <!-- Title section -->
+            <StackLayout>
+                <Frame BorderColor="{StaticResource BlueButton}">
+                    <Label
+                        Text="AcademicRewards"
+                        FontSize="75"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        TextDecorations="Underline"/>
+                </Frame>
+            </StackLayout>
+            <!-- Welcome Back message -->
+            <StackLayout Margin="0, 40">
+                <Label
+                    Text="Welcome back"
+                    FontSize="45"/>
+                <Label
+                    Text="Please sign in to continue"
+                    FontFamily="SecondaryFont"
+                    FontSize="24"
+                    FontAttributes="Italic"
+                    TextColor="{StaticResource Gray600}"/>
+            </StackLayout>
+            <!-- Username/Password section -->
+            <StackLayout>
+                <Label
+                    Text="Username: "
+                    FontSize="26"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry FontSize="22" Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
+                <Label
+                    Text="Password: "
+                    FontSize="26"
+                    Margin="0, 5"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center"/>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry FontSize="22" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
+                <Button
+                    Text="Sign in"
+                    Clicked="LogInButtonClicked"
+                    FontSize="25"
+                    FontFamily="BoldFont"
+                    BorderColor="{StaticResource BlueButton}"
+                    BorderWidth="2"
+                    Margin="200, 40"/>
+            </StackLayout>
+            <!-- Add Account section -->
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="End" Orientation="Horizontal" Margin="0, 10">
+                <Label
+                    Text="Add Account:  "
+                    FontFamily="SecondaryFont"
+                    FontSize="24"
+                    TextColor="{StaticResource Gray600}"
+                    VerticalOptions="Center"/>
+                <Button
+                    Text="+"
+                    Clicked="AddAccountButtonClicked"
+                    FontSize="30"
+                    Padding="18, 8"
+                    FontAttributes="Bold"
+                    FontFamily="BoldFont"
+                    BorderColor="{StaticResource BlueButton}"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+    

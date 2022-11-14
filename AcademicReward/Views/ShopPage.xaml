@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademicReward.Views.ShopPage"
+             Title="Shop">
+    <ScrollView>
+        <StackLayout Margin="25">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                Text="Shop:"
+                                FontSize="45"
+                                FontAttributes="Bold"
+                                TextDecorations="Underline"/>
+                            <Label
+                                Text="Press the plus button to create a new shop item"
+                                FontFamily="SecondaryFont"
+                                FontSize="20"
+                                FontAttributes="Italic"
+                                TextColor="{StaticResource Gray600}"/>
+                        </StackLayout>
+                        <Button
+                            Text="+"
+                            Clicked="Button_Clicked"
+                            FontSize="40"
+                            Padding="28, 12"
+                            FontAttributes="Bold"
+                            FontFamily="BoldFont"
+                            BorderColor="{StaticResource BlueButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame BorderColor="Black" CornerRadius="0" Margin="0, 10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Margin="10" BorderColor="{StaticResource BlueButton}" Grid.Row="0" Grid.Column="0">
+                        <ImageButton 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Source="shirt.png"
+                            Clicked="Shirt_Clicked"
+                            Scale="0.75"/>
+                    </Frame>
+                    <Frame Margin="10" BorderColor="{StaticResource BlueButton}" Grid.Row="0" Grid.Column="1">
+                        <ImageButton
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Source="shopdemoticket.png"
+                        Clicked="Ticket_Clicked"
+                        Scale="0.75"/>
+                    </Frame>
+                    <Frame Margin="10" BorderColor="{StaticResource BlueButton}" Grid.Row="1" Grid.Column="0">
+                        <ImageButton 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Source="shopdemoticket.png"
+                            Clicked="Ticket_Clicked"
+                            Scale="0.75"/>
+                    </Frame>
+                    <Frame Margin="10" BorderColor="{StaticResource BlueButton}" Grid.Row="1" Grid.Column="1">
+                        <ImageButton
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Source="shirt.png"
+                            Clicked="Shirt_Clicked"
+                            Scale="0.75"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
