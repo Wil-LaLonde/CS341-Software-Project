@@ -17,9 +17,9 @@ namespace AcademicReward.Database {
         /// <returns>string database connection</returns>
         private string InitializeConnectionString() {
             string bitHost = "db.bit.io";
-            string bitApiKey = "v2_3vSnH_p2efpv9eFWC9YcaqRYyXgGn"; // from the "Password" field of the "Connect" menu
-            string bitUsername = "WilLaLonde";
-            string bitDatabaseName = "WilLaLonde/AcademicRewards";
+            string bitApiKey = "v2_3vaWv_9N4SgRBSZweqRCh5mKAQ4BE"; // from the "Password" field of the "Connect" menu
+            string bitUsername = "pattmax";
+            string bitDatabaseName = "pattmax/AcademicRewards";
             return $"Host={bitHost};Username={bitUsername};Password={bitApiKey};Database={bitDatabaseName}";
         }
     }
