@@ -4,12 +4,12 @@ namespace AcademicReward.Database
 {
     public class AcademicRewardsDatabase : IDatabase
     {
-        private static string connectionString = string.Empty;
+        private string connectionString = string.Empty;
 
         /// <summary>
         /// AcademicRewardsDatabase constructor
         /// </summary>
-        public static NpgsqlConnection InitDatabaseConnection()
+        public NpgsqlConnection InitDatabaseConnection()
         {
             connectionString = InitializeConnectionString();
 
@@ -23,7 +23,7 @@ namespace AcademicReward.Database
         /// Constructs the database connection string
         /// </summary>
         /// <returns>string database connection</returns>
-        private static string InitializeConnectionString()
+        private string InitializeConnectionString()
         {
             string bitHost = "db.bit.io";
             string bitApiKey = "v2_3vaWv_9N4SgRBSZweqRCh5mKAQ4BE"; // from the "Password" field of the "Connect" menu
