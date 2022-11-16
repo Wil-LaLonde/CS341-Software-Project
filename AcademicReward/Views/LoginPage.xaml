@@ -38,7 +38,7 @@
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry FontSize="22" Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="UsernameEntry" FontSize="22" Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
                 <Label
                     Text="Password: "
@@ -47,11 +47,11 @@
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry FontSize="22" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="PasswordEntry" FontSize="22" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
                 <Button
                     Text="Sign in"
-                    Clicked="LogInButtonClicked"
+                    Clicked="SignInButtonClicked"
                     FontSize="25"
                     FontFamily="BoldFont"
                     BorderColor="{StaticResource BlueButton}"
