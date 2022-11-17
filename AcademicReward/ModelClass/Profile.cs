@@ -18,6 +18,16 @@ namespace AcademicReward.ModelClass {
         public ObservableCollection<ShopItem> PurchaseItems { get { return purchaseItems; } }
 
         /// <summary>
+        /// Profile constructor (when searching a profile)
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <param name="password">string password</param>
+        public Profile(string username, string password) {
+            Username = username;
+            Password = password;
+        }
+
+        /// <summary>
         /// Profile constructor (when making a new account)
         /// The ProfileID should be auto created by the database
         /// </summary>

@@ -1,10 +1,22 @@
 ﻿namespace AcademicReward.Resources {
-    public enum ProfileError {
+    //Add logic error types to this enum
+    public enum LogicErrorType {
+        //LoginPage START
         EmptyUsername,
         EmptyPassword,
         InvalidUsernameLength,
         InvalidPasswordLength,
-        AddProfileDBError,
+        UsernameNotFound,
+        PasswordIncorrect,
+        //LoginPage END
+
+        //General START
         NoError
+        //General END
+    }
+
+    //Add database error types to this enum
+    public enum DatabaseErrorType {
+
     }
 }
