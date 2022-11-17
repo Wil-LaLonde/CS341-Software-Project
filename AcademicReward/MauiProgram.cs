@@ -1,9 +1,12 @@
-﻿using CommunityToolkit.Maui;
+﻿using AcademicReward.ModelClass;
+using CommunityToolkit.Maui;
 
 namespace AcademicReward;
 
 public static class MauiProgram
 {
+	//This will be set upon logging in.
+	public static Profile Profile { get; set; }
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
