@@ -17,6 +17,6 @@
 
     //Add database error types to this enum
     public enum DatabaseErrorType {
-
+        NoError
     }
 }
