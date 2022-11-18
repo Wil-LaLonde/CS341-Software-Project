@@ -4,6 +4,7 @@
         //LoginPage START
         EmptyUsername,
         EmptyPassword,
+        EmptyAdminMemberRadioButton,
         InvalidUsernameLength,
         InvalidPasswordLength,
         UsernameNotFound,

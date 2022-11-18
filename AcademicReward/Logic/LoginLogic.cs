@@ -13,7 +13,14 @@ namespace AcademicReward.Logic {
             loginDB = new LoginDatabase();
         }
 
+        /// <summary>
+        /// Method for adding a new profile
+        /// </summary>
+        /// <param name="profile">(Profile)object profile</param>
+        /// <returns></returns>
         public LogicErrorType AddItem(object profile) {
+            Profile profileToAdd = profile as Profile;
+            //Need to make some checks to see if it is valid first
             return LogicErrorType.NoError;
         }
 
@@ -25,6 +32,11 @@ namespace AcademicReward.Logic {
             return LogicErrorType.NoError;
         }
 
+        /// <summary>
+        /// Method for signing a user in
+        /// </summary>
+        /// <param name="signInProfile"></param>
+        /// <returns></returns>
         public LogicErrorType LookupItem(object signInProfile) {
             //Convert object to Profile type
             Profile profile = signInProfile as Profile;

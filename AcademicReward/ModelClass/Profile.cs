@@ -9,6 +9,8 @@ namespace AcademicReward.ModelClass {
         public int ProfileID { get; private set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string ReEnterPassword { get; set; }
+        public string Salt { get; private set; }
         public bool IsAdmin { get; private set; }
         public int XP { get; set; }
         public int Level { get; set; }
@@ -34,7 +36,7 @@ namespace AcademicReward.ModelClass {
         /// <param name="username">string username</param>
         /// <param name="password">string password</param>
         /// <param name="isAdmin">bool isAdmin</param>
-        public Profile(string username, string password, bool isAdmin) {
+        public Profile(string username, string password, string reEnterPassword, bool isAdmin) {
             Username = username;
             Password = password;
             IsAdmin = isAdmin;

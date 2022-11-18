@@ -26,7 +26,7 @@ public partial class LoginPage : ContentPage {
 		LogicErrorType loginType = loginLogic.LookupItem(profile);
 		if(LogicErrorType.NoError == loginType) {
             //For now, true -> admin & false -> member
-            MauiProgram.Profile = new Profile("TestUsername", "TestPassword", false);
+            MauiProgram.Profile = new Profile("TestUsername", "TestPassword", "TestPassword", false);
             AppShell appShell = new AppShell();
             bool isAdmin = MauiProgram.Profile.IsAdmin;
             if (isAdmin) {
@@ -45,9 +45,11 @@ public partial class LoginPage : ContentPage {
 		}
 	}
 
-	private void AddAccountButtonClicked(object sender, EventArgs e) {
+	private async void AddAccountButtonClicked(object sender, EventArgs e) {
 		//create a pop up window to allow the user to create an account.
 		LoginPopUp loginPopUp = new LoginPopUp();
 		this.ShowPopup(loginPopUp);
+		Profile newProfile = await this.ShowPopupAsync(loginPopUp) as Profile;
+		
 	}
 }
