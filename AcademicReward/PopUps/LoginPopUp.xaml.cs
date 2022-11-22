@@ -1,7 +1,6 @@
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
 using AcademicReward.Resources;
-using Android.Text;
 using CommunityToolkit.Maui.Views;
 using System.Text;
 
@@ -29,7 +28,7 @@ public partial class LoginPopUp : Popup {
 			string reEnterPassword = ReEnterPasswordEntry.Text;
 			bool admin = AdminRadioButton.IsChecked ? true : false;
 			//Create a new profile based on user input
-			Profile newProfile = new Profile(username, password, reEnterPassword, admin);
+			Profile newProfile = new Profile(username, password, reEnterPassword, string.Empty, admin); ;
 			//Need to make some profile checks here (MORE NEEDS TO BE DONE HERE)
 			LogicErrorType addProfileError = loginLogic.AddItem(newProfile);
 			Close(newProfile);

@@ -10,7 +10,7 @@ namespace AcademicReward.ModelClass {
         public string Username { get; set; }
         public string Password { get; set; }
         public string ReEnterPassword { get; set; }
-        public string Salt { get; private set; }
+        public string Salt { get; set; }
         public bool IsAdmin { get; private set; }
         public int XP { get; set; }
         public int Level { get; set; }
@@ -36,9 +36,11 @@ namespace AcademicReward.ModelClass {
         /// <param name="username">string username</param>
         /// <param name="password">string password</param>
         /// <param name="isAdmin">bool isAdmin</param>
-        public Profile(string username, string password, string reEnterPassword, bool isAdmin) {
+        public Profile(string username, string password, string reEnterPassword, string salt, bool isAdmin) {
             Username = username;
             Password = password;
+            ReEnterPassword = reEnterPassword;
+            Salt = salt;
             IsAdmin = isAdmin;
             XP = 0;
             Level = 1;
@@ -46,23 +48,38 @@ namespace AcademicReward.ModelClass {
         }
 
         /// <summary>
-        /// Profile constructor (exisiting account)
+        /// Profile constructor (when attempting to log on)
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <param name="salt">string salt</param>
+        /// <param name="password">string password</param>
+        public Profile(string username, string salt, string password) {
+            Username = username;
+            Salt = salt;
+            Password = password;
+        }
+
+        /// <summary>
+        /// Profile constructor (when fully logged in)
+        /// Parameters match the DB columns
         /// </summary>
         /// <param name="profileID">int profileID</param>
         /// <param name="username">string username</param>
-        /// <param name="password">string password</param>
-        /// <param name="isAdmin">bool isAdmin</param>
         /// <param name="xp">int xp</param>
-        /// <param name="level">int level</param>
         /// <param name="points">int points</param>
-        public Profile(int profileID, string username, string password, bool isAdmin, int xp, int level, int points) {
+        /// <param name="level">int level</param>
+        /// <param name="isAdmin">bool isAdmin</param>
+        /// <param name="salt">string salt</param>
+        /// <param name="password">string password</param>
+        public Profile(int profileID, string username, int xp, int points, int level, bool isAdmin, string salt, string password) {
             ProfileID = profileID;
             Username = username;
-            Password = password;
-            IsAdmin = isAdmin;
             XP = xp;
-            Level = level;
             Points = points;
+            Level = level;
+            IsAdmin = isAdmin;
+            Salt = salt;
+            Password = password;
             groupList = new ObservableCollection<Group>();
             purchaseItems = new ObservableCollection<ShopItem>();
         }

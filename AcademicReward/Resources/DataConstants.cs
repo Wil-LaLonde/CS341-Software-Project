@@ -6,6 +6,8 @@
         public const string EmptyPasswordTitle = "Empty Password";
         public const string EmptyPasswordMessage = "Please fill in the password entry box.";
         public const string EmptyAdminMemberRadioButtonMessage = "An account type is required.";
+        public const string AddProfileDBErrorTitle = "Add Profile Database Error";
+        public const string AddProfileDBErrorMessage = "An error occurred while adding your account.";
         //LoginPage constants END
 
         //Display Alert START
@@ -15,6 +17,7 @@
 
         //General START
         public const string SpaceDashSpace = " - ";
+        public const string Colon = ":";
         //General END
     }
 }

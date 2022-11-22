@@ -17,16 +17,12 @@ public partial class LoginPage : ContentPage {
 	private async void SignInButtonClicked(object sender, EventArgs e) {
 		//Gathering text from entry boxes
 		string username = UsernameEntry.Text ?? string.Empty;
-		username = username.Trim();
 		string password = PasswordEntry.Text ?? string.Empty;
-		password = password.Trim();
 		//Create temp profile
 		Profile profile = new Profile(username, password);
 		
 		LogicErrorType loginType = loginLogic.LookupItem(profile);
 		if(LogicErrorType.NoError == loginType) {
-            //For now, true -> admin & false -> member
-            MauiProgram.Profile = new Profile("TestUsername", "TestPassword", "TestPassword", false);
             AppShell appShell = new AppShell();
             bool isAdmin = MauiProgram.Profile.IsAdmin;
             if (isAdmin) {
@@ -50,6 +46,10 @@ public partial class LoginPage : ContentPage {
 		LoginPopUp loginPopUp = new LoginPopUp();
 		this.ShowPopup(loginPopUp);
 		Profile newProfile = await this.ShowPopupAsync(loginPopUp) as Profile;
-		
+		//LogicErrorType addAccountError = loginLogic.AddItem(newProfile);
+		//Do more with this depending if there is an error or not
+		//if(LogicErrorType.NoError != addAccountError) {
+            //await DisplayAlert(DataConstants.AddProfileDBErrorTitle, DataConstants.AddProfileDBErrorMessage, DataConstants.OK);
+        //}
 	}
 }

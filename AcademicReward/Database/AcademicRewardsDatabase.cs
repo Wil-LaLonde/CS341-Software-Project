@@ -20,8 +20,7 @@ namespace AcademicReward.Database {
             connectionString = InitializeConnectionString();
             //Establishing the connection
             using var con = new NpgsqlConnection(connectionString);
-            con.Open();
-            //Returning the connection, this needs to be closed in the calling method!!!
+            //Retuning the connection
             return con;
         }
 
@@ -29,7 +28,7 @@ namespace AcademicReward.Database {
         /// Constructs the database connection string
         /// </summary>
         /// <returns>string database connection</returns>
-        private static string InitializeConnectionString() {
+        public static string InitializeConnectionString() {
             return $"Host={BitHost};Username={BitUsername};Password={BitApiKey};Database={BitDatabaseName}";
         }
     }
