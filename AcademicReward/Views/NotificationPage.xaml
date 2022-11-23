@@ -3,11 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.NotificationPage"
              Title="Notification">
-    <VerticalStackLayout>
-        <Label 
-            Text="Notification Page Goes Here..."
-            FontSize="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <StackLayout Margin="20">
+            <Frame BorderColor="{StaticResource BlueButton}">
+                <StackLayout>
+                    <Label 
+                        Text="Notifications:"
+                        FontSize="45"
+                        FontAttributes="Bold"
+                        TextDecorations="Underline"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+                    <Label
+                        Text="Notifications from your group(s) are listed here."
+                        FontFamily="SecondaryFont"
+                        FontSize="20"
+                        FontAttributes="Italic"
+                        TextColor="{StaticResource Gray600}"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Margin="0, 20">
+                <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                    <!-- Will need to add some binding here -->
+                    <ListView x:Name="NotificationList" SeparatorColor="Black" MaximumHeightRequest="320">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Grid.Row="0" 
+                                            Grid.Column="0" 
+                                            Text="Some value here"
+                                            FontSize="25"
+                                            Padding="5"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
