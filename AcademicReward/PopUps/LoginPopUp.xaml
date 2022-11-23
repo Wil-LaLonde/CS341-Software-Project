@@ -24,7 +24,7 @@
                     TextDecorations="Underline"/>
             </Frame>
         </StackLayout>
-        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10">
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
             <StackLayout x:Name="ErrorStackLayout">
                 <Label
                     Text="Error with account creation: "

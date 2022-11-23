@@ -38,10 +38,12 @@ namespace AcademicReward.Database {
             return dbError;
         }
 
+        //Currently not needed
         public DatabaseErrorType UpdateItem(object profile) {
             return DatabaseErrorType.NoError;
         }
 
+        //Currently not needed
         public DatabaseErrorType DeleteItem(object profile) {
             return DatabaseErrorType.NoError;
         }

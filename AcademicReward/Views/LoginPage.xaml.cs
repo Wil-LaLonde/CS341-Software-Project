@@ -23,6 +23,7 @@ public partial class LoginPage : ContentPage {
 		
 		LogicErrorType loginType = loginLogic.LookupItem(profile);
 		if(LogicErrorType.NoError == loginType) {
+			//Creating new AppShell to show different tab bars
             AppShell appShell = new AppShell();
             bool isAdmin = MauiProgram.Profile.IsAdmin;
             if (isAdmin) {
@@ -30,26 +31,35 @@ public partial class LoginPage : ContentPage {
             } else {
                 appShell.SetTabBars(isAdmin);
             }
+			//Sending user off to the home page!
             Application.Current.MainPage = appShell;
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         } else if(LogicErrorType.EmptyUsername == loginType) {
             await DisplayAlert(DataConstants.EmptyUsernameTitle, DataConstants.EmptyUsernameMessage, DataConstants.OK);
         } else if(LogicErrorType.EmptyPassword == loginType) {
             await DisplayAlert(DataConstants.EmptyPasswordTitle, DataConstants.EmptyPasswordMessage, DataConstants.OK);
+        } else if(LogicErrorType.InvalidUsernameLength == loginType) {
+            await DisplayAlert(DataConstants.UsernameLengthTitle, DataConstants.UsernameLengthMessage, DataConstants.OK);
+        } else if(LogicErrorType.InvalidPasswordLength == loginType) {
+            await DisplayAlert(DataConstants.PasswordLengthTitle, DataConstants.PasswordLengthMessage, DataConstants.OK);
+        } else if(LogicErrorType.UsernameNotFound == loginType) {
+            await DisplayAlert(DataConstants.UsernameNotFoundTitle, DataConstants.UsernameNotFoundMessage, DataConstants.OK);
+        } else if(LogicErrorType.PasswordIncorrect == loginType) {
+            await DisplayAlert(DataConstants.IncorrectPasswordTitle, DataConstants.IncorrectPasswordMessage, DataConstants.OK);
+        } else if(LogicErrorType.SignProfileInDBError == loginType) {
+            await DisplayAlert(DataConstants.SignProfileInDBTitle, DataConstants.SignProfileInDBMessage, DataConstants.OK);
         } else {
-			//some unknown error has happened here...how did we get here???
-		}
-	}
+            //some unknown error has happened here...how did we get here???
+            await DisplayAlert(DataConstants.SignProfileInUnkownTitle, DataConstants.SignProfileInUnknownMessage, DataConstants.OK);
+        }
+    }
 
 	private async void AddAccountButtonClicked(object sender, EventArgs e) {
 		//create a pop up window to allow the user to create an account.
 		LoginPopUp loginPopUp = new LoginPopUp();
-		this.ShowPopup(loginPopUp);
 		Profile newProfile = await this.ShowPopupAsync(loginPopUp) as Profile;
-		//LogicErrorType addAccountError = loginLogic.AddItem(newProfile);
-		//Do more with this depending if there is an error or not
-		//if(LogicErrorType.NoError != addAccountError) {
-            //await DisplayAlert(DataConstants.AddProfileDBErrorTitle, DataConstants.AddProfileDBErrorMessage, DataConstants.OK);
-        //}
-	}
+		if(newProfile != null) {
+			await DisplayAlert(DataConstants.AddProfileSuccessTitle, DataConstants.AddProfileSuccessMessage, DataConstants.OK);
+		} 
+    }
 }

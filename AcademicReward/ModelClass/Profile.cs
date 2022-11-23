@@ -3,6 +3,11 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
     public class Profile : ObservableObject {
+        public const int MinUsernameLength = 0;
+        public const int MaxUsernameLength = 25;
+        public const int MinPasswordLength = 0;
+        public const int MaxPasswordLength = 50;
+
         private ObservableCollection<Group> groupList;
         private ObservableCollection<ShopItem> purchaseItems;
 

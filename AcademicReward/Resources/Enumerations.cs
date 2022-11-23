@@ -4,9 +4,12 @@
         //LoginPage START
         EmptyUsername,
         EmptyPassword,
+        EmptyReEnterPassword,
         EmptyAdminMemberRadioButton,
+        PasswordMismatch,
         InvalidUsernameLength,
         InvalidPasswordLength,
+        UsernameTaken,
         UsernameNotFound,
         PasswordIncorrect,
         AddProfileDBError,
