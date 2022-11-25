@@ -3,7 +3,8 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
                x:Class="AcademicReward.PopUps.LoginPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
-               Color="White">
+               Color="White"
+               Size="600, 1000">
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <ImageButton
@@ -19,9 +20,25 @@
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
+                    HorizontalOptions="StartAndExpand"
                     TextDecorations="Underline"/>
             </Frame>
         </StackLayout>
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error with account creation: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    TextType="Html"
+                    FontSize="20"/>
+            </StackLayout>
+        </Frame>
         <StackLayout Margin="10, 30">
             <Label
                 Text="Welcome!"
@@ -41,7 +58,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry FontSize="20" x:Name="UsernameEntry"  Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Password: "
@@ -50,7 +67,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry FontSize="20" x:Name="PasswordEntry" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Re-enter Password: "
@@ -59,7 +76,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Re-enter Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry FontSize="20" x:Name="ReEnterPasswordEntry" Placeholder="Re-enter Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
         </StackLayout>
         <StackLayout Margin="10, 0" Orientation="Horizontal">
@@ -71,6 +88,7 @@
                 VerticalOptions="Center"/>
             <RadioButton 
                 Content="Admin"
+                x:Name="AdminRadioButton"
                 FontSize="22"
                 VerticalOptions="Center"/>
             <Label
@@ -80,6 +98,7 @@
                 VerticalOptions="Center"/>
             <RadioButton
                 Content="Member"
+                x:Name="MemberRadioButton"
                 FontSize="22"
                 VerticalOptions="Center"/>
         </StackLayout>

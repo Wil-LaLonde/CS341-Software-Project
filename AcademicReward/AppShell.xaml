@@ -15,20 +15,19 @@
 
     <TabBar>
         <Tab Title="Home" Icon="home.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" x:Name="HomePage"/>
         </Tab>
-        <!-- Will need to investigate how to change tabs depending on user type (memeber/admin) -->
-        <!-- <Tab Title="Notification" Icon="bell.png">
-            <ShellContent ContentTemplate="{DataTemplate views:NotificationPage}" Route="NotificationPage"/>
-        </Tab> -->
+        <Tab Title="Notification" Icon="bell.png">
+            <ShellContent ContentTemplate="{DataTemplate views:NotificationPage}" Route="NotificationPage" x:Name="NotificationPage"/>
+        </Tab>
         <Tab Title="Task" Icon="plus.png">
-            <ShellContent ContentTemplate="{DataTemplate views:TaskPage}" Route="TaskPage"/>
+            <ShellContent ContentTemplate="{DataTemplate views:TaskPage}" Route="TaskPage" x:Name="TaskPage"/>
         </Tab>
         <Tab Title="Shop" Icon="shop.png">
-            <ShellContent ContentTemplate="{DataTemplate views:ShopPage}" Route="ShopPage"/>
+            <ShellContent ContentTemplate="{DataTemplate views:ShopPage}" Route="ShopPage" x:Name="ShopPage"/>
         </Tab>
         <Tab Title="Profile" Icon="profile.png">
-            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage"/>
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage" x:Name="ProfilePage"/>
         </Tab>
     </TabBar>
 </Shell>

@@ -3,14 +3,14 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
     public class Group : ObservableObject {
-        private ObservableCollection<Member> groupMemberList;
+        private ObservableCollection<Profile> groupMemberList;
         private ObservableCollection<Task> groupTaskList;
         private ObservableCollection<Notification> groupNotificationList;
 
         public string GroupName { get; set; }
         public string GroupDescription { get; set; }
-        public Admin GroupAdmin { get; private set; }
-        public ObservableCollection<Member> GroupMemberList { get { return groupMemberList; } }
+        public Profile GroupAdmin { get; private set; }
+        public ObservableCollection<Profile> GroupMemberList { get { return groupMemberList; } }
         public ObservableCollection<Task> GroupTaskList { get { return groupTaskList; } }
         public ObservableCollection<Notification> GroupNotificationList { get { return groupNotificationList; } }
 
@@ -19,12 +19,13 @@ namespace AcademicReward.ModelClass {
         /// </summary>
         /// <param name="groupName">string groupName</param>
         /// <param name="groupDescription">string groupDescription</param>
-        /// <param name="groupAdmin">Admin groupAdmin</param>
-        public Group(string groupName, string groupDescription, Admin groupAdmin) {
+        /// <param name="groupAdmin">Profile groupAdmin</param>
+        public Group(string groupName, string groupDescription, Profile groupAdmin) {
             GroupName = groupName;
             GroupDescription = groupDescription;
+            //This needs to be an admin
             GroupAdmin = groupAdmin;
-            groupMemberList = new ObservableCollection<Member>();
+            groupMemberList = new ObservableCollection<Profile>();
             groupTaskList = new ObservableCollection<Task>();
             groupNotificationList = new ObservableCollection<Notification>();
         }
@@ -32,24 +33,24 @@ namespace AcademicReward.ModelClass {
         /// <summary>
         /// Adds a Member to a Group
         /// </summary>
-        /// <param name="member">Member member</param>
-        public void AddMemberToGroup(Member member) {
+        /// <param name="member">Profile member</param>
+        public void AddMemberToGroup(Profile member) {
             groupMemberList.Add(member);
         }
 
         /// <summary>
         /// Removes a Member from a Group
         /// </summary>
-        /// <param name="member">Member member</param>
-        public void RemoveMemberFromGroup(Member member) {
+        /// <param name="member">Profile member</param>
+        public void RemoveMemberFromGroup(Profile member) {
             groupMemberList.Remove(member);
         }
 
         /// <summary>
         /// Updates the Group Admin
         /// </summary>
-        /// <param name="admin">Admin admin</param>
-        public void UpdateGroupAdmin(Admin admin) {
+        /// <param name="admin">Profile admin</param>
+        public void UpdateGroupAdmin(Profile admin) {
             GroupAdmin = admin;
         }
 
