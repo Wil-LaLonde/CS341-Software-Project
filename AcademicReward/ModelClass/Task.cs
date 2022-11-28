@@ -2,6 +2,10 @@
 
 namespace AcademicReward.ModelClass {
     public class Task : ObservableObject {
+        public const int MinTitleLength = 0;
+        public const int MaxTitleLength = 50;
+        public const int MinDescriptionLength = 0;
+        public const int MaxDescriptionLength = 250;
 
         public bool IsChecked { get; set; }
         public string Title { get; set;}

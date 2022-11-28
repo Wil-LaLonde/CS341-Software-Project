@@ -7,9 +7,11 @@ namespace AcademicReward.ModelClass {
         private ObservableCollection<Task> groupTaskList;
         private ObservableCollection<Notification> groupNotificationList;
 
+        public int GroupID { get; private set; }
         public string GroupName { get; set; }
         public string GroupDescription { get; set; }
         public Profile GroupAdmin { get; private set; }
+        public int AdminProfileID { get; private set; }
         public ObservableCollection<Profile> GroupMemberList { get { return groupMemberList; } }
         public ObservableCollection<Task> GroupTaskList { get { return groupTaskList; } }
         public ObservableCollection<Notification> GroupNotificationList { get { return groupNotificationList; } }
@@ -28,6 +30,20 @@ namespace AcademicReward.ModelClass {
             groupMemberList = new ObservableCollection<Profile>();
             groupTaskList = new ObservableCollection<Task>();
             groupNotificationList = new ObservableCollection<Notification>();
+        }
+
+        /// <summary>
+        /// Group constructor (when gathering all groups for a profile upon login)
+        /// </summary>
+        /// <param name="groupID">int groupID</param>
+        /// <param name="groupName">string groupName</param>
+        /// <param name="groupDescription">string groupDescription</param>
+        /// <param name="adminProfileID">int adminProfileID</param>
+        public Group(int groupID, string groupName, string groupDescription, int adminProfileID) {
+            GroupID = groupID;
+            GroupName = groupName;
+            GroupDescription = groupDescription;
+            AdminProfileID = adminProfileID;
         }
 
         /// <summary>

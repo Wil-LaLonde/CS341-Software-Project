@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using AcademicReward.ModelClass;
 
 public partial class HomePage : ContentPage {
-	public HomePage() {
+    public HomePage() {
 		InitializeComponent();
 		TaskLV.ItemsSource = GetTasks();//need to get all tasks... hardcode some tasks
     }

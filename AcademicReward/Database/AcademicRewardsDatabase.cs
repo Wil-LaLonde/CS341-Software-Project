@@ -12,8 +12,8 @@ namespace AcademicReward.Database {
         /// InitDatabaseConnection opens up a new
         /// AcademicRewards database connection
         /// 
-        /// IMPORTANT: This needs to be closed after
-        /// the database action has been completed
+        /// IMPORTANT: This needs to be opened and
+        /// closed in the calling method
         /// </summary>
         public NpgsqlConnection InitDatabaseConnection() {
             //Creating the connection string

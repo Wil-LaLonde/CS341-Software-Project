@@ -7,10 +7,11 @@ using AcademicReward.Logic;
 using AcademicReward.Resources;
 
 public partial class LoginPage : ContentPage {
-	private ILogic loginLogic;
+	private ILogic loginLogic, loginGroupLogic;
 
 	public LoginPage() {
 		loginLogic = new LoginLogic();
+        loginGroupLogic = new LoginGroupLogic();
 		InitializeComponent();
 	}
 
@@ -31,8 +32,14 @@ public partial class LoginPage : ContentPage {
             } else {
                 appShell.SetTabBars(isAdmin);
             }
-			//Sending user off to the home page!
             Application.Current.MainPage = appShell;
+            //Need to gather all the groups for the given profile.
+            LogicErrorType loginGroupType = loginGroupLogic.LookupItem(MauiProgram.Profile);
+            //There was an issue gathering all the groups, display error message.
+            if(LogicErrorType.LoginGroupCollectionDBError == loginGroupType) {
+                await DisplayAlert(DataConstants.LoginGroupCollectionTitle, DataConstants.LoginGroupCollectionMessage, DataConstants.OK);
+            }
+            //Sending user off to the home page!
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         } else if(LogicErrorType.EmptyUsername == loginType) {
             await DisplayAlert(DataConstants.EmptyUsernameTitle, DataConstants.EmptyUsernameMessage, DataConstants.OK);
