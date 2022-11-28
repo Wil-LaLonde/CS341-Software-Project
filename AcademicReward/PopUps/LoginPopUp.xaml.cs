@@ -50,15 +50,59 @@ public partial class LoginPopUp : Popup {
 		}
 		//There was an error, show error message box.
         SetErrorMessageBox(true, SetErrorMessageBody(addProfileError));
-    } 
+    }
 
 	/// <summary>
-	/// Helper method used to either show or hide the error message box
-	/// This is done since a popup cannot have another popup
+	/// Method called when a user clicks on the show password image button
 	/// </summary>
-	/// <param name="isVisible">bool isVisible</param>
-	/// <param name="errorMessage">string errorMessage</param>
-	private void SetErrorMessageBox(bool isVisible, string errorMessage) {
+	/// <param name="sender">object sender</param>
+	/// <param name="e">EventArgs e</param>
+    private void PasswordShowPasswordClicked(object sender, EventArgs e) {
+        ShowPassword.IsVisible = false;
+        HidePassword.IsVisible = true;
+        PasswordEntry.IsPassword = false;
+    }
+
+	/// <summary>
+	/// Method called when a user clicks on the hide password image button
+	/// </summary>
+	/// <param name="sender">object sender</param>
+	/// <param name="e">EventArgs e</param>
+    private void PasswordHidePasswordClicked(object sender, EventArgs e) {
+        ShowPassword.IsVisible = true;
+        HidePassword.IsVisible = false;
+        PasswordEntry.IsPassword = true;
+    }
+
+	/// <summary>
+	/// Method called when a user clicks on the show re-enter password image button
+	/// </summary>
+	/// <param name="sender">object sender</param>
+	/// <param name="e">EventArgs e</param>
+    private void ReEnterPasswordShowPasswordClicked(object sender, EventArgs e) {
+        ShowReEnterPassword.IsVisible = false;
+        HideReEnterPassword.IsVisible = true;
+        ReEnterPasswordEntry.IsPassword = false;
+    }
+
+	/// <summary>
+	/// Method called when a user clicks on the show re-enter password image button
+	/// </summary>
+	/// <param name="sender">object sender</param>
+	/// <param name="e">EventArgs e</param>
+    private void ReEnterPasswordHidePasswordClicked(object sender, EventArgs e) {
+        ShowReEnterPassword.IsVisible = true;
+        HideReEnterPassword.IsVisible = false;
+        ReEnterPasswordEntry.IsPassword = true;
+    }
+
+    /// <summary>
+    /// Helper method used to either show or hide the error message box
+    /// This is done since a popup cannot have another popup
+    /// </summary>
+    /// <param name="isVisible">bool isVisible</param>
+    /// <param name="errorMessage">string errorMessage</param>
+    private void SetErrorMessageBox(bool isVisible, string errorMessage) {
 		ErrorFrame.IsVisible = isVisible;
 		ErrorStackLayout.IsVisible = isVisible;
 		ErrorMessageHeader.IsVisible = isVisible;

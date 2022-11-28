@@ -9,11 +9,19 @@ using AcademicReward.Resources;
 public partial class LoginPage : ContentPage {
 	private ILogic loginLogic;
 
+    /// <summary>
+    /// LoginPage constructor
+    /// </summary>
 	public LoginPage() {
 		loginLogic = new LoginLogic();
 		InitializeComponent();
 	}
 
+    /// <summary>
+    /// Method called when a user clicks on the sign in button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
 	private async void SignInButtonClicked(object sender, EventArgs e) {
 		//Gathering text from entry boxes
 		string username = UsernameEntry.Text ?? string.Empty;
@@ -54,6 +62,11 @@ public partial class LoginPage : ContentPage {
         }
     }
 
+    /// <summary>
+    /// Method called when a user clicks on the add account button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
 	private async void AddAccountButtonClicked(object sender, EventArgs e) {
 		//create a pop up window to allow the user to create an account.
 		LoginPopUp loginPopUp = new LoginPopUp();
@@ -61,5 +74,27 @@ public partial class LoginPage : ContentPage {
 		if(newProfile != null) {
 			await DisplayAlert(DataConstants.AddProfileSuccessTitle, DataConstants.AddProfileSuccessMessage, DataConstants.OK);
 		} 
+    }
+
+    /// <summary>
+    /// Method called when a user clicks on the show password image button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
+    private void PasswordShowPasswordClicked(object sender, EventArgs e) {
+        ShowPassword.IsVisible = false;
+        HidePassword.IsVisible = true;
+        PasswordEntry.IsPassword = false;
+    }
+
+    /// <summary>
+    /// Method called when a user clicks on the hide password image button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
+    private void PasswordHidePasswordClicked(object sender, EventArgs e) {
+        ShowPassword.IsVisible = true;
+        HidePassword.IsVisible = false;
+        PasswordEntry.IsPassword = true;
     }
 }
