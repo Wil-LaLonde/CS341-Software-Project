@@ -1,8 +1,12 @@
 ﻿using AcademicReward.Database;
-using AcademicReward.ModelClass;
 using AcademicReward.Resources;
 
 namespace AcademicReward.Logic {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: 
+    /// Reviewer: 
+    /// </summary>
     public class LoginGroupLogic : ILogic {
         private IDatabase loginGroupDB;
 
