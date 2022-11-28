@@ -1,6 +1,11 @@
 ﻿using Npgsql;
 
 namespace AcademicReward.Database {
+    /// <summary>
+    /// Primary Author: Maximilian Patterson
+    /// Secondary Author: Wil LaLonde
+    /// Reviewer: Wil LaLonde / Maximilian Patterson
+    /// </summary>
     public class AcademicRewardsDatabase {
         private string connectionString = string.Empty;
         private const string BitHost = "db.bit.io";

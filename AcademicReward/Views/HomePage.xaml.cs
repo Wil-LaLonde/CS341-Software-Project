@@ -4,6 +4,11 @@ using AcademicReward.PopUps;
 using System.Collections.ObjectModel;
 using AcademicReward.ModelClass;
 
+/// <summary>
+/// Primary Author: Xee Lo
+/// Secondary Author: None
+/// Reviewer: Wil LaLonde
+/// </summary>
 public partial class HomePage : ContentPage {
 	public HomePage() {
 		InitializeComponent();

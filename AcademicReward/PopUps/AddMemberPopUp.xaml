@@ -4,6 +4,9 @@
                x:Class="AcademicReward.PopUps.AddMemberPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
                Color="White">
+    <!-- Primary Author: Wil LaLonde -->
+    <!-- Secondary Author: None -->
+    <!-- Reviewer: Maximilian Patterson -->
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <ImageButton

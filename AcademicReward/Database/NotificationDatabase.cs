@@ -1,11 +1,11 @@
 ﻿using AcademicReward.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademicReward.Database {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class NotificationDatabase : AcademicRewardsDatabase, IDatabase {
 
         public NotificationDatabase() { }

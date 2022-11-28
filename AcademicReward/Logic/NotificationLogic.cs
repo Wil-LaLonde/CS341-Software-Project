@@ -1,12 +1,12 @@
 ﻿using AcademicReward.Database;
 using AcademicReward.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademicReward.Logic {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class NotificationLogic : ILogic {
         IDatabase notificationDB;
 

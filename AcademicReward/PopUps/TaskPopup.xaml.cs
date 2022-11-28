@@ -2,6 +2,11 @@ using CommunityToolkit.Maui.Views;
 
 namespace AcademicReward.PopUps;
 
+/// <summary>
+/// Primary Author: Xee Lo
+/// Secondary Author: None
+/// Reviewer: Wil LaLonde
+/// </summary>
 public partial class TaskPopUp : Popup {
 
     public ModelClass.Task SelectedTask { get; }

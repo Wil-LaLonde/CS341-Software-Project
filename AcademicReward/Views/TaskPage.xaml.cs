@@ -3,6 +3,11 @@ using CommunityToolkit.Maui.Views;
 
 namespace AcademicReward.Views;
 
+/// <summary>
+/// Primary Author: Wil LaLonde
+/// Secondary Author: None
+/// Reviewer: Xee Lo
+/// </summary>
 public partial class TaskPage : ContentPage {
 	public class TestNotification {
 		public TestNotification(string notification) {

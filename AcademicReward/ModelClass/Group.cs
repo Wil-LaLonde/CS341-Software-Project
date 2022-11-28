@@ -2,6 +2,11 @@
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class Group : ObservableObject {
         private ObservableCollection<Profile> groupMemberList;
         private ObservableCollection<Task> groupTaskList;

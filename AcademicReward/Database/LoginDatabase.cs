@@ -3,6 +3,11 @@ using AcademicReward.ModelClass;
 using Npgsql;
 
 namespace AcademicReward.Database {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
 
         /// <summary>
