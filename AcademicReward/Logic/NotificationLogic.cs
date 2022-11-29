@@ -48,9 +48,20 @@ namespace AcademicReward.Logic {
             return LogicErrorType.NoError;
         }
 
-        //Currently not needed
-        public LogicErrorType LookupItem(object notification) {
-            return LogicErrorType.NoError;
+        /// <summary>
+        /// Method used to lookup all notifications for a given group
+        /// </summary>
+        /// <param name="group">object group</param>
+        /// <returns>LogicErrorType</returns>
+        public LogicErrorType LookupItem(object group) {
+            LogicErrorType logicError;
+            DatabaseErrorType dbError = notificationDB.LookupFullItem(group);
+            if(DatabaseErrorType.NoError == dbError) {
+                logicError = LogicErrorType.NoError;
+            } else {
+                logicError = LogicErrorType.LookupAllNotificationsDBError;
+            }
+            return logicError;
         }
 
         /// <summary>

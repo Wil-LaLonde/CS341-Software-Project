@@ -39,7 +39,7 @@
             </Frame>
             <StackLayout Margin="0, 20">
                 <Frame BorderColor="Black" CornerRadius="0" Padding="0">
-                    <ListView x:Name="NotificationList" SeparatorColor="Black" MaximumHeightRequest="320">
+                    <ListView x:Name="NotificationList" ItemSelected="SelectedNotification" SeparatorColor="Black" MaximumHeightRequest="320">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -53,7 +53,7 @@
                                         <Label 
                                             Grid.Row="0" 
                                             Grid.Column="0" 
-                                            Text="{Binding TestNotificationValue}"
+                                            Text="{Binding Title}"
                                             FontSize="25"
                                             Padding="5"
                                             VerticalOptions="Center"/>
@@ -95,7 +95,7 @@
             </Frame>
             <StackLayout Margin="0, 20">
                 <Frame BorderColor="Black" CornerRadius="0" Padding="0">
-                    <ListView x:Name="TaskList" SeparatorColor="Black" MaximumHeightRequest="320">
+                    <ListView x:Name="TaskList" ItemSelected="SelectedTask" SeparatorColor="Black" MaximumHeightRequest="320">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -109,7 +109,7 @@
                                         <Label 
                                             Grid.Row="0" 
                                             Grid.Column="0" 
-                                            Text="{Binding TestTaskValue}"
+                                            Text="{Binding Title}"
                                             FontSize="25"
                                             Padding="5"
                                             VerticalOptions="Center"/>

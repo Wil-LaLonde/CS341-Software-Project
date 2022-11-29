@@ -60,9 +60,40 @@ namespace AcademicReward.Database {
             return DatabaseErrorType.NoError;
         }
 
-        //Currently not needed
-        public DatabaseErrorType LookupFullItem(object notification) {
-            return DatabaseErrorType.NoError;
+        /// <summary>
+        /// Method used to lookup all notifications for a given group
+        /// </summary>
+        /// <param name="group">object group</param>
+        /// <returns>DatabaseErrorType</returns>
+        public DatabaseErrorType LookupFullItem(object group) {
+            DatabaseErrorType dbError;
+            Group groupNotifications = group as Group;
+            try {
+                //Opening the connection
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                //SQL to lookup notifications for a group
+                var sql = "SELECT * " +
+                          "FROM notifications " +
+                          $"WHERE groupid = {groupNotifications.GroupID};";
+                //Executing the query.
+                using var cmd = new NpgsqlCommand(sql, con);
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                //Creating notification objects
+                //[0] -> notificationid | [1] -> notificationtitle | [2] -> notificationdescription | [3] -> groupid
+                while (reader.Read()) {
+                    Notification notification = new Notification((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3]);
+                    groupNotifications.AddNotificationToGroup(notification);
+                }
+                //Closing the connection.
+                con.Close();
+                dbError = DatabaseErrorType.NoError;
+            } catch(NpgsqlException ex) {
+                //Something went wrong adding the task
+                Console.WriteLine("Unexpected error while looking up notification: {0}", ex);
+                dbError = DatabaseErrorType.LookupAllNotificationsDBError;
+            }
+            return dbError;
         }
     }
 }

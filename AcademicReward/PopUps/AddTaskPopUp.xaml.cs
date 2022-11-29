@@ -53,6 +53,7 @@ public partial class AddTaskPopUp : Popup {
 				//Check for any logic/database errors
 				logicError = taskLogic.AddItem(task);
 				if(LogicErrorType.NoError == logicError) {
+					selectedGroup.AddTaskToGroup(task);
 					Close(task);
 				}
             } else {

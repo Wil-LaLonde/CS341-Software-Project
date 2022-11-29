@@ -49,8 +49,15 @@ namespace AcademicReward.Logic {
         }
 
         //Currently not needed
-        public LogicErrorType LookupItem(object task) {
-            return LogicErrorType.NoError;
+        public LogicErrorType LookupItem(object group) {
+            LogicErrorType logicError;
+            DatabaseErrorType dbError = taskDB.LookupFullItem(group);
+            if(DatabaseErrorType.NoError == dbError) {
+                logicError = LogicErrorType.NoError;
+            } else {
+                logicError = LogicErrorType.LookupAllTasksDBError;
+            }
+            return logicError;
         }
 
         /// <summary>
