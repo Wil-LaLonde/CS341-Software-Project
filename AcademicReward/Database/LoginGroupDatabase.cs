@@ -48,7 +48,6 @@ namespace AcademicReward.Database {
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
                 //Creating all our group objects
                 //[0] -> groupid | [1] -> groupname | [2] -> groupdescription | [3] -> adminprofileid
                 while(reader.Read()) {
