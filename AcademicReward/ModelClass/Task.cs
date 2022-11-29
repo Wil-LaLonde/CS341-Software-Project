@@ -19,7 +19,6 @@ namespace AcademicReward.ModelClass {
            //Title should have limited chars
         public string Description { get; set; }
         public int Points { get; set; }
-        public string Date { get; set; }
         public int GroupID { get; private set; }
 
         /// <summary>
@@ -29,13 +28,11 @@ namespace AcademicReward.ModelClass {
         /// <param name="title">string title</param>
         /// <param name="description">string description</param>
         /// <param name="points">int points</param>
-        /// <param name="date">string date</param>
-        public Task(bool isChecked, string title, string description, int points, string date) {
+        public Task(bool isChecked, string title, string description, int points) {
             IsChecked = isChecked;
             Title = title;
             Description = description;
             Points = points;
-            Date = date;
         }  
         
         /// <summary>
@@ -53,8 +50,22 @@ namespace AcademicReward.ModelClass {
             GroupID = groupID;
         }
 
-        public Task(int taskID, string title, string description, int points, int groupID) {
-
+        /// <summary>
+        /// Task constructor (used when gathering a task)
+        /// </summary>
+        /// <param name="taskID">int taskID</param>
+        /// <param name="title">string title</param>
+        /// <param name="description">string description</param>
+        /// <param name="points">int points</param>
+        /// <param name="groupID">int groupID</param>
+        /// <param name="isChecked">bool isChecked</param>
+        public Task(int taskID, string title, string description, int points, int groupID, bool isChecked) {
+            IsChecked = isChecked;
+            TaskID = taskID;
+            Title = title;
+            Description = description;
+            Points = points;
+            GroupID = groupID;
         }
     }
 }

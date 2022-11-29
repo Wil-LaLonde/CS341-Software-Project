@@ -28,6 +28,11 @@
 
         //Notification START
         EmptyNotificationGroup,
+        EmptyNotificationTitle,
+        EmptyNotificationDescription,
+        InvalidNotificationtitleLength,
+        InvalidNotificationDescriptionLength,
+        AddNotificationDBError,
         //Notification END
 
         //Task START
@@ -60,7 +65,7 @@
         //Login Group Collection END
 
         //Notification START
-
+        AddNotificationDBError,
         //Notification END
 
         //Task START

@@ -49,7 +49,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Title Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="NotificationTitleEntry" FontSize="20" Placeholder="Title Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Description: "
@@ -58,7 +58,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Description Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="NotificationDescriptionEntry" FontSize="20" Placeholder="Description Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Group: "
@@ -68,7 +68,6 @@
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
                 <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20"/>
-
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">

@@ -41,8 +41,13 @@
 
         //Notification START
         public const string EmptyNotificationGroupMessage = "A notification group selection is required.";
+        public const string EmptyNotificationTitleMessage = "Please fill in the notification title entry box.";
+        public const string EmptyNotificationDescriptionMessage = "Please fill in the notification description entry box.";
+        public const string InvalidNotificationTitleLengthMessage = "Notification title must be between 1-50 characters.";
+        public const string InvalidNotificationDescriptionLengthMessage = "Notification description must be between 1-250 characters.";
         public const string CreateNotificationSuccessTitle = "Notification Creation Success!";
         public const string CreateNotificationSuccessMessage = "Your notification has been created successfully.";
+        public const string AddNotificationUnknownMessage = "An unknown error occurred during notification creation.";
         //Notification END
 
         //Task START
