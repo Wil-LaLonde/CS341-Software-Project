@@ -59,7 +59,11 @@ namespace AcademicReward.Database {
             return DatabaseErrorType.NoError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method used to look up all tasks for a group
+        /// </summary>
+        /// <param name="group">object group</param>
+        /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType LookupFullItem(object group) {
             DatabaseErrorType dbError;
             Group groupTasks = group as Group;

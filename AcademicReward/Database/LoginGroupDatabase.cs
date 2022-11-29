@@ -31,7 +31,11 @@ namespace AcademicReward.Database {
             return DatabaseErrorType.NoError;
         }
 
-
+        /// <summary>
+        /// Method used to look up all groups for a profile
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
             Profile loggedInProfile = profile as Profile;
