@@ -6,6 +6,11 @@ using AcademicReward.ModelClass;
 using AcademicReward.Logic;
 using AcademicReward.Resources;
 
+/// <summary>
+/// Primary Author: Wil LaLonde
+/// Secondary Author: None
+/// Reviewer: Xee Lo / Maximilian Patterson
+/// </summary>
 public partial class LoginPage : ContentPage {
 	private ILogic loginLogic, loginGroupLogic;
 

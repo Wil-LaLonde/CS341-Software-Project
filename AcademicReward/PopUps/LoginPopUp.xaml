@@ -5,6 +5,9 @@
                CanBeDismissedByTappingOutsideOfPopup="False"
                Color="White"
                Size="600, 1000">
+    <!-- Primary Author: Wil LaLonde -->
+    <!-- Secondary Author: None -->
+    <!-- Reviewer: Xee Lo / Maximilian Patterson -->
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <ImageButton

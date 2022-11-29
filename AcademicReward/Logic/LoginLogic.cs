@@ -4,6 +4,11 @@ using AcademicReward.ModelClass;
 using System.Security.Cryptography;
 
 namespace AcademicReward.Logic {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class LoginLogic : ILogic {
         private const int PasswordIndex = 0;
         private const int SaltIndex = 1;

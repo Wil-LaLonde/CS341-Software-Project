@@ -1,6 +1,11 @@
 ﻿using AcademicReward.Resources;
 
-namespace AcademicReward.Database { 
+namespace AcademicReward.Database {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None 
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public interface IDatabase {
         public DatabaseErrorType AddItem(object obj);
         public DatabaseErrorType UpdateItem(object obj);

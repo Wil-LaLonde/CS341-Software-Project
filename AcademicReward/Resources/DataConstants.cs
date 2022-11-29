@@ -1,4 +1,9 @@
 ﻿namespace AcademicReward.Resources {
+    /// <summary>
+    /// Primary Author: Wil LaLonde 
+    /// Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
+    /// Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson
+    /// </summary>
     public static class DataConstants {
         //LoginPage constants START
         public const string EmptyUsernameTitle = "Empty Username";

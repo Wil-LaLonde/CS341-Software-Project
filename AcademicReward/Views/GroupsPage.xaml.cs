@@ -2,6 +2,11 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
+/// <summary>
+/// Primary Author: Maximilian Patterson
+/// Secondary Author: None
+/// Reviewer: Wil LaLonde
+/// </summary>
 public partial class GroupsPage : ContentPage
 {
     public ObservableCollection<Group> Groups = new ObservableCollection<Group>();

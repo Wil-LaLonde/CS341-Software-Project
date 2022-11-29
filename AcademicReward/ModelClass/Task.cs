@@ -1,6 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AcademicReward.ModelClass {
+    /// <summary>
+    /// Primary Author: Xee Lo
+    /// Secondary Author: None
+    /// Reviewer: Wil LaLonde
+    /// </summary>
     public class Task : ObservableObject {
         public const int MinTitleLength = 0;
         public const int MaxTitleLength = 50;

@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.LoginPage"
              Title="User Login">
+    <!-- Primary Author: Wil LaLonde -->
+    <!-- Secondary Author: None -->
+    <!-- Reviewer: Xee Lo / Maximilian Patterson -->
     <ScrollView>
         <StackLayout Margin="20">
             <!-- Title section -->
