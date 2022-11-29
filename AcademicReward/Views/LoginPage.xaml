@@ -43,12 +43,31 @@
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
                     <Entry x:Name="UsernameEntry" FontSize="22" Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
-                <Label
-                    Text="Password: "
-                    FontSize="26"
-                    Margin="0, 5"
-                    FontAttributes="Bold"
-                    VerticalOptions="Center"/>
+                <StackLayout Orientation="Horizontal" Margin="0, 5">
+                    <Label
+                        Text="Password: "
+                        FontSize="26"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"/>
+                    <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <ImageButton
+                            x:Name="ShowPassword"
+                            Source="showpasswordblue.png"
+                            Clicked="PasswordShowPasswordClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="True"/>
+                        <ImageButton
+                            x:Name="HidePassword"
+                            Source="hidepasswordblue.png"
+                            Clicked="PasswordHidePasswordClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="False"/>
+                    </StackLayout>
+                </StackLayout>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
                     <Entry x:Name="PasswordEntry" FontSize="22" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
