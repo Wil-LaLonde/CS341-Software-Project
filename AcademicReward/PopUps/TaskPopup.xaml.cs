@@ -21,7 +21,6 @@ public partial class TaskPopUp : Popup {
         title.Text = selectedTask.Title;
         description.Text = selectedTask.Description;
         points.Text = selectedTask.Points.ToString();
-        date.Text = selectedTask.Date;
 	}
 
     private void BackButtonClicked(object sender, EventArgs e) => Close();

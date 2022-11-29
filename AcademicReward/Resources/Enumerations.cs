@@ -26,6 +26,26 @@
         LoginGroupCollectionDBError,
         //Login Group Collection END
 
+        //Notification START
+        EmptyNotificationGroup,
+        EmptyNotificationTitle,
+        EmptyNotificationDescription,
+        InvalidNotificationtitleLength,
+        InvalidNotificationDescriptionLength,
+        AddNotificationDBError,
+        //Notification END
+
+        //Task START
+        EmptyTaskGroup,
+        InvalidTaskPoints,
+        EmptyTaskTitle,
+        EmptyTaskDescription,
+        NegativeTaskPoints,
+        InvalidTaskTitleLength,
+        InvalidTaskDescriptionLength,
+        AddTaskDBError,
+        //Task END
+
         //General START
         NoError
         //General END
@@ -43,6 +63,14 @@
         //Login Group Collection START
         LoginGroupCollectionDBError,
         //Login Group Collection END
+
+        //Notification START
+        AddNotificationDBError,
+        //Notification END
+
+        //Task START
+        AddTaskDBError,
+        //Task END
 
         //General START
         NoError
