@@ -48,6 +48,8 @@
         public const string CreateNotificationSuccessTitle = "Notification Creation Success!";
         public const string CreateNotificationSuccessMessage = "Your notification has been created successfully.";
         public const string AddNotificationUnknownMessage = "An unknown error occurred during notification creation.";
+        public const string LookupNotificationDBErrorTitle = "Error Loading Notifications";
+        public const string LookupNotificationDBErrorMessage = "There was an unexpected error loading your notifications.";
         //Notification END
 
         //Task START
@@ -62,6 +64,8 @@
         public const string InvalidTaskDescriptionLengthMessage = "Task description must be between 1-250 characters.";
         public const string AddTaskDBErrorMessage = "A database error occurred while adding your task.";
         public const string AddTaskUnknownMessage = "An unknown error occurred during task creation.";
+        public const string LookupTaskDBErrorTitle = "Error Loading Tasks";
+        public const string LookupTaskDBErrorMessage = "There was an unexpected error loading your tasks.";
         //Task END
 
         //Display Alert START

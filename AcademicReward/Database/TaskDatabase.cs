@@ -1,4 +1,5 @@
 ﻿using AcademicReward.Resources;
+using AcademicReward.ModelClass;
 using Npgsql;
 
 namespace AcademicReward.Database {
@@ -59,8 +60,38 @@ namespace AcademicReward.Database {
         }
 
         //Currently not needed
-        public DatabaseErrorType LookupFullItem(object task) {
-            return DatabaseErrorType.NoError;
+        public DatabaseErrorType LookupFullItem(object group) {
+            DatabaseErrorType dbError;
+            Group groupTasks = group as Group;
+            try {
+                //Opening the connection
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                //SQL to lookup tasks for a group
+                var sql = "SELECT * " +
+                          "FROM tasks " +
+                          $"WHERE groupid = {groupTasks.GroupID};";
+                //Executing the query.
+                using var cmd = new NpgsqlCommand(sql, con);
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                //Creating tasks objects
+                //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [5] -> ischecked
+                while (reader.Read())
+                {
+                    ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[5]);
+                    groupTasks.AddTaskToGroup(task);
+                }
+                //Closing the connection.
+                con.Close();
+                dbError = DatabaseErrorType.NoError;
+            }
+            catch (NpgsqlException ex)
+            {
+                //Something went wrong looking up the task
+                Console.WriteLine("Unexpected error while looking up task: {0}", ex);
+                dbError = DatabaseErrorType.LookupAllTasksDBError;
+            }
+            return dbError;
         }
     }
 }

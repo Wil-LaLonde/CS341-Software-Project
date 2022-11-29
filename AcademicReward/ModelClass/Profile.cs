@@ -167,5 +167,19 @@ namespace AcademicReward.ModelClass {
         public void AddPointsToMember(int points) {
             Points += points;
         }
+
+        /// <summary>
+        /// Method used to get the group name from the groupID
+        /// </summary>
+        /// <param name="groupID">int groupID</param>
+        /// <returns>string GroupName</returns>
+        public string GetGroupNameUsingGroupID(int groupID) {
+            foreach(Group group in groupList) {
+                if(group.GroupID == groupID) {
+                    return group.GroupName;
+                }
+            }
+            return string.Empty;
+        }
     }
 }

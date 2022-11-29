@@ -33,6 +33,7 @@
         InvalidNotificationtitleLength,
         InvalidNotificationDescriptionLength,
         AddNotificationDBError,
+        LookupAllNotificationsDBError,
         //Notification END
 
         //Task START
@@ -44,6 +45,7 @@
         InvalidTaskTitleLength,
         InvalidTaskDescriptionLength,
         AddTaskDBError,
+        LookupAllTasksDBError,
         //Task END
 
         //General START
@@ -66,10 +68,12 @@
 
         //Notification START
         AddNotificationDBError,
+        LookupAllNotificationsDBError,
         //Notification END
 
         //Task START
         AddTaskDBError,
+        LookupAllTasksDBError,
         //Task END
 
         //General START

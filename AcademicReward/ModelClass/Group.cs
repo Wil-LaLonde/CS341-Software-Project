@@ -49,6 +49,9 @@ namespace AcademicReward.ModelClass {
             GroupName = groupName;
             GroupDescription = groupDescription;
             AdminProfileID = adminProfileID;
+            groupMemberList = new ObservableCollection<Profile>();
+            groupTaskList = new ObservableCollection<Task>();
+            groupNotificationList = new ObservableCollection<Notification>();
         }
 
         /// <summary>
