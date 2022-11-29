@@ -9,7 +9,7 @@ namespace AcademicReward.Logic {
         /// TaskLogic constructor
         /// </summary>
         public TaskLogic() { 
-            //taskDB = new TaskDatabse();
+            taskDB = new TaskDatabase();
         }
 
         public LogicErrorType AddItem(object task) {

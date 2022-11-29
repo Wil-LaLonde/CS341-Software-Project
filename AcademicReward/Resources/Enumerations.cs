@@ -58,7 +58,7 @@
         //Notification END
 
         //Task START
-
+        AddTaskDBError,
         //Task END
 
         //General START
