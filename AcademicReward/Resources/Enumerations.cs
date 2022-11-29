@@ -26,6 +26,13 @@
 
         //Task START
         EmptyTaskGroup,
+        InvalidTaskPoints,
+        EmptyTaskTitle,
+        EmptyTaskDescription,
+        NegativeTaskPoints,
+        InvalidTaskTitleLength,
+        InvalidTaskDescriptionLength,
+        AddTaskDBError,
         //Task END
 
         //General START

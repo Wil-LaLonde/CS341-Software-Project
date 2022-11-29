@@ -36,10 +36,22 @@
 
         //Notification START
         public const string EmptyNotificationGroupMessage = "A notification group selection is required.";
+        public const string CreateNotificationSuccessTitle = "Notification Creation Success!";
+        public const string CreateNotificationSuccessMessage = "Your notification has been created successfully.";
         //Notification END
 
         //Task START
         public const string EmptyTaskGroupMessage = "A task group selection is required.";
+        public const string InvalidTaskPointsMessage = "Points must be a whole numeric value.";
+        public const string CreateTaskSuccessTitle = "Task Creation Success!";
+        public const string CreateTaskSuccessMessage = "Your task has been created successfully.";
+        public const string EmptyTaskTitleMessage = "Please fill in the task title entry box.";
+        public const string EmptyTaskDescriptionMessage = "Please fill in the task description entry box.";
+        public const string NegativeTaskPointsMessage = "Points cannot be negative.";
+        public const string InvalidTaskTitleLengthMessage = "Task title must be between 1-50 characters.";
+        public const string InvalidTaskDescriptionLengthMessage = "Task description must be between 1-250 characters.";
+        public const string AddTaskDBErrorMessage = "A database error occurred while adding your task.";
+        public const string AddTaskUnknownMessage = "An unknown error occurred during task creation.";
         //Task END
 
         //Display Alert START

@@ -48,12 +48,16 @@ public partial class TaskPage : ContentPage {
 	private async void AddNotificationButtonClicked(object sender, EventArgs e) {
         AddNotificationPopUp addNotificationPopUp = new AddNotificationPopUp();
         Notification notification = await this.ShowPopupAsync(addNotificationPopUp) as Notification;
-        //Some check here to make sure it was added successfully
+        if(notification != null) {
+            await DisplayAlert(DataConstants.CreateNotificationSuccessTitle, DataConstants.CreateNotificationSuccessMessage, DataConstants.OK);
+        }
     }
 
 	private async void AddTaskButtonClicked(object sender, EventArgs e) {
 		AddTaskPopUp addTaskPopUp = new AddTaskPopUp();
 		ModelClass.Task task = await this.ShowPopupAsync(addTaskPopUp) as ModelClass.Task;
-        //Some check here to make sure it was added successfully
+        if(task != null) {
+            await DisplayAlert(DataConstants.CreateTaskSuccessTitle, DataConstants.CreateTaskSuccessMessage, DataConstants.OK);
+        }
 	}
 }

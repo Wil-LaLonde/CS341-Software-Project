@@ -46,7 +46,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Title Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="TaskTitleEntry" FontSize="20" Placeholder="Title Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Description: "
@@ -55,7 +55,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Description Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="TaskDescriptionEntry" FontSize="20" Placeholder="Description Goes Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Points: "
@@ -64,7 +64,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Points Go Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="TaskPointEntry" FontSize="20" Placeholder="Points Go Here..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Group: "

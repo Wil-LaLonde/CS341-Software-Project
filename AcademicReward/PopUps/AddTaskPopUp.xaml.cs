@@ -37,8 +37,22 @@ public partial class AddTaskPopUp : Popup {
 		LogicErrorType logicError;
 		Group selectedGroup = GroupPicker.SelectedItem as Group;
 		if(selectedGroup != null) {
-			logicError = LogicErrorType.NoError;
-            Close(new ModelClass.Task(false, string.Empty, string.Empty, 0, string.Empty));
+			//Gathering user input
+			string title = TaskTitleEntry.Text ?? string.Empty;
+			string description = TaskDescriptionEntry.Text ?? string.Empty;
+			string points = TaskPointEntry.Text ?? string.Empty;
+			bool isPointsValid = int.TryParse(points, out int intPoints);
+			if(isPointsValid) {
+				//Create a new Task object
+				ModelClass.Task task = new ModelClass.Task(title, description, intPoints, selectedGroup.GroupID);
+				//Check for any logic/database errors
+				logicError = taskLogic.AddItem(task);
+				if(LogicErrorType.NoError == logicError) {
+					Close(task);
+				}
+            } else {
+				logicError = LogicErrorType.InvalidTaskPoints;
+			}
         } else {
 			logicError = LogicErrorType.EmptyTaskGroup;
 		}
@@ -73,7 +87,39 @@ public partial class AddTaskPopUp : Popup {
 				errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
 				errorMessageBuilder.Append(DataConstants.EmptyTaskGroupMessage);
 				break;
-		}
+			case LogicErrorType.InvalidTaskPoints:
+				errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.InvalidTaskPointsMessage);
+				break;
+			case LogicErrorType.EmptyTaskTitle:
+				errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.EmptyTaskTitleMessage);
+				break;
+			case LogicErrorType.EmptyTaskDescription:
+				errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.EmptyTaskDescriptionMessage);
+				break;
+			case LogicErrorType.NegativeTaskPoints:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.NegativeTaskPointsMessage);
+                break;
+			case LogicErrorType.InvalidTaskTitleLength:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.InvalidTaskTitleLengthMessage);
+                break;
+			case LogicErrorType.InvalidTaskDescriptionLength:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.InvalidTaskDescriptionLengthMessage);
+                break;
+			case LogicErrorType.AddTaskDBError:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.AddTaskDBErrorMessage);
+                break;
+			default:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+				errorMessageBuilder.Append(DataConstants.AddTaskUnknownMessage);
+                break;
+        }
 		return errorMessageBuilder.ToString();
 	}
 }
