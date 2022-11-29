@@ -5,6 +5,9 @@
             x:Class="AcademicReward.AddShopItemPage"
             CanBeDismissedByTappingOutsideOfPopup="False"
             Color="White">
+    <!-- Primary Author: Sean Stille -->
+    <!-- Secondary Author: Wil LaLonde -->
+    <!-- Reviewer: Wil LaLonde -->
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <ImageButton

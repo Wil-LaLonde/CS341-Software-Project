@@ -7,6 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
+/// <summary>
+/// Primary Author: Wil LaLonde
+/// Secondary Author: None
+/// Reviewer: Xee Lo
+/// </summary>
 public partial class TaskPage : ContentPage {
     Profile profile;
     private ILogic notificationLogic, taskLogic;

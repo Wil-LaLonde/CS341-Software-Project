@@ -2,6 +2,11 @@
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class Profile : ObservableObject {
         public const int MinUsernameLength = 0;
         public const int MaxUsernameLength = 25;

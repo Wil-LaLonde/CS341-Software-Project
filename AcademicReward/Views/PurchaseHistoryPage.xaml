@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.PurchaseHistoryPage"
              Title="Purchase History">
-    
+    <!-- Primary Author: Maximilian Patterson -->
+    <!-- Secondary Author: None -->
+    <!-- Reviewer: Wil LaLonde -->
     <VerticalStackLayout>
         <ListView x:Name="PurchaseHistoryItemsLV" ItemsSource="{Binding PurchaseHistoryItems}" VerticalOptions="Center">
             <ListView.ItemTemplate>

@@ -6,6 +6,11 @@ using System.Text;
 
 namespace AcademicReward.PopUps;
 
+/// <summary>
+/// Primary Author: Wil LaLonde
+/// Secondary Author: None
+/// Reviewer: Xee Lo
+/// </summary>
 public partial class AddTaskPopUp : Popup {
 	ILogic taskLogic;
 
