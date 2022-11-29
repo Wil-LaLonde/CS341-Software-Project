@@ -29,6 +29,11 @@
         public const string SignProfileInUnknownMessage = "An unknown error occurred while signing you in.";
         //LoginPage constants END
 
+        //Login Group Collection START
+        public const string LoginGroupCollectionTitle = "Group Collection Error";
+        public const string LoginGroupCollectionMessage = "An error occurred while gathering your groups. The application can still be used, but no groups will load. Try logging out and in again.";
+        //Login Group Collection END
+
         //Display Alert START
         public const string OK = "OK";
         public const string Cancel = "Cancel";

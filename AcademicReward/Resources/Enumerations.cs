@@ -16,6 +16,10 @@
         SignProfileInDBError,
         //LoginPage END
 
+        //Login Group Collection START
+        LoginGroupCollectionDBError,
+        //Login Group Collection END
+
         //General START
         NoError
         //General END
@@ -29,6 +33,10 @@
         UsernameNotFoundDBError,
         UsernameTakenDBError,
         //LoginPage END
+
+        //Login Group Collection START
+        LoginGroupCollectionDBError,
+        //Login Group Collection END
 
         //General START
         NoError

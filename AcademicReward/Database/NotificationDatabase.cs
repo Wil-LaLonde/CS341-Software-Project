@@ -1,13 +1,11 @@
 ﻿using AcademicReward.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademicReward.Database {
     public class NotificationDatabase : AcademicRewardsDatabase, IDatabase {
 
+        /// <summary>
+        /// NotificationDatbase constructor
+        /// </summary>
         public NotificationDatabase() { }
 
         public DatabaseErrorType AddItem(object notification) {
