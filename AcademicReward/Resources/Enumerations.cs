@@ -20,6 +20,14 @@
         LoginGroupCollectionDBError,
         //Login Group Collection END
 
+        //Notification START
+        EmptyNotificationGroup,
+        //Notification END
+
+        //Task START
+        EmptyTaskGroup,
+        //Task END
+
         //General START
         NoError
         //General END
@@ -37,6 +45,14 @@
         //Login Group Collection START
         LoginGroupCollectionDBError,
         //Login Group Collection END
+
+        //Notification START
+
+        //Notification END
+
+        //Task START
+
+        //Task END
 
         //General START
         NoError

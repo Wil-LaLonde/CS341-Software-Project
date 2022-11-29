@@ -101,5 +101,13 @@ namespace AcademicReward.ModelClass {
         public void RemoveNotificationFromGroup(Notification notification) {
             groupNotificationList.Remove(notification);
         }
+
+        /// <summary>
+        /// ToString method to display the GroupName
+        /// </summary>
+        /// <returns>Group name</returns>
+        public override string ToString() {
+            return GroupName;
+        }
     }
 }

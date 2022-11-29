@@ -34,6 +34,14 @@
         public const string LoginGroupCollectionMessage = "An error occurred while gathering your groups. The application can still be used, but no groups will load. Try logging out and in again.";
         //Login Group Collection END
 
+        //Notification START
+        public const string EmptyNotificationGroupMessage = "A notification group selection is required.";
+        //Notification END
+
+        //Task START
+        public const string EmptyTaskGroupMessage = "A task group selection is required.";
+        //Task END
+
         //Display Alert START
         public const string OK = "OK";
         public const string Cancel = "Cancel";

@@ -3,7 +3,8 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
                x:Class="AcademicReward.PopUps.AddTaskPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
-               Color="White">
+               Color="White"
+               Size="600, 1000">
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <ImageButton
@@ -22,6 +23,21 @@
                     VerticalOptions="Center"/>
             </Frame>
         </StackLayout>
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error with task creation: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    TextType="Html"
+                    FontSize="20"/>
+            </StackLayout>
+        </Frame>
         <StackLayout Margin="10">
             <Label
                 Text="Title: "
@@ -57,25 +73,12 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Group 1</x:String>
-                            <x:String>Group 2</x:String>
-                            <x:String>Group 3</x:String>
-                            <x:String>Group 4</x:String>
-                            <x:String>Group 5</x:String>
-                            <x:String>Group 6</x:String>
-                            <x:String>Group 7</x:String>
-                            <x:String>Group 8</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20"/>
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
             <Button 
-                Text="Create" 
+                Text="Create Task" 
                 Clicked="CreateTaskButtonClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
