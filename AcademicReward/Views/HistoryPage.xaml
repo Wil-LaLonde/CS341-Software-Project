@@ -28,8 +28,8 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 
-                                Text="{Binding Name}" 
-                                Detail="{Binding Description}"/>
+                                Text="{Binding title}" 
+                                Detail="{Binding description}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

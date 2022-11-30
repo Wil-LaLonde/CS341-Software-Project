@@ -1,4 +1,8 @@
+using AcademicReward.ModelClass;
+using AcademicReward.Resources;
+using Npgsql;
 using System.Collections.ObjectModel;
+
 
 namespace AcademicReward.Views;
 
@@ -9,33 +13,63 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class HistoryPage : ContentPage
 {
-	// New observable collection of HistoryItem
-	public ObservableCollection<HistoryItem> HistoryItems = new ObservableCollection<HistoryItem>();
+    // New observable collection of HistoryItem
+    public ObservableCollection<HistoryItem> HistoryItems = new ObservableCollection<HistoryItem>();
 
-	public HistoryPage()
-	{
-		InitializeComponent();
-		HistoryItemsLV.ItemsSource = HistoryItems;
-		TestData();
-	}
+    public HistoryPage()
+    {
+        InitializeComponent();
+        HistoryItemsLV.ItemsSource = HistoryItems;
+        TestData();
+    }
 
-	public void TestData()
-	{
-		base.OnAppearing();
+    public void TestData()
+    {
+        base.OnAppearing();
 
-		// Add some test data
-		HistoryItems.Add(new HistoryItem { Name = "Test 1", Description = "Description 1", Date = DateTime.Now });
-		HistoryItems.Add(new HistoryItem { Name = "Test 2", Description = "Description 2", Date = DateTime.Now });
-		HistoryItems.Add(new HistoryItem { Name = "Test 3", Description = "Description 3", Date = DateTime.Now });
-		HistoryItems.Add(new HistoryItem { Name = "Test 4", Description = "Description 4", Date = DateTime.Now });
-		HistoryItems.Add(new HistoryItem { Name = "Test 5", Description = "Description 5", Date = DateTime.Now });
-	}
+        // Add some test data
+        LoadHistoryItems();
+    }
 
-	// Private class for HistoryItem
-	public class HistoryItem
-	{
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public DateTime Date { get; set; }
-	}
+    // Load the history items from the database
+    public DatabaseErrorType LoadHistoryItems()
+    {
+        int userID = MauiProgram.Profile.ProfileID;
+
+        DatabaseErrorType dbError;
+        try
+        {
+            using var con = new NpgsqlConnection(Database.AcademicRewardsDatabase.InitializeConnectionString());
+            con.Open();
+            var sql = "SELECT * FROM history WHERE profileid = " + $"'{userID}';";
+            using var cmd = new NpgsqlCommand(sql, con);
+            var HistoryItemsReader = cmd.ExecuteReader();
+
+            // Add all the items from HistoryItemsReader to HistoryItems
+            while (HistoryItemsReader.Read())
+            {
+                HistoryItems.Add(new HistoryItem
+                (
+                    (int)HistoryItemsReader.GetDouble(0), // historyid
+                    (int)HistoryItemsReader.GetDouble(1), // profileid
+                    HistoryItemsReader.GetString(2), // title
+                    HistoryItemsReader.GetString(3) // description
+                ));
+            }
+
+            con.Close();
+            dbError = DatabaseErrorType.NoError;
+        }
+        catch (PostgresException ex)
+        {
+            Console.WriteLine("Error while grabbing history: {0}", ex);
+            dbError = DatabaseErrorType.UsernameTakenDBError;
+        }
+        catch (NpgsqlException ex)
+        {
+            Console.WriteLine("Unexpected error while grabbing history: {0}", ex);
+            dbError = DatabaseErrorType.AddProfileDBError;
+        }
+        return dbError;
+    }
 }
