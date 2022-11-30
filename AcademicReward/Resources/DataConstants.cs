@@ -39,6 +39,31 @@
         public const string LoginGroupCollectionMessage = "An error occurred while gathering your groups. The application can still be used, but no groups will load. Try logging out and in again.";
         //Login Group Collection END
 
+        //Edit Profile Page START
+        public const string UpdatePasswordSuccessTitle = "Password Updated!";
+        public const string UpdatePasswordSuccessMessage = "Your pasword has been updated successfully.";
+        public const string EmptyOldPasswordTitle = "Empty Old Password";
+        public const string EmptyOldPasswordMessage = "Please fill in the old password entry box.";
+        public const string EmptyNewPasswordTitle = "Empty New Password";
+        public const string EmptyNewPasswordMessage = "Please fill in the new password entry box.";
+        public const string EmptyReEnterNewPasswordTitle = "Empty Re-Enter New Password";
+        public const string EmptyReEnterNewPasswordMessage = "Please fill in the re-enter new password entry box.";
+        public const string PasswordMismatchTitle = "Password Mismatch";
+        public const string InvalidOldPasswordLengthTitle = "Invalid Old Password Length";
+        public const string InvalidOldPasswordLengthMessage = "Old password must be between 1-50 characters.";
+        public const string InvalidNewPasswordLengthTitle = "Invalid New Password Length";
+        public const string InvalidNewPasswordLengthMessage = "New password must be between 1-50 characters.";
+        public const string InvalidReEnterNewPasswordLengthTitle = "Invalid Re-enter New Password Length";
+        public const string InvalidReEnterNewPasswordLengthMessage = "Re-enter new password must be between 1-50 characters.";
+        public const string OldPasswordIncorrectMessage = "The old password entered is not correct, please try again.";
+        public const string CurrentPasswordErrorTitle = "Old & New Password Error";
+        public const string CurrentPasswordErrorMessage = "The new password cannot be the same as the old password, please try again.";
+        public const string UpdatePasswordDBErrorTitle = "Update Password Databse Error";
+        public const string UpdatePasswordDBErrorMessage = "An unexpected database error occurred while updating your password.";
+        public const string UpdatePasswordUnknownTitle = "Update Password Unknown Error";
+        public const string UpdatePasswordUnknownMessage = "An unknown error occurred while updating your password.";
+        //Edit Profile Page END
+
         //Notification START
         public const string EmptyNotificationGroupMessage = "A notification group selection is required.";
         public const string EmptyNotificationTitleMessage = "Please fill in the notification title entry box.";
@@ -76,6 +101,7 @@
         //General START
         public const string SpaceDashSpace = " - ";
         public const string Colon = ":";
+        public const string GoBack = "..";
         //General END
     }
 }

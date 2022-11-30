@@ -15,6 +15,11 @@ namespace AcademicReward.Database {
         /// </summary>
         public LoginDatabase() { }
 
+        /// <summary>
+        /// Method used to add a new profile
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType AddItem(object profile) {
             DatabaseErrorType dbError;
             Profile profileToAdd = profile as Profile;
@@ -43,9 +48,37 @@ namespace AcademicReward.Database {
             return dbError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method used to update a profile's password
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType UpdateItem(object profile) {
-            return DatabaseErrorType.NoError;
+            DatabaseErrorType dbError;
+            Profile profileToUpdate = profile as Profile;
+            try
+            {
+                //Opening the connection
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                //Insert SQL query for adding a profile
+                var sql = "UPDATE profiles " +
+                          $"SET salt = '{profileToUpdate.Salt}', password = '{profileToUpdate.Password}' " +
+                          $"WHERE profileid = {MauiProgram.Profile.ProfileID};";
+                //Executing the query.
+                using var cmd = new NpgsqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                //Closing the connection.
+                con.Close();
+                MauiProgram.Profile.Salt = profileToUpdate.Salt;
+                MauiProgram.Profile.Password = profileToUpdate.Password;
+                dbError = DatabaseErrorType.NoError;
+            } catch(NpgsqlException ex) {
+                //Not sure what happened, log message
+                Console.WriteLine("Unexpected error while updating profile: {0}", ex);
+                dbError = DatabaseErrorType.UpdatePasswordDBError;
+            }
+            return dbError;
         }
 
         //Currently not needed
@@ -53,6 +86,11 @@ namespace AcademicReward.Database {
             return DatabaseErrorType.NoError;
         }
 
+        /// <summary>
+        /// Method used to look up a profile
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType LookupItem(object profile) {
             DatabaseErrorType dbError;
             Profile profileToLogin = profile as Profile;
@@ -86,6 +124,11 @@ namespace AcademicReward.Database {
             return dbError;
         }
 
+        /// <summary>
+        /// Method used to look up a full profile
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
             Profile profileToLogin = profile as Profile;
