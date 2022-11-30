@@ -20,7 +20,7 @@ namespace AcademicReward.Database
             {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                var sql = "INSERT INTO history (ProfileId, title, Description) VALUES (" + $"'{historyItemToUpdate.ProfileId}', '{historyItemToUpdate.Title}', '{historyItemToUpdate.Description}');";
+                var sql = "INSERT INTO history (profileId, title, description) VALUES (" + $"'{historyItemToUpdate.ProfileId}', '{historyItemToUpdate.Title}', '{historyItemToUpdate.Description}');";
                 using var cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -74,7 +74,7 @@ namespace AcademicReward.Database
             {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                var sql = "UPDATE history SET title = " + $"'{historyItemToUpdate.Title}', Description = '{historyItemToUpdate.Description}' WHERE historyid = '{historyItemToUpdate.HistoryId}';";
+                var sql = "UPDATE history SET title = " + $"'{historyItemToUpdate.Title}', description = '{historyItemToUpdate.Description}' WHERE historyid = '{historyItemToUpdate.HistoryId}';";
                 using var cmd = new NpgsqlCommand(sql, con);
 
                 cmd.ExecuteNonQuery();
@@ -102,7 +102,7 @@ namespace AcademicReward.Database
             {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                var sql = "SELECT * FROM history WHERE ProfileId = " + $"'{ProfileId}';";
+                var sql = "SELECT * FROM history WHERE profileid = " + $"'{ProfileId}';";
                 using var cmd = new NpgsqlCommand(sql, con);
                 var HistoryItemsReader = cmd.ExecuteReader();
 
