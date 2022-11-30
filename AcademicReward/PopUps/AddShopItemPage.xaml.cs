@@ -24,6 +24,8 @@ public partial class AddShopItemPage : Popup {
 		String itemGroup = ""; //Not sure how to pull this from the array of groups
 		String[] itemValues = { name.Text, description.Text, cost.Text, levelRec.Text, itemGroup };
 		logic.AddItem(itemValues);
+
+		Close();
 	}
 
     private void BackButtonClicked(object sender, EventArgs e) => Close();

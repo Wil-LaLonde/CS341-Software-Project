@@ -3,7 +3,7 @@
 namespace AcademicReward.ModelClass {
     /// <summary>
     /// Primary Author: Wil LaLonde
-    /// Secondary Author: None
+    /// Secondary Author: Sean Stille
     /// Reviewer: Maximilian Patterson
     /// </summary>
     public class ShopItem : ObservableObject {
@@ -24,13 +24,33 @@ namespace AcademicReward.ModelClass {
         /// <param name="pointCost">int cost</param>
         /// <param name="levelRequirement">int levelRequirement</param>
         /// <param name="group">Group group</param>
-        public ShopItem(string title, string description, int pointCost, int levelRequirement, Group group) {
+        public ShopItem(string title, string description, int pointCost, int levelRequirement, Group group) { 
             Title = title;
             Description = description;
             PointCost = pointCost;
             LevelRequirement = levelRequirement;
             Group = group;
-            Id = IdCounter++;
+            Id = ++IdCounter;
         }
+
+        /**
+         * Overloaded constructor, used when pulling data from database to accomodate prexisting ID
+         */
+        public ShopItem(int id, string title, string description, int pointCost, int levelRequirement, Group group)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            PointCost = pointCost;
+            LevelRequirement = levelRequirement;
+            Group = group;
+            if (id > IdCounter)
+            {
+                IdCounter = id++;               //This prevents overlapping IDs
+            }
+        }
+
+        
+
     }
 }

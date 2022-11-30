@@ -59,6 +59,11 @@
         LookupAllTasksDBError,
         //Task END
 
+        //Shop START
+        InvalidCost,
+        InvalidLevel,
+        //Shop END
+
         //General START
         NoError
         //General END
