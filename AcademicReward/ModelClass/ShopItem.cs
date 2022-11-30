@@ -3,6 +3,8 @@
 namespace AcademicReward.ModelClass {
     public class ShopItem : ObservableObject {
 
+        public static int IdCounter = 0;
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int PointCost { get; set; }
@@ -23,6 +25,7 @@ namespace AcademicReward.ModelClass {
             PointCost = pointCost;
             LevelRequirement = levelRequirement;
             Group = group;
+            Id = IdCounter++;
         }
     }
 }

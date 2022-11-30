@@ -20,9 +20,17 @@
         LoginGroupCollectionDBError,
         //Login Group Collection END
 
+        //Shop START
+        InvalidCost,
+        InvalidLevel,
+
+        //Shop END
+
         //General START
         NoError
         //General END
+
+
     }
 
     //Add database error types to this enum
