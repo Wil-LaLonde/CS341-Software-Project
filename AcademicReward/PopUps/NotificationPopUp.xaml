@@ -1,12 +1,13 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
-               x:Class="AcademicReward.PopUps.AddMemberPopUp"
+               x:Class="AcademicReward.PopUps.NotificationPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
+               Size="600, 1000"
                Color="White">
     <!-- Primary Author: Wil LaLonde -->
     <!-- Secondary Author: None -->
-    <!-- Reviewer: Maximilian Patterson -->
+    <!-- Reviewer: -->
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
             <ImageButton
@@ -18,7 +19,7 @@
                 Margin="10"/>
             <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                 <Label
-                    Text="Add Member"
+                    Text="Notification Details"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
@@ -27,19 +28,37 @@
         </StackLayout>
         <StackLayout Margin="10">
             <Label
-                Text="Member Username: "
+                Text="Title: "
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" Placeholder="Member Username..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="NotificationTitle" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+            <Label
+                Text="Description: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label x:Name="NotificationDescription" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
+            </Frame>
+            <Label
+                Text="Group: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label x:Name="NotificationGroup" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
             <Button 
-                Text="Add Member" 
-                Clicked="AddMemberButtonClicked"
+                Text="Close" 
+                Clicked="CloseNotificationButtonClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
                 BorderColor="{StaticResource BlueButton}"/>

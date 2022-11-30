@@ -2,6 +2,11 @@
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class Profile : ObservableObject {
         public const int MinUsernameLength = 0;
         public const int MaxUsernameLength = 25;
@@ -14,6 +19,7 @@ namespace AcademicReward.ModelClass {
         public int ProfileID { get; private set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string NewPassword { get; set; }
         public string ReEnterPassword { get; set; }
         public string Salt { get; set; }
         public bool IsAdmin { get; private set; }
@@ -62,6 +68,20 @@ namespace AcademicReward.ModelClass {
             Username = username;
             Salt = salt;
             Password = password;
+        }
+
+        /// <summary>
+        /// Profile constructor (when updating a password)
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <param name="oldPassword">string oldPassword</param>
+        /// <param name="newPassword">string newPassword</param>
+        /// <param name="reEnterNewPassword">string reEnterPassword</param>
+        public Profile(string username, string oldPassword, string newPassword, string reEnterNewPassword) {
+            Username = username;
+            Password = oldPassword;
+            NewPassword = newPassword;
+            ReEnterPassword = reEnterNewPassword;
         }
 
         /// <summary>
@@ -161,6 +181,20 @@ namespace AcademicReward.ModelClass {
         /// <param name="points">int profile</param>
         public void AddPointsToMember(int points) {
             Points += points;
+        }
+
+        /// <summary>
+        /// Method used to get the group name from the groupID
+        /// </summary>
+        /// <param name="groupID">int groupID</param>
+        /// <returns>string GroupName</returns>
+        public string GetGroupNameUsingGroupID(int groupID) {
+            foreach(Group group in groupList) {
+                if(group.GroupID == groupID) {
+                    return group.GroupName;
+                }
+            }
+            return string.Empty;
         }
     }
 }

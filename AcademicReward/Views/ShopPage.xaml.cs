@@ -3,6 +3,11 @@ using CommunityToolkit.Maui.Views;
 
 namespace AcademicReward.Views;
 
+/// <summary>
+/// Primary Author: Sean Stille
+/// Secondary Author: None
+/// Reviewer: Wil LaLonde
+/// </summary>
 public partial class ShopPage : ContentPage {
 
     private ILogic ShopLogic;

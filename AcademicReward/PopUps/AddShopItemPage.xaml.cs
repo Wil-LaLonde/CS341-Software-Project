@@ -3,6 +3,12 @@ namespace AcademicReward;
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
 using CommunityToolkit.Maui.Views;
+
+/// <summary>
+/// Primary Author: Sean Stille
+/// Secondary Author: None
+/// Reviewer: Wil LaLonde
+/// </summary>
 public partial class AddShopItemPage : Popup {
 	ILogic logic;
 	public AddShopItemPage(ILogic ShopLogic) {

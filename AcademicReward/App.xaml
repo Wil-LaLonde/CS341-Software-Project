@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AcademicReward"
              x:Class="AcademicReward.App">
+    <!-- Primary Author: Generated File -->
+    <!-- Secondary Author: Generated File -->
+    <!-- Reviewer: Maximilian Patterson -->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

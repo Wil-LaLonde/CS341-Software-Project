@@ -4,6 +4,11 @@ using AcademicReward.ModelClass;
 using System.Security.Cryptography;
 
 namespace AcademicReward.Logic {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class LoginLogic : ILogic {
         private const int PasswordIndex = 0;
         private const int SaltIndex = 1;
@@ -48,9 +53,31 @@ namespace AcademicReward.Logic {
             return logicError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method used to update a profile's password
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>LogicErrorType logicError</returns>
         public LogicErrorType UpdateItem(object profile) {
-            return LogicErrorType.NoError;
+            LogicErrorType logicError;
+            Profile profileToUpdate = profile as Profile;
+            logicError = UpdatePasswordCheck(profileToUpdate);
+            if(LogicErrorType.NoError == logicError) {
+                //Gathering new salt and hash
+                string storedPassword = GenerateStoredPassword(profileToUpdate.NewPassword);
+                //Gathing all the password parts
+                string[] storedPasswordParts = storedPassword.Split(DataConstants.Colon);
+                profileToUpdate.Password = storedPasswordParts[PasswordIndex];
+                profileToUpdate.Salt = storedPasswordParts[SaltIndex];
+                //Making database call to update salt and password (hash)
+                DatabaseErrorType dbError = loginDB.UpdateItem(profileToUpdate);
+                if(DatabaseErrorType.NoError == dbError) {
+                    logicError = LogicErrorType.NoError;
+                } else {
+                    logicError = LogicErrorType.UpdatePasswordDBError;
+                }
+            }
+            return logicError;
         }
 
         //Currently not needed
@@ -138,6 +165,39 @@ namespace AcademicReward.Logic {
         }
 
         /// <summary>
+        /// Helper method used to help update a user's password
+        /// </summary>
+        /// <param name="profile">Profile profile</param>
+        /// <returns>LogicErrorType logicError</returns>
+        private LogicErrorType UpdatePasswordCheck(Profile profile) {
+            LogicErrorType logicError;
+            if(string.IsNullOrEmpty(profile.Password)) {
+                logicError = LogicErrorType.EmptyOldPassword;
+            } else if(string.IsNullOrEmpty(profile.NewPassword)) {
+                logicError = LogicErrorType.EmptyNewPassword;
+            } else if(string.IsNullOrEmpty(profile.ReEnterPassword)) {
+                logicError = LogicErrorType.EmptyReEnterNewPassword;
+            } else if(!profile.NewPassword.Equals(profile.ReEnterPassword)) {
+                logicError = LogicErrorType.PasswordMismatch;
+            }else if(CheckPasswordLength(profile.Password)) {
+                logicError = LogicErrorType.InvalidOldPasswordLength;
+            } else if(CheckPasswordLength(profile.NewPassword)) {
+                logicError = LogicErrorType.InvalidNewPasswordLength;
+            } else if(CheckPasswordLength(profile.ReEnterPassword)) {
+                logicError = LogicErrorType.InvalidReEnterNewPasswordLength;
+            } else if(!IsValidLogin(MauiProgram.Profile.Salt, MauiProgram.Profile.Password, profile.Password)) {
+                //checking if the old password does not match the current
+                logicError = LogicErrorType.PasswordIncorrect;
+            } else if(IsValidLogin(MauiProgram.Profile.Salt, MauiProgram.Profile.Password, profile.NewPassword)) {
+                //checking if the new password matches the current
+                logicError = LogicErrorType.CurrentPasswordError;
+            } else {
+                logicError = LogicErrorType.NoError;
+            }
+            return logicError;
+        }
+
+        /// <summary>
         /// Helper method to check the given username length
         /// </summary>
         /// <param name="username">string username</param>
@@ -170,7 +230,7 @@ namespace AcademicReward.Logic {
         /// </summary>
         /// <param name="password">string password</param>
         /// <returns>string hash:salt</returns>
-        private string GenerateStoredPassword(string password) {
+        public string GenerateStoredPassword(string password) {
             //Creating main salt storage bytes
             RNGCryptoServiceProvider saltStorage = new RNGCryptoServiceProvider();
             byte[] salt = new byte[SaltByteSize];
@@ -192,7 +252,7 @@ namespace AcademicReward.Logic {
         /// <param name="storedPassword">string storedPassword</param>
         /// <param name="testPassword">string testPassword</param>
         /// <returns>bool true/false</returns>
-        private bool IsValidLogin(string storedSalt, string storedPassword, string testPassword) {
+        public bool IsValidLogin(string storedSalt, string storedPassword, string testPassword) {
             //Gathering string bytes
             byte[] storedSaltBytes = Convert.FromBase64String(storedSalt);
             byte[] storedPasswordBytes = Convert.FromBase64String(storedPassword);

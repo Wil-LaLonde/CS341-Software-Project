@@ -2,6 +2,11 @@
 
 namespace AcademicReward;
 
+/// <summary>
+/// Primary Author: Generated File
+/// Secondary Author: Wil LaLonde
+/// Reviewer: Xee Lo / Maximilian Patterson
+/// </summary>
 public partial class AppShell : Shell {
 
 	public AppShell() {

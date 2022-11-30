@@ -2,6 +2,11 @@
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
+    /// <summary>
+    /// Primary Author: Wil LaLonde
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
+    /// </summary>
     public class Group : ObservableObject {
         private ObservableCollection<Profile> groupMemberList;
         private ObservableCollection<Task> groupTaskList;
@@ -44,6 +49,9 @@ namespace AcademicReward.ModelClass {
             GroupName = groupName;
             GroupDescription = groupDescription;
             AdminProfileID = adminProfileID;
+            groupMemberList = new ObservableCollection<Profile>();
+            groupTaskList = new ObservableCollection<Task>();
+            groupNotificationList = new ObservableCollection<Notification>();
         }
 
         /// <summary>
@@ -100,6 +108,14 @@ namespace AcademicReward.ModelClass {
         /// <param name="notification">Notification notification</param>
         public void RemoveNotificationFromGroup(Notification notification) {
             groupNotificationList.Remove(notification);
+        }
+
+        /// <summary>
+        /// ToString method to display the GroupName
+        /// </summary>
+        /// <returns>Group name</returns>
+        public override string ToString() {
+            return GroupName;
         }
     }
 }

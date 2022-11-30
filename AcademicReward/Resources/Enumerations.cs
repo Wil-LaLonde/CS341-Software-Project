@@ -1,4 +1,10 @@
 ﻿namespace AcademicReward.Resources {
+    /// <summary>
+    /// Primary Author: Wil LaLonde 
+    /// Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
+    /// Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson
+    /// </summary>
+
     //Add logic error types to this enum
     public enum LogicErrorType {
         //LoginPage START
@@ -20,17 +26,42 @@
         LoginGroupCollectionDBError,
         //Login Group Collection END
 
-        //Shop START
-        InvalidCost,
-        InvalidLevel,
+        //Edit Profile Page START
+        EmptyOldPassword,
+        EmptyNewPassword,
+        EmptyReEnterNewPassword,
+        InvalidOldPasswordLength,
+        InvalidNewPasswordLength,
+        InvalidReEnterNewPasswordLength,
+        CurrentPasswordError,
+        UpdatePasswordDBError,
+        //Edit Profile Page END
 
-        //Shop END
+        //Notification START
+        EmptyNotificationGroup,
+        EmptyNotificationTitle,
+        EmptyNotificationDescription,
+        InvalidNotificationtitleLength,
+        InvalidNotificationDescriptionLength,
+        AddNotificationDBError,
+        LookupAllNotificationsDBError,
+        //Notification END
+
+        //Task START
+        EmptyTaskGroup,
+        InvalidTaskPoints,
+        EmptyTaskTitle,
+        EmptyTaskDescription,
+        NegativeTaskPoints,
+        InvalidTaskTitleLength,
+        InvalidTaskDescriptionLength,
+        AddTaskDBError,
+        LookupAllTasksDBError,
+        //Task END
 
         //General START
         NoError
         //General END
-
-
     }
 
     //Add database error types to this enum
@@ -45,6 +76,20 @@
         //Login Group Collection START
         LoginGroupCollectionDBError,
         //Login Group Collection END
+
+        //Edit Profile Page START
+        UpdatePasswordDBError,
+        //Edit Profile Page END
+
+        //Notification START
+        AddNotificationDBError,
+        LookupAllNotificationsDBError,
+        //Notification END
+
+        //Task START
+        AddTaskDBError,
+        LookupAllTasksDBError,
+        //Task END
 
         //General START
         NoError

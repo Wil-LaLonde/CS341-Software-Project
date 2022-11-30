@@ -2,6 +2,11 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
+/// <summary>
+/// Primary Author: Maximilian Patterson
+/// Secondary Author: Wil LaLonde
+/// Reviewer: Wil LaLonde
+/// </summary>
 public partial class HistoryPage : ContentPage
 {
 	// New observable collection of HistoryItem

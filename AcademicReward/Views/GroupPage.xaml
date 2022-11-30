@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.GroupPage"
              Title="Group">
+    <!-- Primary Author: Maximilian Patterson -->
+    <!-- Secondary Author: Wil LaLonde -->
+    <!-- Reviewer: Wil LaLonde -->
     <ScrollView>
         <StackLayout Margin="25">
             <Frame BorderColor="{StaticResource BlueButton}">
