@@ -1,3 +1,4 @@
+using Android.Net.Wifi.P2p;
 using CommunityToolkit.Maui.Views;
 
 namespace AcademicReward.PopUps;
@@ -21,9 +22,21 @@ public partial class TaskPopUp : Popup {
         title.Text = selectedTask.Title;
         description.Text = selectedTask.Description;
         points.Text = selectedTask.Points.ToString();
+        group.Text = selectedTask.GroupID.ToString();
 	}
 
+    /// <summary>
+    /// Method that closes the popup
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
     private void BackButtonClicked(object sender, EventArgs e) => Close();
+
+    /// <summary>
+    /// Method that submits the task for review 
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
     private void SubmitTask(object sender, EventArgs e) => Close();
 
    

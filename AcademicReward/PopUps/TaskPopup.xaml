@@ -9,7 +9,7 @@
     <!-- Reviewer: Wil LaLonde -->
 
     <!--Layout of the popup-->
-    <StackLayout Margin="25" WidthRequest="600" HeightRequest="800" BackgroundColor="White">
+    <StackLayout Margin="25" WidthRequest="600" BackgroundColor="White">
      <!--Layout of the popup-->
         
         <StackLayout Orientation="Horizontal" Margin="0, 30">
@@ -61,20 +61,20 @@
             </HorizontalStackLayout>
             <!--Points-->
 
-            <!--Date-->
+            <!--Group-->
             <HorizontalStackLayout >
                 <Label
-                Text="Date:"
+                Text="GroupID:"
                 FontSize="28"
                 Margin="0, 5, 10,0" 
                 FontAttributes="Bold"/>
                 <Label
-                x:Name="date"
+                x:Name="group"
                 FontSize="28"
                 Margin="0, 5"
                 />
             </HorizontalStackLayout>
-            <!--Date-->
+            <!--Group-->
 
             <!--Feedback-->
             <Label
