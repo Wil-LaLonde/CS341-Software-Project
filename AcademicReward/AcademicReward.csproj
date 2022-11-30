@@ -70,9 +70,15 @@
 	  <MauiXaml Update="PopUps\AddNotificationPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PopUps\EditShopItemPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PopUps\AddTaskPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <Compile Update="PopUps\EditShopItemPage.xaml.cs">
+	    <DependentUpon>EditShopItemPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="PopUps\TaskPopup.xaml.cs">
 	    <DependentUpon>TaskPopup.xaml</DependentUpon>
 	  </Compile>
