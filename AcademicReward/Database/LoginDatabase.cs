@@ -1,6 +1,7 @@
 ﻿using AcademicReward.Resources;
 using AcademicReward.ModelClass;
 using Npgsql;
+using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
@@ -164,6 +165,11 @@ namespace AcademicReward.Database {
                 dbError = DatabaseErrorType.LoginProfileDBError;
             }
             return dbError;
+        }
+
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
+        {
+            throw new NotImplementedException();
         }
     }
 }
