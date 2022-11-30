@@ -62,6 +62,8 @@
         //General START
         NoError
         //General END
+
+
     }
 
     //Add database error types to this enum
