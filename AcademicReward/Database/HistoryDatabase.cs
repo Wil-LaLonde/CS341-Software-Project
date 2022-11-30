@@ -6,9 +6,9 @@ using System.Collections.ObjectModel;
 namespace AcademicReward.Database
 {
     /// <summary>
-    /// Primary Author: Wil LaLonde
+    /// Primary Author: Maximilian Patterson
     /// Secondary Author: None
-    /// Reviewer: Maximilian Patterson
+    /// Reviewer:
     /// </summary>
     public class HistoryDatabase : AcademicRewardsDatabase, IDatabase
     {
