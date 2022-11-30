@@ -19,6 +19,7 @@ namespace AcademicReward.ModelClass {
         public int ProfileID { get; private set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string NewPassword { get; set; }
         public string ReEnterPassword { get; set; }
         public string Salt { get; set; }
         public bool IsAdmin { get; private set; }
@@ -67,6 +68,20 @@ namespace AcademicReward.ModelClass {
             Username = username;
             Salt = salt;
             Password = password;
+        }
+
+        /// <summary>
+        /// Profile constructor (when updating a password)
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <param name="oldPassword">string oldPassword</param>
+        /// <param name="newPassword">string newPassword</param>
+        /// <param name="reEnterNewPassword">string reEnterPassword</param>
+        public Profile(string username, string oldPassword, string newPassword, string reEnterNewPassword) {
+            Username = username;
+            Password = oldPassword;
+            NewPassword = newPassword;
+            ReEnterPassword = reEnterNewPassword;
         }
 
         /// <summary>

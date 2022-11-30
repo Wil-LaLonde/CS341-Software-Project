@@ -24,32 +24,104 @@
                 </StackLayout>
             </Frame>
             <StackLayout Margin="0, 20">
-                <Label
-                    Text="Username:"
-                    FontSize="26"
-                    Margin="0, 5"
-                    FontAttributes="Bold"
-                    VerticalOptions="Center"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        Text="Old Password:"
+                        FontSize="26"
+                        Margin="0, 5"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"/>
+                    <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <ImageButton
+                            x:Name="ShowOldPassword"
+                            Source="showpasswordblue.png"
+                            Clicked="OldPasswordShowClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="True"/>
+                        <ImageButton
+                            x:Name="HideOldPassword"
+                            Source="hidepasswordblue.png"
+                            Clicked="OldPasswordHideClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="False"/>
+                    </StackLayout>
+                </StackLayout>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry FontSize="22" Placeholder="New Username..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="OldPasswordEntry" FontSize="22" Placeholder="Old Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
-                <Label
-                    Text="Password:"
-                    FontSize="26"
-                    Margin="0, 5"
-                    FontAttributes="Bold"
-                    VerticalOptions="Center"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        Text="New Password:"
+                        FontSize="26"
+                        Margin="0, 5"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"/>
+                    <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <ImageButton
+                            x:Name="ShowNewPassword"
+                            Source="showpasswordblue.png"
+                            Clicked="NewPasswordShowClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="True"/>
+                        <ImageButton
+                            x:Name="HideNewPassowrd"
+                            Source="hidepasswordblue.png"
+                            Clicked="NewPasswordHideClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="False"/>
+                    </StackLayout>
+                </StackLayout>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry FontSize="22" Placeholder="New Password..." IsPassword="True" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="NewPasswordEntry" FontSize="22" Placeholder="New Password..." IsPassword="True" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
-                <Button 
-                    Text="Save" 
-                    FontSize="25"
-                    FontFamily="BoldFont"
-                    Margin="200, 45"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        Text="Re-enter New Password:"
+                        FontSize="26"
+                        Margin="0, 5"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"/>
+                    <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <ImageButton
+                            x:Name="ShowReEnterPassword"
+                            Source="showpasswordblue.png"
+                            Clicked="ReEnterPasswordShowClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="True"/>
+                        <ImageButton
+                            x:Name="HideReEnterPassword"
+                            Source="hidepasswordblue.png"
+                            Clicked="ReEnterPasswordHideClicked"
+                            WidthRequest="38"
+                            HeightRequest="38"
+                            Margin="0, 0, 15, 0"
+                            IsVisible="False"/>
+                    </StackLayout>
+                </StackLayout>
+                <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
+                    <Entry x:Name="ReEnterNewPasswordEntry" FontSize="22" Placeholder="Re-enter New Password..." IsPassword="True" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                </Frame>
             </StackLayout>
+            <Button 
+                x:Name="Save"
+                Clicked="SaveButtonClicked"
+                Text="Save" 
+                FontSize="25"
+                FontFamily="BoldFont"
+                Padding="20"
+                Margin="250, 10"
+                VerticalOptions="EndAndExpand"/>
         </StackLayout>
-
     </ScrollView>
     
 </ContentPage>

@@ -26,6 +26,17 @@
         LoginGroupCollectionDBError,
         //Login Group Collection END
 
+        //Edit Profile Page START
+        EmptyOldPassword,
+        EmptyNewPassword,
+        EmptyReEnterNewPassword,
+        InvalidOldPasswordLength,
+        InvalidNewPasswordLength,
+        InvalidReEnterNewPasswordLength,
+        CurrentPasswordError,
+        UpdatePasswordDBError,
+        //Edit Profile Page END
+
         //Notification START
         EmptyNotificationGroup,
         EmptyNotificationTitle,
@@ -65,6 +76,10 @@
         //Login Group Collection START
         LoginGroupCollectionDBError,
         //Login Group Collection END
+
+        //Edit Profile Page START
+        UpdatePasswordDBError,
+        //Edit Profile Page END
 
         //Notification START
         AddNotificationDBError,
