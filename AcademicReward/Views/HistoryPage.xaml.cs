@@ -20,14 +20,6 @@ public partial class HistoryPage : ContentPage
     {
         InitializeComponent();
         HistoryItemsLV.ItemsSource = HistoryItems;
-        TestData();
-    }
-
-    public void TestData()
-    {
-        base.OnAppearing();
-
-        // Add some test data
         LoadHistoryItems();
     }
 
