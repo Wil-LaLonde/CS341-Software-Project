@@ -39,7 +39,7 @@ public partial class ShopPage : ContentPage {
 
     public void openEditPage(ShopItem toBeEditted)
     {
-        this.ShowPopup(new EditShopItemPage(ShopLogic, toBeEditted));
+        this.ShowPopup(new EditShopItemPage(ShopLogic, toBeEditted, this));
         
     }
 

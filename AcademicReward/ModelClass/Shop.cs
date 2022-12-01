@@ -45,9 +45,5 @@ namespace AcademicReward.ModelClass {
             AddShopItemToShop(newValues);
         }
 
-        public ObservableCollection<ShopItem> getList()
-        {
-            return shopItemList;
-        }
     }
 }

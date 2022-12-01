@@ -13,7 +13,10 @@ namespace AcademicReward.Logic
     /**
  *  Primary Author: Sean Stille
  *  Reviewer: TBD
- *  Desc: The logic implementation for items within the shop, adding them, deleting them, etc.
+ *  Desc:   The logic implementation for items within the shop, adding them, deleting them, etc.
+ *          NOTE: Currently the groupID gets set to one regardless of input, this will get changed in
+ *                the next sprint, keeping it as null right now (it goes into the database as 1) since
+ *                member shop view hasn't been implemented yet.
  */
     public class ShopLogic : ILogic
     {
@@ -32,13 +35,13 @@ namespace AcademicReward.Logic
             int level = -1;
             if(! int.TryParse(AddItemVals[2], out cost)) //Testing cost, if it doesn't work, throw exception
             {
-                //return LogicErrorType.InvalidCost;
+                return LogicErrorType.InvalidCost;
             }
             if( !int.TryParse(AddItemVals[3], out level)) // Testing level
             {
-                //return LogicErrorType.InvalidLevel;
+                return LogicErrorType.InvalidLevel;
             }
-
+            
             toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, null);
             
             
@@ -49,7 +52,7 @@ namespace AcademicReward.Logic
             }
             else
             {
-                return LogicErrorType.LookupAllTasksDBError;
+                return LogicErrorType.NoError;
             }
         }
 
@@ -83,11 +86,11 @@ namespace AcademicReward.Logic
             int level = -1;
             if (!int.TryParse(AddItemVals[2], out cost)) //Testing cost, if it doesn't work, throw exception
             {
-                //return LogicErrorType.InvalidCost;
+                return LogicErrorType.InvalidCost;
             }
             if (!int.TryParse(AddItemVals[3], out level)) // Testing level
             {
-                //return LogicErrorType.InvalidLevel;
+                return LogicErrorType.InvalidLevel;
             }
 
             toBeAdded = new ShopItem(int.Parse(AddItemVals[5]), AddItemVals[0], AddItemVals[1], cost, level, null);

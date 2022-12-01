@@ -24,7 +24,7 @@ namespace AcademicReward.Database
         }
         public DatabaseErrorType AddItem(object obj)
         {
-            DatabaseErrorType dbError;
+            DatabaseErrorType dbError = DatabaseErrorType.NoError;
             try
             {
                 ShopItem item = (ShopItem)obj;
@@ -45,13 +45,13 @@ namespace AcademicReward.Database
             {
                 //Username already exists.
                 Console.WriteLine("Error while adding item: {0}", ex);
-                dbError = DatabaseErrorType.AddProfileDBError;
+                
             }
             catch (NpgsqlException ex)
             {
                 //Not sure what happened, log message
                 Console.WriteLine("Unexpected error while adding item: {0}", ex);
-                dbError = DatabaseErrorType.AddProfileDBError;
+                
             }
             return dbError;
         }

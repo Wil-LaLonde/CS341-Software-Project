@@ -30,7 +30,7 @@
         <StackLayout Margin="10" HorizontalOptions="Center">
             <Frame BorderColor="Black" CornerRadius="0" Padding="0">
                 <Image
-                    Source="shopdemoticket.png"
+                    Source="shop.png"
                     Scale="0.5"/>
             </Frame>
         </StackLayout>
