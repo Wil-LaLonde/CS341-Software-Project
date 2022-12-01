@@ -32,5 +32,18 @@ namespace AcademicReward.ModelClass {
         public void RemoveShopItemFromShop(ShopItem shopItem) {
             shopItemList.Remove(shopItem);
         }
+
+        /// <summary>
+        /// Edits a given shop item by replacing the variables in the shop item with new, editted variables.
+        /// </summary>
+        /// <param name="shopItem">ShopItem shopItem</param>
+        /// <param name="newValues">The new shopitem which will take ShopItems place</param>
+        public void editShopItemFromShop(ShopItem ShopItem, ShopItem newValues)
+        {
+            newValues.Id = ShopItem.Id;
+            RemoveShopItemFromShop(ShopItem);
+            AddShopItemToShop(newValues);
+        }
+
     }
 }

@@ -2,7 +2,7 @@
 <mct:Popup  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-            x:Class="AcademicReward.AddShopItemPage"
+            x:Class="AcademicReward.EditShopItemPage"
             CanBeDismissedByTappingOutsideOfPopup="False"
             Color="White">
     <!-- Primary Author: Sean Stille -->
@@ -19,7 +19,7 @@
                 Margin="10"/>
             <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                 <Label
-                    Text="Create Shop Item"
+                    Text="Edit Shop Item"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
@@ -89,7 +89,7 @@
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
             <Button 
-                Text="Add" 
+                Text="Update" 
                 Clicked="AddClicked"
                 FontSize="25"
                 FontFamily="BoldFont"

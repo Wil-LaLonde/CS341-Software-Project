@@ -19,7 +19,8 @@
                 Margin="10"/>
             <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                 <Label
-                    Text="Free Ticket!!!"
+                    x:Name="ItemTitle"
+                    BackgroundColor="{StaticResource Gray200}"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
@@ -29,7 +30,7 @@
         <StackLayout Margin="10" HorizontalOptions="Center">
             <Frame BorderColor="Black" CornerRadius="0" Padding="0">
                 <Image
-                    Source="shopdemoticket.png"
+                    Source="shop.png"
                     Scale="0.5"/>
             </Frame>
         </StackLayout>
@@ -41,11 +42,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label 
-                    Text="25 Points"
-                    FontSize="20"
-                    TextColor="{StaticResource Gray400}"
-                    BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="Cost" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
             <Label
                 Text="Item Description: "
@@ -54,11 +51,7 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label 
-                    Text="Item Description Goes Here..."
-                    FontSize="20"
-                    TextColor="{StaticResource Gray400}"
-                    BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="Desc" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" Orientation="Horizontal">

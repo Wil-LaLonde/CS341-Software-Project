@@ -59,9 +59,17 @@
         LookupAllTasksDBError,
         //Task END
 
+        //Shop START
+        InvalidCost,
+        InvalidLevel,
+        UnsuccessfulDBAdd,
+        //Shop END
+
         //General START
         NoError
         //General END
+
+
     }
 
     //Add database error types to this enum
