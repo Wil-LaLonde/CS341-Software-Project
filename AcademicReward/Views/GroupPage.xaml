@@ -11,13 +11,22 @@
             <Frame BorderColor="{StaticResource BlueButton}">
                 <StackLayout Orientation="Vertical">
                     <Label
-                        Text="Example Group Name"
+                        x:Name="GroupNameLbl"
+                        Text="{ Binding GroupName }"
                         FontSize="45"
                         TextDecorations="Underline"
                         FontAttributes="Bold"
                         HorizontalOptions="Center"/>
                     <Label
-                        Text="Admin: John Doe"
+                        x:Name="GroupAdminLbl"
+                        Text="{ Binding AdminName }"
+                        FontSize="35"
+                        FontFamily="SecondaryFont"
+                        TextColor="{StaticResource Gray600}"
+                        HorizontalOptions="Center"/>
+                    <Label
+                        x:Name="GroupDescriptionLbl"
+                        Text="{ Binding GroupDescription }"
                         FontSize="35"
                         FontFamily="SecondaryFont"
                         TextColor="{StaticResource Gray600}"
@@ -56,7 +65,7 @@
                             <ViewCell>
                                 <Label
                                     FontSize="25"
-                                    Text="{Binding Name}"
+                                    Text="{Binding Username}"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>
                             </ViewCell>

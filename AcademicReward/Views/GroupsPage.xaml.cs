@@ -1,5 +1,7 @@
 using AcademicReward.Database;
+using AcademicReward.ModelClass;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace AcademicReward.Views;
 
@@ -22,8 +24,12 @@ public partial class GroupsPage : ContentPage
         Navigation.PushAsync(new CreateGroupPage());
     }
 
-    private void ShowSampleGroupPage(object sender, EventArgs e)
+    private void SelectedGroup(object sender, SelectedItemChangedEventArgs e)
     {
-        Navigation.PushAsync(new GroupPage());
+        ModelClass.Group selectedGroup = e.SelectedItem as ModelClass.Group;
+        if (selectedGroup != null)
+        {
+            Navigation.PushAsync(new GroupPage(selectedGroup));
+        }
     }
 }

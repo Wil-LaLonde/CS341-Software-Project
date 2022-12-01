@@ -9,7 +9,7 @@ namespace AcademicReward.Views;
 
 /// <summary>
 /// Primary Author: Maximilian Patterson
-/// Secondary Author: Wil LaLonde
+/// Secondary Author:
 /// Reviewer: Wil LaLonde
 /// </summary>
 public partial class HistoryPage : ContentPage

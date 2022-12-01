@@ -1,3 +1,5 @@
+using AcademicReward.Database;
+using AcademicReward.ModelClass;
 using AcademicReward.PopUps;
 using CommunityToolkit.Maui.Views;
 using System.Collections.ObjectModel;
@@ -11,28 +13,26 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class GroupPage : ContentPage
 {
-    public ObservableCollection<Member> Members = new ObservableCollection<Member>();
-    public GroupPage()
+    public ObservableCollection<Profile> Members = new ObservableCollection<Profile>();
+    public GroupPage(Group group)
     {
         InitializeComponent();
+        
+        Members = GroupProfileRelationship.getProfilesInGroup(group);
         MembersLV.ItemsSource = Members;
-        TestData();
+        
+        GroupDescriptionLbl.Text = group.GroupDescription;
+        GroupNameLbl.Text = group.GroupName;
+        ShowAdminName(group);
     }
 
-    public void TestData()
+    public void ShowAdminName(Group group)
     {
         base.OnAppearing();
-
-        // Add some test data
-        Members.Add(new Member { Name = "Billy" });
-        Members.Add(new Member { Name = "Tom" });
-        Members.Add(new Member { Name = "Bob" });        
-    }
-
-    // Private class for HistoryItem
-    public class Member
-    {
-        public string Name { get; set; }
+        LoginDatabase loginDatabase= new LoginDatabase();
+        Object admin = loginDatabase.FindById(group.AdminProfileID);
+        Profile adminProfile = admin as Profile;
+        GroupAdminLbl.Text = adminProfile.Username;
     }
 
     public void AddMemberButtonClicked(object sender, EventArgs e) {
