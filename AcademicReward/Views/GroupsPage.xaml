@@ -35,31 +35,33 @@
                         HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
             </Frame>
-            <ListView x:Name="GroupsLV" ItemsSource="{Binding Groups}" SeparatorVisibility="None" Margin="0, 20" SelectionMode="None" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button 
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Text="{Binding Name}"
-                                    FontSize="45"
-                                    FontFamily="BoldFont"
-                                    Clicked="ShowSampleGroupPage"
-                                    Margin="70, 8"
-                                    Padding="0, 15"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <StackLayout Margin="0, 20">
+                <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+                    <ListView x:Name="GroupsLV" ItemSelected="SelectedGroup" SeparatorColor="Black" MaximumHeightRequest="320">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Grid.Row="0" 
+                                            Grid.Column="0" 
+                                            Text="{Binding GroupName}"
+                                            FontSize="25"
+                                            Padding="5"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

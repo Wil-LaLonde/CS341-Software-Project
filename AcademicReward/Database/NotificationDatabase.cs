@@ -1,6 +1,7 @@
 ﻿using AcademicReward.ModelClass;
 using AcademicReward.Resources;
 using Npgsql;
+using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
@@ -94,6 +95,16 @@ namespace AcademicReward.Database {
                 dbError = DatabaseErrorType.LookupAllNotificationsDBError;
             }
             return dbError;
+        }
+
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object FindById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

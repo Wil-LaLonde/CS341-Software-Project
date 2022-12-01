@@ -1,6 +1,7 @@
 ﻿using AcademicReward.Resources;
 using AcademicReward.ModelClass;
 using Npgsql;
+using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
@@ -164,6 +165,40 @@ namespace AcademicReward.Database {
                 dbError = DatabaseErrorType.LoginProfileDBError;
             }
             return dbError;
+        }
+
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Object FindById(int id)
+        {
+            try {
+                
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                
+                var sql = "SELECT * " +
+                          "FROM Profiles " +
+                          $"WHERE profileid= '{id}';";
+                
+                using var cmd = new NpgsqlCommand(sql, con);
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                
+                // Load into a new profile object
+                reader.Read();
+                Profile profile = new Profile((int)reader[0], reader[1] as string, (int)reader[2], 
+                    (int)reader[3], (int)reader[4], (bool)reader[5], reader[6] as string, reader[7] as string); 
+
+                con.Close();
+                
+                return profile;
+            }
+            catch (Exception e) {
+                Console.WriteLine("Error while querying profile by id in: {0}", e);
+                return null;
+            }
         }
     }
 }

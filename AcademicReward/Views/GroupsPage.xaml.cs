@@ -1,4 +1,7 @@
+using AcademicReward.Database;
+using AcademicReward.ModelClass;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace AcademicReward.Views;
 
@@ -9,30 +12,11 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class GroupsPage : ContentPage
 {
-    public ObservableCollection<Group> Groups = new ObservableCollection<Group>();
+    public ObservableCollection<object> Groups = new ObservableCollection<object>();
     public GroupsPage()
     {
         InitializeComponent();
-        GroupsLV.ItemsSource = Groups;
-        TestData();
-    }
-
-    public void TestData()
-    {
-        base.OnAppearing();
-
-        // Add some test data
-        Groups.Add(new Group { Name = "Group 1" });
-        Groups.Add(new Group { Name = "Group 2" });
-        Groups.Add(new Group { Name = "Group 3" });
-        Groups.Add(new Group { Name = "Group 4" });
-        Groups.Add(new Group { Name = "Group 5" });
-    }
-
-    // Private class for HistoryItem
-    public class Group
-    {
-        public string Name { get; set; }
+        GroupsLV.ItemsSource = MauiProgram.Profile.GroupList;
     }
 
     private void AddGroup(object sender, EventArgs e)
@@ -40,8 +24,12 @@ public partial class GroupsPage : ContentPage
         Navigation.PushAsync(new CreateGroupPage());
     }
 
-    private void ShowSampleGroupPage(object sender, EventArgs e)
+    private void SelectedGroup(object sender, SelectedItemChangedEventArgs e)
     {
-        Navigation.PushAsync(new GroupPage());
+        ModelClass.Group selectedGroup = e.SelectedItem as ModelClass.Group;
+        if (selectedGroup != null)
+        {
+            Navigation.PushAsync(new GroupPage(selectedGroup));
+        }
     }
 }

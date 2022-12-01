@@ -1,4 +1,6 @@
-﻿using AcademicReward.Resources;
+﻿using AcademicReward.ModelClass;
+using AcademicReward.Resources;
+using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
@@ -11,6 +13,8 @@ namespace AcademicReward.Database {
         public DatabaseErrorType UpdateItem(object obj);
         public DatabaseErrorType DeleteItem(object obj);
         public DatabaseErrorType LookupItem(object obj);
-        public DatabaseErrorType LookupFullItem(object obj); 
+        public DatabaseErrorType LookupFullItem(object obj);
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args);
+        public Object FindById(int id);
     }
 }

@@ -99,9 +99,15 @@
         LookupAllTasksDBError,
         //Task END
 
-        //Shop START
+        // History START
+        AddHistoryDBError,
+        LookupAllHistoryDBError,
+        LoadHistoryDBError,
+        UpdateHistoryDBError,
+        DeleteHistoryDBError,
 
-        //Shop END
+
+        // History END
 
         //General START
         NoError
