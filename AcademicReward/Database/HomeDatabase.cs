@@ -75,5 +75,9 @@ namespace AcademicReward.Database {
             return DatabaseErrorType.NoError;
         }
 
+        public object FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
