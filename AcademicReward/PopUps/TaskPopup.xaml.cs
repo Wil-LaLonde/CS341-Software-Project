@@ -1,4 +1,3 @@
-using Android.Net.Wifi.P2p;
 using CommunityToolkit.Maui.Views;
 
 namespace AcademicReward.PopUps;

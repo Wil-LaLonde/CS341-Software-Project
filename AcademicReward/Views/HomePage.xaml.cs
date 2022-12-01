@@ -3,7 +3,6 @@ using CommunityToolkit.Maui.Views;
 using AcademicReward.PopUps;
 using System.Collections.ObjectModel;
 using AcademicReward.ModelClass;
-using Xamarin.Google.Crypto.Tink.Signature;
 using System.Diagnostics;
 using AcademicReward.Logic;
 using AcademicReward.Resources;
