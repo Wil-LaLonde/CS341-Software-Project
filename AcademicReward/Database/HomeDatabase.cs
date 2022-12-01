@@ -1,7 +1,7 @@
 ﻿using AcademicReward.Resources;
 using AcademicReward.ModelClass;
 using Npgsql;
-
+using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     class HomeDatabase : AcademicRewardsDatabase, IDatabase{
@@ -69,6 +69,10 @@ namespace AcademicReward.Database {
                 dbError = DatabaseErrorType.LookupAllTasksDBError;
             }
             return dbError;
+        }
+
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NoError;
         }
 
     }
