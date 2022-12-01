@@ -29,8 +29,6 @@ public partial class ShopPage : ContentPage {
         ShopItem selectedItem = e.SelectedItem as ShopItem;
         if (selectedItem != null)
         {
-            //ShopItem notificationPopup = new Shopitem();
-            //this.ShowPopup(notificationPopup);
             ShopItem selected = e.SelectedItem as ShopItem;
             this.ShowPopup(new ViewShopItemPage(selected, ShopLogic, this));
             getShopItems();
@@ -46,7 +44,6 @@ public partial class ShopPage : ContentPage {
     public void getShopItems()
     {
         ShopLogic.LookupItem(null);
-       // ShopLogic.ItemList.Add(new ShopItem("TestTitle", "TestDesc",0,0,null));
         ShopItemList.ItemsSource = ShopLogic.ItemList;
     }
 }
