@@ -15,5 +15,6 @@ namespace AcademicReward.Database {
         public DatabaseErrorType LookupItem(object obj);
         public DatabaseErrorType LookupFullItem(object obj);
         public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args);
+        public Object FindById(int id);
     }
 }

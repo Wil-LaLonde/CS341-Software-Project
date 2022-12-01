@@ -103,5 +103,10 @@ namespace AcademicReward.Database {
         {
             throw new NotImplementedException();
         }
+
+        public object FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
