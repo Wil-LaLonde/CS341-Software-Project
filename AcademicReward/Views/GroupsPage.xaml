@@ -49,7 +49,7 @@
                                 <Button 
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Text="{Binding Name}"
+                                    Text="{Binding GroupName}"
                                     FontSize="45"
                                     FontFamily="BoldFont"
                                     Clicked="ShowSampleGroupPage"
