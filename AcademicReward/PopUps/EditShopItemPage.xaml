@@ -19,7 +19,7 @@
                 Margin="10"/>
             <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                 <Label
-                    Text="Create Shop Item"
+                    Text="Edit Shop Item"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
