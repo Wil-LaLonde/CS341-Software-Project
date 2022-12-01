@@ -62,6 +62,7 @@
         //Shop START
         InvalidCost,
         InvalidLevel,
+        UnsuccessfulDBAdd,
         //Shop END
 
         //General START
@@ -97,6 +98,10 @@
         AddTaskDBError,
         LookupAllTasksDBError,
         //Task END
+
+        //Shop START
+
+        //Shop END
 
         //General START
         NoError

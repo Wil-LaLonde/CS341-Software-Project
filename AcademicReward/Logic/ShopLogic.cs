@@ -52,7 +52,7 @@ namespace AcademicReward.Logic
             }
             else
             {
-                return LogicErrorType.NoError;
+                return LogicErrorType.UnsuccessfulDBAdd;
             }
         }
 
@@ -102,7 +102,7 @@ namespace AcademicReward.Logic
             }
             else
             {
-                return LogicErrorType.LookupAllTasksDBError;
+                return LogicErrorType.UnsuccessfulDBAdd;
             }
             throw new NotImplementedException();
         }

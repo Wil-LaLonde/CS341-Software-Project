@@ -83,6 +83,16 @@ namespace AcademicReward.Database
             return DatabaseErrorType.NoError;
         }
 
+        public object FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
+        {
+            throw new NotImplementedException();
+        }
+
         public DatabaseErrorType LookupFullItem(object obj)
         {
                 ObservableCollection<ShopItem> newList = new ObservableCollection<ShopItem>();
