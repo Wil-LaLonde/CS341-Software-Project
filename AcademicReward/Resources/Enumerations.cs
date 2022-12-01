@@ -91,6 +91,16 @@
         LookupAllTasksDBError,
         //Task END
 
+        // History START
+        AddHistoryDBError,
+        LookupAllHistoryDBError,
+        LoadHistoryDBError,
+        UpdateHistoryDBError,
+        DeleteHistoryDBError,
+
+
+        // History END
+
         //General START
         NoError
         //General END

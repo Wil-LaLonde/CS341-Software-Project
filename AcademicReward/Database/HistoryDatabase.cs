@@ -29,12 +29,12 @@ namespace AcademicReward.Database
             catch (PostgresException ex)
             {
                 Console.WriteLine("Error while adding history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.AddHistoryDBError;
             }
             catch (NpgsqlException ex)
             {
                 Console.WriteLine("Error while adding history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.AddHistoryDBError;
             }
             return dbError;
         }
@@ -56,12 +56,12 @@ namespace AcademicReward.Database
             catch (PostgresException ex)
             {
                 Console.WriteLine("Error while deleting history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.DeleteHistoryDBError;
             }
             catch (NpgsqlException ex)
             {
                 Console.WriteLine("Error while deleting history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.DeleteHistoryDBError;
             }
             return dbError;
         }
@@ -84,12 +84,12 @@ namespace AcademicReward.Database
             catch (PostgresException ex)
             {
                 Console.WriteLine("Error while editing history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.UpdateHistoryDBError;
             }
             catch (NpgsqlException ex)
             {
                 Console.WriteLine("Error while editing history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.UpdateHistoryDBError;
             }
             return dbError;
         }
@@ -124,12 +124,7 @@ namespace AcademicReward.Database
             catch (PostgresException ex)
             {
                 Console.WriteLine("Error while grabbing history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
-            }
-            catch (NpgsqlException ex)
-            {
-                Console.WriteLine("Error while grabbing history: {0}", ex);
-                dbError = DatabaseErrorType.UsernameTakenDBError;
+                dbError = DatabaseErrorType.LoadHistoryDBError;
             }
             return dbError;
         }
