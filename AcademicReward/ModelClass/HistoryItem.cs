@@ -5,7 +5,7 @@ namespace AcademicReward.ModelClass
     /// <summary>
     /// Primary Author: Maximilian Patterson
     /// Secondary Author: None
-    /// Reviewer: 
+    /// Reviewer: Xee Lo
     /// </summary>
     public class HistoryItem : ObservableObject
     {
