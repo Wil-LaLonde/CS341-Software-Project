@@ -20,8 +20,8 @@ public partial class HomePage : ContentPage {
     public HomePage() {
 		InitializeComponent();
         homeLogic = new HomeLogic();
-		//TaskLV.ItemsSource = GetTasks();//need to get all tasks... hardcode some tasks
         isAdmin = MauiProgram.Profile.IsAdmin;
+        MauiProgram.Profile.AddPointsToMember(250);
 		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
@@ -30,15 +30,25 @@ public partial class HomePage : ContentPage {
     /// <summary>
     /// Method is called when you start the home page to display the difference pages for member/admin
     /// </summary>
-    /// <param name="isAdmin">object sender</param>
-    public void UsernameDisplay(bool isAdmin) {
+    /// <param name="isAdmin">bool isAdmin</param>
+    private void UsernameDisplay(bool isAdmin) {
+        //Bind user name to signed in profile
+        Username.Text = MauiProgram.Profile.Username;
         if (isAdmin) {
-            points.IsVisible = false;
-            level.IsVisible = false;
-            progressBar.IsVisible = false;
-            exp.IsVisible = false;
+            PointsLabel.IsVisible = false;
+            Points.IsVisible = false;
+            LevelLabel.IsVisible = false;
+            Level.IsVisible = false;
+            ProgressBar.IsVisible = false;
+            ExpLabel.IsVisible = false;
+            Exp.IsVisible = false;
 		}
 		else {
+            //Need to map over all member values
+            Points.Text = MauiProgram.Profile.Points.ToString();
+            Level.Text = MauiProgram.Profile.Level.ToString();
+            ProgressBar.Progress = MauiProgram.Profile.GetCurrentXPDouble();
+            Exp.Text = MauiProgram.Profile.GetCurrentXPInt() + DataConstants.SpaceSlashSpace + Profile.LevelUpRequirementInt;
 			TaskLV.HeightRequest = 700;
         }
     }

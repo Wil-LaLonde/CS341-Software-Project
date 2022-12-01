@@ -12,6 +12,8 @@ namespace AcademicReward.ModelClass {
         public const int MaxUsernameLength = 25;
         public const int MinPasswordLength = 0;
         public const int MaxPasswordLength = 50;
+        public const int LevelUpRequirementInt = 100;
+        public const double LevelUpRequirementDouble = 100.0;
 
         private ObservableCollection<Group> groupList;
         private ObservableCollection<ShopItem> purchaseItems;
@@ -142,15 +144,40 @@ namespace AcademicReward.ModelClass {
         }
 
         /// <summary>
+        /// Add Points to a Member's profile
+        /// </summary>
+        /// <param name="points">int points</param>
+        public void AddPointsToMember(int points) {
+            if(points > 0) {
+                Points += points;
+                //Points also count towards XP, add XP to the profile
+                AddXPToMember(points);
+            }
+        }
+
+        /// <summary>
+        /// Removes Points from a Member's profile
+        /// </summary>
+        /// <param name="points">int points</param>
+        public void RemovePointsFromMember(int points) {
+            if(points > 0) {
+                Points -= points;
+            }
+        }
+
+        /// <summary>
         /// Adds XP to a Member
         /// </summary>
         /// <param name="xp">int xp</param>
         public void AddXPToMember(int xp) {
-            //Maybe add some logic here for different levels?
-            //This could call the LevelUpMember method to do so.
             if (xp > 0) {
                 XP += xp;
-                LevelUpMember();
+                //Checking for a level up
+                int currentLevel = XP / LevelUpRequirementInt + 1;
+                //Could be a case where we need to level up more than once
+                while(currentLevel > Level) {
+                    LevelUpMember();
+                }          
             }
         }
 
@@ -176,14 +203,6 @@ namespace AcademicReward.ModelClass {
         }
 
         /// <summary>
-        /// Add Points to a Member's profile
-        /// </summary>
-        /// <param name="points">int profile</param>
-        public void AddPointsToMember(int points) {
-            Points += points;
-        }
-
-        /// <summary>
         /// Method used to get the group name from the groupID
         /// </summary>
         /// <param name="groupID">int groupID</param>
@@ -195,6 +214,23 @@ namespace AcademicReward.ModelClass {
                 }
             }
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Method used to get current XP (90 / 100)
+        /// </summary>
+        /// <returns>int xp</returns>
+        public int GetCurrentXPInt() {
+            return XP % LevelUpRequirementInt;
+        }
+
+        /// <summary>
+        /// Method used to get current XP (90 / 100)
+        /// For the progress bar since it requires a double
+        /// </summary>
+        /// <returns>double xp</returns>
+        public double GetCurrentXPDouble() {
+            return XP % LevelUpRequirementDouble / LevelUpRequirementInt;
         }
     }
 }

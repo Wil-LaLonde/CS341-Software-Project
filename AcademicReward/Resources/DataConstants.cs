@@ -102,6 +102,7 @@
         public const string SpaceDashSpace = " - ";
         public const string Colon = ":";
         public const string GoBack = "..";
+        public const string SpaceSlashSpace = " / ";
         //General END
     }
 }
