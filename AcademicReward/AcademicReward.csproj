@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
@@ -69,9 +70,15 @@
 	  <MauiXaml Update="PopUps\AddNotificationPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PopUps\EditShopItemPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PopUps\AddTaskPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <Compile Update="PopUps\EditShopItemPage.xaml.cs">
+	    <DependentUpon>EditShopItemPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="PopUps\TaskPopup.xaml.cs">
 	    <DependentUpon>TaskPopup.xaml</DependentUpon>
 	  </Compile>
@@ -79,6 +86,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="PopUps\LoginPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopUps\NotificationPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopUps\TaskPageTaskPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="PopUps\TaskPopup.xaml">

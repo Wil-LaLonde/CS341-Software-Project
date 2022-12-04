@@ -3,36 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.ProfilePage"
              Title="Profile">
+    <!-- Primary Author: Maximilian Patterson -->
+    <!-- Secondary Author: Wil LaLonde -->
+    <!-- Reviewer: Wil LaLonde -->
     <ScrollView>
         <StackLayout Margin="25">
             <Frame BorderColor="{StaticResource BlueButton}">
                 <StackLayout>
-                    
+
                     <StackLayout Orientation="Horizontal">
                         <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="0, 10">
-                            <Label
-                                Text="Username: John Doe"
-                                FontSize="45"
-                                FontAttributes="Bold"/>
-                            <Label
-                                Text="Points: 46"
-                                FontSize="35"
-                                FontFamily="SecondaryFont"
-                                TextColor="{StaticResource Gray600}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    x:Name="UsernameLabel"
+                                    Text="Username: "
+                                    FontSize="45"
+                                    FontAttributes="Bold"/>
+                                <Label
+                                    x:Name="Username"
+                                    FontSize="45"
+                                    FontAttributes="Bold"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    x:Name="PointsLabel"
+                                    Text="Points: "
+                                    FontSize="35"/>
+                                <Label
+                                    x:Name="Points"
+                                    FontSize="35"/>
+                            </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand" Margin="0, 10">
-                            <Label
-                                Text="Level 1"
-                                FontSize="45"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    x:Name="LevelLabel"
+                                    Text="Lvl "
+                                    FontSize="45"/>
+                                <Label
+                                    x:Name="Level"
+                                    FontSize="45"/>
+                            </StackLayout>
                         </StackLayout>
-                        
-                        
                     </StackLayout>
-                    <ProgressBar Progress="0.75" ProgressColor="{StaticResource BlueButton}"/>
-                    <Label
-                        Text="XP: 75/100"
-                        FontSize="20"
-                        Margin="0, 5"/>
+                    <ProgressBar x:Name="ProgressBar" ProgressColor="{StaticResource BlueButton}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            x:Name="ExpLabel"
+                            Text="XP: "
+                            FontSize="20"
+                            Margin="0, 5"/>
+                        <Label
+                            x:Name="Exp"
+                            FontSize="20"
+                            Margin="0, 5"/>
+                    </StackLayout>
                 </StackLayout>
             </Frame>
             <StackLayout Orientation="Vertical" Margin="0, 40" Spacing="15">
