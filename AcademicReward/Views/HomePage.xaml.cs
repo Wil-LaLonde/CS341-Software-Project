@@ -21,7 +21,6 @@ public partial class HomePage : ContentPage {
 		InitializeComponent();
         homeLogic = new HomeLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
-        MauiProgram.Profile.AddPointsToMember(250);
 		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
