@@ -49,7 +49,7 @@ public partial class AddNotificationPopUp : Popup {
             Notification notification = new Notification(title, description, selectedGroup.GroupID);
             logicError = notificationLogic.AddItem(notification);
             if(LogicErrorType.NoError == logicError) {
-                selectedGroup.AddNotificationToGroup(notification);
+                MauiProgram.Profile.AddNotificationToProfile(notification);
                 Close(notification);
             }
         } else {

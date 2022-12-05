@@ -28,9 +28,14 @@ namespace AcademicReward.Database {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                //SQL to add task to table
+                //SQL to add task to table, also adding task to profiletask table
                 var sql = "INSERT INTO tasks (tasktitle, taskdescription, points, groupid, ischecked)" +
-                          $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsChecked});";
+                          $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsChecked}); " +
+                          "INSERT INTO profiletask " +
+                          "SELECT profileid, MAX(taskid), ischecked, ischecked " +
+                          "FROM profilegroup, tasks " +
+                          $"WHERE profilegroup.groupid = {taskToAdd.GroupID} " +
+                          "GROUP BY profileid, ischecked;";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
@@ -61,13 +66,13 @@ namespace AcademicReward.Database {
         }
 
         /// <summary>
-        /// Method used to look up all tasks for a group
+        /// Method used to look up all tasks for a profile
         /// </summary>
-        /// <param name="group">object group</param>
+        /// <param name="profile">object profile</param>
         /// <returns>DatabaseErrorType</returns>
-        public DatabaseErrorType LookupFullItem(object group) {
+        public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
-            Group groupTasks = group as Group;
+            Profile profileTasks = profile as Profile;
             try {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -75,23 +80,21 @@ namespace AcademicReward.Database {
                 //SQL to lookup tasks for a group
                 var sql = "SELECT * " +
                           "FROM tasks " +
-                          $"WHERE groupid = {groupTasks.GroupID};";
+                          $"WHERE taskid IN (SELECT taskid FROM profiletask WHERE profileid = {profileTasks.ProfileID});";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
                 //Creating tasks objects
                 //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [5] -> ischecked
-                while (reader.Read())
-                {
+                while (reader.Read()) {
                     ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[5]);
-                    groupTasks.AddTaskToGroup(task);
+                    profileTasks.AddTaskToProfile(task);
                 }
                 //Closing the connection.
                 con.Close();
                 dbError = DatabaseErrorType.NoError;
             }
-            catch (NpgsqlException ex)
-            {
+            catch (NpgsqlException ex) {
                 //Something went wrong looking up the task
                 Console.WriteLine("Unexpected error while looking up task: {0}", ex);
                 dbError = DatabaseErrorType.LookupAllTasksDBError;

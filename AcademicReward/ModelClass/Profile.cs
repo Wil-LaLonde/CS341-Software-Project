@@ -17,6 +17,8 @@ namespace AcademicReward.ModelClass {
 
         private ObservableCollection<Group> groupList;
         private ObservableCollection<ShopItem> purchaseItems;
+        private ObservableCollection<Notification> notificationList;
+        private ObservableCollection<Task> taskList;
 
         public int ProfileID { get; private set; }
         public string Username { get; set; }
@@ -31,6 +33,8 @@ namespace AcademicReward.ModelClass {
 
         public ObservableCollection<Group> GroupList { get { return groupList; } }
         public ObservableCollection<ShopItem> PurchaseItems { get { return purchaseItems; } }
+        public ObservableCollection<Notification> NotificationList { get { return notificationList; } }
+        public ObservableCollection<Task> TaskList { get { return taskList; } }
 
         /// <summary>
         /// Profile constructor (when searching a profile)
@@ -109,6 +113,8 @@ namespace AcademicReward.ModelClass {
             Password = password;
             groupList = new ObservableCollection<Group>();
             purchaseItems = new ObservableCollection<ShopItem>();
+            notificationList = new ObservableCollection<Notification>();
+            taskList = new ObservableCollection<Task>();
         }
 
         /// <summary>
@@ -125,22 +131,6 @@ namespace AcademicReward.ModelClass {
         /// <param name="group">Group group</param>
         public void RemoveGroupFromProfile(Group group) {
             groupList.Remove(group);
-        }
-
-        /// <summary>
-        /// Update a Profile's username
-        /// </summary>
-        /// <param name="username">string password</param>
-        public void UpdateProfileUsername(string username) {
-            Username = username;
-        }
-
-        /// <summary>
-        /// Update a Profile's password
-        /// </summary>
-        /// <param name="password">string password</param>
-        public void UpdateProfilePassword(string password) {
-            Password = password;
         }
 
         /// <summary>
@@ -231,6 +221,38 @@ namespace AcademicReward.ModelClass {
         /// <returns>double xp</returns>
         public double GetCurrentXPDouble() {
             return XP % LevelUpRequirementDouble / LevelUpRequirementInt;
+        }
+
+        /// <summary>
+        /// Adds a Task to a Profile
+        /// </summary>
+        /// <param name="task">Task task</param>
+        public void AddTaskToProfile(Task task) {
+            taskList.Add(task);
+        }
+
+        /// <summary>
+        /// Removes a Task from a Profile
+        /// </summary>
+        /// <param name="task">Task task</param>
+        public void RemoveTaskFromProfile(Task task) {
+            taskList.Remove(task);
+        }
+
+        /// <summary>
+        /// Adds a Notification to a Profile
+        /// </summary>
+        /// <param name="notification">Notification notification</param>
+        public void AddNotificationToProfile(Notification notification) {
+            notificationList.Add(notification);
+        }
+
+        /// <summary>
+        /// Removes a Notification from a Profile
+        /// </summary>
+        /// <param name="notification">Notification notification</param>
+        public void RemoveNotificationFromProfile(Notification notification) {
+            notificationList.Remove(notification);
         }
     }
 }

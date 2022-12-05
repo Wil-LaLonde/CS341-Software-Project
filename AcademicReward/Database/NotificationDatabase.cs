@@ -28,9 +28,15 @@ namespace AcademicReward.Database {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                //SQL to add notification to table
+                //SQL statement to add the notification to our notifications table
+                //Also adding all profileids and the new notificationid to the profilenotification table
                 var sql = "INSERT INTO notifications (notificationtitle, notificationdescription, groupid)" +
-                          $"VALUES ('{notificationToAdd.Title}', '{notificationToAdd.Description}', {notificationToAdd.GroupID});";
+                          $"VALUES ('{notificationToAdd.Title}', '{notificationToAdd.Description}', {notificationToAdd.GroupID});" +
+                          "INSERT INTO profilenotification " +
+                          "SELECT profileid, MAX(notificationid) " +
+                          "FROM profilegroup, notifications " +
+                          $"WHERE profilegroup.groupid = {notificationToAdd.GroupID} " +
+                          "GROUP BY profileid;";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
@@ -62,13 +68,13 @@ namespace AcademicReward.Database {
         }
 
         /// <summary>
-        /// Method used to lookup all notifications for a given group
+        /// Method used to lookup all notifications for a given profile
         /// </summary>
-        /// <param name="group">object group</param>
+        /// <param name="profile">object profile</param>
         /// <returns>DatabaseErrorType</returns>
-        public DatabaseErrorType LookupFullItem(object group) {
+        public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
-            Group groupNotifications = group as Group;
+            Profile profileNotifications = profile as Profile;
             try {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -76,7 +82,7 @@ namespace AcademicReward.Database {
                 //SQL to lookup notifications for a group
                 var sql = "SELECT * " +
                           "FROM notifications " +
-                          $"WHERE groupid = {groupNotifications.GroupID};";
+                          $"WHERE notificationid IN (SELECT notificationid FROM profilenotification WHERE profileid = {profileNotifications.ProfileID});";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -84,7 +90,7 @@ namespace AcademicReward.Database {
                 //[0] -> notificationid | [1] -> notificationtitle | [2] -> notificationdescription | [3] -> groupid
                 while (reader.Read()) {
                     Notification notification = new Notification((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3]);
-                    groupNotifications.AddNotificationToGroup(notification);
+                    profileNotifications.AddNotificationToProfile(notification);
                 }
                 //Closing the connection.
                 con.Close();

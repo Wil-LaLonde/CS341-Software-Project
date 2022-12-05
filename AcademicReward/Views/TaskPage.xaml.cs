@@ -21,10 +21,8 @@ public partial class TaskPage : ContentPage {
         taskLogic = new TaskLogic();
         //Gathering all current notifications
         PrepareNotificationList();
-        RefreshNotificationList();
         //Gathering all currents tasks
         PrepareTaskList();
-        RefreshTaskList();
     }
 
     /// <summary>
@@ -32,27 +30,21 @@ public partial class TaskPage : ContentPage {
     /// </summary>
     private async void PrepareNotificationList() {
         LogicErrorType logicError;
-        foreach(Group group in MauiProgram.Profile.GroupList) {
-            logicError = notificationLogic.LookupItem(group);
-            if(LogicErrorType.LookupAllNotificationsDBError == logicError) {
-                await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle, DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);
-                break;
-            }
+        logicError = notificationLogic.LookupItem(MauiProgram.Profile);
+        if(LogicErrorType.LookupAllNotificationsDBError == logicError) {
+            await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle, DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);      
+        } else {
+            NotificationList.ItemsSource = MauiProgram.Profile.NotificationList;
         }
     }
 
     /// <summary>
-    /// Helper method used to gather all tasks
+    /// Helper method used to gather all tasks.
+    /// No need to make a database call as tasks have 
+    /// been gathered on the home page.
     /// </summary>
-    private async void PrepareTaskList() {
-        LogicErrorType logicError;
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            logicError = taskLogic.LookupItem(group);
-            if(LogicErrorType.LookupAllTasksDBError == logicError) {
-                await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
-                break;
-            }
-        }
+    private void PrepareTaskList() {
+        TaskList.ItemsSource = MauiProgram.Profile.TaskList;
     }
 
     /// <summary>
@@ -64,7 +56,7 @@ public partial class TaskPage : ContentPage {
         AddNotificationPopUp addNotificationPopUp = new AddNotificationPopUp();
         Notification notification = await this.ShowPopupAsync(addNotificationPopUp) as Notification;
         if(notification != null) {
-            RefreshNotificationList();
+            //RefreshNotificationList();
             await DisplayAlert(DataConstants.CreateNotificationSuccessTitle, DataConstants.CreateNotificationSuccessMessage, DataConstants.OK);
         }
     }
@@ -104,34 +96,7 @@ public partial class TaskPage : ContentPage {
 		AddTaskPopUp addTaskPopUp = new AddTaskPopUp();
 		ModelClass.Task task = await this.ShowPopupAsync(addTaskPopUp) as ModelClass.Task;
         if(task != null) {
-            RefreshTaskList();
             await DisplayAlert(DataConstants.CreateTaskSuccessTitle, DataConstants.CreateTaskSuccessMessage, DataConstants.OK);
         }
 	}
-
-    /// <summary>
-    /// Helper method used to refresh the notification list
-    /// </summary>
-    private void RefreshNotificationList() {
-        ObservableCollection<Notification> notificationList = new ObservableCollection<Notification>();
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            foreach (Notification notification in group.GroupNotificationList) {
-                notificationList.Add(notification);
-            }
-        }
-        NotificationList.ItemsSource = notificationList;
-    }
-
-    /// <summary>
-    /// Helper method used to refresh the task list
-    /// </summary>
-    private void RefreshTaskList() {
-        ObservableCollection<ModelClass.Task> taskList = new ObservableCollection<ModelClass.Task>();
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            foreach (ModelClass.Task task in group.GroupTaskList) {
-                taskList.Add(task);
-            }
-        }
-        TaskList.ItemsSource = taskList;
-    }
 }
