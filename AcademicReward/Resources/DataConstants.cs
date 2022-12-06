@@ -93,6 +93,11 @@
         public const string LookupTaskDBErrorMessage = "There was an unexpected error loading your tasks.";
         //Task END
 
+        //History START
+        public const string HistoryEditPasswordTitle = "Password Updated";
+        public const string HistoryEditPasswordDescription = "Your password has been updated on {0}";
+        //History END
+
         //Display Alert START
         public const string OK = "OK";
         public const string Cancel = "Cancel";
