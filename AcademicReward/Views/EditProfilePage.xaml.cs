@@ -1,6 +1,7 @@
 using AcademicReward.Logic;
 using AcademicReward.Resources;
 using AcademicReward.ModelClass;
+using AcademicReward.Database;
 
 namespace AcademicReward.Views;
 
@@ -11,6 +12,7 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class EditProfilePage : ContentPage {
     ILogic loginLogic;
+    IDatabase historyDB;
 
     /// <summary>
     /// EditProfilePage constructor
@@ -18,6 +20,7 @@ public partial class EditProfilePage : ContentPage {
 	public EditProfilePage() {
 		InitializeComponent();
         loginLogic = new LoginLogic();
+        historyDB = new HistoryDatabase();
 	}
 
     /// <summary>
@@ -36,6 +39,8 @@ public partial class EditProfilePage : ContentPage {
         //Trying to update the password
         logicError = loginLogic.UpdateItem(profile);
         if(LogicErrorType.NoError == logicError) {
+            //Adding a history item for updating a user's password
+            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryEditPasswordTitle, string.Format(DataConstants.HistoryEditPasswordDescription, DateTime.Now.ToString())));
             await DisplayAlert(DataConstants.UpdatePasswordSuccessTitle, DataConstants.UpdatePasswordSuccessMessage, DataConstants.OK);
             //Sending the user back to the profile page, see ya!
             await Shell.Current.GoToAsync(DataConstants.GoBack);

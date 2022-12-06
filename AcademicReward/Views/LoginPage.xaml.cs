@@ -84,6 +84,7 @@ public partial class LoginPage : ContentPage {
 		LoginPopUp loginPopUp = new LoginPopUp();
 		Profile newProfile = await this.ShowPopupAsync(loginPopUp) as Profile;
 		if(newProfile != null) {
+            
 			await DisplayAlert(DataConstants.AddProfileSuccessTitle, DataConstants.AddProfileSuccessMessage, DataConstants.OK);
 		} 
     }
