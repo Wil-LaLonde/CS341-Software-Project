@@ -48,10 +48,14 @@ namespace AcademicReward.Logic {
             return LogicErrorType.NoError;
         }
 
-        //Currently not needed
-        public LogicErrorType LookupItem(object group) {
+        /// <summary>
+        /// Method used to gather all tasks for a given profile
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public LogicErrorType LookupItem(object profile) {
             LogicErrorType logicError;
-            DatabaseErrorType dbError = taskDB.LookupFullItem(group);
+            DatabaseErrorType dbError = taskDB.LookupFullItem(profile);
             if(DatabaseErrorType.NoError == dbError) {
                 logicError = LogicErrorType.NoError;
             } else {

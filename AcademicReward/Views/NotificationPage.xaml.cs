@@ -32,12 +32,9 @@ public partial class NotificationPage : ContentPage {
     /// </summary>
     private async void PrepareNotificationList() {
         LogicErrorType logicError;
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            logicError = notificationLogic.LookupItem(group);
-            if (LogicErrorType.LookupAllNotificationsDBError == logicError) {
-                await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle, DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);
-                break;
-            }
+        logicError = notificationLogic.LookupItem(MauiProgram.Profile);
+        if (LogicErrorType.LookupAllNotificationsDBError == logicError) {
+            await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle, DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);
         }
     }
 
@@ -58,12 +55,6 @@ public partial class NotificationPage : ContentPage {
     /// Helper method used to refresh the notification list
     /// </summary>
     private void RefreshNotificationList() {
-        ObservableCollection<Notification> notificationList = new ObservableCollection<Notification>();
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            foreach (Notification notification in group.GroupNotificationList) {
-                notificationList.Add(notification);
-            }
-        }
-        NotificationList.ItemsSource = notificationList;
+        NotificationList.ItemsSource = MauiProgram.Profile.NotificationList;
     }
 }

@@ -9,8 +9,6 @@ namespace AcademicReward.ModelClass {
     /// </summary>
     public class Group : ObservableObject {
         private ObservableCollection<Profile> groupMemberList;
-        private ObservableCollection<Task> groupTaskList;
-        private ObservableCollection<Notification> groupNotificationList;
 
         public int GroupID { get; private set; }
         public string GroupName { get; set; }
@@ -18,8 +16,6 @@ namespace AcademicReward.ModelClass {
         public Profile GroupAdmin { get; private set; }
         public int AdminProfileID { get; private set; }
         public ObservableCollection<Profile> GroupMemberList { get { return groupMemberList; } }
-        public ObservableCollection<Task> GroupTaskList { get { return groupTaskList; } }
-        public ObservableCollection<Notification> GroupNotificationList { get { return groupNotificationList; } }
 
         /// <summary>
         /// Group constructor
@@ -33,8 +29,6 @@ namespace AcademicReward.ModelClass {
             //This needs to be an admin
             GroupAdmin = groupAdmin;
             groupMemberList = new ObservableCollection<Profile>();
-            groupTaskList = new ObservableCollection<Task>();
-            groupNotificationList = new ObservableCollection<Notification>();
         }
 
         /// <summary>
@@ -50,8 +44,6 @@ namespace AcademicReward.ModelClass {
             GroupDescription = groupDescription;
             AdminProfileID = adminProfileID;
             groupMemberList = new ObservableCollection<Profile>();
-            groupTaskList = new ObservableCollection<Task>();
-            groupNotificationList = new ObservableCollection<Notification>();
         }
 
         /// <summary>
@@ -76,38 +68,6 @@ namespace AcademicReward.ModelClass {
         /// <param name="admin">Profile admin</param>
         public void UpdateGroupAdmin(Profile admin) {
             GroupAdmin = admin;
-        }
-
-        /// <summary>
-        /// Adds a Task to a Group
-        /// </summary>
-        /// <param name="task">Task task</param>
-        public void AddTaskToGroup(Task task) {
-            groupTaskList.Add(task);
-        }
-
-        /// <summary>
-        /// Removes a Task from a Group
-        /// </summary>
-        /// <param name="task">Task task</param>
-        public void RemoveTaskFromGroup(Task task) {
-            groupTaskList.Remove(task);
-        }
-
-        /// <summary>
-        /// Adds a Notification to a Group
-        /// </summary>
-        /// <param name="notification">Notification notification</param>
-        public void AddNotificationToGroup(Notification notification) {
-            groupNotificationList.Add(notification);
-        }
-
-        /// <summary>
-        /// Removes a Notification from a Group
-        /// </summary>
-        /// <param name="notification">Notification notification</param>
-        public void RemoveNotificationFromGroup(Notification notification) {
-            groupNotificationList.Remove(notification);
         }
 
         /// <summary>

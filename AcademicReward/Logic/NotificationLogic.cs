@@ -49,13 +49,13 @@ namespace AcademicReward.Logic {
         }
 
         /// <summary>
-        /// Method used to lookup all notifications for a given group
+        /// Method used to lookup all notifications for a given profile
         /// </summary>
-        /// <param name="group">object group</param>
+        /// <param name="profile">object profile</param>
         /// <returns>LogicErrorType</returns>
-        public LogicErrorType LookupItem(object group) {
+        public LogicErrorType LookupItem(object profile) {
             LogicErrorType logicError;
-            DatabaseErrorType dbError = notificationDB.LookupFullItem(group);
+            DatabaseErrorType dbError = notificationDB.LookupFullItem(profile);
             if(DatabaseErrorType.NoError == dbError) {
                 logicError = LogicErrorType.NoError;
             } else {
