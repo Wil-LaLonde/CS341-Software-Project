@@ -49,16 +49,6 @@ public partial class HomePage : ContentPage {
     }
 
     /// <summary>
-    /// Checks to see if the checkbox has been checked off and then make the bool isChecked true
-    /// </summary>
-    /// <param name="sender">object sender</param>
-    /// <param name="e">EventArgs e</param>
-    private void TaskCheckBox(object sender, CheckedChangedEventArgs e){
-        
-
-	}
-
-    /// <summary>
     /// Helper method used to gather all tasks
     /// </summary>
     private async void PrepareTaskList() {
@@ -68,8 +58,27 @@ public partial class HomePage : ContentPage {
             await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
         }
         else {
-            TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
+            if (MauiProgram.Profile.IsAdmin){
+                foreach (var task in MauiProgram.Profile.TaskList){
+                    //if the task is not submitted for approval then don't show task in the listview for ADMIN
+                    if (!task.IsSubmitted){
+                        TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
+                    }
+                }
+            }else{
+                foreach (var task in MauiProgram.Profile.TaskList)
+                {
+                    //if the task is not submitted for review then don't show task in the listview for MEMBER
+                    //do we want this here? or do we want to keep it in the list view...
+                    if (!task.IsChecked)
+                    {
+                        TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
+                    }
+                }
+            }
         }
+            
+       
     }
 
     /// <summary>

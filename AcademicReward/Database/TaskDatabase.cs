@@ -62,10 +62,10 @@ namespace AcademicReward.Database {
                     using var con = new NpgsqlConnection(InitializeConnectionString());
                     con.Open();
                     //SQL to update the task that is associated to a profile in profiletask table
-                    var sql = "UPDATE profiletask" +
-                              "SET isapproved = true, " +
-                              $"WHERE taskid = {taskToUpdate.TaskID} +" +
-                              $"AND profileid = {MauiProgram.Profile.ProfileID};";
+                    var sql = "UPDATE profiletask, tasks" + //might cause errors for this one--------------------------
+                              "SET isapproved = true, ischecked = true" +
+                              $"WHERE profiletask.taskid = {taskToUpdate.TaskID} +" +
+                              $"AND profiletask.profileid = {MauiProgram.Profile.ProfileID};";
 
                     //Executing the query.
                     using var cmd = new NpgsqlCommand(sql, con);

@@ -45,12 +45,6 @@ public partial class TaskPopUp : Popup {
 
     /// <summary>
     /// Method that submits the task for review
-    /// send notification (maybe) 
-    /// ProfileTask == table that shows up for individual task 
-    /// ProfileNotification == table that shows up nofication for individual 
-    /// need to make a sql command for Task == individual task from notification
-    /// if both bool is true then send it to history event
-    /// stop displaying for member
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
@@ -60,23 +54,22 @@ public partial class TaskPopUp : Popup {
         {
             //call the task database to change the profileTask table
             SelectedTask.IsChecked = true;
+
+            //sql call to update table
+            logicError = updateTask.UpdateItem(SelectedTask);
+
             MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask);
-            //need to get sql call for group to remove [SelectedTask.GroupID]
-            //MauiProgram.Profile.RemoveGroupFromProfile(Group group);
+
         }
         else
         {
             if (SelectedTask.IsChecked)//if the task is fully checked off 
             {
-                //removes task from list 
-                MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask);
-                //removes task from list
 
                 //send notification to memeber that they have been awarded 
               //  Notification completedTaskNotification = new Notification("Congratulations, you have completed a task", $"Task: {SelectedTask.Title}", SelectedTask.GroupID);
                // MauiProgram.Profile.AddNotificationToProfile(completedTaskNotification);
                 //send notification to memeber that they have been awarded 
-                //-NEED TO TALK ABOUT HOW NOTIFICATION WILL BE SENT TO GROUPS NOT TO YOURSELF
 
                 //add it to task to history
                 HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, SelectedTask.Title, $"{SelectedTask.Description}\nPoints: {SelectedTask.Points}\nGroupID: {SelectedTask.GroupID}");
@@ -88,19 +81,22 @@ public partial class TaskPopUp : Popup {
                 MauiProgram.Profile.AddPointsToMember(SelectedTask.Points);
                 //add points and exp 
 
-                //sql call to update table
-                logicError = updateTask.UpdateItem(SelectedTask);
+                //remove task from the list 
+                MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask);
+
+                //removes task from list 
+                MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask);
+                //removes task from list
             }
             else //if the task is not fully checked then
             {
                 //add the task to the admin tasklist 
                 logicError = updateTask.UpdateItem(SelectedTask);
-
+                SelectedTask.IsSubmitted = true;//if that task is submitted for review then make this true
 
                 //Notification completedTaskNotification = new Notification("A new Task as been added", $"Task: {SelectedTask.Title}", SelectedTask.GroupID);
                 //need to send this notification to admin
 
-                //need to figure out sql call 
 
             }
         }
