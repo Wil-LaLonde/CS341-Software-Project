@@ -38,9 +38,24 @@ namespace AcademicReward.Logic {
             return logicError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method use to update task
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns>LogicErrorType</returns>
         public LogicErrorType UpdateItem(object task) {
-            return LogicErrorType.NoError;
+            LogicErrorType logicError;
+            ModelClass.Task taskToUpdate = task as ModelClass.Task;
+            DatabaseErrorType dbError = taskDB.UpdateItem(taskToUpdate);
+            if (DatabaseErrorType.NoError == dbError)
+            {
+                logicError = LogicErrorType.NoError;
+            }
+            else
+            {
+                logicError = LogicErrorType.UpdateTaskDBError;
+            }
+            return logicError;
         }
 
         //Currently not needed
@@ -52,7 +67,7 @@ namespace AcademicReward.Logic {
         /// Method used to gather all tasks for a given profile
         /// </summary>
         /// <param name="profile"></param>
-        /// <returns></returns>
+        /// <returns>LogicErrorType</returns>
         public LogicErrorType LookupItem(object profile) {
             LogicErrorType logicError;
             DatabaseErrorType dbError = taskDB.LookupFullItem(profile);

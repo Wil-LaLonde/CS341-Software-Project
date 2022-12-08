@@ -62,7 +62,7 @@ public partial class HomePage : ContentPage {
     /// Helper method used to gather all tasks
     /// </summary>
     private async void PrepareTaskList() {
-        LogicErrorType logicError;
+        LogicErrorType
         logicError = taskLogic.LookupItem(MauiProgram.Profile);
         if (LogicErrorType.LookupAllTasksDBError == logicError) {
             await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);

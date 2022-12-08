@@ -57,6 +57,7 @@
         InvalidTaskDescriptionLength,
         AddTaskDBError,
         LookupAllTasksDBError,
+        UpdateTaskDBError,
         //Task END
 
         //Shop START
@@ -97,6 +98,7 @@
         //Task START
         AddTaskDBError,
         LookupAllTasksDBError,
+        UpdateTaskDbError,
         //Task END
 
         // History START

@@ -1,6 +1,8 @@
 using AcademicReward.Database;
 using AcademicReward.ModelClass;
+using AcademicReward.Logic;
 using CommunityToolkit.Maui.Views;
+using AcademicReward.Resources;
 using static Android.Provider.ContactsContract;
 
 namespace AcademicReward.PopUps;
@@ -15,6 +17,7 @@ public partial class TaskPopUp : Popup {
     public ModelClass.Task SelectedTask { get; }
     bool isAdmin;
     IDatabase history;
+    ILogic updateTask;
     public TaskPopUp() {
 		InitializeComponent();
         
@@ -30,7 +33,7 @@ public partial class TaskPopUp : Popup {
         group.Text = selectedTask.GroupID.ToString();
         isAdmin = MauiProgram.Profile.IsAdmin;
         history = new HistoryDatabase();
-
+        updateTask = new TaskLogic();
     }
 
     /// <summary>
@@ -52,6 +55,7 @@ public partial class TaskPopUp : Popup {
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
     private void SubmitTask(object sender, EventArgs e) {
+        LogicErrorType logicError;
         if (isAdmin)
         {
             //call the task database to change the profileTask table
@@ -79,18 +83,19 @@ public partial class TaskPopUp : Popup {
                 history.AddItem(taskHistory);
                 //add it to task to history
 
-                //add points and exp --- exp should be discussed 
-                MauiProgram.Profile.AddXPToMember(50);
+                //add points and exp 
+                MauiProgram.Profile.AddXPToMember(SelectedTask.Points);
                 MauiProgram.Profile.AddPointsToMember(SelectedTask.Points);
-                //add points and exp --- exp should be discussed 
+                //add points and exp 
 
-                //need to get sql call for group to remove [SelectedTask.GroupID]
-
-                //MauiProgram.Profile.RemoveGroupFromProfile(Group group);
+                //sql call to update table
+                logicError = updateTask.UpdateItem(SelectedTask);
             }
             else //if the task is not fully checked then
             {
                 //add the task to the admin tasklist 
+                logicError = updateTask.UpdateItem(SelectedTask);
+
 
                 //Notification completedTaskNotification = new Notification("A new Task as been added", $"Task: {SelectedTask.Title}", SelectedTask.GroupID);
                 //need to send this notification to admin

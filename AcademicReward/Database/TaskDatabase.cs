@@ -52,7 +52,58 @@ namespace AcademicReward.Database {
 
         //Currently not needed
         public DatabaseErrorType UpdateItem(object task) {
-            return DatabaseErrorType.NoError;
+            DatabaseErrorType dbError;
+            ModelClass.Task taskToUpdate = task as ModelClass.Task;
+
+            if (taskToUpdate.IsChecked){
+                //update the bool
+                try{
+                    //Opening the connection
+                    using var con = new NpgsqlConnection(InitializeConnectionString());
+                    con.Open();
+                    //SQL to update the task that is associated to a profile in profiletask table
+                    var sql = "UPDATE profiletask" +
+                              "SET isapproved = true, " +
+                              $"WHERE taskid = {taskToUpdate.TaskID} +" +
+                              $"AND profileid = {MauiProgram.Profile.ProfileID};";
+
+                    //Executing the query.
+                    using var cmd = new NpgsqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                    //Closing the connection.
+                    con.Close();
+                    dbError = DatabaseErrorType.NoError;
+                }
+                catch (NpgsqlException ex){
+                    //Something went wrong updating the task
+                    Console.WriteLine("Unexpected error while adding task: {0}", ex);
+                    dbError = DatabaseErrorType.UpdateTaskDbError;
+                }
+            }
+            else{
+                try {
+                    //Opening the connection
+                    using var con = new NpgsqlConnection(InitializeConnectionString());
+                    con.Open();
+                    //SQL to update the task that is associated to a profile in profiletask table
+                    var sql = "UPDATE profiletask" +
+                              "SET issubmitted = true, " +
+                              $"WHERE taskid = {taskToUpdate.TaskID} +" +
+                              $"AND profileid = {MauiProgram.Profile.ProfileID};";
+                    //Executing the query.
+                    using var cmd = new NpgsqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                    //Closing the connection.
+                    con.Close();
+                    dbError = DatabaseErrorType.NoError;
+                }
+                catch (NpgsqlException ex){
+                    //Something went wrong updating the task
+                    Console.WriteLine("Unexpected error while adding task: {0}", ex);
+                    dbError = DatabaseErrorType.UpdateTaskDbError;
+                }
+            }
+            return dbError;
         }
 
         //Currently not needed
