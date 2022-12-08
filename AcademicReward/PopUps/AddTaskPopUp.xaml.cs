@@ -1,8 +1,10 @@
 using CommunityToolkit.Maui.Views;
 using AcademicReward.ModelClass;
 using AcademicReward.Logic;
+using AcademicReward.Database;
 using AcademicReward.Resources;
 using System.Text;
+using Android.App;
 
 namespace AcademicReward.PopUps;
 
@@ -13,6 +15,7 @@ namespace AcademicReward.PopUps;
 /// </summary>
 public partial class AddTaskPopUp : Popup {
 	ILogic taskLogic;
+	IDatabase historyDB;
 
 	/// <summary>
 	/// AddTaskPopUp constructor
@@ -22,6 +25,7 @@ public partial class AddTaskPopUp : Popup {
 		//Gather all the groups for the select list
 		GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
 		taskLogic = new TaskLogic();
+		historyDB = new HistoryDatabase();
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
     }
@@ -54,6 +58,8 @@ public partial class AddTaskPopUp : Popup {
 				logicError = taskLogic.AddItem(task);
 				if(LogicErrorType.NoError == logicError) {
 					MauiProgram.Profile.AddTaskToProfile(task);
+					//Adding a history item for creating a task
+					historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateTaskTitle, string.Format(DataConstants.HistoryCreateTaskDescription, task.Title, selectedGroup.GroupName)));
 					Close(task);
 				}
             } else {

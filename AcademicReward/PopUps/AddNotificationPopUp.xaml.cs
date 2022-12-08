@@ -1,4 +1,5 @@
 using AcademicReward.Logic;
+using AcademicReward.Database;
 using AcademicReward.ModelClass;
 using AcademicReward.Resources;
 using CommunityToolkit.Maui.Views;
@@ -13,6 +14,7 @@ namespace AcademicReward.PopUps;
 /// </summary>
 public partial class AddNotificationPopUp : Popup {
     ILogic notificationLogic;
+    IDatabase historyDB;
 
     /// <summary>
     /// AddNotificationPopUp constructor
@@ -22,6 +24,7 @@ public partial class AddNotificationPopUp : Popup {
         //Set group picker item source
         GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
         notificationLogic = new NotificationLogic();
+        historyDB = new HistoryDatabase();
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
     }
@@ -50,6 +53,8 @@ public partial class AddNotificationPopUp : Popup {
             logicError = notificationLogic.AddItem(notification);
             if(LogicErrorType.NoError == logicError) {
                 MauiProgram.Profile.AddNotificationToProfile(notification);
+                //Adding a history item for creating a notification
+                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateNotificationTitle, string.Format(DataConstants.HistoryCreateNotificationDescription, notification.Title, selectedGroup.GroupName)));
                 Close(notification);
             }
         } else {
