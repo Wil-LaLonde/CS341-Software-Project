@@ -13,11 +13,14 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class GroupPage : ContentPage
 {
+    public Group group;
     public ObservableCollection<Profile> Members = new ObservableCollection<Profile>();
     public GroupPage(Group group)
     {
         InitializeComponent();
         
+        this.group = group;
+
         Members = GroupProfileRelationship.getProfilesInGroup(group);
         MembersLV.ItemsSource = Members;
         
@@ -36,7 +39,7 @@ public partial class GroupPage : ContentPage
     }
 
     public void AddMemberButtonClicked(object sender, EventArgs e) {
-        AddMemberPopUp addMemberPopUp = new AddMemberPopUp();
+        AddMemberPopUp addMemberPopUp = new AddMemberPopUp(group);
         this.ShowPopup(addMemberPopUp);
     }
 }

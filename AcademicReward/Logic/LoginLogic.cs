@@ -265,5 +265,10 @@ namespace AcademicReward.Logic {
                 differences |= (uint)(storedPasswordBytes[position] ^ testHash[position]);
             return differences == 0;
         }
+
+        public LogicErrorType AddItemWithArgs(object[] obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
