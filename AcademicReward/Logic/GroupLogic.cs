@@ -5,7 +5,7 @@ using AcademicReward.Resources;
 namespace AcademicReward.Logic
 {
     /// <summary>
-    /// Primary Author: Wil LaLonde
+    /// Primary Author: Maximilian Patterson
     /// Secondary Author: 
     /// Reviewer: 
     /// </summary>
