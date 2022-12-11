@@ -34,5 +34,8 @@ public partial class CreateGroupPage : ContentPage
          );
 
         groupLogic.AddItem(group);
+        
+        // Navigate back to the group page
+        Navigation.PopAsync();
     }
 }
