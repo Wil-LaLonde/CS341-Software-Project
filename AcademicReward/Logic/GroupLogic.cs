@@ -1,4 +1,5 @@
 ﻿using AcademicReward.Database;
+using AcademicReward.ModelClass;
 using AcademicReward.Resources;
 
 namespace AcademicReward.Logic
@@ -27,6 +28,11 @@ namespace AcademicReward.Logic
 
             // Add to database
             var dbError = GroupDB.AddItem(obj);
+
+            // Create history entry for a new group
+            var historyDB = new HistoryDatabase();
+            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateGroupTitle, string.Format(DataConstants.HistoryCreateGroupDescription, group.GroupName)));
+
             return LogicErrorType.NoError;
         }
 
