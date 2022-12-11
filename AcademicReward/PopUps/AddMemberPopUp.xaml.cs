@@ -1,7 +1,9 @@
+using AcademicReward.Database;
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
 using AcademicReward.Views;
 using CommunityToolkit.Maui.Views;
+using System.Collections.ObjectModel;
 
 namespace AcademicReward.PopUps;
 
@@ -13,9 +15,13 @@ namespace AcademicReward.PopUps;
 public partial class AddMemberPopUp : Popup {
 	
 	public Group group;
-	public AddMemberPopUp(Group group) {
+	// Reference to groupage so that the listview can be updated
+	public ObservableCollection<Profile> memberList;
+
+	public AddMemberPopUp(Group group, ref ObservableCollection<Profile> memberList) {
 		InitializeComponent();
 		this.group = group;
+		this.memberList = memberList;
 	}
 
     private void BackButtonClicked(object sender, EventArgs e) => Close();
@@ -33,6 +39,8 @@ public partial class AddMemberPopUp : Popup {
 
 		var error = addMemberLogic.AddItemWithArgs(obj);
 
-		Close();
+        // Update the listview
+        memberList = GroupProfileRelationship.getProfilesInGroup(group);
+		Close(memberList);
 	}
 }
