@@ -50,5 +50,28 @@ namespace AcademicReward.Database
                 return null;
             }
         }
+
+        public static void addProfileToGroup(Profile profile, Group group)
+        {
+            try
+            {
+                int profileId = profile.ProfileID;
+                int groupId = group.GroupID;
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                //Select SQL query for getting all profiles
+                var sql = "INSERT INTO profilegroup (profileid, groupid) " +
+                    "VALUES (" + $"{profileId}" + ", " + $"{groupId}" + ");";
+                //Executing the query.
+                using var cmd = new NpgsqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                //Closing the connection.
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error while adding profile to group: {0}", e);
+            }
+        }
     }
 }
