@@ -107,6 +107,11 @@
         DeleteHistoryDBError,
         // History END
 
+        // Group START
+        UpdateGroupDBError,
+        AddGroupDBError,
+        // Group END
+
         //General START
         NoError
         //General END
