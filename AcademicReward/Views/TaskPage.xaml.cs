@@ -1,9 +1,9 @@
 using AcademicReward.Logic;
+using AcademicReward.Database;
 using AcademicReward.ModelClass;
 using AcademicReward.PopUps;
 using AcademicReward.Resources;
 using CommunityToolkit.Maui.Views;
-using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
@@ -13,12 +13,13 @@ namespace AcademicReward.Views;
 /// Reviewer: Xee Lo
 /// </summary>
 public partial class TaskPage : ContentPage {
-    private ILogic notificationLogic, taskLogic;
+    private ILogic notificationLogic;
+    private IDatabase historyDB;
 
 	public TaskPage() {
         InitializeComponent();
         notificationLogic = new NotificationLogic();
-        taskLogic = new TaskLogic();
+        historyDB = new HistoryDatabase();
         //Gathering all current notifications
         PrepareNotificationList();
         //Gathering all currents tasks
@@ -56,7 +57,9 @@ public partial class TaskPage : ContentPage {
         AddNotificationPopUp addNotificationPopUp = new AddNotificationPopUp();
         Notification notification = await this.ShowPopupAsync(addNotificationPopUp) as Notification;
         if(notification != null) {
-            //RefreshNotificationList();
+            //Adding a history item for creating a notification
+            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateNotificationTitle, 
+                string.Format(DataConstants.HistoryCreateNotificationDescription, notification.Title, MauiProgram.Profile.GetGroupNameUsingGroupID(notification.GroupID))));
             await DisplayAlert(DataConstants.CreateNotificationSuccessTitle, DataConstants.CreateNotificationSuccessMessage, DataConstants.OK);
         }
     }
@@ -96,6 +99,9 @@ public partial class TaskPage : ContentPage {
 		AddTaskPopUp addTaskPopUp = new AddTaskPopUp();
 		ModelClass.Task task = await this.ShowPopupAsync(addTaskPopUp) as ModelClass.Task;
         if(task != null) {
+            //Adding a history item for creating a task
+            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateTaskTitle, 
+                string.Format(DataConstants.HistoryCreateTaskDescription, task.Title, MauiProgram.Profile.GetGroupNameUsingGroupID(task.GroupID))));
             await DisplayAlert(DataConstants.CreateTaskSuccessTitle, DataConstants.CreateTaskSuccessMessage, DataConstants.OK);
         }
 	}

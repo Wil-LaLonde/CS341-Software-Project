@@ -67,9 +67,14 @@
         UnsuccessfulDBAdd,
         //Shop END
 
-        //Profile START
-        UpdateProfileDBError,
-        //Profile END
+        //History START (history calls are often made from LogicClasses
+        HistoryAddError,
+        //History END
+
+        //Group START
+        GroupCreateError,
+        GroupAlreadyHasAdmin,
+        //Group END
 
         //General START
         NoError
@@ -116,9 +121,10 @@
         DeleteHistoryDBError,
         // History END
 
-        //Profile START
-        UpdateProfileDBError,
-        //Profile END
+        // Group START
+        UpdateGroupDBError,
+        AddGroupDBError,
+        // Group END
 
         //General START
         NoError

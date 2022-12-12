@@ -104,5 +104,10 @@ namespace AcademicReward.Logic {
             int descriptionLength = description.Length;
             return descriptionLength < Notification.MinDescriptionLength || descriptionLength > Notification.MaxDescriptionLength;
         }
+
+        public LogicErrorType AddItemWithArgs(object[] obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

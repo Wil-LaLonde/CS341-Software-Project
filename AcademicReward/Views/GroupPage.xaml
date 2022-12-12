@@ -50,7 +50,7 @@
                     HorizontalOptions="EndAndExpand"/>
                 <Button
                     Text="+"
-                    Clicked="AddMemberButtonClicked"
+                    Clicked="AddMemberButtonClickedAsync"
                     FontSize="30"
                     Padding="18, 8"
                     FontAttributes="Bold"
