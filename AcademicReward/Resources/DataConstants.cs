@@ -40,6 +40,8 @@
         //Login Group Collection END
 
         //Edit Profile Page START
+        public const string UpdateProfileXpPointsLevelTitle = "Error Update Profile";
+        public const string UpdateProfileXpPointsLevelMessage = "There was an error updating your profile.";
         public const string UpdatePasswordSuccessTitle = "Password Updated!";
         public const string UpdatePasswordSuccessMessage = "Your pasword has been updated successfully.";
         public const string EmptyOldPasswordTitle = "Empty Old Password";
@@ -91,6 +93,7 @@
         public const string AddTaskUnknownMessage = "An unknown error occurred during task creation.";
         public const string LookupTaskDBErrorTitle = "Error Loading Tasks";
         public const string LookupTaskDBErrorMessage = "There was an unexpected error loading your tasks.";
+        public const string UpdatingTask = "There was an unexpected error updating your task.";
         //Task END
 
         //History START

@@ -21,6 +21,8 @@ namespace AcademicReward.ModelClass {
         public int Points { get; set; }
         public int GroupID { get; private set; }
 
+        public bool IsSubmitted { get; set; }
+
         /// <summary>
         /// Task constructor
         /// </summary>
@@ -44,6 +46,7 @@ namespace AcademicReward.ModelClass {
         /// <param name="groupID">int groupID</param>
         public Task(string title, string description, int points, int groupID) {
             IsChecked = false;
+            IsSubmitted = false;
             Title = title;
             Description = description;
             Points = points;
@@ -61,6 +64,27 @@ namespace AcademicReward.ModelClass {
         /// <param name="isChecked">bool isChecked</param>
         public Task(int taskID, string title, string description, int points, int groupID, bool isChecked) {
             IsChecked = isChecked;
+            TaskID = taskID;
+            Title = title;
+            Description = description;
+            Points = points;
+            GroupID = groupID;
+        }
+
+        /// <summary>
+        /// Task constructor (used for checking if the task should be displayed for memeber or admin)
+        /// </summary>
+        /// <param name="taskID"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="points"></param>
+        /// <param name="groupID"></param>
+        /// <param name="isChecked"></param>
+        /// <param name="isSubmitted"></param>
+        public Task(int taskID, string title, string description, int points, int groupID, bool isChecked, bool isSubmitted)
+        {
+            IsChecked = isChecked;
+            IsSubmitted = isSubmitted;
             TaskID = taskID;
             Title = title;
             Description = description;

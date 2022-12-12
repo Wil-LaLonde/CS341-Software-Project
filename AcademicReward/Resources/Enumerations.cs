@@ -57,6 +57,8 @@
         InvalidTaskDescriptionLength,
         AddTaskDBError,
         LookupAllTasksDBError,
+        UpdateTaskDBError,
+        DeleteTaskDBError,
         //Task END
 
         //Shop START
@@ -73,6 +75,10 @@
         GroupCreateError,
         GroupAlreadyHasAdmin,
         //Group END
+
+        //Profile START
+        UpdateProfileDBError,
+        //Profile END
 
         //General START
         NoError
@@ -105,7 +111,10 @@
 
         //Task START
         AddTaskDBError,
+        LookupTaskDBError,
         LookupAllTasksDBError,
+        UpdateTaskDbError,
+        DeleteTaskDBError,
         //Task END
 
         // History START
@@ -120,6 +129,10 @@
         UpdateGroupDBError,
         AddGroupDBError,
         // Group END
+
+        //Profile START
+        UpdateProfileDBError,
+        //Profile END
 
         //General START
         NoError

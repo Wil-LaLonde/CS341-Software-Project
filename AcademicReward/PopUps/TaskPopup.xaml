@@ -31,6 +31,23 @@
                     HorizontalOptions="Center"/>
             </Frame>
         </StackLayout>
+        <!--ERROR BODY MESSAGE-->
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error with task creation: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    TextType="Html"
+                    FontSize="20"/>
+            </StackLayout>
+        </Frame>
+        <!--ERROR BODY MESSAGE-->
         <StackLayout Margin="10">
             <!--Description-->
             <Label
