@@ -1,5 +1,6 @@
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
+using AcademicReward.Resources;
 
 namespace AcademicReward.Views;
 
@@ -49,7 +50,12 @@ public partial class CreateGroupPage : ContentPage
             MauiProgram.Profile // Admin profile
          );
 
-        groupLogic.AddItem(group);
+        var error = groupLogic.AddItem(group);
+        if (error != LogicErrorType.NoError)
+        {
+            ErrorLabel.Text = "Error adding group";
+            return;
+        }
         
         // Navigate back to the group page
         Navigation.PopAsync();
