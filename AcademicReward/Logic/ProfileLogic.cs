@@ -42,5 +42,8 @@ namespace AcademicReward.Logic {
         public LogicErrorType LookupItem(object obj) {
             return LogicErrorType.NoError;
         }
+        public LogicErrorType AddItemWithArgs(object[] obj) {
+            return LogicErrorType.NoError;
+        }
     }
 }
