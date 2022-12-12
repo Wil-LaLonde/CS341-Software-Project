@@ -44,8 +44,9 @@ namespace AcademicReward.Logic
             
             toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, 
                 MauiProgram.Profile.GroupList.ElementAt( int.Parse(AddItemVals[5]) ) );
-            
-            
+                //The line above is getting the ID of the group, finding it in the group list, then passing that group into the constructor
+
+
             ItemList.Add(toBeAdded);
             if (ShopData.AddItem(toBeAdded) == DatabaseErrorType.NoError)
             {

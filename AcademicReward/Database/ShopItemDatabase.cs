@@ -111,21 +111,22 @@ namespace AcademicReward.Database
                     
                     while (reader.Read())
                     {
-                        int groupID = (int)reader[5];
+                        int groupID = (int)reader[5]; //Getting group ID
                         bool idPresent = false;
                         Group gettingGroup = null;
 
-                        foreach (Group g in MauiProgram.Profile.GroupList)
+                        foreach (Group g in MauiProgram.Profile.GroupList) //Check the group list for this profile to see if it uses that ID
                         {
-                            if(g.GroupID == groupID)
+                            if(g.GroupID == groupID) //If it does use that ID, mark the corresponding group and mark that the user is part of this group
                             {
-                            idPresent = true;
+                            idPresent = true;   
                             gettingGroup = g;
                             }
                         }
-                        if (idPresent)
+                        if (idPresent)  //If the item is for a group this user is in, add the item to the list the user will see
                         {
-                        ShopItem item = new ShopItem((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], gettingGroup);
+                        ShopItem item = new ShopItem((int)reader[0], reader[1] as string, reader[2] as string, 
+                            (int)reader[3], (int)reader[4], gettingGroup);
 
                         newList.Add(item);
                         }
