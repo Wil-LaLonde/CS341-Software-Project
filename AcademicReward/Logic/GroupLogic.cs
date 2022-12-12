@@ -32,10 +32,20 @@ namespace AcademicReward.Logic
 
             // Add to database
             var dbError = GroupDB.AddItem(obj);
+            if (dbError != DatabaseErrorType.NoError)
+            {
+                Console.WriteLine("Error adding group to database");
+                return LogicErrorType.GroupCreateError;
+            }
 
             // Create history entry for a new group
             var historyDB = new HistoryDatabase();
-            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateGroupTitle, string.Format(DataConstants.HistoryCreateGroupDescription, group.GroupName)));
+            var error = historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateGroupTitle, string.Format(DataConstants.HistoryCreateGroupDescription, group.GroupName)));
+            if (error != DatabaseErrorType.NoError)
+            {
+                Console.WriteLine("Error adding history item");
+                return LogicErrorType.HistoryAddError;
+            }
 
             return LogicErrorType.NoError;
         }

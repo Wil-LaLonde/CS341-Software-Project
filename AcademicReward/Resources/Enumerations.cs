@@ -69,6 +69,10 @@
         HistoryAddError,
         //History END
 
+        //Group START
+        GroupCreateError,
+        //Group END
+
         //General START
         NoError
         //General END
