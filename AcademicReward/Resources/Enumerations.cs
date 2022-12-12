@@ -58,6 +58,7 @@
         AddTaskDBError,
         LookupAllTasksDBError,
         UpdateTaskDBError,
+        DeleteTaskDBError,
         //Task END
 
         //Shop START
@@ -104,6 +105,7 @@
         LookupTaskDBError,
         LookupAllTasksDBError,
         UpdateTaskDbError,
+        DeleteTaskDBError,
         //Task END
 
         // History START

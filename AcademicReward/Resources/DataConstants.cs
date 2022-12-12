@@ -40,6 +40,8 @@
         //Login Group Collection END
 
         //Edit Profile Page START
+        public const string UpdateProfileXpPointsLevelTitle = "Error Update Profile";
+        public const string UpdateProfileXpPointsLevelMessage = "There was an error updating your profile.";
         public const string UpdatePasswordSuccessTitle = "Password Updated!";
         public const string UpdatePasswordSuccessMessage = "Your pasword has been updated successfully.";
         public const string EmptyOldPasswordTitle = "Empty Old Password";

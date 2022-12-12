@@ -60,7 +60,16 @@ namespace AcademicReward.Logic {
 
         //Currently not needed
         public LogicErrorType DeleteItem(object task) {
-            return LogicErrorType.NoError;
+            LogicErrorType logicError;
+            ModelClass.Task taskToDelete = task as ModelClass.Task;
+            DatabaseErrorType dbError = taskDB.DeleteItem(taskToDelete);
+            if (DatabaseErrorType.NoError == dbError) {
+                logicError = LogicErrorType.NoError;
+            }
+            else {
+                logicError = LogicErrorType.DeleteTaskDBError;
+            }
+            return logicError;
         }
 
         /// <summary>

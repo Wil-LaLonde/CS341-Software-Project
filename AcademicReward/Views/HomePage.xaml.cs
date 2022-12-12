@@ -17,14 +17,17 @@ public partial class HomePage : ContentPage {
     private ILogic taskLogic;
     bool isAdmin;
     IDatabase lookUpTask;
+    IDatabase history;
+    ILogic updateProfile;
     ObservableCollection<Task> tasksToShow;
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
         lookUpTask = new TaskDatabase();
+        history = new HistoryDatabase();
+        updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
 		UsernameDisplay(isAdmin);
-        tasksToShow = new ObservableCollection<Task>();
         PrepareTaskList();
         RefreshTaskList();
         
@@ -60,6 +63,7 @@ public partial class HomePage : ContentPage {
     /// Helper method used to gather all tasks
     /// </summary>
     private async void PrepareTaskList() {
+        tasksToShow = new ObservableCollection<Task>();
         LogicErrorType
         logicError = taskLogic.LookupItem(MauiProgram.Profile);
         if (LogicErrorType.LookupAllTasksDBError == logicError) {
@@ -69,19 +73,12 @@ public partial class HomePage : ContentPage {
             if (MauiProgram.Profile.IsAdmin){
                // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
-                    //look up individual tasks and set the properties if needed 
-                    //logicError = (LogicErrorType)lookUpTask.LookupItem(task);
-                   // if(LogicErrorType.LookupAllNotificationsDBError == logicError) {
-                   //     await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
-                   // }
-                   // else {
-                        //if the task is not submitted for approval then don't show task in the listview for ADMIN
-                        if (task.IsSubmitted) {
+                   
+                        if (task.IsSubmitted && (!task.IsChecked)) {
                         tasksToShow.Add(task);
                         TaskLV.ItemsSource = tasksToShow;
                     }
-                   // }
-                   
+                  
                 }
             }else{
               //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
@@ -97,9 +94,23 @@ public partial class HomePage : ContentPage {
                             tasksToShow.Add(task);
                             TaskLV.ItemsSource = tasksToShow;
                         }
+                        else {
+                            HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, task.Title, $"{task.Description}\nPoints: {task.Points}\nGroupID: {task.GroupID}");
+                            history.AddItem(taskHistory); //history doesnt have a logic layer so may need to changed
+
+                            MauiProgram.Profile.AddXPToMember(task.Points); //adds exp to memeber
+                            MauiProgram.Profile.AddPointsToMember(task.Points); //adds points to member
+                            logicError = updateProfile.UpdateItem(MauiProgram.Profile);
+                            if (logicError == LogicErrorType.NoError) {
+                               // MauiProgram.Profile.RemoveTaskFromProfile(task);
+                                //removes the task once it has been reviewed and approved 
+                            taskLogic.DeleteItem(task);
+                            }
+                            else {
+                                await DisplayAlert(DataConstants.UpdateProfileXpPointsLevelTitle, DataConstants.UpdateProfileXpPointsLevelMessage, DataConstants.OK);
+                            }
+                        }
                     }
-                    //if the task is not submitted for review then don't show task in the listview for MEMBER
-                    //do we want this here? or do we want to keep it in the list view... 
                 }
             }
         }
