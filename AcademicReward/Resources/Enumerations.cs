@@ -71,6 +71,7 @@
 
         //Group START
         GroupCreateError,
+        GroupAlreadyHasAdmin,
         //Group END
 
         //General START

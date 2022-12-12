@@ -47,7 +47,13 @@ public partial class AddMemberPopUp : Popup {
 		object[] obj = new object[] { memberName, group };
 
 		var error = addMemberLogic.AddItemWithArgs(obj);
-		if (error != LogicErrorType.NoError)
+		if (error == LogicErrorType.GroupAlreadyHasAdmin)
+		{
+            // Set error label text
+            ErrorLabel.Text = "An additional admin user cannot be added to a group";
+            return;
+        }
+		else if (error != LogicErrorType.NoError)
 		{
             // Set error label text
             ErrorLabel.Text = "Username not found";

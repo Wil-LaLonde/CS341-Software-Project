@@ -29,12 +29,6 @@ namespace AcademicReward.Logic
             // Convert object to array
             var arguments = obj as object[];
 
-            // Print arguments
-            foreach (var argument in arguments)
-            {
-                System.Diagnostics.Debug.WriteLine(argument);
-            }
-
             // Find profile by username
             var loginDB = new LoginDatabase();
             var profile = GroupProfileRelationship.findByUsername(arguments[0] as string);
@@ -43,7 +37,12 @@ namespace AcademicReward.Logic
             var group = arguments[1] as Group;
 
             // Add relationship to database
-            GroupProfileRelationship.addProfileToGroup(profile, group);
+            var error = GroupProfileRelationship.addProfileToGroup(profile, group);
+            if (error != LogicErrorType.NoError)
+            {
+                return error;
+            }
+
 
             // Create history entry for a new member in group
             try
