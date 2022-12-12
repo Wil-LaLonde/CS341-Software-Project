@@ -76,6 +76,10 @@
         GroupAlreadyHasAdmin,
         //Group END
 
+        //Profile START
+        UpdateProfileDBError,
+        //Profile END
+
         //General START
         NoError
         //General END
@@ -125,6 +129,10 @@
         UpdateGroupDBError,
         AddGroupDBError,
         // Group END
+
+        //Profile START
+        UpdateProfileDBError,
+        //Profile END
 
         //General START
         NoError
