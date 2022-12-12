@@ -42,7 +42,8 @@ namespace AcademicReward.Logic
                 return LogicErrorType.InvalidLevel;
             }
             
-            toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, null);
+            toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, 
+                MauiProgram.Profile.GroupList.ElementAt( int.Parse(AddItemVals[5]) ) );
             
             
             ItemList.Add(toBeAdded);

@@ -33,7 +33,7 @@ namespace AcademicReward.Database
                 con.Open();
                 //Insert SQL query for adding a profile
                 var sql = "INSERT INTO shopitems (shopitemid, itemtitle, itemdescription, pointcost, levelrequirment, groupid)" +
-                          $"VALUES ({item.Id}, '{item.Title}', '{item.Description}', {item.PointCost}, {item.LevelRequirement}, {1});";
+                          $"VALUES ({item.Id}, '{item.Title}', '{item.Description}', {item.PointCost}, {item.LevelRequirement}, {item.Group.GroupID});";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
@@ -111,8 +111,25 @@ namespace AcademicReward.Database
                     
                     while (reader.Read())
                     {
-                        ShopItem item = new ShopItem((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], null);
+                        int groupID = (int)reader[5];
+                        bool idPresent = false;
+                        Group gettingGroup = null;
+
+                        foreach (Group g in MauiProgram.Profile.GroupList)
+                        {
+                            if(g.GroupID == groupID)
+                            {
+                            idPresent = true;
+                            gettingGroup = g;
+                            }
+                        }
+                        if (idPresent)
+                        {
+                        ShopItem item = new ShopItem((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], gettingGroup);
+
                         newList.Add(item);
+                        }
+                        
                         
                     }
                     logic.ItemList = newList;

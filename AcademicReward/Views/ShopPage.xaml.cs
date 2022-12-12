@@ -17,6 +17,7 @@ public partial class ShopPage : ContentPage {
 		InitializeComponent();
         ShopLogic = new ShopLogic();
         getShopItems();
+        
 	}
 
 	private void Button_Clicked(object sender, EventArgs e) {
