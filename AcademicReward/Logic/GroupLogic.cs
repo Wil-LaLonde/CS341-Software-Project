@@ -14,14 +14,18 @@ namespace AcademicReward.Logic
         private IDatabase GroupDB;
 
         /// <summary>
-        /// LoginGroupLogic constructor
+        /// GroupLogic constructor
         /// </summary>
         public GroupLogic()
         {
             GroupDB = new GroupDatabase();
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method that adds a new Group to the database 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
         public LogicErrorType AddItem(object obj)
         {
             var group = obj as ModelClass.Group;
@@ -50,11 +54,7 @@ namespace AcademicReward.Logic
             return LogicErrorType.NoError;
         }
 
-        /// <summary>
-        /// Method that calls the database to gather 
-        /// </summary>
-        /// <param name="profile"></param>
-        /// <returns></returns>
+        //Currently not needed
         public LogicErrorType LookupItem(object profile)
         {
             return LogicErrorType.NoError;
