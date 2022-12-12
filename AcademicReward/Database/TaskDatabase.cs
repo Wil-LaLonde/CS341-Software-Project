@@ -29,12 +29,13 @@ namespace AcademicReward.Database {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //SQL to add task to table, also adding task to profiletask table
-                var sql = "INSERT INTO tasks (tasktitle, taskdescription, points, groupid, ischecked)" +
+                var sql = "INSERT INTO tasks (tasktitle, taskdescription, points, groupid, ischecked, issubmitted)" +
                           $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsChecked}, {taskToAdd.IsSubmitted}); " +
                           "INSERT INTO profiletask " +
                           "SELECT profileid, MAX(taskid), ischecked, ischecked " +
                           "FROM profilegroup, tasks " +
                           $"WHERE profilegroup.groupid = {taskToAdd.GroupID} " +
+                          $"AND profileid != {MauiProgram.Profile.ProfileID} " +
                           "GROUP BY profileid, ischecked;";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
@@ -54,22 +55,20 @@ namespace AcademicReward.Database {
         public DatabaseErrorType UpdateItem(object task) {
             DatabaseErrorType dbError;
             ModelClass.Task taskToUpdate = task as ModelClass.Task;
+            int profileId = MauiProgram.Profile.ProfileID;
 
-            if (taskToUpdate.IsChecked) {
+            if (taskToUpdate.IsChecked) {//need to update the members view here not admin 
                 //update the bool
                 try {
                     //Opening the connection
                     using var con = new NpgsqlConnection(InitializeConnectionString());
                     con.Open();
                     //SQL to update the task that is associated to a profile in profiletask table ADMIN VIEW
-                    var sql = "UPDATE profiletask" +
-                              $"SET isapproved = '{taskToUpdate.IsChecked}'" +
-                              $"WHERE profiletask.taskid = {taskToUpdate.TaskID} +" +
-                              $"AND profiletask.profileid = {MauiProgram.Profile.ProfileID};";// +
-                    /*"UPDATE tasks" +
-                    $"SET ischecked = '{taskToUpdate.IsChecked}'" +
-                    $"AND task.profileid = {MauiProgram.Profile.ProfileID};";*/
-
+                    var sql = "UPDATE profiletask " +
+                              $"SET isapproved = {taskToUpdate.IsChecked} " +
+                              $"WHERE profiletask.taskid = {taskToUpdate.TaskID}" +
+                              $"AND profiletask.profileid = {profileId};";//needs to be the memebrs profile ID not member ID
+                    
                     //Executing the query.
                     using var cmd = new NpgsqlCommand(sql, con);
                     cmd.ExecuteNonQuery();
@@ -89,10 +88,9 @@ namespace AcademicReward.Database {
                     using var con = new NpgsqlConnection(InitializeConnectionString());
                     con.Open();
                     //SQL to update the task that is associated to a profile in profiletask table MEMBER VIEW
-                    var sql = "UPDATE profiletask" +
-                              $"SET issubmitted = '{taskToUpdate.IsSubmitted}'" +
-                              $"WHERE taskid = {taskToUpdate.TaskID} +" +
-                              $"AND profileid = {MauiProgram.Profile.ProfileID};";
+                    var sql = "UPDATE profiletask " +
+                              $"SET issubmitted = {taskToUpdate.IsSubmitted} " +
+                              $"WHERE taskid = {taskToUpdate.TaskID} AND profileid = {profileId};";
                     //Executing the query.
                     using var cmd = new NpgsqlCommand(sql, con);
                     cmd.ExecuteNonQuery();
@@ -123,7 +121,7 @@ namespace AcademicReward.Database {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //SQL to lookup tasks for a group
-                var sql = "SELECT issubmitted, isapproved" +
+                var sql = "SELECT issubmitted, isapproved " +
                           "FROM profiletask " +
                           $"WHERE taskid = {taskToFind.TaskID} AND profileid = {MauiProgram.Profile.ProfileID};";
                 //Executing the query.
@@ -143,7 +141,7 @@ namespace AcademicReward.Database {
             catch (NpgsqlException ex) {
                 //Something went wrong looking up the task
                 Console.WriteLine("Unexpected error while looking up task: {0}", ex);
-                dbError = DatabaseErrorType.LookupTaskDBError;
+                dbError = DatabaseErrorType.LookupAllTasksDBError;
             }
             return dbError;
         }
@@ -156,31 +154,68 @@ namespace AcademicReward.Database {
         public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
             ModelClass.Profile profileTasks = profile as ModelClass.Profile;
-            try {
-                //Opening the connection
-                using var con = new NpgsqlConnection(InitializeConnectionString());
-                con.Open();
-                //SQL to lookup tasks for a group
-                var sql = "SELECT * " +
-                          "FROM tasks " +
-                          $"WHERE taskid IN (SELECT taskid FROM profiletask WHERE profileid = {profileTasks.ProfileID});";
-                //Executing the query.
-                using var cmd = new NpgsqlCommand(sql, con);
-                using NpgsqlDataReader reader = cmd.ExecuteReader();
-                //Creating tasks objects
-                //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [5] -> ischecked | [6] -> issubmitted
-                while (reader.Read()) {
-                    ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[5], (bool)reader[6]);
-                    profileTasks.AddTaskToProfile(task);
+            if (profileTasks.IsAdmin) { //This is for fetching data for ADMIN VIEW 
+                try {
+                    //Opening the connection
+                    using var con = new NpgsqlConnection(InitializeConnectionString());
+                    con.Open();
+                    //SQL to lookup tasks for a group 
+                    var sql = "SELECT tasks.taskid, tasks.tasktitle, tasks.taskdescription, tasks.points, tasks.groupid, profiletask.issubmitted, profiletask.isapproved " +
+                              "FROM profiletask, tasks " +
+                              "WHERE profileid IN(SELECT profiles.profileid " +
+                                                    "FROM profilegroup, profiles " +
+                                                    "WHERE groupid IN (SELECT groupid " +
+                                                                       "FROM profilegroup " +
+                                                                       $"WHERE profileid = {MauiProgram.Profile.ProfileID}) " +
+                                                  "AND profilegroup.profileid = profiles.profileid " +
+                                                  "AND profiles.isAdmin = false) " +
+                               "AND tasks.taskid = profiletask.taskid;";
+                    //Executing the query.
+                    using var cmd = new NpgsqlCommand(sql, con);
+                    using NpgsqlDataReader reader = cmd.ExecuteReader();
+                    //Creating tasks objects
+                    //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [6] -> ischecked | [5] -> issubmitted
+                    while (reader.Read()) {
+                        ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[6], (bool)reader[5]);
+                        profileTasks.AddTaskToProfile(task);
+                    }
+                    //Closing the connection.
+                    con.Close();
+                    dbError = DatabaseErrorType.NoError;
                 }
-                //Closing the connection.
-                con.Close();
-                dbError = DatabaseErrorType.NoError;
+                catch (NpgsqlException ex) {
+                    //Something went wrong looking up the task
+                    Console.WriteLine("Unexpected error while looking up task: {0}", ex);
+                    dbError = DatabaseErrorType.LookupAllTasksDBError;
+                }
             }
-            catch (NpgsqlException ex) {
-                //Something went wrong looking up the task
-                Console.WriteLine("Unexpected error while looking up task: {0}", ex);
-                dbError = DatabaseErrorType.LookupAllTasksDBError;
+            else {//this is for fetching all tasks for MEMBER VIEW
+                try {
+                    //Opening the connection
+                    using var con = new NpgsqlConnection(InitializeConnectionString());
+                    con.Open();
+                    //SQL to lookup tasks for a group
+                    var sql = "SELECT * " +
+                              "FROM tasks " +
+                              $"WHERE taskid IN (SELECT taskid FROM profiletask WHERE profileid = {profileTasks.ProfileID});";
+                    //Executing the query.
+                    using var cmd = new NpgsqlCommand(sql, con);
+                    using NpgsqlDataReader reader = cmd.ExecuteReader();
+                    //Creating tasks objects
+                    //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [5] -> ischecked | [6] -> issubmitted
+                    while (reader.Read()) {
+                        ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[5], (bool)reader[6]);
+                        profileTasks.AddTaskToProfile(task);
+                    }
+                    //Closing the connection.
+                    con.Close();
+                    dbError = DatabaseErrorType.NoError;
+                }
+                catch (NpgsqlException ex) {
+                    //Something went wrong looking up the task
+                    Console.WriteLine("Unexpected error while looking up task: {0}", ex);
+                    dbError = DatabaseErrorType.LookupAllTasksDBError;
+                }
             }
             return dbError;
         }

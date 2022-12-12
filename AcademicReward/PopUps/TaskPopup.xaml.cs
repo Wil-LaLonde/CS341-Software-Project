@@ -71,7 +71,7 @@ public partial class TaskPopUp : Popup {
         }
         else {
             if (SelectedTask.IsChecked) { //if the task is checked off 
-
+                //NEED TO UPDATE PROFILE DATABASE VALUES 
                 //add it to task to history
                 HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, SelectedTask.Title, $"{SelectedTask.Description}\nPoints: {SelectedTask.Points}\nGroupID: {SelectedTask.GroupID}");
                 logicError = (LogicErrorType)history.AddItem(taskHistory); //history doesnt have a logic layer so may need to changed
@@ -85,7 +85,7 @@ public partial class TaskPopUp : Popup {
                     Close(SelectedTask); //close the task
                 }
                 else {
-                    logicError = (LogicErrorType)DatabaseErrorType.AddHistoryDBError; //-----may throw errors here-----
+                    logicError = (LogicErrorType)DatabaseErrorType.AddHistoryDBError; 
                 }
             }
             else { //This is for when MEMBERS are submitting the task for the first time --- therefore it has not been checked 
@@ -103,7 +103,9 @@ public partial class TaskPopUp : Popup {
                 }
             }
         }
-        SetErrorMessageBox(true, SetErrorMessageBody(logicError));
+        if(logicError != LogicErrorType.NoError) {
+            SetErrorMessageBox(true, SetErrorMessageBody(logicError));
+        }
     }
 
     /// <summary>

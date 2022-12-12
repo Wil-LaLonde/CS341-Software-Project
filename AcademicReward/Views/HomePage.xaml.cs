@@ -5,6 +5,7 @@ using AcademicReward.ModelClass;
 using AcademicReward.Logic;
 using AcademicReward.Resources;
 using AcademicReward.Database;
+using System.Collections.ObjectModel;
 
 /// <summary>
 /// Primary Author: Xee Lo
@@ -16,13 +17,17 @@ public partial class HomePage : ContentPage {
     private ILogic taskLogic;
     bool isAdmin;
     IDatabase lookUpTask;
+    ObservableCollection<Task> tasksToShow;
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
+        lookUpTask = new TaskDatabase();
         isAdmin = MauiProgram.Profile.IsAdmin;
 		UsernameDisplay(isAdmin);
+        tasksToShow = new ObservableCollection<Task>();
         PrepareTaskList();
-        lookUpTask = new TaskDatabase();
+        RefreshTaskList();
+        
     }
 
     /// <summary>
@@ -62,25 +67,39 @@ public partial class HomePage : ContentPage {
         }
         else {
             if (MauiProgram.Profile.IsAdmin){
+               // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
                     //look up individual tasks and set the properties if needed 
-                    lookUpTask.LookupItem(task);
-                    //if the task is not submitted for approval then don't show task in the listview for ADMIN
-                    if (!task.IsSubmitted){
-                        TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
+                    //logicError = (LogicErrorType)lookUpTask.LookupItem(task);
+                   // if(LogicErrorType.LookupAllNotificationsDBError == logicError) {
+                   //     await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
+                   // }
+                   // else {
+                        //if the task is not submitted for approval then don't show task in the listview for ADMIN
+                        if (task.IsSubmitted) {
+                        tasksToShow.Add(task);
+                        TaskLV.ItemsSource = tasksToShow;
                     }
+                   // }
+                   
                 }
             }else{
+              //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList)
                 {
                     //look up individual tasks and set the properties if needed 
-                    lookUpTask.LookupItem(task);
-                    //if the task is not submitted for review then don't show task in the listview for MEMBER
-                    //do we want this here? or do we want to keep it in the list view...
-                    if (!task.IsChecked)
-                    {
-                        TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
+                    logicError = (LogicErrorType)lookUpTask.LookupItem(task);
+                    if (LogicErrorType.LookupAllNotificationsDBError == logicError) {
+                        await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
                     }
+                    else {
+                        if (!task.IsChecked) {
+                            tasksToShow.Add(task);
+                            TaskLV.ItemsSource = tasksToShow;
+                        }
+                    }
+                    //if the task is not submitted for review then don't show task in the listview for MEMBER
+                    //do we want this here? or do we want to keep it in the list view... 
                 }
             }
         }
@@ -97,5 +116,9 @@ public partial class HomePage : ContentPage {
 		Task selectedTask = (Task)e.SelectedItem;
          TaskPopUp taskPopUp = new TaskPopUp(selectedTask);
          this.ShowPopup(taskPopUp);
+    }
+
+    private void RefreshTaskList() {
+        TaskLV.ItemsSource = tasksToShow;
     }
 }
