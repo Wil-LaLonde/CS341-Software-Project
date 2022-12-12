@@ -46,8 +46,13 @@ namespace AcademicReward.Logic
             GroupProfileRelationship.addProfileToGroup(profile, group);
 
             // Create history entry for a new member in group
-            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryAddMemberToGroupGroupTitle, string.Format(DataConstants.HistoryAddMemberToGroupGroupDescription, profile.Username, group.GroupName)));
-
+            try
+            {
+                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryAddMemberToGroupGroupTitle, string.Format(DataConstants.HistoryAddMemberToGroupGroupDescription, profile.Username, group.GroupName)));
+            } catch
+            {
+                return LogicErrorType.HistoryAddError;
+            }
             return LogicErrorType.NoError;
         }
 

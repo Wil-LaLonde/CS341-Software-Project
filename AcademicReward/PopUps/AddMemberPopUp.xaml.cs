@@ -1,6 +1,7 @@
 using AcademicReward.Database;
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
+using AcademicReward.Resources;
 using AcademicReward.Views;
 using CommunityToolkit.Maui.Views;
 using System.Collections.ObjectModel;
@@ -31,6 +32,14 @@ public partial class AddMemberPopUp : Popup {
 		// Grab the text from the entry box
 		String memberName = MemberNameEntry.Text;
 
+		// Error checking for empty string
+		if (memberName == null || memberName == "")
+		{
+			// Set error label text
+			ErrorLabel.Text = "Please enter a member name";
+			return;
+		}
+
 		// Add member logic
 		var addMemberLogic = new AddMemberLogic();
 
@@ -38,9 +47,18 @@ public partial class AddMemberPopUp : Popup {
 		object[] obj = new object[] { memberName, group };
 
 		var error = addMemberLogic.AddItemWithArgs(obj);
+		if (error != LogicErrorType.NoError)
+		{
+            // Set error label text
+            ErrorLabel.Text = "Username not found";
+            return;
+        }
 
         // Update the listview
         memberList = GroupProfileRelationship.getProfilesInGroup(group);
+        
+		ErrorLabel.Text = "";
+        
 		Close(memberList);
 	}
 }

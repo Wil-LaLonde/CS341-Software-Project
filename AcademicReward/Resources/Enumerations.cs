@@ -65,6 +65,10 @@
         UnsuccessfulDBAdd,
         //Shop END
 
+        //History START (history calls are often made from LogicClasses
+        HistoryAddError,
+        //History END
+
         //General START
         NoError
         //General END
