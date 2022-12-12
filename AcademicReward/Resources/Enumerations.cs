@@ -97,6 +97,7 @@
 
         //Task START
         AddTaskDBError,
+        LookupTaskDBError,
         LookupAllTasksDBError,
         UpdateTaskDbError,
         //Task END

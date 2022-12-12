@@ -4,6 +4,7 @@ using AcademicReward.PopUps;
 using AcademicReward.ModelClass;
 using AcademicReward.Logic;
 using AcademicReward.Resources;
+using AcademicReward.Database;
 
 /// <summary>
 /// Primary Author: Xee Lo
@@ -14,12 +15,14 @@ public partial class HomePage : ContentPage {
 
     private ILogic taskLogic;
     bool isAdmin;
+    IDatabase lookUpTask;
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
 		UsernameDisplay(isAdmin);
         PrepareTaskList();
+        lookUpTask = new TaskDatabase();
     }
 
     /// <summary>
@@ -60,6 +63,8 @@ public partial class HomePage : ContentPage {
         else {
             if (MauiProgram.Profile.IsAdmin){
                 foreach (var task in MauiProgram.Profile.TaskList){
+                    //look up individual tasks and set the properties if needed 
+                    lookUpTask.LookupItem(task);
                     //if the task is not submitted for approval then don't show task in the listview for ADMIN
                     if (!task.IsSubmitted){
                         TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
@@ -68,6 +73,8 @@ public partial class HomePage : ContentPage {
             }else{
                 foreach (var task in MauiProgram.Profile.TaskList)
                 {
+                    //look up individual tasks and set the properties if needed 
+                    lookUpTask.LookupItem(task);
                     //if the task is not submitted for review then don't show task in the listview for MEMBER
                     //do we want this here? or do we want to keep it in the list view...
                     if (!task.IsChecked)

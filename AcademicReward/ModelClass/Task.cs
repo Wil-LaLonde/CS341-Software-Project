@@ -46,6 +46,7 @@ namespace AcademicReward.ModelClass {
         /// <param name="groupID">int groupID</param>
         public Task(string title, string description, int points, int groupID) {
             IsChecked = false;
+            IsSubmitted = false;
             Title = title;
             Description = description;
             Points = points;

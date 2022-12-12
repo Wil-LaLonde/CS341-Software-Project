@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
-    /// Primary Author: Wil LaLonde
+    /// Primary Author: Wil LaLonde, Xee Lo
     /// Secondary Author: None
     /// Reviewer: 
     /// </summary>
@@ -30,7 +30,7 @@ namespace AcademicReward.Database {
                 con.Open();
                 //SQL to add task to table, also adding task to profiletask table
                 var sql = "INSERT INTO tasks (tasktitle, taskdescription, points, groupid, ischecked)" +
-                          $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsChecked}); " +
+                          $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsChecked}, {taskToAdd.IsSubmitted}); " +
                           "INSERT INTO profiletask " +
                           "SELECT profileid, MAX(taskid), ischecked, ischecked " +
                           "FROM profilegroup, tasks " +
@@ -55,17 +55,20 @@ namespace AcademicReward.Database {
             DatabaseErrorType dbError;
             ModelClass.Task taskToUpdate = task as ModelClass.Task;
 
-            if (taskToUpdate.IsChecked){
+            if (taskToUpdate.IsChecked) {
                 //update the bool
-                try{
+                try {
                     //Opening the connection
                     using var con = new NpgsqlConnection(InitializeConnectionString());
                     con.Open();
-                    //SQL to update the task that is associated to a profile in profiletask table
-                    var sql = "UPDATE profiletask, tasks" + //might cause errors for this one--------------------------
-                              "SET isapproved = true, ischecked = true" +
+                    //SQL to update the task that is associated to a profile in profiletask table ADMIN VIEW
+                    var sql = "UPDATE profiletask" +
+                              $"SET isapproved = '{taskToUpdate.IsChecked}'" +
                               $"WHERE profiletask.taskid = {taskToUpdate.TaskID} +" +
-                              $"AND profiletask.profileid = {MauiProgram.Profile.ProfileID};";
+                              $"AND profiletask.profileid = {MauiProgram.Profile.ProfileID};";// +
+                    /*"UPDATE tasks" +
+                    $"SET ischecked = '{taskToUpdate.IsChecked}'" +
+                    $"AND task.profileid = {MauiProgram.Profile.ProfileID};";*/
 
                     //Executing the query.
                     using var cmd = new NpgsqlCommand(sql, con);
@@ -74,20 +77,20 @@ namespace AcademicReward.Database {
                     con.Close();
                     dbError = DatabaseErrorType.NoError;
                 }
-                catch (NpgsqlException ex){
+                catch (NpgsqlException ex) {
                     //Something went wrong updating the task
                     Console.WriteLine("Unexpected error while adding task: {0}", ex);
                     dbError = DatabaseErrorType.UpdateTaskDbError;
                 }
             }
-            else{
+            else {
                 try {
                     //Opening the connection
                     using var con = new NpgsqlConnection(InitializeConnectionString());
                     con.Open();
-                    //SQL to update the task that is associated to a profile in profiletask table
+                    //SQL to update the task that is associated to a profile in profiletask table MEMBER VIEW
                     var sql = "UPDATE profiletask" +
-                              "SET issubmitted = true, " +
+                              $"SET issubmitted = '{taskToUpdate.IsSubmitted}'" +
                               $"WHERE taskid = {taskToUpdate.TaskID} +" +
                               $"AND profileid = {MauiProgram.Profile.ProfileID};";
                     //Executing the query.
@@ -97,7 +100,7 @@ namespace AcademicReward.Database {
                     con.Close();
                     dbError = DatabaseErrorType.NoError;
                 }
-                catch (NpgsqlException ex){
+                catch (NpgsqlException ex) {
                     //Something went wrong updating the task
                     Console.WriteLine("Unexpected error while adding task: {0}", ex);
                     dbError = DatabaseErrorType.UpdateTaskDbError;
@@ -113,7 +116,36 @@ namespace AcademicReward.Database {
 
         //Currently not needed
         public DatabaseErrorType LookupItem(object task) {
-            return DatabaseErrorType.NoError;
+            DatabaseErrorType dbError;
+            ModelClass.Task taskToFind = task as ModelClass.Task;
+            try {
+                //Opening the connection
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                //SQL to lookup tasks for a group
+                var sql = "SELECT issubmitted, isapproved" +
+                          "FROM profiletask " +
+                          $"WHERE taskid = {taskToFind.TaskID} AND profileid = {MauiProgram.Profile.ProfileID};";
+                //Executing the query.
+                using var cmd = new NpgsqlCommand(sql, con);
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                //Creating tasks objects
+                //[0] -> issubmitted | [1] -> isapproved
+                while (reader.Read()) {
+                    //set the task here
+                    taskToFind.IsSubmitted = (bool)reader[0];
+                    taskToFind.IsChecked = (bool)reader[1];
+                }
+                //Closing the connection.
+                con.Close();
+                dbError = DatabaseErrorType.NoError;
+            }
+            catch (NpgsqlException ex) {
+                //Something went wrong looking up the task
+                Console.WriteLine("Unexpected error while looking up task: {0}", ex);
+                dbError = DatabaseErrorType.LookupTaskDBError;
+            }
+            return dbError;
         }
 
         /// <summary>
@@ -123,7 +155,7 @@ namespace AcademicReward.Database {
         /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
-            Profile profileTasks = profile as Profile;
+            ModelClass.Profile profileTasks = profile as ModelClass.Profile;
             try {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -136,9 +168,9 @@ namespace AcademicReward.Database {
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
                 //Creating tasks objects
-                //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [5] -> ischecked
+                //[0] -> taskid | [1] -> tasktitle | [2] -> taskdescription | [3] -> points | [4] -> groupid | [5] -> ischecked | [6] -> issubmitted
                 while (reader.Read()) {
-                    ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[5]);
+                    ModelClass.Task task = new ModelClass.Task((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], (bool)reader[5], (bool)reader[6]);
                     profileTasks.AddTaskToProfile(task);
                 }
                 //Closing the connection.

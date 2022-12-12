@@ -91,6 +91,7 @@
         public const string AddTaskUnknownMessage = "An unknown error occurred during task creation.";
         public const string LookupTaskDBErrorTitle = "Error Loading Tasks";
         public const string LookupTaskDBErrorMessage = "There was an unexpected error loading your tasks.";
+        public const string UpdatingTask = "There was an unexpected error updating your task.";
         //Task END
 
         //History START
