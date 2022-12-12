@@ -17,6 +17,7 @@
                             FontAttributes="Bold"
                             TextDecorations="Underline"/>
                         <Label
+                            x:Name="AddGroupLbl"
                             Text="Press the plus button to create a new group"
                             FontFamily="SecondaryFont"
                             FontSize="20"
@@ -24,6 +25,7 @@
                             TextColor="{StaticResource Gray600}"/>
                     </StackLayout>
                     <Button
+                        x:Name="AddGroupBtn"
                         Text="+"
                         Clicked="AddGroup"
                         FontSize="40"
