@@ -106,5 +106,10 @@ namespace AcademicReward.Logic
             }
             throw new NotImplementedException();
         }
+
+        public LogicErrorType AddItemWithArgs(object[] obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

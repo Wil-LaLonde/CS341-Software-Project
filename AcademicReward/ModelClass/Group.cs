@@ -10,11 +10,11 @@ namespace AcademicReward.ModelClass {
     public class Group : ObservableObject {
         private ObservableCollection<Profile> groupMemberList;
 
-        public int GroupID { get; private set; }
+        public int GroupID { get; set; }
         public string GroupName { get; set; }
         public string GroupDescription { get; set; }
         public Profile GroupAdmin { get; private set; }
-        public int AdminProfileID { get; private set; }
+        public int AdminProfileID { get; set; }
         public ObservableCollection<Profile> GroupMemberList { get { return groupMemberList; } }
 
         /// <summary>

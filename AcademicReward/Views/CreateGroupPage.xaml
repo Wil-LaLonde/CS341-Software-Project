@@ -24,6 +24,7 @@
                 </StackLayout>
             </Frame>
             <StackLayout Margin="0, 20">
+                <Label x:Name="ErrorLabel" Text="" FontSize="20" FontAttributes="Bold" TextColor="Red" VerticalOptions="End" Margin="0, 0, 0, 10"/>
                 <Label
                     Text="Group Name:"
                     FontSize="26"
@@ -31,7 +32,7 @@
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry FontSize="22" Placeholder="Eg. Group 1" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="GroupNameEntry" FontSize="22" Placeholder="Eg. Group 1" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
                 <Label
                     Text="Description:"
@@ -40,13 +41,14 @@
                     FontAttributes="Bold"
                     VerticalOptions="Center"/>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry FontSize="22" Placeholder="Eg. This is a sample group" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="GroupDescriptionEntry" FontSize="22" Placeholder="Eg. This is a sample group" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
                 </Frame>
                 <Button 
                     Text="Create Group" 
                     FontSize="25"
                     FontFamily="BoldFont"
-                    Margin="100, 45"/>
+                    Margin="100, 45"
+                    Clicked="CreateGroupButtonClicked"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

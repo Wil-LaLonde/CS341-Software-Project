@@ -97,6 +97,10 @@
         public const string HistoryEditPasswordTitle = "Password Updated";
         public const string HistoryEditPasswordDescription = "Your password has been updated on {0}";
         public const string HistoryCreateNotificationTitle = "Notification Created";
+        public const string HistoryCreateGroupTitle = "New Group Created";
+        public const string HistoryCreateGroupDescription = "You created group: {0}";
+        public const string HistoryAddMemberToGroupGroupTitle = "Member added to group";
+        public const string HistoryAddMemberToGroupGroupDescription = "You added: {0} to group: {1}";
         public const string HistoryCreateNotificationDescription = "You created {0} notification for {1}";
         public const string HistoryCreateTaskTitle = "Task Created";
         public const string HistoryCreateTaskDescription = "You created {0} task for {1}";
