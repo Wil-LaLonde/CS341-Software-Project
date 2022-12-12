@@ -20,6 +20,7 @@ public partial class TaskPopUp : Popup {
     IDatabase lookUpTask;
     IDatabase history;
     ILogic updateTask;
+    ILogic updateProfile;
     public TaskPopUp() {
 		InitializeComponent();
     }
@@ -36,6 +37,7 @@ public partial class TaskPopUp : Popup {
         history = new HistoryDatabase();
         updateTask = new TaskLogic();
         lookUpTask = new TaskDatabase();
+        updateProfile = new ProfileLogic();
     }
 
     /// <summary>
@@ -71,22 +73,23 @@ public partial class TaskPopUp : Popup {
         }
         else {
             if (SelectedTask.IsChecked) { //if the task is checked off 
-                //NEED TO UPDATE PROFILE DATABASE VALUES 
                 //add it to task to history
                 HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, SelectedTask.Title, $"{SelectedTask.Description}\nPoints: {SelectedTask.Points}\nGroupID: {SelectedTask.GroupID}");
-                logicError = (LogicErrorType)history.AddItem(taskHistory); //history doesnt have a logic layer so may need to changed
-                if (LogicErrorType.NoError == logicError) {
-                    MauiProgram.Profile.AddXPToMember(SelectedTask.Points); //adds exp to memeber
-                    MauiProgram.Profile.AddPointsToMember(SelectedTask.Points); //adds points to member
+                history.AddItem(taskHistory); //history doesnt have a logic layer so may need to changed
+          
+                MauiProgram.Profile.AddXPToMember(SelectedTask.Points); //adds exp to memeber
+                MauiProgram.Profile.AddPointsToMember(SelectedTask.Points); //adds points to member
+                logicError = updateProfile.UpdateItem(MauiProgram.Profile);
+                if (logicError == LogicErrorType.NoError) {
                     MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask);    //removes the task once it has been reviewed and approved 
-                                                                                //send notification to memeber that they have been awarded 
-                                                                                //  Notification completedTaskNotification = new Notification("Congratulations, you have completed a task", $"Task: {SelectedTask.Title}", SelectedTask.GroupID);
-                                                                                // MauiProgram.Profile.AddNotificationToProfile(completedTaskNotification);
                     Close(SelectedTask); //close the task
                 }
                 else {
-                    logicError = (LogicErrorType)DatabaseErrorType.AddHistoryDBError; 
+                    logicError = LogicErrorType.UpdateProfileDBError;
                 }
+                                    //send notification to memeber that they have been awarded 
+                                    //  Notification completedTaskNotification = new Notification("Congratulations, you have completed a task", $"Task: {SelectedTask.Title}", SelectedTask.GroupID);
+                                    // MauiProgram.Profile.AddNotificationToProfile(completedTaskNotification)                 
             }
             else { //This is for when MEMBERS are submitting the task for the first time --- therefore it has not been checked 
 

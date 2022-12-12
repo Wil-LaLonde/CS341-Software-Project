@@ -66,6 +66,10 @@
         UnsuccessfulDBAdd,
         //Shop END
 
+        //Profile START
+        UpdateProfileDBError,
+        //Profile END
+
         //General START
         NoError
         //General END
@@ -109,6 +113,10 @@
         UpdateHistoryDBError,
         DeleteHistoryDBError,
         // History END
+
+        //Profile START
+        UpdateProfileDBError,
+        //Profile END
 
         //General START
         NoError
