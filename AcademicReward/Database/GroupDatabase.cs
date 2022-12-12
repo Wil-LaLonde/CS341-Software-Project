@@ -13,14 +13,14 @@ namespace AcademicReward.Database
     {
 
         /// <summary>
-        /// TaskDatabase constructor
+        /// GroupDatabase constructor
         /// </summary>
         public GroupDatabase() { }
 
         /// <summary>
-        /// Method used to add a new task (database)
+        /// Method used to add a new group (database)
         /// </summary>
-        /// <param name="task">object task</param>
+        /// <param name="group">object group</param>
         /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType AddItem(object group)
         {
@@ -68,7 +68,11 @@ namespace AcademicReward.Database
             return dbError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method used to update a group (database)
+        /// </summary>
+        /// <param name="group">object group</param>
+        /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType UpdateItem(object group)
         {
             DatabaseErrorType dbError;
@@ -110,21 +114,19 @@ namespace AcademicReward.Database
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Method used to look up all tasks for a profile
-        /// </summary>
-        /// <param name="profile">object profile</param>
-        /// <returns>DatabaseErrorType</returns>
+        //Currently not needed
         public DatabaseErrorType LookupFullItem(object profile)
         {
             throw new NotImplementedException();
         }
-
+        
+        //Currently not needed
         public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
         {
             throw new NotImplementedException();
         }
 
+        //Currently not needed
         public object FindById(int id)
         {
             throw new NotImplementedException();
