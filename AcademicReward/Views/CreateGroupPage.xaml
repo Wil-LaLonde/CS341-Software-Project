@@ -24,6 +24,7 @@
                 </StackLayout>
             </Frame>
             <StackLayout Margin="0, 20">
+                <Label x:Name="ErrorLabel" Text="" FontSize="20" FontAttributes="Bold" TextColor="Red" VerticalOptions="End" Margin="0, 0, 0, 10"/>
                 <Label
                     Text="Group Name:"
                     FontSize="26"

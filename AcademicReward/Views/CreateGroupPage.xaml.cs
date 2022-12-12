@@ -25,6 +25,22 @@ public partial class CreateGroupPage : ContentPage
         var groupName = GroupNameEntry.Text;
         var groupDescription = GroupDescriptionEntry.Text;
 
+        // Error checking for empty name
+        if (groupName == null || groupName == "")
+        {
+            // Set error label text
+            ErrorLabel.Text = "Please enter a group name";
+            return;
+        }
+
+        // Error checking for empty description
+        if (groupDescription == null || groupDescription == "")
+        {
+            // Set error label text
+            ErrorLabel.Text = "Please enter a group description";
+            return;
+        }
+
         // Create group object from information supplied by admin user
         var group = new Group
         (
