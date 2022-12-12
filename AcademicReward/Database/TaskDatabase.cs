@@ -2,7 +2,6 @@
 using AcademicReward.ModelClass;
 using Npgsql;
 using System.Collections.ObjectModel;
-using static Android.Provider.ContactsContract;
 
 namespace AcademicReward.Database {
     /// <summary>

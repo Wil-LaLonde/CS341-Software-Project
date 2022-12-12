@@ -74,11 +74,10 @@ public partial class HomePage : ContentPage {
                // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
                    
-                        if (task.IsSubmitted && (!task.IsChecked)) {
-                        tasksToShow.Add(task);
-                        TaskLV.ItemsSource = tasksToShow;
-                    }
-                  
+                     if (task.IsSubmitted && (!task.IsChecked)) {
+                     tasksToShow.Add(task);
+                     TaskLV.ItemsSource = tasksToShow;
+                     }    
                 }
             }else{
               //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
@@ -101,8 +100,7 @@ public partial class HomePage : ContentPage {
                             MauiProgram.Profile.AddXPToMember(task.Points); //adds exp to memeber
                             MauiProgram.Profile.AddPointsToMember(task.Points); //adds points to member
                             logicError = updateProfile.UpdateItem(MauiProgram.Profile);
-                            if (logicError == LogicErrorType.NoError) {
-                               // MauiProgram.Profile.RemoveTaskFromProfile(task);
+                            if (logicError == LogicErrorType.NoError) { 
                                 //removes the task once it has been reviewed and approved 
                             taskLogic.DeleteItem(task);
                             }
