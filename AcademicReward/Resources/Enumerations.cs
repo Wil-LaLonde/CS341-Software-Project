@@ -73,6 +73,10 @@
         //History END
 
         //Group START
+        EmptyGroupName,
+        EmptyGroupDescription,
+        InvalidGroupNameLength,
+        InvalidGroupDescriptionLength,
         GroupCreateError,
         GroupAlreadyHasAdmin,
         //Group END

@@ -110,6 +110,15 @@
         public const string HistoryCreateTaskDescription = "You created {0} task for {1}";
         //History END
 
+        //Create Group START
+        public const string EmptyGroupNameMessage = "Please fill in the group name entry box.";
+        public const string EmptyGroupDescriptionMessage = "Please fill in the group description entry box.";
+        public const string InvalidGroupNameLengthMessage = "Group name must be between 1-50 characters.";
+        public const string InvalidGroupDescriptionMessage = "Group description must be between 1-250 characters.";
+        public const string CreateGroupDBErrorMessage = "An unexpected database error occurred while creating your group.";
+        public const string CreateGroupUnknownErrorMessage = "An unknown error occurred while creating your group.";
+        //Create Group END
+
         //Display Alert START
         public const string OK = "OK";
         public const string Cancel = "Cancel";
