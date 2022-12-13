@@ -32,10 +32,9 @@ public partial class HomePage : ContentPage {
         history = new HistoryDatabase();
         updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
-		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
-        
+        UsernameDisplay(isAdmin);
     }
 
     /// <summary>

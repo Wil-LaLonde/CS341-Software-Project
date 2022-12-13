@@ -23,22 +23,23 @@ namespace AcademicReward.Database {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //Select SQL query for getting all profiles
-                var sql = "SELECT * " +
-                    "FROM profiles " +
-                    "WHERE profileid IN (SELECT profileid" +
-                    "                    FROM profilegroup" +
-                    "                    WHERE groupid = " + $"{groupId}" + ");";
+                var sql = "SELECT username, xp, level " +
+                          "FROM profiles " +
+                          "WHERE profileid IN (SELECT profileid " +
+                                              "FROM profilegroup, groups " +
+                                             $"WHERE groups.groupid = {groupId} " +
+                                              "AND profileid != groups.adminprofileid " +
+                                              "AND groups.groupid = profilegroup.groupid);";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
                 //Reading the data
                 ObservableCollection<Profile> profiles = new ObservableCollection<Profile>();
 
-                while (reader.Read()) {
-                    profiles.Add(new Profile(
-                        reader.GetString(1), // Username
-                        reader.GetString(7) // Password
-                    ));
+                while (reader.Read())
+                {
+                    //[0] -> username | [1] -> xp | [2] -> level
+                    profiles.Add(new Profile(reader[0] as string, (int)reader[1], (int)reader[2]));
                 }
 
                 //Closing the connection.
