@@ -19,11 +19,14 @@ public partial class HomePage : ContentPage {
     IDatabase lookUpTask;
     IDatabase history;
     ILogic updateProfile;
+    IDatabase lookUpMemberId;
     ObservableCollection<Task> tasksToShow;
+    public ModelClass.Task SelectedTask1 { get; set; }
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
         lookUpTask = new TaskDatabase();
+        lookUpMemberId = new TaskDatabase();
         history = new HistoryDatabase();
         updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
@@ -48,6 +51,7 @@ public partial class HomePage : ContentPage {
             ProgressBar.IsVisible = false;
             ExpLabel.IsVisible = false;
             Exp.IsVisible = false;
+           // checkBox.isVisible = false;
 		}
 		else {
             //Need to map over all member values
@@ -77,7 +81,7 @@ public partial class HomePage : ContentPage {
                      if (task.IsSubmitted && (!task.IsChecked)) {
                      tasksToShow.Add(task);
                      TaskLV.ItemsSource = tasksToShow;
-                     }    
+                     }  
                 }
             }else{
               //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
@@ -121,13 +125,39 @@ public partial class HomePage : ContentPage {
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
-    private void SelectedTask(object sender, SelectedItemChangedEventArgs e) {
+    private async void SelectedTask(object sender, SelectedItemChangedEventArgs e) {
 		Task selectedTask = (Task)e.SelectedItem;
+
          TaskPopUp taskPopUp = new TaskPopUp(selectedTask);
-         this.ShowPopup(taskPopUp);
+
+        ModelClass.Task task = await this.ShowPopupAsync(taskPopUp) as ModelClass.Task;
+        //this.ShowPopup(taskPopUp);
+
+        if (task != null)
+        {
+            if (MauiProgram.Profile.IsAdmin && task.IsChecked)
+            {
+                RemoveTask(task);
+                int memberID = (int)lookUpMemberId.FindById(task.TaskID);
+                HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, task.Title, $"MemberID: {memberID}\nGroupID: {task.GroupID}");
+                history.AddItem(taskHistory);
+                await DisplayAlert("Approved Task", "task was succesfully approved", DataConstants.OK);
+            }
+            else
+            {
+                RemoveTask(selectedTask);
+                tasksToShow.Add(task);
+                //selectedTask.IsSubmitted = task.IsSubmitted;
+                RefreshTaskList();
+            }
+        }
     }
 
     private void RefreshTaskList() {
         TaskLV.ItemsSource = tasksToShow;
+    }
+
+    public void RemoveTask(Task taskToRemove){
+        tasksToShow.Remove(taskToRemove);
     }
 }
