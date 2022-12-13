@@ -12,13 +12,30 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class ShopPage : ContentPage {
 
+    bool isAdmin;
+
     private ShopLogic ShopLogic;
 	public ShopPage() {
 		InitializeComponent();
+        isAdmin = MauiProgram.Profile.IsAdmin;
         ShopLogic = new ShopLogic();
+        SetVisibility();
         getShopItems();
         
-	}
+    }
+    private void SetVisibility()
+    {
+        if ( isAdmin)
+        {
+            AddButton.IsVisible = true;
+            CreateText.IsVisible = true;
+        }
+        else
+        {
+            AddButton.IsVisible = false;
+            CreateText.IsVisible = false;
+        }
+    }
 
 	private void Button_Clicked(object sender, EventArgs e) {
 		this.ShowPopup(new AddShopItemPage(ShopLogic));
@@ -34,6 +51,7 @@ public partial class ShopPage : ContentPage {
             this.ShowPopup(new ViewShopItemPage(selected, ShopLogic, this));
             getShopItems();
         }
+        
     }
 
     public void openEditPage(ShopItem toBeEditted)
@@ -46,5 +64,10 @@ public partial class ShopPage : ContentPage {
     {
         ShopLogic.LookupItem(null);
         ShopItemList.ItemsSource = ShopLogic.ItemList;
+    }
+
+    public void displayError(String title, String body, String cancel)
+    {
+        DisplayAlert(title, body, cancel);
     }
 }

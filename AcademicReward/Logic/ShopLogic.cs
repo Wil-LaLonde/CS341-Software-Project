@@ -20,12 +20,33 @@ namespace AcademicReward.Logic
  */
     public class ShopLogic : ILogic
     {
-        IDatabase ShopData;
+        ShopItemDatabase ShopData;
         public ObservableCollection<ShopItem> ItemList;
         public ShopLogic()
         {
             ShopData = new ShopItemDatabase(this);
             ItemList = new ObservableCollection<ShopItem>();
+        }
+
+        public LogicErrorType BuyItem(ShopItem item)
+        {
+            Profile currentMember = MauiProgram.Profile;
+            if (currentMember.Level < item.LevelRequirement)
+            {
+                return LogicErrorType.NeedHigherLevel;
+            }
+            if (currentMember.Points < item.PointCost)
+            {
+                return LogicErrorType.NotEnoughDoubloons;
+            }
+            if ( ShopData.BuyItem(item) != DatabaseErrorType.NoError)
+            {
+                return LogicErrorType.UnsuccessfulDBAdd;
+            }
+
+            currentMember.Points -= item.PointCost;
+
+            return LogicErrorType.NoError;
         }
         public LogicErrorType AddItem(object obj)
         {

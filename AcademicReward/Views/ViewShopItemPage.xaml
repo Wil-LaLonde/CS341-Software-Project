@@ -56,6 +56,7 @@
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" Orientation="Horizontal">
             <Button 
+                x:Name="DeleteButton"
                 Text="Delete" 
                 Clicked="DeleteClicked"
                 FontSize="25"
@@ -63,8 +64,16 @@
                 BorderColor="{StaticResource BlueButton}"
                 Margin="10, 0"/>
             <Button 
+                x:Name="EditButton"
                 Text="Edit" 
                 Clicked="EditClicked"
+                FontSize="25"
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}"/>
+            <Button 
+                x:Name="BuyButton"
+                Text="Buy" 
+                Clicked="BuyClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
                 BorderColor="{StaticResource BlueButton}"/>
