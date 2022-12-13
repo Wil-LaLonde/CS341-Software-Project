@@ -8,6 +8,7 @@ using AcademicReward.PopUps;
 namespace AcademicReward.Views;
 
 /// <summary>
+/// NotificationPage shows all notifications for the signed in member
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
 /// Reviewer: Maximilian Patterson

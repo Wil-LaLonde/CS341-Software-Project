@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
+    /// LoginDatabase is used to sign users in, create new profiles, and update profiles in the database
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson
@@ -84,7 +85,7 @@ namespace AcademicReward.Database {
 
         //Currently not needed
         public DatabaseErrorType DeleteItem(object profile) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         /// <summary>
@@ -166,14 +167,18 @@ namespace AcademicReward.Database {
             }
             return dbError;
         }
-
-        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
-        {
-            throw new NotImplementedException();
+        
+        //Currently not needed
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NotImplemented;
         }
 
-        public Object FindById(int id)
-        {
+        /// <summary>
+        /// Gathering profile information based off the profileid
+        /// </summary>
+        /// <param name="id">int id</param>
+        /// <returns>object profile</returns>
+        public Object FindById(int id) {
             try {
                 
                 using var con = new NpgsqlConnection(InitializeConnectionString());

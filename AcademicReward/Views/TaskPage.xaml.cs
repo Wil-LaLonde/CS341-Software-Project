@@ -8,6 +8,7 @@ using CommunityToolkit.Maui.Views;
 namespace AcademicReward.Views;
 
 /// <summary>
+/// TaskPage shows all tasks and notifications for an admin
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
 /// Reviewer: Xee Lo
@@ -16,6 +17,9 @@ public partial class TaskPage : ContentPage {
     private ILogic notificationLogic;
     private IDatabase historyDB;
 
+    /// <summary>
+    /// TaskPage constructor
+    /// </summary>
 	public TaskPage() {
         InitializeComponent();
         notificationLogic = new NotificationLogic();

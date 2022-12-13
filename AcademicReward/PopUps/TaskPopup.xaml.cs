@@ -1,28 +1,34 @@
 using AcademicReward.Database;
-using AcademicReward.ModelClass;
 using AcademicReward.Logic;
 using CommunityToolkit.Maui.Views;
 using AcademicReward.Resources;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// TaskPopUp is the popup when a user clicks on a task on the Home page
 /// Primary Author: Xee Lo
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
 /// </summary>
 public partial class TaskPopUp : Popup {
-
     public ModelClass.Task SelectedTask { get; }
     bool isAdmin;
     IDatabase lookUpTask;
     ILogic updateTask;
+
+    /// <summary>
+    /// TaskPopUp constructor
+    /// </summary>
     public TaskPopUp() {
 		InitializeComponent();
     }
 
+    /// <summary>
+    /// TaskPopUp constructor
+    /// </summary>
+    /// <param name="selectedTask">ModelClass.Task selectedTask</param>
 	public TaskPopUp(ModelClass.Task selectedTask) {
         InitializeComponent();
         SelectedTask = selectedTask;
@@ -35,7 +41,6 @@ public partial class TaskPopUp : Popup {
        
         updateTask = new TaskLogic();
         lookUpTask = new TaskDatabase();
-        
     }
 
     /// <summary>
