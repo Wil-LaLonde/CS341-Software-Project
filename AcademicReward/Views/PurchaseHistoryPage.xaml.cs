@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 namespace AcademicReward.Views;
 
 /// <summary>
+/// PurchaseHistoryPage shows all purchased items for a profile
 /// Primary Author: Maximilian Patterson
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
