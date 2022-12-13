@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.ModelClass {
     /// <summary>
+    /// Model class used to represent a profile
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson
