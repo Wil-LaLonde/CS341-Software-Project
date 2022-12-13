@@ -9,6 +9,11 @@ namespace AcademicReward.ModelClass {
     /// Reviewer: Maximilian Patterson
     /// </summary>
     public class Group : ObservableObject {
+        public const int MinGroupNameLength = 0;
+        public const int MaxGroupNameLength = 50;
+        public const int MinGroupDescriptionLength = 0;
+        public const int MaxGroupDescriptionLength = 250;
+
         private ObservableCollection<Profile> groupMemberList;
 
         public int GroupID { get; set; }

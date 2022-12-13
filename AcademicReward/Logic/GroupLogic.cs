@@ -24,25 +24,22 @@ namespace AcademicReward.Logic {
         /// </summary>
         /// <param name="obj">object obj</param>
         /// <returns>LogicErrorType logicError</returns>
-        public LogicErrorType AddItem(object obj) {
-            var group = obj as Group;
-
-            // Add to database
-            var dbError = GroupDB.AddItem(obj);
-            if (dbError != DatabaseErrorType.NoError) {
-                Console.WriteLine("Error adding group to database");
-                return LogicErrorType.GroupCreateError;
+        public LogicErrorType AddItem(object group) {
+            LogicErrorType logicError;
+            Group groupToAdd = group as Group;
+            //Checking user input
+            logicError = AddGroupCheck(groupToAdd);
+            if(LogicErrorType.NoError == logicError) {
+                // Add to database
+                DatabaseErrorType dbError = GroupDB.AddItem(groupToAdd);
+                if(DatabaseErrorType.NoError == dbError) {
+                    IDatabase historyDB = new HistoryDatabase();
+                    historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateGroupTitle, string.Format(DataConstants.HistoryCreateGroupDescription, groupToAdd.GroupName)));
+                } else {
+                    logicError = LogicErrorType.GroupCreateError;
+                }
             }
-
-            // Create history entry for a new group
-            var historyDB = new HistoryDatabase();
-            var error = historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateGroupTitle, string.Format(DataConstants.HistoryCreateGroupDescription, group.GroupName)));
-            if (error != DatabaseErrorType.NoError) {
-                Console.WriteLine("Error adding history item");
-                return LogicErrorType.HistoryAddError;
-            }
-
-            return LogicErrorType.NoError;
+            return logicError;
         }
 
         /// <summary>
@@ -69,6 +66,47 @@ namespace AcademicReward.Logic {
         //Currently not needed
         public LogicErrorType AddItemWithArgs(object[] obj) {
             return LogicErrorType.NotImplemented;
+        }
+
+        /// <summary>
+        /// Helper method used to check a group before adding it to the database
+        /// </summary>
+        /// <param name="group">Group group</param>
+        /// <returns>LogicErrorType logicError</returns>
+        private LogicErrorType AddGroupCheck(Group group) {
+            LogicErrorType logicError;
+            if(string.IsNullOrEmpty(group.GroupName)) {
+                logicError = LogicErrorType.EmptyGroupName;
+            } else if(string.IsNullOrEmpty(group.GroupDescription)) {
+                logicError = LogicErrorType.EmptyGroupDescription;
+            } else if(CheckGroupNameLength(group.GroupName)) {
+                logicError = LogicErrorType.InvalidGroupNameLength;
+            } else if(CheckGroupDescriptionLength(group.GroupDescription)) {
+                logicError = LogicErrorType.InvalidGroupDescriptionLength;
+            } else {
+                logicError = LogicErrorType.NoError;
+            }
+            return logicError;
+        }
+
+        /// <summary>
+        /// Helper method used to check the group name length
+        /// </summary>
+        /// <param name="groupName">string groupName</param>
+        /// <returns>true/false</returns>
+        private bool CheckGroupNameLength(string groupName) {
+            int groupNameLength = groupName.Length;
+            return groupNameLength < Group.MinGroupNameLength || groupNameLength > Group.MaxGroupNameLength;
+        }
+
+        /// <summary>
+        /// Helper method used to check the group description length
+        /// </summary>
+        /// <param name="groupDescription">string groupDescription</param>
+        /// <returns>true/false</returns>
+        private bool CheckGroupDescriptionLength(string groupDescription) {
+            int groupDescriptionLength = groupDescription.Length;
+            return groupDescriptionLength < Group.MinGroupDescriptionLength || groupDescriptionLength > Group.MaxGroupDescriptionLength;
         }
     }
 }
