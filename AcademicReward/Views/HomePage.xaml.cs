@@ -4,6 +4,8 @@ using AcademicReward.PopUps;
 using AcademicReward.ModelClass;
 using AcademicReward.Logic;
 using AcademicReward.Resources;
+using AcademicReward.Database;
+using System.Collections.ObjectModel;
 
 /// <summary>
 /// Primary Author: Xee Lo
@@ -14,12 +16,21 @@ public partial class HomePage : ContentPage {
 
     private ILogic taskLogic;
     bool isAdmin;
+    IDatabase lookUpTask;
+    IDatabase history;
+    ILogic updateProfile;
+    ObservableCollection<Task> tasksToShow;
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
+        lookUpTask = new TaskDatabase();
+        history = new HistoryDatabase();
+        updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
 		UsernameDisplay(isAdmin);
         PrepareTaskList();
+        RefreshTaskList();
+        
     }
 
     /// <summary>
@@ -49,27 +60,60 @@ public partial class HomePage : ContentPage {
     }
 
     /// <summary>
-    /// Checks to see if the checkbox has been checked off and then make the bool isChecked true
-    /// </summary>
-    /// <param name="sender">object sender</param>
-    /// <param name="e">EventArgs e</param>
-    private void TaskCheckBox(object sender, CheckedChangedEventArgs e){
-        
-
-	}
-
-    /// <summary>
     /// Helper method used to gather all tasks
     /// </summary>
     private async void PrepareTaskList() {
-        LogicErrorType logicError;
+        tasksToShow = new ObservableCollection<Task>();
+        LogicErrorType
         logicError = taskLogic.LookupItem(MauiProgram.Profile);
         if (LogicErrorType.LookupAllTasksDBError == logicError) {
             await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
         }
         else {
-            TaskLV.ItemsSource = MauiProgram.Profile.TaskList;
+            if (MauiProgram.Profile.IsAdmin){
+               // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
+                foreach (var task in MauiProgram.Profile.TaskList){
+                   
+                     if (task.IsSubmitted && (!task.IsChecked)) {
+                     tasksToShow.Add(task);
+                     TaskLV.ItemsSource = tasksToShow;
+                     }    
+                }
+            }else{
+              //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
+                foreach (var task in MauiProgram.Profile.TaskList)
+                {
+                    //look up individual tasks and set the properties if needed 
+                    logicError = (LogicErrorType)lookUpTask.LookupItem(task);
+                    if (LogicErrorType.LookupAllNotificationsDBError == logicError) {
+                        await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
+                    }
+                    else {
+                        if (!task.IsChecked) {
+                            tasksToShow.Add(task);
+                            TaskLV.ItemsSource = tasksToShow;
+                        }
+                        else {
+                            HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, task.Title, $"{task.Description}\nPoints: {task.Points}\nGroupID: {task.GroupID}");
+                            history.AddItem(taskHistory); //history doesnt have a logic layer so may need to changed
+
+                            MauiProgram.Profile.AddXPToMember(task.Points); //adds exp to memeber
+                            MauiProgram.Profile.AddPointsToMember(task.Points); //adds points to member
+                            logicError = updateProfile.UpdateItem(MauiProgram.Profile);
+                            if (logicError == LogicErrorType.NoError) { 
+                                //removes the task once it has been reviewed and approved 
+                            taskLogic.DeleteItem(task);
+                            }
+                            else {
+                                await DisplayAlert(DataConstants.UpdateProfileXpPointsLevelTitle, DataConstants.UpdateProfileXpPointsLevelMessage, DataConstants.OK);
+                            }
+                        }
+                    }
+                }
+            }
         }
+            
+       
     }
 
     /// <summary>
@@ -81,5 +125,9 @@ public partial class HomePage : ContentPage {
 		Task selectedTask = (Task)e.SelectedItem;
          TaskPopUp taskPopUp = new TaskPopUp(selectedTask);
          this.ShowPopup(taskPopUp);
+    }
+
+    private void RefreshTaskList() {
+        TaskLV.ItemsSource = tasksToShow;
     }
 }

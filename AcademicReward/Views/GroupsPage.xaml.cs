@@ -17,6 +17,13 @@ public partial class GroupsPage : ContentPage
     {
         InitializeComponent();
         GroupsLV.ItemsSource = MauiProgram.Profile.GroupList;
+
+        // Hide add group button and text if user is not an admin
+        if (!MauiProgram.Profile.IsAdmin)
+        {
+            AddGroupBtn.IsVisible = false;
+            AddGroupLbl.IsVisible = false;
+        }
     }
 
     private void AddGroup(object sender, EventArgs e)

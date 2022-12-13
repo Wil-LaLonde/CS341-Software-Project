@@ -27,6 +27,13 @@ public partial class GroupPage : ContentPage
         GroupDescriptionLbl.Text = group.GroupDescription;
         GroupNameLbl.Text = group.GroupName;
         ShowAdminName(group);
+
+        // Hide add group button and text if user is not an admin
+        if (!MauiProgram.Profile.IsAdmin)
+        {
+            AddMemberBtn.IsVisible = false;
+            AddMemberLbl.IsVisible = false;
+        }
     }
 
     public void ShowAdminName(Group group)

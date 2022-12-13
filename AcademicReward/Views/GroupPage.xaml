@@ -42,6 +42,7 @@
                     TextDecorations="Underline"
                     VerticalOptions="Center"/>
                 <Label
+                    x:Name="AddMemberLbl"
                     Text="Add Member:  "
                     FontFamily="SecondaryFont"
                     FontSize="24"
@@ -49,6 +50,7 @@
                     VerticalOptions="Center"
                     HorizontalOptions="EndAndExpand"/>
                 <Button
+                    x:Name="AddMemberBtn"
                     Text="+"
                     Clicked="AddMemberButtonClickedAsync"
                     FontSize="30"
