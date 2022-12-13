@@ -35,7 +35,7 @@ public partial class TaskPopUp : Popup {
         title.Text = selectedTask.Title;
         description.Text = selectedTask.Description;
         points.Text = selectedTask.Points.ToString();
-        group.Text = selectedTask.GroupID.ToString();
+        group.Text = MauiProgram.Profile.GetGroupNameUsingGroupID(selectedTask.GroupID);
         SetErrorMessageBox(false, string.Empty);
         isAdmin = MauiProgram.Profile.IsAdmin;
        

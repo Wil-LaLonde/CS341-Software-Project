@@ -81,7 +81,7 @@
             <!--Group-->
             <HorizontalStackLayout >
                 <Label
-                Text="GroupID:"
+                Text="Group Name:"
                 FontSize="28"
                 Margin="0, 5, 10,0" 
                 FontAttributes="Bold"/>

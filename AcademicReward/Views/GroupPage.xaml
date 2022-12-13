@@ -17,13 +17,19 @@
                         TextDecorations="Underline"
                         FontAttributes="Bold"
                         HorizontalOptions="Center"/>
-                    <Label
-                        x:Name="GroupAdminLbl"
-                        Text="{ Binding AdminName }"
-                        FontSize="35"
-                        FontFamily="SecondaryFont"
-                        TextColor="{StaticResource Gray600}"
-                        HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label
+                            Text="Admin: "
+                            FontSize="35"
+                            FontFamily="SecondaryFont"
+                            TextColor="{StaticResource Gray600}"/>
+                        <Label
+                            x:Name="GroupAdminLbl"
+                            Text="{ Binding AdminName }"
+                            FontSize="35"
+                            FontFamily="SecondaryFont"
+                            TextColor="{StaticResource Gray600}"/>
+                    </StackLayout>
                     <Label
                         x:Name="GroupDescriptionLbl"
                         Text="{ Binding GroupDescription }"
@@ -65,11 +71,38 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label
-                                    FontSize="25"
-                                    Text="{Binding Username}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Grid.Row="0" 
+                                        Grid.Column="0" 
+                                        Text="{Binding Level, StringFormat='Lvl: {0}'}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center"/>
+                                    <Label 
+                                        Grid.Row="0" 
+                                        Grid.Column="1" 
+                                        Text="{Binding Username}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center"/>
+                                    <Label 
+                                        Grid.Row="0" 
+                                        Grid.Column="2" 
+                                        Text="{Binding XP, StringFormat='XP: {0}/100'}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="EndAndExpand"/>
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
                 </ListView.ItemTemplate>

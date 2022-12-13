@@ -1,4 +1,5 @@
 ﻿using AcademicReward.Resources;
+using AcademicReward.ModelClass;
 using Npgsql;
 using System.Collections.ObjectModel;
 
@@ -189,7 +190,7 @@ namespace AcademicReward.Database {
         /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
-            ModelClass.Profile profileTasks = profile as ModelClass.Profile;
+            Profile profileTasks = profile as Profile;
             if (profileTasks.IsAdmin) { //This is for fetching data for ADMIN VIEW 
                 try {
                     //Opening the connection

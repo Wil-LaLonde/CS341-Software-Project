@@ -26,6 +26,7 @@ public partial class GroupPage : ContentPage {
         this.group = group;
 
         Members = GroupProfileRelationship.getProfilesInGroup(group);
+        UpdateMembersXP();
         MembersLV.ItemsSource = Members;
 
         GroupDescriptionLbl.Text = group.GroupDescription;
@@ -65,8 +66,18 @@ public partial class GroupPage : ContentPage {
         if (result is ObservableCollection<Profile> membersResult) {
             if (membersResult != null) {
                 Members = GroupProfileRelationship.getProfilesInGroup(group);
+                UpdateMembersXP();
                 MembersLV.ItemsSource = Members;
             }
+        }
+    }
+
+    /// <summary>
+    /// Helper method used to properly show the correct amount of XP for a member
+    /// </summary>
+    private void UpdateMembersXP() {
+        foreach(Profile member in Members) {
+            member.XP = member.GetCurrentXPInt();
         }
     }
 }

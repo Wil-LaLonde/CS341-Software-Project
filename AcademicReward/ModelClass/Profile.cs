@@ -92,6 +92,18 @@ namespace AcademicReward.ModelClass {
         }
 
         /// <summary>
+        /// Profile constructor (when showing members in a group)
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <param name="level">int level</param>
+        /// <param name="xp">int xp</param>
+        public Profile(string username, int xp, int level) {
+            Username = username;
+            XP = xp;
+            Level = level;
+        }
+
+        /// <summary>
         /// Profile constructor (when fully logged in)
         /// Parameters match the DB columns
         /// </summary>
