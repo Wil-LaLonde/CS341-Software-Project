@@ -1,26 +1,34 @@
 ﻿using AcademicReward.Database;
 using AcademicReward.Resources;
 using AcademicReward.ModelClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AcademicReward.Logic {
     /// <summary>
+    /// ProfileLogic is the logic behind updating a profile (xp, level, points)
     /// Primary Author: Xee Lo
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson
     /// </summary>
-    internal class ProfileLogic : ILogic{
+    public class ProfileLogic : ILogic{
         IDatabase profileDB;
+
+        /// <summary>
+        /// ProfileLogic constructor
+        /// </summary>
         public ProfileLogic() {
             profileDB = new ProfileDatabase();
         }
+
+        //Currently not needed
         public LogicErrorType AddItem(object obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
+
+        /// <summary>
+        /// Method used to update a profile (logic)
+        /// </summary>
+        /// <param name="profile">object profile</param>
+        /// <returns>LogicErrorType logicError</returns>
         public LogicErrorType UpdateItem(object profile) {
             LogicErrorType logicError;
             Profile profileToUpdate = profile as Profile;
@@ -36,14 +44,20 @@ namespace AcademicReward.Logic {
             
             return logicError;
         }
+
+        //Currently not needed
         public LogicErrorType DeleteItem(object obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
+
+        //Currently not needed
         public LogicErrorType LookupItem(object obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
+
+        //Currently not needed
         public LogicErrorType AddItemWithArgs(object[] obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
     }
 }
