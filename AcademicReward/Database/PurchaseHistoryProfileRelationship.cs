@@ -4,6 +4,12 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database
 {
+    /// <summary>
+    /// Provides methods for interacting with the profiles/shopitems relationship
+    /// Primary Author: Maximilian Patterson
+    /// Secondary Author: None
+    /// Reviewer: Wil LaLonde
+    /// </summary>
     internal class PurchaseHistoryProfileRelationship : AcademicRewardsDatabase
     {
         // Method to grab all purchase history items for a given profile
