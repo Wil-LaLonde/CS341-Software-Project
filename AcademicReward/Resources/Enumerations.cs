@@ -1,5 +1,6 @@
 ﻿namespace AcademicReward.Resources {
     /// <summary>
+    /// Enumerations holds all our LogicErrorTypes and DatabaseErrorTypes
     /// Primary Author: Wil LaLonde 
     /// Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
     /// Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson
