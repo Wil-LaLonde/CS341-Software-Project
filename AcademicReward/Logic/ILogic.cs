@@ -3,7 +3,6 @@
 namespace AcademicReward.Logic {
     /// <summary>
     /// ILogic interface
-    /// 
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson

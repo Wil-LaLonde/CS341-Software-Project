@@ -7,6 +7,7 @@ using AcademicReward.Logic;
 using AcademicReward.Resources;
 
 /// <summary>
+/// LoginPage is the page that allows users to sign in or create a new profile
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
 /// Reviewer: Xee Lo / Maximilian Patterson

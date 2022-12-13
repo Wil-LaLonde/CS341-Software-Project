@@ -1,5 +1,6 @@
 ﻿namespace AcademicReward.Resources {
     /// <summary>
+    /// DataConstants is the file that holds all data constants to avoid "magic values"
     /// Primary Author: Wil LaLonde 
     /// Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
     /// Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson

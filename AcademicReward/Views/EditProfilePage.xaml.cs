@@ -6,9 +6,10 @@ using AcademicReward.Database;
 namespace AcademicReward.Views;
 
 /// <summary>
-/// Primary Author: Maximilian Patterson
-/// Secondary Author: None
-/// Reviewer: Wil LaLonde
+/// EditProfilePage is the page that allows the user to update their password
+/// Primary Author: Wil LaLonde
+/// Secondary Author: Maximilian Patterson
+/// Reviewer: Xee Lo
 /// </summary>
 public partial class EditProfilePage : ContentPage {
     ILogic loginLogic;

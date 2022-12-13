@@ -7,6 +7,7 @@ using System.Text;
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// AddTaskPopUp is the popup to add a new task
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
 /// Reviewer: Xee Lo
