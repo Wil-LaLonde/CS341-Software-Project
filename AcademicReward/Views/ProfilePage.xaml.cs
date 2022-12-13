@@ -16,6 +16,10 @@ public partial class ProfilePage : ContentPage {
 	public ProfilePage() {
 		InitializeComponent();
         UsernameDisplay(MauiProgram.Profile.IsAdmin);
+        // If user is an admin, hide PurchaseHistoryBtn
+        if (MauiProgram.Profile.IsAdmin) {
+            PurchaseHistoryBtn.IsVisible = false;
+        }
 	}
 
     /// <summary>

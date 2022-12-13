@@ -1,3 +1,5 @@
+using AcademicReward.Database;
+using AcademicReward.ModelClass;
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
@@ -8,12 +10,22 @@ namespace AcademicReward.Views;
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
 /// </summary>
-public partial class PurchaseHistoryPage : ContentPage {
+public partial class PurchaseHistoryPage : ContentPage
+{
+    public ObservableCollection<PurchaseHistoryItem> PurchaseHistoryItems = new ObservableCollection<PurchaseHistoryItem>();
 
-    /// <summary>
-    /// PurchaseHistoryPage constructor
-    /// </summary>
-    public PurchaseHistoryPage() {
+    public PurchaseHistoryPage()
+    {
         InitializeComponent();
+        GetAllPurchaseHistory();
+    }
+
+
+    public void GetAllPurchaseHistory()
+    {
+        base.OnAppearing();
+        PurchaseHistoryItems = PurchaseHistoryProfileRelationship.GetPurchaseHistory(MauiProgram.Profile);
+        System.Diagnostics.Debug.WriteLine(PurchaseHistoryItems.Count);
+        PurchaseHistoryItemsLV.ItemsSource = PurchaseHistoryItems;
     }
 }
