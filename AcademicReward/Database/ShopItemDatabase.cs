@@ -71,6 +71,11 @@ namespace AcademicReward.Database
                 using var cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 //Closing the connection.
+                sql = "INSERT INTO history (profileid, title, description) VALUES " +
+                    $"({MauiProgram.Profile.ProfileID}, 'Added a shop item','Added an item to group: {item.Group.GroupName}');";
+                using var secondCmd = new NpgsqlCommand(sql, con);
+
+                secondCmd.ExecuteNonQuery();
                 con.Close();
                 dbError = DatabaseErrorType.NoError;
             }
