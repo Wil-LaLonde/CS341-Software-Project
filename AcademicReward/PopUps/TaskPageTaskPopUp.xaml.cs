@@ -3,9 +3,10 @@ using CommunityToolkit.Maui.Views;
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// TaskPageTaskPopUp is the popup when a user clicks on a task on the Task Page
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
-/// Reviewer: 
+/// Reviewer: Xee Lo
 /// </summary>
 public partial class TaskPageTaskPopUp : Popup {
 
