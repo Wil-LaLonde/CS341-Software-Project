@@ -81,7 +81,8 @@
         //Profile END
 
         //General START
-        NoError
+        NoError,
+        NotImplemented
         //General END
 
 
@@ -135,7 +136,8 @@
         //Profile END
 
         //General START
-        NoError
+        NoError,
+        NotImplemented
         //General END
     }
 }
