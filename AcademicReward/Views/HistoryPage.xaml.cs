@@ -1,25 +1,23 @@
 using AcademicReward.Database;
-using AcademicReward.ModelClass;
-using AcademicReward.Resources;
-using Npgsql;
 using System.Collections.ObjectModel;
-
 
 namespace AcademicReward.Views;
 
 /// <summary>
+/// HistoryPage is the page that shows all history items for a profile
 /// Primary Author: Maximilian Patterson
 /// Secondary Author:
 /// Reviewer: Wil LaLonde
 /// </summary>
-public partial class HistoryPage : ContentPage
-{
+public partial class HistoryPage : ContentPage {
     IDatabase HistoryDatabase = new HistoryDatabase();
     // New observable collection of HistoryItem
     public ObservableCollection<object> HistoryItems = new ObservableCollection<object>();
 
-    public HistoryPage()
-    {
+    /// <summary>
+    /// HistoryPage constructor
+    /// </summary>
+    public HistoryPage() {
         InitializeComponent();
         HistoryItemsLV.ItemsSource = HistoryItems;
         
