@@ -63,8 +63,16 @@
         //Task END
 
         //Shop START
+        EmptyShopItemGroup,
         InvalidCost,
         InvalidLevel,
+        EmptyShopItemTitle,
+        EmptyShopItemDescription,
+        NegativeShopItemCost,
+        NegativeShopItemLevelRequirement,
+        InvalidShopItemLength,
+        InvalidShopItemDescriptionLength,
+        AddShopItemDBError,
         UnsuccessfulDBAdd,
         NotEnoughDoubloons,
         NeedHigherLevel,
@@ -130,6 +138,7 @@
         //Task END
 
         //Shop START
+        AddShopItemDBError,
         BuyItemError,
         //Shop END
 

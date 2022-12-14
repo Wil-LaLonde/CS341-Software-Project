@@ -8,6 +8,13 @@ namespace AcademicReward.ModelClass {
     /// Reviewer: Maximilian Patterson
     /// </summary>
     public class ShopItem : ObservableObject {
+        public const int MinTitleLength = 0;
+        public const int MaxTitleLength = 50;
+        public const int MinDescriptionLength = 0;
+        public const int MaxDescriptionLength = 250;
+        public const int MinCostValue = 0;
+        public const int MinLevelRequirement = 1;
+
 
         public static int IdCounter = 0;
         public int Id { get; set; }

@@ -60,37 +60,40 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Method used to add a shop item (database)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="shopItem">object shopItem</param>
         /// <returns>DatabaseErrorType dbError</returns>
-        public DatabaseErrorType AddItem(object obj) {
-            DatabaseErrorType dbError = DatabaseErrorType.NoError;
+        public DatabaseErrorType AddItem(object shopItem) {
+            DatabaseErrorType dbError;
+            ShopItem shopItemToAdd = shopItem as ShopItem;
             try {
-                ShopItem item = (ShopItem)obj;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //Insert SQL query for adding a profile
-                var sql = "INSERT INTO shopitems (shopitemid, itemtitle, itemdescription, pointcost, levelrequirment, groupid)" +
-                          $"VALUES ({item.Id}, '{item.Title}', '{item.Description}', {item.PointCost}, {item.LevelRequirement}, {item.Group.GroupID});";
+                var sql = "INSERT INTO shopitems (itemtitle, itemdescription, pointcost, levelrequirment, groupid) " +
+                          $"VALUES ('{shopItemToAdd.Title}', '{shopItemToAdd.Description}', {shopItemToAdd.PointCost}, {shopItemToAdd.LevelRequirement}, {shopItemToAdd.Group.GroupID}) RETURNING shopitemid;";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
-                cmd.ExecuteNonQuery();
-                //Closing the connection.
-                sql = "INSERT INTO history (profileid, title, description) VALUES " +
-                    $"({MauiProgram.Profile.ProfileID}, 'Added a shop item','Added an item to group: {item.Group.GroupName}');";
-                using var secondCmd = new NpgsqlCommand(sql, con);
-
-                secondCmd.ExecuteNonQuery();
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                //Gathering new shopitemid
+                int shopItemID;
+                while(reader.Read()) {
+                    shopItemID = (int)reader[0];
+                    //Assigning new id to the shopItem object
+                    shopItemToAdd.Id = shopItemID;
+                }
                 con.Close();
                 dbError = DatabaseErrorType.NoError;
             }
             catch (PostgresException ex) {
                 //Error adding shop item
                 Console.WriteLine("Error while adding item: {0}", ex);
+                dbError = DatabaseErrorType.AddShopItemDBError;
             }
             catch (NpgsqlException ex) {
                 //Not sure what happened, log message
                 Console.WriteLine("Unexpected error while adding item: {0}", ex);
+                dbError = DatabaseErrorType.AddShopItemDBError;
             }
             return dbError;
         }

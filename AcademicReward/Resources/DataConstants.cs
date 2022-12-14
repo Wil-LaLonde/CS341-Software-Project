@@ -108,6 +108,8 @@
         public const string HistoryCreateNotificationDescription = "You created {0} notification for {1}";
         public const string HistoryCreateTaskTitle = "Task Created";
         public const string HistoryCreateTaskDescription = "You created {0} task for {1}";
+        public const string HistoryAddShopItemTitle = "Shop Item Created";
+        public const string HistoryAddShopItemDescription = "You created shop item: {0} for group: {1}.";
         //History END
 
         //Create Group START
@@ -135,6 +137,19 @@
         public const string TaskApprovedTitle = "Task Approved!";
         public const string TaskApprovedMessage = "Task was succesfully approved. The member will receive their points and XP the next time they sign in.";
         //Home Page END
+
+        //Shop START
+        public const string InvalidItemCostMessage = "Item cost must be a whole numeric value.";
+        public const string InvalidLevelMessage = "Level requirement must be a whole numeric value.";
+        public const string EmptyShopItemTitleMessage = "Please fill in the item title entry box.";
+        public const string EmptyShopItemDescriptionMessage = "Please fill in the item descrription entry box.";
+        public const string NegativeShopItemCostMessage = "Item cost cannot be negative.";
+        public const string NegativeShopItemLevelRequirementMessage = "Level requirement must be at least 1.";
+        public const string InvalidShopItemTitleLengthMessage = "Item title must be between 1-25 characters.";
+        public const string InvalidShopItemDescriptionLengthMessage = "Item description must be between 1-250 characters.";
+        public const string AddShopItemDBErrorMessage = "An unexpected database error occurred while adding the shop item.";
+        public const string AddShopItemUnknownErrorMessage = "An unknown error occurred while adding the shop item.";
+        //Shop END
 
         //Display Alert START
         public const string OK = "OK";

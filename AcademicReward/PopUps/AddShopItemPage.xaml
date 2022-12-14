@@ -4,9 +4,10 @@
             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
             x:Class="AcademicReward.AddShopItemPage"
             CanBeDismissedByTappingOutsideOfPopup="False"
-            Color="White">
-    <!-- Primary Author: Sean Stille -->
-    <!-- Secondary Author: Wil LaLonde -->
+            Color="White"
+            Size="600, 1100">
+    <!-- Primary Author: Wil LaLonde -->
+    <!-- Secondary Author: Sean Stille -->
     <!-- Reviewer: Wil LaLonde -->
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
@@ -26,7 +27,21 @@
                     TextDecorations="Underline"/>
             </Frame>
         </StackLayout>
-
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error with task creation: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    TextType="Html"
+                    FontSize="20"/>
+            </StackLayout>
+        </Frame>
         <StackLayout Margin="10">
             <Label
                 Text="Item Name:"
