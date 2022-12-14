@@ -2,15 +2,14 @@
 using Npgsql;
 using System.Collections.ObjectModel;
 
-namespace AcademicReward.Database
-{
+namespace AcademicReward.Database {
     /// <summary>
+    /// GroupDatabase controls anything related to groups in the database
     /// Primary Author: Maximilian Patterson
     /// Secondary Author: None
-    /// Reviewer: 
+    /// Reviewer: Wil LaLonde 
     /// </summary>
-    public class GroupDatabase : AcademicRewardsDatabase, IDatabase
-    {
+    public class GroupDatabase : AcademicRewardsDatabase, IDatabase {
 
         /// <summary>
         /// GroupDatabase constructor
@@ -22,12 +21,11 @@ namespace AcademicReward.Database
         /// </summary>
         /// <param name="group">object group</param>
         /// <returns>DatabaseErrorType</returns>
-        public DatabaseErrorType AddItem(object group)
-        {
+        public DatabaseErrorType AddItem(object group) {
             DatabaseErrorType dbError;
             var groupToAdd = group as ModelClass.Group;
-            try
-            {
+
+            try {
                 // Open connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
@@ -45,8 +43,7 @@ namespace AcademicReward.Database
 
                 // Getting the group id from the created row
                 var id = 0;
-                while (reader.Read())
-                {
+                while (reader.Read()) {
                     id = reader.GetInt32(0);
                 }
 
@@ -59,10 +56,9 @@ namespace AcademicReward.Database
                 groupToAdd.AdminProfileID = MauiProgram.Profile.ProfileID;
                 MauiProgram.Profile.AddGroupToProfile(groupToAdd); // Update list for current profile
             }
-            catch (NpgsqlException ex)
-            {
-                //Something went wrong adding the task
-                Console.WriteLine("Unexpected error while adding task: {0}", ex);
+            catch (NpgsqlException ex) {
+                //Something went wrong adding the group
+                Console.WriteLine("Unexpected error while adding group: {0}", ex);
                 dbError = DatabaseErrorType.AddGroupDBError;
             }
             return dbError;
@@ -73,13 +69,11 @@ namespace AcademicReward.Database
         /// </summary>
         /// <param name="group">object group</param>
         /// <returns>DatabaseErrorType</returns>
-        public DatabaseErrorType UpdateItem(object group)
-        {
+        public DatabaseErrorType UpdateItem(object group) {
             DatabaseErrorType dbError;
             var groupToAdd = group as ModelClass.Group;
 
-            try
-            {
+            try {
                 // Open connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
@@ -93,9 +87,8 @@ namespace AcademicReward.Database
                 con.Close();
                 dbError = DatabaseErrorType.NoError;
             }
-            catch (NpgsqlException ex)
-            {
-                //Something went wrong adding the task
+            catch (NpgsqlException ex) {
+                //Something went wrong updating the group
                 Console.WriteLine("Unexpected error while updating group: {0}", ex);
                 dbError = DatabaseErrorType.UpdateGroupDBError;
             }
@@ -103,34 +96,28 @@ namespace AcademicReward.Database
         }
 
         //Currently not needed
-        public DatabaseErrorType DeleteItem(object task)
-        {
-            throw new NotImplementedException();
+        public DatabaseErrorType DeleteItem(object group) {
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
-        public DatabaseErrorType LookupItem(object task)
-        {
-            throw new NotImplementedException();
+        public DatabaseErrorType LookupItem(object group) {
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
-        public DatabaseErrorType LookupFullItem(object profile)
-        {
-            throw new NotImplementedException();
+        public DatabaseErrorType LookupFullItem(object group) {
+            return DatabaseErrorType.NotImplemented;
         }
         
         //Currently not needed
-        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
-        {
-            throw new NotImplementedException();
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
-        public object FindById(int id)
-        {
-            throw new NotImplementedException();
+        public object FindById(int id) {
+            return DatabaseErrorType.NotImplemented;
         }
     }
 }
-

@@ -4,6 +4,7 @@ using AcademicReward.Resources;
 
 namespace AcademicReward.Logic {
     /// <summary>
+    /// NotificationLogic is the logic behind anything notification related
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson
@@ -40,12 +41,12 @@ namespace AcademicReward.Logic {
 
         //Currently not needed
         public LogicErrorType UpdateItem(object notification) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
 
         //Currently not needed
         public LogicErrorType DeleteItem(object notification) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace AcademicReward.Logic {
 
         public LogicErrorType AddItemWithArgs(object[] obj)
         {
-            throw new NotImplementedException();
+            return LogicErrorType.NotImplemented;
         }
     }
 }

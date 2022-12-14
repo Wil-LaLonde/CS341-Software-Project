@@ -2,6 +2,7 @@
 
 namespace AcademicReward.ModelClass {
     /// <summary>
+    /// Model class used to represent a Notification
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson

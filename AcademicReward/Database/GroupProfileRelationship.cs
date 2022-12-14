@@ -3,28 +3,33 @@ using AcademicReward.Resources;
 using Npgsql;
 using System.Collections.ObjectModel;
 
-namespace AcademicReward.Database
-{
+namespace AcademicReward.Database {
     /// <summary>
+    /// GroupProfileRelationship is used to get groups for a given profile from the database
     /// Primary Author: Maximilian Patterson
     /// Secondary Author: None
-    /// Reviewer: 
+    /// Reviewer: Wil LaLonde
     /// </summary>
-    internal class GroupProfileRelationship : AcademicRewardsDatabase
-    {
-        public static ObservableCollection<Profile> getProfilesInGroup(Group group)
-        {
-            try
-            {
+    public class GroupProfileRelationship : AcademicRewardsDatabase {
+
+        /// <summary>
+        /// Method used to gather all profiles for a given group
+        /// </summary>
+        /// <param name="group">Group group</param>
+        /// <returns>ObservableCollection profiles</returns>
+        public static ObservableCollection<Profile> getProfilesInGroup(Group group) {
+            try {
                 int groupId = group.GroupID;
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //Select SQL query for getting all profiles
-                var sql = "SELECT * " +
-                    "FROM profiles " +
-                    "WHERE profileid IN (SELECT profileid" +
-                    "                    FROM profilegroup" +
-                    "                    WHERE groupid = " + $"{groupId}" + ");";
+                var sql = "SELECT username, xp, level " +
+                          "FROM profiles " +
+                          "WHERE profileid IN (SELECT profileid " +
+                                              "FROM profilegroup, groups " +
+                                             $"WHERE groups.groupid = {groupId} " +
+                                              "AND profileid != groups.adminprofileid " +
+                                              "AND groups.groupid = profilegroup.groupid);";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -33,10 +38,8 @@ namespace AcademicReward.Database
 
                 while (reader.Read())
                 {
-                    profiles.Add(new Profile(
-                        reader.GetString(1), // Username
-                        reader.GetString(7) // Password
-                    ));
+                    //[0] -> username | [1] -> xp | [2] -> level
+                    profiles.Add(new Profile(reader[0] as string, (int)reader[1], (int)reader[2]));
                 }
 
                 //Closing the connection.
@@ -44,27 +47,28 @@ namespace AcademicReward.Database
 
                 return profiles;
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 //Groupname already exists.
                 Console.WriteLine("Error while getting all profiles from group: {0}", e);
                 return null;
             }
         }
 
-        public static LogicErrorType addProfileToGroup(Profile profile, Group group)
-        {
-            try
-            {
+        /// <summary>
+        /// Method used to add a profile and group to the database (join table)
+        /// </summary>
+        /// <param name="profile">Profile profile</param>
+        /// <param name="group">Group group</param>
+        /// <returns>LogicErrorType logicError</returns>
+        public static LogicErrorType addProfileToGroup(Profile profile, Group group) {
+            try {
 
-                if (checkAdminExists(group) && profile.IsAdmin)
-                {
+                if (checkAdminExists(group) && profile.IsAdmin) {
                     // Group already has an admin
                     Console.WriteLine("Error while adding profile to group: Admin already exists");
                     return LogicErrorType.GroupAlreadyHasAdmin;
                 }
-                else
-                {
+                else {
                     int profileId = profile.ProfileID;
                     int groupId = group.GroupID;
                     using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -80,17 +84,19 @@ namespace AcademicReward.Database
                     return LogicErrorType.NoError;
                 }
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine("Error while adding profile to group: {0}", e);
                 return LogicErrorType.GroupCreateError;
             }
         }
 
-        public static Profile findByUsername(string username)
-        {
-            try
-            {
+        /// <summary>
+        /// Method used to find a user by their username in the database
+        /// </summary>
+        /// <param name="username">string username</param>
+        /// <returns>Profile profile</returns>
+        public static Profile findByUsername(string username) {
+            try {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //Select SQL query for getting all profiles
@@ -103,8 +109,7 @@ namespace AcademicReward.Database
                 //Reading the data
                 Profile profile = null;
 
-                while (reader.Read())
-                {
+                while (reader.Read()) {
                     profile = new Profile(
                         reader.GetInt32(0), // ProfileID
                         reader.GetString(1), // Username
@@ -122,19 +127,20 @@ namespace AcademicReward.Database
 
                 return profile;
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 //Groupname already exists.
                 Console.WriteLine("Error while getting profile by username: {0}", e);
                 return null;
             }
         }
 
-        // Method to check if an admin profile already exists in a group, returning a boolean
-        public static bool checkAdminExists(Group group)
-        {
-            try
-            {
+        /// <summary>
+        /// Method used to check if trying to add an admin to a group
+        /// </summary>
+        /// <param name="group">Group group</param>
+        /// <returns>true/false</returns>
+        public static bool checkAdminExists(Group group) {
+            try {
                 int groupId = group.GroupID;
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
@@ -150,8 +156,7 @@ namespace AcademicReward.Database
                 //Reading the data
                 ObservableCollection<Profile> profiles = new ObservableCollection<Profile>();
 
-                while (reader.Read())
-                {
+                while (reader.Read()) {
                     profiles.Add(new Profile(
                         reader.GetInt32(0), // ProfileID
                         reader.GetString(1), // Username
@@ -167,18 +172,15 @@ namespace AcademicReward.Database
                 //Closing the connection.
                 con.Close();
 
-                foreach (Profile profile in profiles)
-                {
-                    if (profile.IsAdmin)
-                    {
+                foreach (Profile profile in profiles) {
+                    if (profile.IsAdmin) {
                         return true;
                     }
                 }
 
                 return false;
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 Console.WriteLine("Error while getting all profiles from group: {0}", e);
                 return false;
             }

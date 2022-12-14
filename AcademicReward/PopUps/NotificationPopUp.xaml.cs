@@ -4,9 +4,10 @@ using AcademicReward.ModelClass;
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// NotificationPopUp is the popup when a user clicks on a notification
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
-/// Reviewer: 
+/// Reviewer: Maximilian Patterson
 /// </summary>
 public partial class NotificationPopUp : Popup {
 

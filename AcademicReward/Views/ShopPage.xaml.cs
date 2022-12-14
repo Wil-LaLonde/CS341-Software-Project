@@ -1,20 +1,22 @@
 using AcademicReward.Logic;
 using CommunityToolkit.Maui.Views;
 using AcademicReward.ModelClass;
-using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
 /// <summary>
+/// ShopPage shows all shop items for a profile/group
 /// Primary Author: Sean Stille
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
 /// </summary>
 public partial class ShopPage : ContentPage {
-
     bool isAdmin;
-
     private ShopLogic ShopLogic;
+
+    /// <summary>
+    /// ShopPage constructor
+    /// </summary>
 	public ShopPage() {
 		InitializeComponent();
         isAdmin = MauiProgram.Profile.IsAdmin;
@@ -37,16 +39,24 @@ public partial class ShopPage : ContentPage {
         }
     }
 
+    /// <summary>
+    /// Method called when a user clicks on the add shop item button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
 	private void Button_Clicked(object sender, EventArgs e) {
 		this.ShowPopup(new AddShopItemPage(ShopLogic));
         getShopItems();
 	}
 
-    private void SelectedItem(object sender, SelectedItemChangedEventArgs e)
-    {
+    /// <summary>
+    /// Method called when a user selects a shop item
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">SelectedItemChangedEventArgs e</param>
+    private void SelectedItem(object sender, SelectedItemChangedEventArgs e) {
         ShopItem selectedItem = e.SelectedItem as ShopItem;
-        if (selectedItem != null)
-        {
+        if (selectedItem != null) {
             ShopItem selected = e.SelectedItem as ShopItem;
             this.ShowPopup(new ViewShopItemPage(selected, ShopLogic, this));
             getShopItems();
@@ -54,14 +64,19 @@ public partial class ShopPage : ContentPage {
         
     }
 
-    public void openEditPage(ShopItem toBeEditted)
-    {
+    /// <summary>
+    /// Method called to open the edit shop item page
+    /// </summary>
+    /// <param name="toBeEditted">ShopItem toBeEditted</param>
+    public void openEditPage(ShopItem toBeEditted) {
         this.ShowPopup(new EditShopItemPage(ShopLogic, toBeEditted, this));
         
     }
 
-    public void getShopItems()
-    {
+    /// <summary>
+    /// Method used to gather all shop items
+    /// </summary>
+    public void getShopItems() {
         ShopLogic.LookupItem(null);
         ShopItemList.ItemsSource = ShopLogic.ItemList;
     }

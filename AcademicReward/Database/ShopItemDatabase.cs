@@ -1,25 +1,25 @@
 ﻿using AcademicReward.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AcademicReward.ModelClass;
 using Npgsql;
 using AcademicReward.Logic;
 using System.Collections.ObjectModel;
-/**
-*  Primary Author: Sean Stille
-*  Reviewer: TBD
-*  Desc: The database implementation for items within the shop, adding them, deleting them, etc.
-*/
-namespace AcademicReward.Database
-{
-    internal class ShopItemDatabase : AcademicRewardsDatabase, IDatabase
-    {
+
+namespace AcademicReward.Database {
+
+    /// <summary>
+    /// ShopItemDatabase controls shop items in the database
+    /// Primary Author: Sean Stille
+    /// Secondary Author: None
+    /// Reviewer: Wil LaLonde
+    /// </summary>
+    public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
         ShopLogic logic;
-        public ShopItemDatabase(ShopLogic ShopLogic)
-        {
+
+        /// <summary>
+        /// ShopItemDatabase constructor
+        /// </summary>
+        /// <param name="ShopLogic">ShopLogic shoplogic</param>
+        public ShopItemDatabase(ShopLogic ShopLogic) {
             logic = ShopLogic;
         }
         public DatabaseErrorType BuyItem(object obj)
@@ -55,11 +55,16 @@ namespace AcademicReward.Database
             }
             return dbError;
         }
-        public DatabaseErrorType AddItem(object obj)
-        {
+
+
+        /// <summary>
+        /// Method used to add a shop item (database)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>DatabaseErrorType dbError</returns>
+        public DatabaseErrorType AddItem(object obj) {
             DatabaseErrorType dbError = DatabaseErrorType.NoError;
-            try
-            {
+            try {
                 ShopItem item = (ShopItem)obj;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -79,25 +84,24 @@ namespace AcademicReward.Database
                 con.Close();
                 dbError = DatabaseErrorType.NoError;
             }
-            catch (PostgresException ex)
-            {
-                //Username already exists.
+            catch (PostgresException ex) {
+                //Error adding shop item
                 Console.WriteLine("Error while adding item: {0}", ex);
-                
             }
-            catch (NpgsqlException ex)
-            {
+            catch (NpgsqlException ex) {
                 //Not sure what happened, log message
                 Console.WriteLine("Unexpected error while adding item: {0}", ex);
-                
             }
             return dbError;
         }
 
-        public DatabaseErrorType DeleteItem(object obj)
-        {
-            try
-            {
+        /// <summary>
+        /// Method used to delete a shop item
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>DatabaseErrorType dbError</returns>
+        public DatabaseErrorType DeleteItem(object obj) {
+            try {
                 ShopItem item = obj as ShopItem;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -112,41 +116,42 @@ namespace AcademicReward.Database
                 con.Close();
                 return DatabaseErrorType.NoError;
             }
-            catch (NpgsqlException ex)
-            {
-                //Something went wrong adding the task
-                Console.WriteLine("Unexpected error while looking up shopitems: {0}", ex);
-
+            catch (NpgsqlException ex) {
+                //Something went wrong deleting the shop item
+                Console.WriteLine("Unexpected error while deleting the shop item: {0}", ex);
             }
             return DatabaseErrorType.NoError;
         }
 
-        public object FindById(int id)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public object FindById(int id) {
+            return DatabaseErrorType.NotImplemented;
         }
 
-        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NotImplemented;
         }
 
-        public DatabaseErrorType LookupFullItem(object obj)
-        {
-                ObservableCollection<ShopItem> newList = new ObservableCollection<ShopItem>();
-                //Group groupNotifications = obj as Group;
-                try
-                {
-                    //Opening the connection
-                    using var con = new NpgsqlConnection(InitializeConnectionString());
-                    con.Open();
-                    //SQL to lookup notifications for a group
-                    var sql = "SELECT * " +
-                              "FROM shopitems;";
-                    //Executing the query.
-                    using var cmd = new NpgsqlCommand(sql, con);
-                    using NpgsqlDataReader reader = cmd.ExecuteReader();
+        /// <summary>
+        /// Method used to lookup all shop items (database)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>DatabaseErrorType dbError</returns>
+        public DatabaseErrorType LookupFullItem(object obj) {
+            ObservableCollection<ShopItem> newList = new ObservableCollection<ShopItem>();
+            try {
+                //Opening the connection
+                using var con = new NpgsqlConnection(InitializeConnectionString());
+                con.Open();
+                //SQL to lookup notifications for a group
+                var sql = "SELECT * " +
+                            "FROM shopitems;";
+                //Executing the query.
+                using var cmd = new NpgsqlCommand(sql, con);
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
                     
+
                     while (reader.Read())
                     {
                         Profile profile = MauiProgram.Profile;
@@ -178,33 +183,34 @@ namespace AcademicReward.Database
 
                         newList.Add(item);
                         }
+                      
                         
-                        
-                    }
-                    logic.ItemList = newList;
-                    //Closing the connection.
-                    con.Close();
-                return DatabaseErrorType.NoError;
                 }
-                catch (NpgsqlException ex)
-                {
-                    //Something went wrong adding the task
-                    Console.WriteLine("Unexpected error while looking up shopitems: {0}", ex);
+                logic.ItemList = newList;
+                //Closing the connection.
+                con.Close();
+                return DatabaseErrorType.NoError;
+            }
+            catch (NpgsqlException ex) {
+                //Something went wrong looking up shop items
+                Console.WriteLine("Unexpected error while looking up shopitems: {0}", ex);
                    
-                }
-                return DatabaseErrorType.NoError;
-
+            }
+            return DatabaseErrorType.NoError;
         }
 
-        public DatabaseErrorType LookupItem(object obj)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public DatabaseErrorType LookupItem(object obj) {
+            return DatabaseErrorType.NotImplemented;
         }
 
-        public DatabaseErrorType UpdateItem(object obj)
-        {
-            try
-            {
+        /// <summary>
+        /// Method used to update a shop item (database)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>DatabaseErrorType dbError</returns>
+        public DatabaseErrorType UpdateItem(object obj) {
+            try {
                 ShopItem item = obj as ShopItem;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -221,14 +227,11 @@ namespace AcademicReward.Database
                 con.Close();
                 return DatabaseErrorType.NoError;
             }
-            catch (NpgsqlException ex)
-            {
-                //Something went wrong adding the task
-                Console.WriteLine("Unexpected error while looking up shopitems: {0}", ex);
-
+            catch (NpgsqlException ex) {
+                //Something went wrong updating the shop item
+                Console.WriteLine("Unexpected error updating the shopitem: {0}", ex);
             }
             return DatabaseErrorType.NoError;
-            throw new NotImplementedException();
         }
     }
 }

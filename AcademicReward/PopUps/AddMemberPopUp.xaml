@@ -3,7 +3,8 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
                x:Class="AcademicReward.PopUps.AddMemberPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
-               Color="White">
+               Color="White"
+               Size="500, 550">
     <!-- Primary Author: Wil LaLonde -->
     <!-- Secondary Author: None -->
     <!-- Reviewer: Maximilian Patterson -->
@@ -25,6 +26,20 @@
                     TextDecorations="Underline"/>
             </Frame>
         </StackLayout>
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error while adding member: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    FontSize="20"/>
+            </StackLayout>
+        </Frame>
         <StackLayout Margin="10">
             <Label
                 Text="Member Username: "
@@ -32,7 +47,6 @@
                 Margin="0, 5"
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
-            <Label x:Name="ErrorLabel" Text="" FontSize="20" FontAttributes="Bold" TextColor="Red" VerticalOptions="End" Margin="0, 0, 0, 10"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
                 <Entry x:Name="MemberNameEntry" FontSize="20" Placeholder="Member Username..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
             </Frame>

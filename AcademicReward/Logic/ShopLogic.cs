@@ -1,32 +1,27 @@
 ﻿using AcademicReward.Database;
 using AcademicReward.Resources;
 using AcademicReward.ModelClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
-namespace AcademicReward.Logic
-{
-    /**
- *  Primary Author: Sean Stille
- *  Reviewer: TBD
- *  Desc:   The logic implementation for items within the shop, adding them, deleting them, etc.
- *          NOTE: Currently the groupID gets set to one regardless of input, this will get changed in
- *                the next sprint, keeping it as null right now (it goes into the database as 1) since
- *                member shop view hasn't been implemented yet.
- */
-    public class ShopLogic : ILogic
-    {
-        ShopItemDatabase ShopData;
+
+namespace AcademicReward.Logic {
+    /// <summary>
+    /// The logic implementation for items within the shop, adding them, deleting them, etc.
+    /// Primary Author: Sean Stille
+    /// Secondary Author: None
+    /// Reviewer: Wil LaLonde
+    /// </summary>
+    public class ShopLogic : ILogic {
+        IDatabase ShopData;
         public ObservableCollection<ShopItem> ItemList;
-        public ShopLogic()
-        {
+
+        /// <summary>
+        /// ShopLogic constructor
+        /// </summary>
+        public ShopLogic() {
             ShopData = new ShopItemDatabase(this);
             ItemList = new ObservableCollection<ShopItem>();
         }
+
 
         public LogicErrorType BuyItem(ShopItem item)
         {
@@ -48,45 +43,48 @@ namespace AcademicReward.Logic
 
             return LogicErrorType.NoError;
         }
-        public LogicErrorType AddItem(object obj)
-        {
+
+        /// <summary>
+        /// Method used to add a shop item (logic)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>LogicErrorType logicError</returns>
+        public LogicErrorType AddItem(object obj) {
             ModelClass.ShopItem toBeAdded;
             String[] AddItemVals = (String[])obj;
             int cost = -1;
             int level = -1;
-            if(! int.TryParse(AddItemVals[2], out cost)) //Testing cost, if it doesn't work, throw exception
-            {
+            //Testing cost, if it doesn't work, throw exception
+            if (! int.TryParse(AddItemVals[2], out cost)) {
                 return LogicErrorType.InvalidCost;
             }
-            if( !int.TryParse(AddItemVals[3], out level)) // Testing level
-            {
+            // Testing level
+            if ( !int.TryParse(AddItemVals[3], out level))  {
                 return LogicErrorType.InvalidLevel;
             }
             
             toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, 
                 MauiProgram.Profile.GroupList.ElementAt( int.Parse(AddItemVals[5]) ) );
                 //The line above is getting the ID of the group, finding it in the group list, then passing that group into the constructor
-
-
+            
             ItemList.Add(toBeAdded);
-            if (ShopData.AddItem(toBeAdded) == DatabaseErrorType.NoError)
-            {
+            if (ShopData.AddItem(toBeAdded) == DatabaseErrorType.NoError) {
                 return LogicErrorType.NoError;
-            }
-            else
-            {
+            } else {
                 return LogicErrorType.UnsuccessfulDBAdd;
             }
         }
 
-        public LogicErrorType DeleteItem(object obj)
-        {
+        /// <summary>
+        /// Method used to delete a shop item (logic)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>LogicErrorType logicError</returns>
+        public LogicErrorType DeleteItem(object obj) {
             ShopItem item = obj as ShopItem;
             ShopItem toBeRemoved = null;
-            foreach ( ShopItem i in ItemList)
-            {
-                if (i.Id == item.Id)
-                {
+            foreach ( ShopItem i in ItemList) {
+                if (i.Id == item.Id) {
                     toBeRemoved = i;
                 }
             }
@@ -95,44 +93,47 @@ namespace AcademicReward.Logic
             return LogicErrorType.NoError;
         }
 
-        public LogicErrorType LookupItem(object obj)
-        {
+        /// <summary>
+        /// Method used to lookup all shop items (logic)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>LogicErrorType logicError</returns>
+        public LogicErrorType LookupItem(object obj) {
             ShopData.LookupFullItem(null);
             return LogicErrorType.NoError;
         }
 
-        public LogicErrorType UpdateItem(object obj)
-        {
+        /// <summary>
+        /// Method used to update a shop item (logic)
+        /// </summary>
+        /// <param name="obj">object obj</param>
+        /// <returns>LogicErrorType logicError</returns>
+        public LogicErrorType UpdateItem(object obj) {
             ModelClass.ShopItem toBeAdded;
             String[] AddItemVals = (String[])obj;
             int cost = -1;
             int level = -1;
-            if (!int.TryParse(AddItemVals[2], out cost)) //Testing cost, if it doesn't work, throw exception
-            {
+            //Testing cost, if it doesn't work, throw exception
+            if (!int.TryParse(AddItemVals[2], out cost))  {
                 return LogicErrorType.InvalidCost;
             }
-            if (!int.TryParse(AddItemVals[3], out level)) // Testing level
-            {
+            // Testing level
+            if (!int.TryParse(AddItemVals[3], out level))  {
                 return LogicErrorType.InvalidLevel;
             }
 
             toBeAdded = new ShopItem(int.Parse(AddItemVals[5]), AddItemVals[0], AddItemVals[1], cost, level, null);
-
             
-            if (ShopData.UpdateItem(toBeAdded) == DatabaseErrorType.NoError)
-            {
+            if (ShopData.UpdateItem(toBeAdded) == DatabaseErrorType.NoError) {
                 return LogicErrorType.NoError;
-            }
-            else
-            {
+            } else {
                 return LogicErrorType.UnsuccessfulDBAdd;
             }
-            throw new NotImplementedException();
         }
 
-        public LogicErrorType AddItemWithArgs(object[] obj)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public LogicErrorType AddItemWithArgs(object[] obj) {
+            return LogicErrorType.NotImplemented;
         }
     }
 }

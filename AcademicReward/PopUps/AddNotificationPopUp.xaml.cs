@@ -7,6 +7,7 @@ using System.Text;
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// AddNotificationPopUp is the popup when adding a new notification
 /// Primary Author: Wil LaLonde 
 /// Secondary Author: None
 /// Reviewer: Xee Lo

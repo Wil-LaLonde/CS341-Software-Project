@@ -1,14 +1,13 @@
 ﻿using Npgsql;
 
-namespace AcademicReward.Database
-{
+namespace AcademicReward.Database {
     /// <summary>
+    /// AcademicRewardsDatabase is used for establishing the database connection string
     /// Primary Author: Maximilian Patterson
     /// Secondary Author: Wil LaLonde
     /// Reviewer: Wil LaLonde / Maximilian Patterson
     /// </summary>
-    public class AcademicRewardsDatabase
-    {
+    public class AcademicRewardsDatabase {
         private string connectionString = string.Empty;
         private const string BitHost = "db.bit.io";
         private const string BitApiKey = "v2_3vaWv_9N4SgRBSZweqRCh5mKAQ4BE";
@@ -22,8 +21,7 @@ namespace AcademicReward.Database
         /// IMPORTANT: This needs to be opened and
         /// closed in the calling method
         /// </summary>
-        public NpgsqlConnection InitDatabaseConnection()
-        {
+        public NpgsqlConnection InitDatabaseConnection() {
             //Creating the connection string
             connectionString = InitializeConnectionString();
             //Establishing the connection
@@ -36,8 +34,7 @@ namespace AcademicReward.Database
         /// Constructs the database connection string
         /// </summary>
         /// <returns>string database connection</returns>
-        public static string InitializeConnectionString()
-        {
+        public static string InitializeConnectionString() {
             return $"Host={BitHost};Username={BitUsername};Password={BitApiKey};Database={BitDatabaseName}";
         }
     }

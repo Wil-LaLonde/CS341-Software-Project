@@ -8,6 +8,7 @@ using AcademicReward.Database;
 using System.Collections.ObjectModel;
 
 /// <summary>
+/// HomePage is the page the user lands on upon logging in. They can submit tasks as well
 /// Primary Author: Xee Lo
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
@@ -20,6 +21,10 @@ public partial class HomePage : ContentPage {
     IDatabase history;
     ILogic updateProfile;
     ObservableCollection<Task> tasksToShow;
+
+    /// <summary>
+    /// HomePage constructor
+    /// </summary>
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
@@ -27,10 +32,9 @@ public partial class HomePage : ContentPage {
         history = new HistoryDatabase();
         updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
-		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
-        
+        UsernameDisplay(isAdmin);
     }
 
     /// <summary>
@@ -127,6 +131,9 @@ public partial class HomePage : ContentPage {
          this.ShowPopup(taskPopUp);
     }
 
+    /// <summary>
+    /// Method used to refresh the list being shown
+    /// </summary>
     private void RefreshTaskList() {
         TaskLV.ItemsSource = tasksToShow;
     }

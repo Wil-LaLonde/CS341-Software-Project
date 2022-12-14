@@ -1,41 +1,48 @@
-using AcademicReward.Database;
 using AcademicReward.ModelClass;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace AcademicReward.Views;
 
 /// <summary>
+/// GroupsPage is the page that shows all groups for a given profile
 /// Primary Author: Maximilian Patterson
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
 /// </summary>
-public partial class GroupsPage : ContentPage
-{
+public partial class GroupsPage : ContentPage {
     public ObservableCollection<object> Groups = new ObservableCollection<object>();
-    public GroupsPage()
-    {
+
+    /// <summary>
+    /// GroupPage constructor
+    /// </summary>
+    public GroupsPage() {
         InitializeComponent();
         GroupsLV.ItemsSource = MauiProgram.Profile.GroupList;
 
         // Hide add group button and text if user is not an admin
-        if (!MauiProgram.Profile.IsAdmin)
-        {
+        if (!MauiProgram.Profile.IsAdmin) {
             AddGroupBtn.IsVisible = false;
             AddGroupLbl.IsVisible = false;
         }
     }
 
-    private void AddGroup(object sender, EventArgs e)
-    {
+    /// <summary>
+    /// Method called when a user clicks on the add group button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
+    private void AddGroup(object sender, EventArgs e) {
         Navigation.PushAsync(new CreateGroupPage());
     }
 
-    private void SelectedGroup(object sender, SelectedItemChangedEventArgs e)
-    {
-        ModelClass.Group selectedGroup = e.SelectedItem as ModelClass.Group;
-        if (selectedGroup != null)
-        {
+    /// <summary>
+    /// Method called when a user selects a group
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">SelectedItemChangedEventArgs e</param>
+    private void SelectedGroup(object sender, SelectedItemChangedEventArgs e) {
+        Group selectedGroup = e.SelectedItem as Group;
+        if (selectedGroup != null) {
             Navigation.PushAsync(new GroupPage(selectedGroup));
         }
     }

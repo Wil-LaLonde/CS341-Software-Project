@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
+    /// NotificationDatabase controls notifications from the database
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson
@@ -54,17 +55,17 @@ namespace AcademicReward.Database {
 
         //Currently not needed
         public DatabaseErrorType UpdateItem(object notification) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
         public DatabaseErrorType DeleteItem(object notification) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
         public DatabaseErrorType LookupItem(object notification) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         /// <summary>
@@ -102,15 +103,15 @@ namespace AcademicReward.Database {
             }
             return dbError;
         }
-
-        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
-        {
-            throw new NotImplementedException();
+        
+        //Currently not needed
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NotImplemented;
         }
 
-        public object FindById(int id)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public object FindById(int id) {
+            return DatabaseErrorType.NotImplemented;
         }
     }
 }
