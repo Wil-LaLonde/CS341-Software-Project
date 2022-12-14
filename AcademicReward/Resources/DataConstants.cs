@@ -119,6 +119,16 @@
         public const string CreateGroupUnknownErrorMessage = "An unknown error occurred while creating your group.";
         //Create Group END
 
+        //Add Member START
+        public const string EmptyMemberNameMessage = "Please fill in the member username entry box.";
+        public const string InvalidMemberUsernameLengthMessage = "Member username must be between 1-25 characters.";
+        public const string AddMemberAlreadyInGroupMessage = "Member is already in the group.";
+        public const string GroupAlreadyHasAdminMessage = "Only one admin can be in a group.";
+        public const string AddMemberUserNameNotFoundMessage = "Member username not found.";
+        public const string AddMemberDBErrorMessage = "An unexpected datbase error occurred while adding the member to the group.";
+        public const string AddMemberUnknownErrorMessage = "An unknown error occurred while adding the member to the group.";
+        //Add Member END
+
         //Display Alert START
         public const string OK = "OK";
         public const string Cancel = "Cancel";

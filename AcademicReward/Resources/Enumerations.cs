@@ -78,8 +78,12 @@
         InvalidGroupNameLength,
         InvalidGroupDescriptionLength,
         GroupCreateError,
-        GroupAlreadyHasAdmin,
         //Group END
+
+        //Add Member START
+        GroupAlreadyHasAdmin,
+        MemberAlreadyInGroup,
+        //Add Member END
 
         //Profile START
         UpdateProfileDBError,
