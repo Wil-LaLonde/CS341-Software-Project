@@ -11,7 +11,7 @@ namespace AcademicReward.Logic {
     /// Reviewer: Wil LaLonde
     /// </summary>
     public class ShopLogic : ILogic {
-        IDatabase ShopData;
+        ShopItemDatabase ShopData;
         public ObservableCollection<ShopItem> ItemList;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace AcademicReward.Logic {
             }
 
             currentMember.Points -= item.PointCost;
-
+            //Need to make a database call here to change the point values
             return LogicErrorType.NoError;
         }
 

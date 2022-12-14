@@ -129,6 +129,13 @@
         public const string AddMemberUnknownErrorMessage = "An unknown error occurred while adding the member to the group.";
         //Add Member END
 
+        //Home Page START
+        public const string TaskSubmittedTitle = "Task Submitted!";
+        public const string TaskSubmittedMessage = "Task was succesfully submitted. You are now waiting for approval from your group admin.";
+        public const string TaskApprovedTitle = "Task Approved!";
+        public const string TaskApprovedMessage = "Task was succesfully approved. The member will receive their points and XP the next time they sign in.";
+        //Home Page END
+
         //Display Alert START
         public const string OK = "OK";
         public const string Cancel = "Cancel";

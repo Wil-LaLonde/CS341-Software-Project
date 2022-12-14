@@ -8,6 +8,7 @@ using AcademicReward.Database;
 using System.Collections.ObjectModel;
 
 /// <summary>
+/// HomePage is the page the user lands on upon logging in. They can submit tasks as well
 /// Primary Author: Xee Lo
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
@@ -21,8 +22,10 @@ public partial class HomePage : ContentPage {
     ILogic updateProfile;
     IDatabase lookUpMemberId;
     ObservableCollection<Task> tasksToShow;
-    public bool IsEnable {get;set;}
-    public ModelClass.Task SelectedTask1 { get; set; }
+
+    /// <summary>
+    /// HomePage constructor
+    /// </summary>
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
@@ -31,9 +34,9 @@ public partial class HomePage : ContentPage {
         history = new HistoryDatabase();
         updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
-		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
+        UsernameDisplay(isAdmin);
     }
 
     /// <summary>
@@ -44,7 +47,6 @@ public partial class HomePage : ContentPage {
         //Bind user name to signed in profile
         Username.Text = MauiProgram.Profile.Username;
         if (isAdmin) {
-            
             PointsLabel.IsVisible = false;
             Points.IsVisible = false;
             LevelLabel.IsVisible = false;
@@ -52,8 +54,6 @@ public partial class HomePage : ContentPage {
             ProgressBar.IsVisible = false;
             ExpLabel.IsVisible = false;
             Exp.IsVisible = false;
-
-           
         }
 		else {
             //Need to map over all member values
@@ -80,8 +80,10 @@ public partial class HomePage : ContentPage {
                // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
                     if (task.IsSubmitted && (!task.IsApproved)) {
-                     tasksToShow.Add(task);
-                     TaskLV.ItemsSource = tasksToShow;
+                        //Setting to false since we don't want the checkbox to be checked
+                        task.IsSubmitted = false;
+                        tasksToShow.Add(task);
+                        TaskLV.ItemsSource = tasksToShow;
                     }  
                 }
             }else{
@@ -141,11 +143,11 @@ public partial class HomePage : ContentPage {
                 int memberID = (int)lookUpMemberId.FindById(task.TaskID);
                 HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, task.Title, $"MemberID: {memberID}\nGroupID: {task.GroupID}");
                 history.AddItem(taskHistory);
-                await DisplayAlert("Approved Task", "Task was succesfully approved", DataConstants.OK);
+                await DisplayAlert(DataConstants.TaskApprovedTitle, DataConstants.TaskApprovedMessage, DataConstants.OK);
             }
             else
             {
-                await DisplayAlert("Submitted Task", "Task was succesfully submitted. You are now waiting for approval.", DataConstants.OK);
+                await DisplayAlert(DataConstants.TaskSubmittedTitle, DataConstants.TaskSubmittedMessage, DataConstants.OK);
                 RefreshTaskList();
             }
         }
