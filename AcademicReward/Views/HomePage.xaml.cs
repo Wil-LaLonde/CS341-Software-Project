@@ -21,6 +21,7 @@ public partial class HomePage : ContentPage {
     ILogic updateProfile;
     IDatabase lookUpMemberId;
     ObservableCollection<Task> tasksToShow;
+    public bool IsEnable {get;set;}
     public ModelClass.Task SelectedTask1 { get; set; }
     public HomePage() {
 		InitializeComponent();
@@ -33,7 +34,6 @@ public partial class HomePage : ContentPage {
 		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
-        
     }
 
     /// <summary>
@@ -44,6 +44,7 @@ public partial class HomePage : ContentPage {
         //Bind user name to signed in profile
         Username.Text = MauiProgram.Profile.Username;
         if (isAdmin) {
+            
             PointsLabel.IsVisible = false;
             Points.IsVisible = false;
             LevelLabel.IsVisible = false;
@@ -51,8 +52,9 @@ public partial class HomePage : ContentPage {
             ProgressBar.IsVisible = false;
             ExpLabel.IsVisible = false;
             Exp.IsVisible = false;
-           // checkBox.isVisible = false;
-		}
+            
+
+        }
 		else {
             //Need to map over all member values
             Points.Text = MauiProgram.Profile.Points.ToString();
@@ -77,8 +79,8 @@ public partial class HomePage : ContentPage {
             if (MauiProgram.Profile.IsAdmin){
                // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
-                   
-                     if (task.IsSubmitted && (!task.IsChecked)) {
+                    IsEnable = false;
+                    if (task.IsSubmitted && (!task.IsApproved)) {
                      tasksToShow.Add(task);
                      TaskLV.ItemsSource = tasksToShow;
                      }  
@@ -93,7 +95,7 @@ public partial class HomePage : ContentPage {
                         await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
                     }
                     else {
-                        if (!task.IsChecked) {
+                        if (!task.IsApproved) {
                             tasksToShow.Add(task);
                             TaskLV.ItemsSource = tasksToShow;
                         }
@@ -131,32 +133,36 @@ public partial class HomePage : ContentPage {
          TaskPopUp taskPopUp = new TaskPopUp(selectedTask);
 
         ModelClass.Task task = await this.ShowPopupAsync(taskPopUp) as ModelClass.Task;
-        //this.ShowPopup(taskPopUp);
-
+   
         if (task != null)
         {
-            if (MauiProgram.Profile.IsAdmin && task.IsChecked)
+            if (MauiProgram.Profile.IsAdmin && task.IsApproved)
             {
                 RemoveTask(task);
                 int memberID = (int)lookUpMemberId.FindById(task.TaskID);
                 HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, task.Title, $"MemberID: {memberID}\nGroupID: {task.GroupID}");
                 history.AddItem(taskHistory);
-                await DisplayAlert("Approved Task", "task was succesfully approved", DataConstants.OK);
+                await DisplayAlert("Approved Task", "Task was succesfully approved", DataConstants.OK);
             }
             else
             {
-                RemoveTask(selectedTask);
-                tasksToShow.Add(task);
-                //selectedTask.IsSubmitted = task.IsSubmitted;
+                await DisplayAlert("Submitted Task", "Task was succesfully submitted. You are now waiting for approval.", DataConstants.OK);
                 RefreshTaskList();
             }
         }
     }
 
+    /// <summary>
+    /// refreshes the task to show
+    /// </summary>
     private void RefreshTaskList() {
         TaskLV.ItemsSource = tasksToShow;
     }
 
+    /// <summary>
+    /// removes task from list after Admin has approved a task
+    /// </summary>
+    /// <param name="taskToRemove"></param>
     public void RemoveTask(Task taskToRemove){
         tasksToShow.Remove(taskToRemove);
     }
