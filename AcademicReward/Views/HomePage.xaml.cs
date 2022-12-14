@@ -8,7 +8,6 @@ using AcademicReward.Database;
 using System.Collections.ObjectModel;
 
 /// <summary>
-/// HomePage is the page the user lands on upon logging in. They can submit tasks as well
 /// Primary Author: Xee Lo
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
@@ -20,21 +19,21 @@ public partial class HomePage : ContentPage {
     IDatabase lookUpTask;
     IDatabase history;
     ILogic updateProfile;
+    IDatabase lookUpMemberId;
     ObservableCollection<Task> tasksToShow;
-
-    /// <summary>
-    /// HomePage constructor
-    /// </summary>
+    public bool IsEnable {get;set;}
+    public ModelClass.Task SelectedTask1 { get; set; }
     public HomePage() {
 		InitializeComponent();
         taskLogic = new TaskLogic();
         lookUpTask = new TaskDatabase();
+        lookUpMemberId = new TaskDatabase();
         history = new HistoryDatabase();
         updateProfile = new ProfileLogic();
         isAdmin = MauiProgram.Profile.IsAdmin;
+		UsernameDisplay(isAdmin);
         PrepareTaskList();
         RefreshTaskList();
-        UsernameDisplay(isAdmin);
     }
 
     /// <summary>
@@ -45,6 +44,7 @@ public partial class HomePage : ContentPage {
         //Bind user name to signed in profile
         Username.Text = MauiProgram.Profile.Username;
         if (isAdmin) {
+            
             PointsLabel.IsVisible = false;
             Points.IsVisible = false;
             LevelLabel.IsVisible = false;
@@ -52,7 +52,9 @@ public partial class HomePage : ContentPage {
             ProgressBar.IsVisible = false;
             ExpLabel.IsVisible = false;
             Exp.IsVisible = false;
-		}
+
+           
+        }
 		else {
             //Need to map over all member values
             Points.Text = MauiProgram.Profile.Points.ToString();
@@ -77,11 +79,10 @@ public partial class HomePage : ContentPage {
             if (MauiProgram.Profile.IsAdmin){
                // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
-                   
-                     if (task.IsSubmitted && (!task.IsChecked)) {
+                    if (task.IsSubmitted && (!task.IsApproved)) {
                      tasksToShow.Add(task);
                      TaskLV.ItemsSource = tasksToShow;
-                     }    
+                    }  
                 }
             }else{
               //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
@@ -93,7 +94,7 @@ public partial class HomePage : ContentPage {
                         await DisplayAlert(DataConstants.LookupTaskDBErrorTitle, DataConstants.LookupTaskDBErrorMessage, DataConstants.OK);
                     }
                     else {
-                        if (!task.IsChecked) {
+                        if (!task.IsApproved) {
                             tasksToShow.Add(task);
                             TaskLV.ItemsSource = tasksToShow;
                         }
@@ -125,16 +126,43 @@ public partial class HomePage : ContentPage {
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
-    private void SelectedTask(object sender, SelectedItemChangedEventArgs e) {
+    private async void SelectedTask(object sender, SelectedItemChangedEventArgs e) {
 		Task selectedTask = (Task)e.SelectedItem;
+
          TaskPopUp taskPopUp = new TaskPopUp(selectedTask);
-         this.ShowPopup(taskPopUp);
+
+        ModelClass.Task task = await this.ShowPopupAsync(taskPopUp) as ModelClass.Task;
+   
+        if (task != null)
+        {
+            if (MauiProgram.Profile.IsAdmin && task.IsApproved)
+            {
+                RemoveTask(task);
+                int memberID = (int)lookUpMemberId.FindById(task.TaskID);
+                HistoryItem taskHistory = new HistoryItem(MauiProgram.Profile.ProfileID, task.Title, $"MemberID: {memberID}\nGroupID: {task.GroupID}");
+                history.AddItem(taskHistory);
+                await DisplayAlert("Approved Task", "Task was succesfully approved", DataConstants.OK);
+            }
+            else
+            {
+                await DisplayAlert("Submitted Task", "Task was succesfully submitted. You are now waiting for approval.", DataConstants.OK);
+                RefreshTaskList();
+            }
+        }
     }
 
     /// <summary>
-    /// Method used to refresh the list being shown
+    /// refreshes the task to show
     /// </summary>
     private void RefreshTaskList() {
         TaskLV.ItemsSource = tasksToShow;
+    }
+
+    /// <summary>
+    /// removes task from list after Admin has approved a task
+    /// </summary>
+    /// <param name="taskToRemove"></param>
+    public void RemoveTask(Task taskToRemove){
+        tasksToShow.Remove(taskToRemove);
     }
 }

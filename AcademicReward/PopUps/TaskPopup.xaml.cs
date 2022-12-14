@@ -3,6 +3,8 @@ using AcademicReward.Logic;
 using CommunityToolkit.Maui.Views;
 using AcademicReward.Resources;
 using System.Text;
+using System.Threading.Tasks;
+using AcademicReward.Views;
 
 namespace AcademicReward.PopUps;
 
@@ -13,7 +15,8 @@ namespace AcademicReward.PopUps;
 /// Reviewer: Wil LaLonde
 /// </summary>
 public partial class TaskPopUp : Popup {
-    public ModelClass.Task SelectedTask { get; }
+
+    public ModelClass.Task SelectedTask { get; set; }
     bool isAdmin;
     IDatabase lookUpTask;
     ILogic updateTask;
@@ -63,7 +66,7 @@ public partial class TaskPopUp : Popup {
         lookUpTask.LookupItem(SelectedTask); 
         if (isAdmin){//if profile is admin 
             //sql call to update the task if the ADMIN has recieved a task a MEMBER has compeleted\
-            SelectedTask.IsChecked = true;  //isChecked means ADMIN HAS CHECKED TASK AS COMPLETED 
+            SelectedTask.IsApproved = true;  //isApproved means ADMIN HAS CHECKED TASK AS COMPLETED 
             logicError = updateTask.UpdateItem(SelectedTask);
             if (LogicErrorType.NoError == logicError) {
                 

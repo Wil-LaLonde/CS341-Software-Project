@@ -31,7 +31,7 @@ namespace AcademicReward.Database {
                 con.Open();
                 //SQL to add task to table, also adding task to profiletask table
                 var sql = "INSERT INTO tasks (tasktitle, taskdescription, points, groupid, ischecked, issubmitted)" +
-                          $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsChecked}, {taskToAdd.IsSubmitted}); " +
+                          $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsApproved}, {taskToAdd.IsSubmitted}); " +
                           "INSERT INTO profiletask " +
                           "SELECT profileid, MAX(taskid), ischecked, ischecked " +
                           "FROM profilegroup, tasks " +
@@ -63,7 +63,7 @@ namespace AcademicReward.Database {
             int profileId = MauiProgram.Profile.ProfileID;
             int memberId = (int)FindById(taskToUpdate.TaskID);
 
-            if (taskToUpdate.IsChecked) {//need to update the members view here not admin 
+            if (taskToUpdate.IsApproved) {//need to update the members view here not admin 
                 //update the bool
                 
                 try {
@@ -72,7 +72,7 @@ namespace AcademicReward.Database {
                     con.Open();
                     //SQL to update the task that is associated to a profile in profiletask table ADMIN VIEW
                     var sql = "UPDATE profiletask " +
-                              $"SET isapproved = {taskToUpdate.IsChecked} " +
+                              $"SET isapproved = {taskToUpdate.IsApproved} " +
                               $"WHERE profiletask.taskid = {taskToUpdate.TaskID}" +
                               $"AND profiletask.profileid = {memberId};";// member ID to update that specific task
                     
@@ -169,7 +169,7 @@ namespace AcademicReward.Database {
                 while (reader.Read()) {
                     //set the task here
                     taskToFind.IsSubmitted = (bool)reader[0];
-                    taskToFind.IsChecked = (bool)reader[1];
+                    taskToFind.IsApproved = (bool)reader[1];
                 }
                 //Closing the connection.
                 con.Close();

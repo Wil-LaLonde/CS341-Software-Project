@@ -15,12 +15,22 @@ namespace AcademicReward.ModelClass {
         public const int MinPointValue = 0;
 
         public int TaskID { get; private set; }
-        public bool IsChecked { get; set; }
+        public bool IsApproved {
+            get { return approve; }
+            set { SetProperty(ref approve, value); }
+        }
         public string Title { get; set;}
         public string Description { get; set; }
         public int Points { get; set; }
         public int GroupID { get; private set; }
-        public bool IsSubmitted { get; set; }
+
+        public bool IsSubmitted {
+            get { return submitted; }
+            set { SetProperty(ref submitted, value); }
+        }
+
+        private bool approve;
+        private bool submitted;
 
         /// <summary>
         /// Task constructor
@@ -30,7 +40,7 @@ namespace AcademicReward.ModelClass {
         /// <param name="description">string description</param>
         /// <param name="points">int points</param>
         public Task(bool isChecked, string title, string description, int points) {
-            IsChecked = isChecked;
+            approve = isChecked;
             Title = title;
             Description = description;
             Points = points;
@@ -44,8 +54,8 @@ namespace AcademicReward.ModelClass {
         /// <param name="points">int points</param>
         /// <param name="groupID">int groupID</param>
         public Task(string title, string description, int points, int groupID) {
-            IsChecked = false;
-            IsSubmitted = false;
+            approve = false;
+            submitted = false;
             Title = title;
             Description = description;
             Points = points;
@@ -62,7 +72,7 @@ namespace AcademicReward.ModelClass {
         /// <param name="groupID">int groupID</param>
         /// <param name="isChecked">bool isChecked</param>
         public Task(int taskID, string title, string description, int points, int groupID, bool isChecked) {
-            IsChecked = isChecked;
+            approve = isChecked;
             TaskID = taskID;
             Title = title;
             Description = description;
@@ -73,16 +83,17 @@ namespace AcademicReward.ModelClass {
         /// <summary>
         /// Task constructor (used for checking if the task should be displayed for memeber or admin)
         /// </summary>
-        /// <param name="taskID">int taskID</param>
-        /// <param name="title">string title</param>
-        /// <param name="description">string description</param>
-        /// <param name="points">int points</param>
-        /// <param name="groupID">int groupID</param>
-        /// <param name="isChecked">bool isChecked</param>
-        /// <param name="isSubmitted">bool isSubmitted</param>
-        public Task(int taskID, string title, string description, int points, int groupID, bool isChecked, bool isSubmitted) {
-            IsChecked = isChecked;
-            IsSubmitted = isSubmitted;
+        /// <param name="taskID"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="points"></param>
+        /// <param name="groupID"></param>
+        /// <param name="isChecked"></param>
+        /// <param name="isSubmitted"></param>
+        public Task(int taskID, string title, string description, int points, int groupID, bool isChecked, bool isSubmitted)
+        {
+            approve = isChecked;
+            submitted = isSubmitted;
             TaskID = taskID;
             Title = title;
             Description = description;
