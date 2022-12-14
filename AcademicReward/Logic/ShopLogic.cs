@@ -33,6 +33,9 @@ namespace AcademicReward.Logic {
                 DatabaseErrorType dbError = shopDB.BuyItem(shopItem);
                 if(DatabaseErrorType.NoError == dbError) {
                     logicError = LogicErrorType.NoError;
+                    //Add new history item
+                    historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryBuyShopItemTitle,
+                       string.Format(DataConstants.HistoryBuyShopItemDescription, shopItem.Title, shopItem.Group.GroupName)));
                 } else {
                     logicError = LogicErrorType.BuyItemError;
                 }

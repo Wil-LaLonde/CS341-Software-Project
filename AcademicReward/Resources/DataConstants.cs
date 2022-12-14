@@ -114,6 +114,8 @@
         public const string HistoryUpdateShopItemDescription = "You updated shop item: {0} for group: {1}.";
         public const string HistoryDeleteShopItemTitle = "Shop Item Deleted";
         public const string HistoryDeleteShopItemDescription = "You deleted shop item: {0} for group: {1}.";
+        public const string HistoryBuyShopItemTitle = "Shop Item Bought";
+        public const string HistoryBuyShopItemDescription = "You bought shop item: {0} from group: {1}.";
         //History END
 
         //Create Group START
