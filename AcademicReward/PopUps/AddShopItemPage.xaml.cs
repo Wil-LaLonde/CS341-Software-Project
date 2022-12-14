@@ -9,7 +9,7 @@ using System.Text;
 /// <summary>
 /// AddShopItemPage is the popup when adding a new shop item
 /// Primary Author: Sean Stille
-/// Secondary Author: None
+/// Secondary Author: Wil LaLonde
 /// Reviewer: Wil LaLonde
 /// </summary>
 public partial class AddShopItemPage : Popup {
@@ -37,7 +37,7 @@ public partial class AddShopItemPage : Popup {
 		Group selectedGroup = GroupPicker.SelectedItem as Group;
 		if (selectedGroup != null) {
 			string itemName = name.Text ?? string.Empty;
-			string itemDescription = name.Text ?? string.Empty;
+			string itemDescription = description.Text ?? string.Empty;
 			bool isValidItemCost = int.TryParse(cost.Text, out int itemCost);
 			if(isValidItemCost) {
 				bool isValidLevelRequirement = int.TryParse(levelRec.Text, out int levelRequirement);
@@ -93,8 +93,16 @@ public partial class AddShopItemPage : Popup {
 		switch(logicError) {
 			case LogicErrorType.EmptyShopItemGroup:
 				errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-				errorMessageBuilder.Append(DataConstants.EmptyGroupNameMessage);
+				errorMessageBuilder.Append(DataConstants.EmptyShopItemGroupMessage);
 				break;
+			case LogicErrorType.EmptyShopItemTitle:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+                errorMessageBuilder.Append(DataConstants.EmptyShopItemTitleMessage);
+                break;
+			case LogicErrorType.EmptyShopItemDescription:
+                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
+                errorMessageBuilder.Append(DataConstants.EmptyShopItemDescriptionMessage);
+                break;
 			case LogicErrorType.InvalidCost:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.InvalidItemCostMessage);
@@ -102,14 +110,6 @@ public partial class AddShopItemPage : Popup {
 			case LogicErrorType.InvalidLevel:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.InvalidLevelMessage);
-                break;
-			case LogicErrorType.EmptyShopItemTitle:
-                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.EmptyShopItemTitleMessage);
-                break;
-			case LogicErrorType.EmptyTaskDescription:
-                errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.EmptyShopItemDescriptionMessage);
                 break;
             case LogicErrorType.NegativeShopItemCost:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
@@ -131,7 +131,7 @@ public partial class AddShopItemPage : Popup {
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.AddShopItemDBErrorMessage);
                 break;
-			default;
+			default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.AddShopItemUnknownErrorMessage);
                 break;

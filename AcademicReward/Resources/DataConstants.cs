@@ -110,6 +110,10 @@
         public const string HistoryCreateTaskDescription = "You created {0} task for {1}";
         public const string HistoryAddShopItemTitle = "Shop Item Created";
         public const string HistoryAddShopItemDescription = "You created shop item: {0} for group: {1}.";
+        public const string HistoryUpdateShopItemTitle = "Shop Item Updated";
+        public const string HistoryUpdateShopItemDescription = "You updated shop item: {0} for group: {1}.";
+        public const string HistoryDeleteShopItemTitle = "Shop Item Deleted";
+        public const string HistoryDeleteShopItemDescription = "You deleted shop item: {0} for group: {1}.";
         //History END
 
         //Create Group START
@@ -139,6 +143,7 @@
         //Home Page END
 
         //Shop START
+        public const string EmptyShopItemGroupMessage = "A shop item group must be selected.";
         public const string InvalidItemCostMessage = "Item cost must be a whole numeric value.";
         public const string InvalidLevelMessage = "Level requirement must be a whole numeric value.";
         public const string EmptyShopItemTitleMessage = "Please fill in the item title entry box.";
@@ -149,6 +154,22 @@
         public const string InvalidShopItemDescriptionLengthMessage = "Item description must be between 1-250 characters.";
         public const string AddShopItemDBErrorMessage = "An unexpected database error occurred while adding the shop item.";
         public const string AddShopItemUnknownErrorMessage = "An unknown error occurred while adding the shop item.";
+        public const string UpdateShopItemDBErrorMessage = "An unexpected database error occurred while updating the shop item.";
+        public const string UpdateShopItemUnknownErrorMessage = "An unknown error occurred while updating the shop item.";
+        public const string LookupShopItemDBErrorTitle = "Error Loading Shop Items";
+        public const string LookupShopItemDBErrorMessage = "There was an unexpected error loading your shop items.";
+        public const string AddShopItemSuccessTitle = "Shop Item Add Success!";
+        public const string AddShopItemSuccessMessage = "Your shop item has been added successfully.";
+        public const string UpdateShopItemSuccessTitle = "Shop Item Update Success!";
+        public const string UpdateShopItemSuccessMessage = "Your shop item has been updated successfully.";
+        public const string DeleteShopItemSuccessTitle = "Shop Item Delete Success!";
+        public const string DeleteShopItemSuccessMessage = "Your shop item has been deleted successfully.";
+        public const string BuyShopItemLevelRequirementMessage = "Your level is not high enough.";
+        public const string BuyShopItemNotEnoughPointsMessage = "Not enough points.";
+        public const string BuyShopItemDBErrorMessage = "An unexpected database error occurred while buying the shop item.";
+        public const string BuyShopItemUnknownErrorMessage = "An unknown error occurred while buying the shop item.";
+        public const string BuyShopItemSuccessTitle = "Shop Item Buy Success!";
+        public const string BuyShopItemSuccessMessage = "Your shop item has been bought successfully.";
         //Shop END
 
         //Display Alert START

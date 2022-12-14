@@ -15,6 +15,8 @@ public partial class ProfilePage : ContentPage {
     /// </summary>
 	public ProfilePage() {
 		InitializeComponent();
+        BindingContext = MauiProgram.Profile;
+        Points.SetBinding(Label.TextProperty, nameof(MauiProgram.Profile.Points));
         UsernameDisplay(MauiProgram.Profile.IsAdmin);
         // If user is an admin, hide PurchaseHistoryBtn
         if (MauiProgram.Profile.IsAdmin) {
@@ -86,8 +88,6 @@ public partial class ProfilePage : ContentPage {
             Exp.IsVisible = false;
         }
         else {
-            //Need to map over all member values
-            Points.Text = MauiProgram.Profile.Points.ToString();
             Level.Text = MauiProgram.Profile.Level.ToString();
             ProgressBar.Progress = MauiProgram.Profile.GetCurrentXPDouble();
             Exp.Text = MauiProgram.Profile.GetCurrentXPInt() + DataConstants.SpaceSlashSpace + Profile.LevelUpRequirementInt;

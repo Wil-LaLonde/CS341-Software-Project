@@ -21,6 +21,8 @@ namespace AcademicReward.ModelClass {
         private ObservableCollection<Notification> notificationList;
         private ObservableCollection<Task> taskList;
 
+        private int points;
+
         public int ProfileID { get; private set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -30,7 +32,11 @@ namespace AcademicReward.ModelClass {
         public bool IsAdmin { get; private set; }
         public int XP { get; set; }
         public int Level { get; set; }
-        public int Points { get; set; }
+        public int Points {
+            get { return points; }
+            set { SetProperty(ref points, value); }
+        }
+        public Shop ProfileShop { get; private set; }
 
         public ObservableCollection<Group> GroupList { get { return groupList; } }
         public ObservableCollection<ShopItem> PurchaseItems { get { return purchaseItems; } }
@@ -128,6 +134,7 @@ namespace AcademicReward.ModelClass {
             purchaseItems = new ObservableCollection<ShopItem>();
             notificationList = new ObservableCollection<Notification>();
             taskList = new ObservableCollection<Task>();
+            ProfileShop = new Shop();
         }
 
         /// <summary>
@@ -217,6 +224,20 @@ namespace AcademicReward.ModelClass {
                 }
             }
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Method used to get the group object using the groupID
+        /// </summary>
+        /// <param name="groupID">int groupID</param>
+        /// <returns>Group group</returns>
+        public Group GetGroupUsingGroupID(int groupID) {
+            foreach(Group group in groupList) {
+                if(group.GroupID == groupID) {
+                    return group;
+                }
+            }
+            return null;
         }
 
         /// <summary>

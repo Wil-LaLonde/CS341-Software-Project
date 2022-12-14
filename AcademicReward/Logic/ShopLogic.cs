@@ -12,38 +12,32 @@ namespace AcademicReward.Logic {
     /// </summary>
     public class ShopLogic : ILogic {
         IDatabase historyDB;
-        ShopItemDatabase ShopData;
-        public ObservableCollection<ShopItem> ItemList;
+        ShopItemDatabase shopDB;
 
         /// <summary>
         /// ShopLogic constructor
         /// </summary>
         public ShopLogic() {
-            ShopData = new ShopItemDatabase(this);
-            ItemList = new ObservableCollection<ShopItem>();
+            shopDB = new ShopItemDatabase();
             historyDB = new HistoryDatabase();
         }
 
-
-        public LogicErrorType BuyItem(ShopItem item)
-        {
-            Profile currentMember = MauiProgram.Profile;
-            if (currentMember.Level < item.LevelRequirement)
-            {
-                return LogicErrorType.NeedHigherLevel;
+        /// <summary>
+        /// Method used to buy a shop item (logic)
+        /// </summary>
+        /// <param name="shopItem">ShopItem shopItem</param>
+        /// <returns>LogicErrorType logicError</returns>
+        public LogicErrorType BuyItem(ShopItem shopItem) {
+            LogicErrorType logicError = CheckBuyShopItem(MauiProgram.Profile, shopItem);
+            if(LogicErrorType.NoError == logicError) {
+                DatabaseErrorType dbError = shopDB.BuyItem(shopItem);
+                if(DatabaseErrorType.NoError == dbError) {
+                    logicError = LogicErrorType.NoError;
+                } else {
+                    logicError = LogicErrorType.BuyItemError;
+                }
             }
-            if (currentMember.Points < item.PointCost)
-            {
-                return LogicErrorType.NotEnoughDoubloons;
-            }
-            if ( ShopData.BuyItem(item) != DatabaseErrorType.NoError)
-            {
-                return LogicErrorType.UnsuccessfulDBAdd;
-            }
-
-            currentMember.Points -= item.PointCost;
-            //Need to make a database call here to change the point values
-            return LogicErrorType.NoError;
+            return logicError;
         }
 
         /// <summary>
@@ -55,11 +49,10 @@ namespace AcademicReward.Logic {
             LogicErrorType logicError;
             ShopItem shopItemToAdd = shopItem as ShopItem;
             //Checking user input
-            logicError = AddShopItemCheck(shopItemToAdd);
+            logicError = CheckShopItem(shopItemToAdd);
             if(LogicErrorType.NoError == logicError) {
-                DatabaseErrorType dbError = ShopData.AddItem(shopItemToAdd);
+                DatabaseErrorType dbError = shopDB.AddItem(shopItemToAdd);
                 if(DatabaseErrorType.NoError == dbError) {
-                    ItemList.Add(shopItemToAdd);
                     //Adding new history item
                     historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryAddShopItemTitle, 
                         string.Format(DataConstants.HistoryAddShopItemDescription, shopItemToAdd.Title, shopItemToAdd.Group.GroupName)));
@@ -73,57 +66,60 @@ namespace AcademicReward.Logic {
         /// <summary>
         /// Method used to delete a shop item (logic)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="shopItem">object shopItem</param>
         /// <returns>LogicErrorType logicError</returns>
-        public LogicErrorType DeleteItem(object obj) {
-            ShopItem item = obj as ShopItem;
-            ShopItem toBeRemoved = null;
-            foreach ( ShopItem i in ItemList) {
-                if (i.Id == item.Id) {
-                    toBeRemoved = i;
-                }
+        public LogicErrorType DeleteItem(object shopItem) {
+            LogicErrorType logicError;
+            DatabaseErrorType dbError = shopDB.DeleteItem(shopItem);
+            if(DatabaseErrorType.NoError == dbError) {
+                logicError = LogicErrorType.NoError;
+                //Add new history item
+                ShopItem shopItemToDelete = shopItem as ShopItem;
+                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryDeleteShopItemTitle,
+                       string.Format(DataConstants.HistoryDeleteShopItemDescription, shopItemToDelete.Title, shopItemToDelete.Group.GroupName)));
+            } else {
+                logicError = LogicErrorType.DeleteShopItemDBError;
             }
-            ItemList.Remove(toBeRemoved);
-            ShopData.DeleteItem(toBeRemoved);
-            return LogicErrorType.NoError;
+            return logicError;
         }
 
         /// <summary>
         /// Method used to lookup all shop items (logic)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="profile">object profile</param>
         /// <returns>LogicErrorType logicError</returns>
-        public LogicErrorType LookupItem(object obj) {
-            ShopData.LookupFullItem(null);
-            return LogicErrorType.NoError;
+        public LogicErrorType LookupItem(object profile) {
+            LogicErrorType logicError;
+            DatabaseErrorType dbError = shopDB.LookupFullItem(profile);
+            if(DatabaseErrorType.NoError == dbError) {
+                logicError = LogicErrorType.NoError;
+            } else {
+                logicError = LogicErrorType.LookupAllShopItemsDBError;
+            }
+            return logicError;
         }
 
         /// <summary>
         /// Method used to update a shop item (logic)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="shopItem">object shopItem</param>
         /// <returns>LogicErrorType logicError</returns>
-        public LogicErrorType UpdateItem(object obj) {
-            ModelClass.ShopItem toBeAdded;
-            String[] AddItemVals = (String[])obj;
-            int cost = -1;
-            int level = -1;
-            //Testing cost, if it doesn't work, throw exception
-            if (!int.TryParse(AddItemVals[2], out cost))  {
-                return LogicErrorType.InvalidCost;
+        public LogicErrorType UpdateItem(object shopItem) {
+            LogicErrorType logicError;
+            ShopItem shopItemToUpdate = shopItem as ShopItem;
+            //Checking user input
+            logicError = CheckShopItem(shopItemToUpdate);
+            if (LogicErrorType.NoError == logicError) {
+                DatabaseErrorType dbError = shopDB.UpdateItem(shopItemToUpdate);
+                if (DatabaseErrorType.NoError == dbError) {
+                    //Adding new history item
+                    historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryUpdateShopItemTitle,
+                        string.Format(DataConstants.HistoryUpdateShopItemDescription, shopItemToUpdate.Title, shopItemToUpdate.Group.GroupName)));
+                } else {
+                    logicError = LogicErrorType.UpdateShopItemDBError;
+                }
             }
-            // Testing level
-            if (!int.TryParse(AddItemVals[3], out level))  {
-                return LogicErrorType.InvalidLevel;
-            }
-
-            toBeAdded = new ShopItem(int.Parse(AddItemVals[5]), AddItemVals[0], AddItemVals[1], cost, level, null);
-            
-            if (ShopData.UpdateItem(toBeAdded) == DatabaseErrorType.NoError) {
-                return LogicErrorType.NoError;
-            } else {
-                return LogicErrorType.UnsuccessfulDBAdd;
-            }
+            return logicError;
         }
 
         //Currently not needed
@@ -135,12 +131,12 @@ namespace AcademicReward.Logic {
         /// Helper method used to check a shop item
         /// </summary>
         /// <param name="shopItem">ShopItem shopItem</param>
-        private LogicErrorType AddShopItemCheck(ShopItem shopItem) {
+        private LogicErrorType CheckShopItem(ShopItem shopItem) {
             LogicErrorType logicError;
             if (string.IsNullOrEmpty(shopItem.Title)) {
                 logicError = LogicErrorType.EmptyShopItemTitle;
             } else if(string.IsNullOrEmpty(shopItem.Description)) {
-                logicError = LogicErrorType.EmptyTaskDescription;
+                logicError = LogicErrorType.EmptyShopItemDescription;
             } else if(CheckPointValue(shopItem.PointCost)) {
                 logicError = LogicErrorType.NegativeShopItemCost;
             } else if(CheckLevelRequirement(shopItem.LevelRequirement)) {
@@ -149,6 +145,24 @@ namespace AcademicReward.Logic {
                 logicError = LogicErrorType.InvalidShopItemLength;
             } else if(CheckItemDescriptionLength(shopItem.Description)) {
                 logicError = LogicErrorType.InvalidShopItemDescriptionLength;
+            } else {
+                logicError = LogicErrorType.NoError;
+            }
+            return logicError;
+        }
+
+        /// <summary>
+        /// Helper method for checking when buying a shop item
+        /// </summary>
+        /// <param name="profile">Profile profile</param>
+        /// <param name="shopItem">ShopItem shopItem</param>
+        /// <returns>LogicErrorType logicError</returns>
+        private LogicErrorType CheckBuyShopItem(Profile profile, ShopItem shopItem) {
+            LogicErrorType logicError;
+            if(profile.Level < shopItem.LevelRequirement) {
+                logicError = LogicErrorType.NeedHigherLevel;
+            } else if(profile.Points < shopItem.PointCost) {
+                logicError = LogicErrorType.NotEnoughDoubloons;
             } else {
                 logicError = LogicErrorType.NoError;
             }

@@ -14,15 +14,40 @@ namespace AcademicReward.ModelClass {
         public const int MaxDescriptionLength = 250;
         public const int MinCostValue = 0;
         public const int MinLevelRequirement = 1;
+        public const int DeleteShopItemSuccesValue = -1;
+        public const int BuyShopItemSuccessValue = -2;
 
+        private int id;
+        private string title;
+        private string description;
+        private int pointCost;
+        private int levelRequirement;
+        private Group group;
 
-        public static int IdCounter = 0;
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public int PointCost { get; set; }
-        public int LevelRequirement { get; set; }
-        public Group Group { get; set; }
+        public int Id {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+        public string Title {
+            get { return title; }
+            set { SetProperty(ref title, value); }
+        }
+        public string Description {
+            get { return description; }
+            set { SetProperty(ref description, value); }
+        }
+        public int PointCost {
+            get { return pointCost; }
+            set { SetProperty(ref pointCost, value); }
+        }
+        public int LevelRequirement {
+            get { return levelRequirement; }
+            set { SetProperty(ref levelRequirement, value); }
+        }
+        public Group Group {
+            get { return group; }
+            set { SetProperty(ref group, value); }
+        }
 
         /// <summary>
         /// ShopItem constructor
@@ -38,7 +63,6 @@ namespace AcademicReward.ModelClass {
             PointCost = pointCost;
             LevelRequirement = levelRequirement;
             Group = group;
-            Id = ++IdCounter;
         }
 
         /// <summary>
@@ -57,9 +81,6 @@ namespace AcademicReward.ModelClass {
             PointCost = pointCost;
             LevelRequirement = levelRequirement;
             Group = group;
-            if (id > IdCounter) {
-                IdCounter = id++;               //This prevents overlapping IDs
-            }
         }
     }
 }

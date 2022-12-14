@@ -6,8 +6,8 @@
             CanBeDismissedByTappingOutsideOfPopup="False"
             Color="White"
             Size="600, 1100">
-    <!-- Primary Author: Wil LaLonde -->
-    <!-- Secondary Author: Sean Stille -->
+    <!-- Primary Author: Sean Stille -->
+    <!-- Secondary Author: Wil LaLonde -->
     <!-- Reviewer: Wil LaLonde -->
     <StackLayout Margin="25">
         <StackLayout Orientation="Horizontal" Margin="0, 20">
@@ -30,7 +30,7 @@
         <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
             <StackLayout x:Name="ErrorStackLayout">
                 <Label
-                    Text="Error with task creation: "
+                    Text="Error while adding shop item: "
                     x:Name="ErrorMessageHeader"
                     FontSize="22"
                     Margin="0, 5"
@@ -38,7 +38,6 @@
                 <Label
                     Text=""
                     x:Name="ErrorMessageBody"
-                    TextType="Html"
                     FontSize="20"/>
             </StackLayout>
         </Frame>

@@ -36,6 +36,18 @@
                             BorderColor="{StaticResource BlueButton}"
                             VerticalOptions="Center"
                             HorizontalOptions="EndAndExpand"/>
+                        <StackLayout Orientation="Horizontal" x:Name="PointStack">
+                            <Label
+                                x:Name="PointsLabel"
+                                Text="Points: "
+                                FontSize="35"
+                                VerticalOptions="Center"
+                                HorizontalOptions="EndAndExpand"/>
+                            <Label
+                                x:Name="Points"
+                                FontSize="35"
+                                VerticalOptions="Center"/>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </Frame>
