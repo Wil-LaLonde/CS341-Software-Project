@@ -7,6 +7,7 @@ using System.Text;
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// LoginPopUp is the popup to create a new profile
 /// Primary Author: Wil LaLonde
 /// Secondary Author: None
 /// Reviewer: Xee Lo / Maximilian Patterson
@@ -14,6 +15,9 @@ namespace AcademicReward.PopUps;
 public partial class LoginPopUp : Popup {
 	private ILogic loginLogic;
 
+	/// <summary>
+	/// LoginPopUp constructor
+	/// </summary>
 	public LoginPopUp() {
 		loginLogic = new LoginLogic();
 		InitializeComponent();

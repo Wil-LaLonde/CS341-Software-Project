@@ -3,9 +3,10 @@ using AcademicReward.Resources;
 
 namespace AcademicReward.Logic {
     /// <summary>
+    /// TaskLogic is the logic behind anything task related
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
-    /// Reviewer: 
+    /// Reviewer: Xee Lo
     /// </summary>
     public class TaskLogic : ILogic {
         private IDatabase taskDB;
@@ -58,15 +59,18 @@ namespace AcademicReward.Logic {
             return logicError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method used to delete a task
+        /// </summary>
+        /// <param name="task">object task</param>
+        /// <returns>LogicErrorType logicError</returns>
         public LogicErrorType DeleteItem(object task) {
             LogicErrorType logicError;
             ModelClass.Task taskToDelete = task as ModelClass.Task;
             DatabaseErrorType dbError = taskDB.DeleteItem(taskToDelete);
             if (DatabaseErrorType.NoError == dbError) {
                 logicError = LogicErrorType.NoError;
-            }
-            else {
+            } else {
                 logicError = LogicErrorType.DeleteTaskDBError;
             }
             return logicError;
@@ -75,7 +79,7 @@ namespace AcademicReward.Logic {
         /// <summary>
         /// Method used to gather all tasks for a given profile
         /// </summary>
-        /// <param name="profile"></param>
+        /// <param name="profile">object profile</param>
         /// <returns>LogicErrorType</returns>
         public LogicErrorType LookupItem(object profile) {
             LogicErrorType logicError;
@@ -140,9 +144,9 @@ namespace AcademicReward.Logic {
             return descriptionLength < ModelClass.Task.MinDescriptionLength || descriptionLength > ModelClass.Task.MaxDescriptionLength;
         }
 
-        public LogicErrorType AddItemWithArgs(object[] obj)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public LogicErrorType AddItemWithArgs(object[] obj) {
+            return LogicErrorType.NotImplemented;
         }
     }
 }

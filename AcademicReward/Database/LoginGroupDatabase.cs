@@ -5,31 +5,36 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
+    /// LoginGroupDatabase gathers all the groups for a signed in profile from the database
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
-    /// Reviewer: 
+    /// Reviewer: Maximilian Patterson
     /// </summary>
     public class LoginGroupDatabase : AcademicRewardsDatabase, IDatabase {
+        
+        /// <summary>
+        /// LoginGroupDatabase constructor
+        /// </summary>
         public LoginGroupDatabase() { }
 
         //Currently not needed
         public DatabaseErrorType AddItem(object obj) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
         public DatabaseErrorType UpdateItem(object obj) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
         public DatabaseErrorType DeleteItem(object obj) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         //Currently not needed
         public DatabaseErrorType LookupItem(object obj) {
-            return DatabaseErrorType.NoError;
+            return DatabaseErrorType.NotImplemented;
         }
 
         /// <summary>
@@ -69,14 +74,14 @@ namespace AcademicReward.Database {
             return dbError;
         }
 
-        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NotImplemented;
         }
 
-        public object FindById(int id)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public object FindById(int id) {
+            return DatabaseErrorType.NotImplemented;
         }
     }
 }

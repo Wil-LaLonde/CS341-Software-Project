@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 
 namespace AcademicReward.Logic {
     /// <summary>
+    /// LoginLogic is the logic behind adding profiles, signing profiles in, and updating profiles (password)
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None
     /// Reviewer: Maximilian Patterson
@@ -82,7 +83,7 @@ namespace AcademicReward.Logic {
 
         //Currently not needed
         public LogicErrorType DeleteItem(object profile) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
 
         /// <summary>

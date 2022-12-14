@@ -73,6 +73,13 @@
                         Clicked="ShowHistoryView"
                         Margin="65, 5"
                         Padding="0, 25"/>
+                <Button x:Name="PurchaseHistoryBtn"
+                        Text="Purchase History" 
+                        FontSize="42"
+                        FontFamily="BoldFont"
+                        Clicked="ShowPurchaseHistoryView"
+                        Margin="65, 5"
+                        Padding="0, 25"/>
                 <Button Text="Edit Profile" 
                         FontSize="42"
                         FontFamily="BoldFont"

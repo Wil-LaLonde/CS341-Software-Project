@@ -1,9 +1,9 @@
-﻿using AcademicReward.ModelClass;
-using AcademicReward.Resources;
+﻿using AcademicReward.Resources;
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
+    /// IDatabase interface
     /// Primary Author: Wil LaLonde
     /// Secondary Author: None 
     /// Reviewer: Maximilian Patterson

@@ -3,9 +3,10 @@ using AcademicReward.Resources;
 
 namespace AcademicReward.Logic {
     /// <summary>
+    /// LoginGroupLogic is the logic behind gathering all groups for a profile upon signing in
     /// Primary Author: Wil LaLonde
-    /// Secondary Author: 
-    /// Reviewer: 
+    /// Secondary Author: None
+    /// Reviewer: Maximilian Patterson
     /// </summary>
     public class LoginGroupLogic : ILogic {
         private IDatabase loginGroupDB;
@@ -19,24 +20,24 @@ namespace AcademicReward.Logic {
 
         //Currently not needed
         public LogicErrorType AddItem(object obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
 
         //Currently not needed
         public LogicErrorType UpdateItem(object obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
 
         //Currently not needed
         public LogicErrorType DeleteItem(object obj) {
-            return LogicErrorType.NoError;
+            return LogicErrorType.NotImplemented;
         }
 
         /// <summary>
         /// Method that calls the database to gather 
         /// </summary>
-        /// <param name="profile"></param>
-        /// <returns></returns>
+        /// <param name="profile">object profile</param>
+        /// <returns>LogicErrorType logicError</returns>
         public LogicErrorType LookupItem(object profile) {
             LogicErrorType logicError;
             DatabaseErrorType dbError = loginGroupDB.LookupFullItem(profile);
@@ -48,8 +49,8 @@ namespace AcademicReward.Logic {
             return logicError;
         }
 
-        public LogicErrorType AddItemWithArgs(object[] obj)
-        {
+        //Currently not needed
+        public LogicErrorType AddItemWithArgs(object[] obj) {
             throw new NotImplementedException();
         }
     }

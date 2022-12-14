@@ -52,8 +52,8 @@ public partial class HomePage : ContentPage {
             ProgressBar.IsVisible = false;
             ExpLabel.IsVisible = false;
             Exp.IsVisible = false;
-            
 
+           
         }
 		else {
             //Need to map over all member values
@@ -79,11 +79,10 @@ public partial class HomePage : ContentPage {
             if (MauiProgram.Profile.IsAdmin){
                // ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();
                 foreach (var task in MauiProgram.Profile.TaskList){
-                    IsEnable = false;
                     if (task.IsSubmitted && (!task.IsApproved)) {
                      tasksToShow.Add(task);
                      TaskLV.ItemsSource = tasksToShow;
-                     }  
+                    }  
                 }
             }else{
               //  ObservableCollection<Task> tasksToShow = new ObservableCollection<Task>();

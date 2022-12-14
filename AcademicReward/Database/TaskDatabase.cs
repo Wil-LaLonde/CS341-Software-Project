@@ -5,9 +5,10 @@ using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
     /// <summary>
+    /// TaskDatabase controls tasks in the database
     /// Primary Author: Wil LaLonde, Xee Lo
     /// Secondary Author: None
-    /// Reviewer: 
+    /// Reviewer: Maximilian Patterson
     /// </summary>
     public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
 
@@ -20,7 +21,7 @@ namespace AcademicReward.Database {
         /// Method used to add a new task (database)
         /// </summary>
         /// <param name="task">object task</param>
-        /// <returns>DatabaseErrorType</returns>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType AddItem(object task) {
             DatabaseErrorType dbError;
             ModelClass.Task taskToAdd = task as ModelClass.Task;
@@ -54,8 +55,8 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Updates the item based on MEMBER VIEW or ADMIN VIEW
         /// </summary>
-        /// <param name="task"></param>
-        /// <returns></returns>
+        /// <param name="task">object task</param>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType UpdateItem(object task) {
             DatabaseErrorType dbError;
             ModelClass.Task taskToUpdate = task as ModelClass.Task;
@@ -113,7 +114,11 @@ namespace AcademicReward.Database {
             return dbError;
         }
 
-        //Currently not needed
+        /// <summary>
+        /// Method used to delete a task (database)
+        /// </summary>
+        /// <param name="task">object task</param>
+        /// <returns>DatabaseErrorType dbError</returns>
         public DatabaseErrorType DeleteItem(object task) {
             DatabaseErrorType dbError;
             ModelClass.Task taskToDelete = task as ModelClass.Task;
@@ -143,7 +148,7 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Looks up the task from profiletask to update the bool values
         /// </summary>
-        /// <param name="task"></param>
+        /// <param name="task">object task</param>
         /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType LookupItem(object task) {
             DatabaseErrorType dbError;
@@ -185,7 +190,7 @@ namespace AcademicReward.Database {
         /// <returns>DatabaseErrorType</returns>
         public DatabaseErrorType LookupFullItem(object profile) {
             DatabaseErrorType dbError;
-            ModelClass.Profile profileTasks = profile as ModelClass.Profile;
+            Profile profileTasks = profile as Profile;
             if (profileTasks.IsAdmin) { //This is for fetching data for ADMIN VIEW 
                 try {
                     //Opening the connection
@@ -252,19 +257,17 @@ namespace AcademicReward.Database {
             return dbError;
         }
 
-        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args)
-        {
-            throw new NotImplementedException();
+        //Currently not needed
+        public DatabaseErrorType LoadItems(ObservableCollection<object> obj, string[] args) {
+            return DatabaseErrorType.NotImplemented;
         }
-
 
         /// <summary>
         /// Looks for the specific MEMBER ID
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">int id</param>
         /// <returns>object</returns>
-        public object FindById(int id)
-        {
+        public object FindById(int id) {
             var memberProfileId = -1;
             try {
                 using var con = new NpgsqlConnection(InitializeConnectionString());
@@ -294,7 +297,6 @@ namespace AcademicReward.Database {
                 //Something went wrong looking up the task
                 Console.WriteLine("Unexpected error while looking up task: {0}", ex);
             }
-
             return memberProfileId;
         }
     }

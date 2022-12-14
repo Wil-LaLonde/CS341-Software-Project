@@ -2,6 +2,7 @@
 
 namespace AcademicReward.ModelClass {
     /// <summary>
+    /// Model class used to represent a task
     /// Primary Author: Xee Lo
     /// Secondary Author: None
     /// Reviewer: Wil LaLonde
@@ -19,7 +20,6 @@ namespace AcademicReward.ModelClass {
             set { SetProperty(ref approve, value); }
         }
         public string Title { get; set;}
-           //Title should have limited chars
         public string Description { get; set; }
         public int Points { get; set; }
         public int GroupID { get; private set; }

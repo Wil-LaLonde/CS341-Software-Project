@@ -1,5 +1,4 @@
 using AcademicReward.Database;
-using AcademicReward.ModelClass;
 using AcademicReward.Logic;
 using CommunityToolkit.Maui.Views;
 using AcademicReward.Resources;
@@ -10,6 +9,7 @@ using AcademicReward.Views;
 namespace AcademicReward.PopUps;
 
 /// <summary>
+/// TaskPopUp is the popup when a user clicks on a task on the Home page
 /// Primary Author: Xee Lo
 /// Secondary Author: None
 /// Reviewer: Wil LaLonde
@@ -21,23 +21,29 @@ public partial class TaskPopUp : Popup {
     IDatabase lookUpTask;
     ILogic updateTask;
 
+    /// <summary>
+    /// TaskPopUp constructor
+    /// </summary>
     public TaskPopUp() {
 		InitializeComponent();
     }
 
+    /// <summary>
+    /// TaskPopUp constructor
+    /// </summary>
+    /// <param name="selectedTask">ModelClass.Task selectedTask</param>
 	public TaskPopUp(ModelClass.Task selectedTask) {
         InitializeComponent();
         SelectedTask = selectedTask;
         title.Text = selectedTask.Title;
         description.Text = selectedTask.Description;
         points.Text = selectedTask.Points.ToString();
-        group.Text = selectedTask.GroupID.ToString();
+        group.Text = MauiProgram.Profile.GetGroupNameUsingGroupID(selectedTask.GroupID);
         SetErrorMessageBox(false, string.Empty);
         isAdmin = MauiProgram.Profile.IsAdmin;
        
         updateTask = new TaskLogic();
         lookUpTask = new TaskDatabase();
-        
     }
 
     /// <summary>

@@ -1,14 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace AcademicReward.ModelClass
-{
+namespace AcademicReward.ModelClass {
     /// <summary>
+    /// Model class used to represent a HistoryItem
     /// Primary Author: Maximilian Patterson
     /// Secondary Author: None
     /// Reviewer: Xee Lo
     /// </summary>
-    public class HistoryItem : ObservableObject
-    {
+    public class HistoryItem : ObservableObject {
         public int HistoryId { get; set; }
         public int ProfileId { get; set; }
         public string Title { get; set; }

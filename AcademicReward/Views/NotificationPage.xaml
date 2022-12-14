@@ -7,7 +7,7 @@
     <!-- Secondary Author: None -->
     <!-- Reviewer: Maximilian Patterson -->
     <ScrollView>
-        <StackLayout Margin="20">
+        <StackLayout Margin="25">
             <Frame BorderColor="{StaticResource BlueButton}">
                 <StackLayout>
                     <Label 

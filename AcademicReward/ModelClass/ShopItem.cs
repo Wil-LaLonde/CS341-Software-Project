@@ -2,6 +2,7 @@
 
 namespace AcademicReward.ModelClass {
     /// <summary>
+    /// Model class used to represent a shop item
     /// Primary Author: Wil LaLonde
     /// Secondary Author: Sean Stille
     /// Reviewer: Maximilian Patterson
@@ -33,24 +34,25 @@ namespace AcademicReward.ModelClass {
             Id = ++IdCounter;
         }
 
-        /**
-         * Overloaded constructor, used when pulling data from database to accomodate prexisting ID
-         */
-        public ShopItem(int id, string title, string description, int pointCost, int levelRequirement, Group group)
-        {
+        /// <summary>
+        /// ShopItem constructor (when pulling from the database)
+        /// </summary>
+        /// <param name="id">int id</param>
+        /// <param name="title">string title</param>
+        /// <param name="description">string description</param>
+        /// <param name="pointCost">int pointCost</param>
+        /// <param name="levelRequirement">int levelRequirement</param>
+        /// <param name="group">Group group</param>
+        public ShopItem(int id, string title, string description, int pointCost, int levelRequirement, Group group) {
             Id = id;
             Title = title;
             Description = description;
             PointCost = pointCost;
             LevelRequirement = levelRequirement;
             Group = group;
-            if (id > IdCounter)
-            {
+            if (id > IdCounter) {
                 IdCounter = id++;               //This prevents overlapping IDs
             }
         }
-
-        
-
     }
 }

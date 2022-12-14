@@ -1,5 +1,6 @@
 ﻿namespace AcademicReward.Resources {
     /// <summary>
+    /// DataConstants is the file that holds all data constants to avoid "magic values"
     /// Primary Author: Wil LaLonde 
     /// Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
     /// Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson
@@ -108,6 +109,25 @@
         public const string HistoryCreateTaskTitle = "Task Created";
         public const string HistoryCreateTaskDescription = "You created {0} task for {1}";
         //History END
+
+        //Create Group START
+        public const string EmptyGroupNameMessage = "Please fill in the group name entry box.";
+        public const string EmptyGroupDescriptionMessage = "Please fill in the group description entry box.";
+        public const string InvalidGroupNameLengthMessage = "Group name must be between 1-50 characters.";
+        public const string InvalidGroupDescriptionMessage = "Group description must be between 1-250 characters.";
+        public const string CreateGroupDBErrorMessage = "An unexpected database error occurred while creating your group.";
+        public const string CreateGroupUnknownErrorMessage = "An unknown error occurred while creating your group.";
+        //Create Group END
+
+        //Add Member START
+        public const string EmptyMemberNameMessage = "Please fill in the member username entry box.";
+        public const string InvalidMemberUsernameLengthMessage = "Member username must be between 1-25 characters.";
+        public const string AddMemberAlreadyInGroupMessage = "Member is already in the group.";
+        public const string GroupAlreadyHasAdminMessage = "Only one admin can be in a group.";
+        public const string AddMemberUserNameNotFoundMessage = "Member username not found.";
+        public const string AddMemberDBErrorMessage = "An unexpected datbase error occurred while adding the member to the group.";
+        public const string AddMemberUnknownErrorMessage = "An unknown error occurred while adding the member to the group.";
+        //Add Member END
 
         //Display Alert START
         public const string OK = "OK";
