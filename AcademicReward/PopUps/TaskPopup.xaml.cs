@@ -66,10 +66,10 @@ public partial class TaskPopUp : Popup {
         lookUpTask.LookupItem(SelectedTask); 
         if (isAdmin){//if profile is admin 
             //sql call to update the task if the ADMIN has recieved a task a MEMBER has compeleted\
+            SelectedTask.IsSubmitted = true;
             SelectedTask.IsApproved = true;  //isApproved means ADMIN HAS CHECKED TASK AS COMPLETED 
             logicError = updateTask.UpdateItem(SelectedTask);
             if (LogicErrorType.NoError == logicError) {
-                
                 MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask); //remove it from ADMIN task list
                 Close(SelectedTask);
             }
