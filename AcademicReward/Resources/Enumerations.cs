@@ -66,6 +66,8 @@
         InvalidCost,
         InvalidLevel,
         UnsuccessfulDBAdd,
+        NotEnoughDoubloons,
+        NeedHigherLevel,
         //Shop END
 
         //History START (history calls are often made from LogicClasses
@@ -126,6 +128,10 @@
         UpdateTaskDbError,
         DeleteTaskDBError,
         //Task END
+
+        //Shop START
+        BuyItemError,
+        //Shop END
 
         // History START
         AddHistoryDBError,

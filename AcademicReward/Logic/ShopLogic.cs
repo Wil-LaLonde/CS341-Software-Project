@@ -22,6 +22,28 @@ namespace AcademicReward.Logic {
             ItemList = new ObservableCollection<ShopItem>();
         }
 
+
+        public LogicErrorType BuyItem(ShopItem item)
+        {
+            Profile currentMember = MauiProgram.Profile;
+            if (currentMember.Level < item.LevelRequirement)
+            {
+                return LogicErrorType.NeedHigherLevel;
+            }
+            if (currentMember.Points < item.PointCost)
+            {
+                return LogicErrorType.NotEnoughDoubloons;
+            }
+            if ( ShopData.BuyItem(item) != DatabaseErrorType.NoError)
+            {
+                return LogicErrorType.UnsuccessfulDBAdd;
+            }
+
+            currentMember.Points -= item.PointCost;
+
+            return LogicErrorType.NoError;
+        }
+
         /// <summary>
         /// Method used to add a shop item (logic)
         /// </summary>
@@ -41,7 +63,9 @@ namespace AcademicReward.Logic {
                 return LogicErrorType.InvalidLevel;
             }
             
-            toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, null);
+            toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, 
+                MauiProgram.Profile.GroupList.ElementAt( int.Parse(AddItemVals[5]) ) );
+                //The line above is getting the ID of the group, finding it in the group list, then passing that group into the constructor
             
             ItemList.Add(toBeAdded);
             if (ShopData.AddItem(toBeAdded) == DatabaseErrorType.NoError) {

@@ -18,6 +18,7 @@
                                 FontAttributes="Bold"
                                 TextDecorations="Underline"/>
                             <Label
+                                x:Name="CreateText"
                                 Text="Press the plus button to create a new shop item"
                                 FontFamily="SecondaryFont"
                                 FontSize="20"
@@ -25,6 +26,7 @@
                                 TextColor="{StaticResource Gray600}"/>
                         </StackLayout>
                         <Button
+                            x:Name="AddButton"
                             Text="+"
                             Clicked="Button_Clicked"
                             FontSize="40"

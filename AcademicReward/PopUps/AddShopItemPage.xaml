@@ -71,20 +71,8 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center"/>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Group 1</x:String>
-                            <x:String>Group 2</x:String>
-                            <x:String>Group 3</x:String>
-                            <x:String>Group 4</x:String>
-                            <x:String>Group 5</x:String>
-                            <x:String>Group 6</x:String>
-                            <x:String>Group 7</x:String>
-                            <x:String>Group 8</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20"  ItemDisplayBinding="{Binding GroupName}"/>
+
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
