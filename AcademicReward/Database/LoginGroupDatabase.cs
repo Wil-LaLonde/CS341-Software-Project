@@ -54,7 +54,7 @@ public class LoginGroupDatabase : AcademicRewardsDatabase, IDatabase {
                 "FROM groups " +
                 "WHERE groupid IN (SELECT a.groupid " +
                 "FROM groups a, profilegroup b " +
-                $"WHERE a.groupid = b.groupid AND profileid = {loggedInProfile.ProfileID});";
+                $"WHERE a.groupid = b.groupid AND profileid = {loggedInProfile.ProfileId});";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             using NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -71,7 +71,7 @@ public class LoginGroupDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Some database error occurred
             Console.WriteLine("Unexpected error while gathering profile groups: {0}", ex);
-            dbError = DatabaseErrorType.LoginGroupCollectionDBError;
+            dbError = DatabaseErrorType.LoginGroupCollectionDbError;
         }
 
         return dbError;

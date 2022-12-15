@@ -14,28 +14,28 @@ namespace AcademicReward;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class EditShopItemPage : Popup {
-    private readonly ShopItem shopItem;
-    private readonly ILogic shopLogic;
-    private ShopPage shopPage;
+    private readonly ShopItem _shopItem;
+    private readonly ILogic _shopLogic;
+    private ShopPage _shopPage;
 
     /// <summary>
     ///     EditShopItemPage constructor
     /// </summary>
-    /// <param name="ShopLogic">ILogic ShopLogic</param>
+    /// <param name="shopLogic">ILogic ShopLogic</param>
     /// <param name="toBeChanged">ShopItem toBeChanged</param>
     /// <param name="shop">ShopPage shop</param>
-    public EditShopItemPage(ILogic ShopLogic, ShopItem toBeChanged, ShopPage shop) {
+    public EditShopItemPage(ILogic shopLogic, ShopItem toBeChanged, ShopPage shop) {
         InitializeComponent();
-        shopLogic = ShopLogic;
-        shopItem = toBeChanged;
-        shopPage = shop;
+        _shopLogic = shopLogic;
+        _shopItem = toBeChanged;
+        _shopPage = shop;
         GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
         //Setting values to make updating easier for user
-        name.Text = shopItem.Title;
-        description.Text = shopItem.Description;
-        cost.Text = shopItem.PointCost.ToString();
-        levelRec.Text = shopItem.LevelRequirement.ToString();
-        GroupPicker.SelectedItem = shopItem.Group;
+        name.Text = _shopItem.Title;
+        description.Text = _shopItem.Description;
+        cost.Text = _shopItem.PointCost.ToString();
+        levelRec.Text = _shopItem.LevelRequirement.ToString();
+        GroupPicker.SelectedItem = _shopItem.Group;
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
     }
@@ -56,17 +56,17 @@ public partial class EditShopItemPage : Popup {
                 bool isValidLevelRequirement = int.TryParse(levelRec.Text, out int levelRequirement);
                 if (isValidLevelRequirement) {
                     //Create shop item that will replace the old one
-                    ShopItem shopItemToUpdate = new(shopItem.Id, itemName, itemDescription, itemCost, levelRequirement,
+                    ShopItem shopItemToUpdate = new(_shopItem.Id, itemName, itemDescription, itemCost, levelRequirement,
                         selectedGroup);
-                    logicError = shopLogic.UpdateItem(shopItemToUpdate);
+                    logicError = _shopLogic.UpdateItem(shopItemToUpdate);
                     //Shop item was updated successfully
                     if (LogicErrorType.NoError == logicError) {
                         //Update shop item values with new ones
-                        shopItem.Title = shopItemToUpdate.Title;
-                        shopItem.Description = shopItemToUpdate.Description;
-                        shopItem.PointCost = shopItemToUpdate.PointCost;
-                        shopItem.LevelRequirement = shopItemToUpdate.LevelRequirement;
-                        shopItem.Group = shopItemToUpdate.Group;
+                        _shopItem.Title = shopItemToUpdate.Title;
+                        _shopItem.Description = shopItemToUpdate.Description;
+                        _shopItem.PointCost = shopItemToUpdate.PointCost;
+                        _shopItem.LevelRequirement = shopItemToUpdate.LevelRequirement;
+                        _shopItem.Group = shopItemToUpdate.Group;
                         Close(shopItemToUpdate);
                     }
                 }
@@ -153,9 +153,9 @@ public partial class EditShopItemPage : Popup {
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.InvalidShopItemDescriptionLengthMessage);
                 break;
-            case LogicErrorType.UpdateShopItemDBError:
+            case LogicErrorType.UpdateShopItemDbError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.UpdateShopItemDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.UpdateShopItemDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);

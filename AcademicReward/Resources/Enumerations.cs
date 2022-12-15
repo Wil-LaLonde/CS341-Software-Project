@@ -20,12 +20,12 @@ public enum LogicErrorType {
     UsernameTaken,
     UsernameNotFound,
     PasswordIncorrect,
-    AddProfileDBError,
-    SignProfileInDBError,
+    AddProfileDbError,
+    SignProfileInDbError,
     //LoginPage END
 
     //Login Group Collection START
-    LoginGroupCollectionDBError,
+    LoginGroupCollectionDbError,
     //Login Group Collection END
 
     //Edit Profile Page START
@@ -36,7 +36,7 @@ public enum LogicErrorType {
     InvalidNewPasswordLength,
     InvalidReEnterNewPasswordLength,
     CurrentPasswordError,
-    UpdatePasswordDBError,
+    UpdatePasswordDbError,
     //Edit Profile Page END
 
     //Notification START
@@ -45,8 +45,8 @@ public enum LogicErrorType {
     EmptyNotificationDescription,
     InvalidNotificationtitleLength,
     InvalidNotificationDescriptionLength,
-    AddNotificationDBError,
-    LookupAllNotificationsDBError,
+    AddNotificationDbError,
+    LookupAllNotificationsDbError,
     //Notification END
 
     //Task START
@@ -57,10 +57,10 @@ public enum LogicErrorType {
     NegativeTaskPoints,
     InvalidTaskTitleLength,
     InvalidTaskDescriptionLength,
-    AddTaskDBError,
-    LookupAllTasksDBError,
-    UpdateTaskDBError,
-    DeleteTaskDBError,
+    AddTaskDbError,
+    LookupAllTasksDbError,
+    UpdateTaskDbError,
+    DeleteTaskDbError,
     //Task END
 
     //Shop START
@@ -73,11 +73,11 @@ public enum LogicErrorType {
     NegativeShopItemLevelRequirement,
     InvalidShopItemLength,
     InvalidShopItemDescriptionLength,
-    LookupAllShopItemsDBError,
-    AddShopItemDBError,
-    UpdateShopItemDBError,
-    DeleteShopItemDBError,
-    UnsuccessfulDBAdd,
+    LookupAllShopItemsDbError,
+    AddShopItemDbError,
+    UpdateShopItemDbError,
+    DeleteShopItemDbError,
+    UnsuccessfulDbAdd,
     NotEnoughDoubloons,
     NeedHigherLevel,
     BuyItemError,
@@ -101,7 +101,7 @@ public enum LogicErrorType {
     //Add Member END
 
     //Profile START
-    UpdateProfileDBError,
+    UpdateProfileDbError,
     //Profile END
 
     //General START
@@ -114,56 +114,56 @@ public enum LogicErrorType {
 //Add database error types to this enum
 public enum DatabaseErrorType {
     //LoginPage START
-    AddProfileDBError,
-    LoginProfileDBError,
-    UsernameNotFoundDBError,
-    UsernameTakenDBError,
+    AddProfileDbError,
+    LoginProfileDbError,
+    UsernameNotFoundDbError,
+    UsernameTakenDbError,
     //LoginPage END
 
     //Login Group Collection START
-    LoginGroupCollectionDBError,
+    LoginGroupCollectionDbError,
     //Login Group Collection END
 
     //Edit Profile Page START
-    UpdatePasswordDBError,
+    UpdatePasswordDbError,
     //Edit Profile Page END
 
     //Notification START
-    AddNotificationDBError,
-    LookupAllNotificationsDBError,
+    AddNotificationDbError,
+    LookupAllNotificationsDbError,
     //Notification END
 
     //Task START
-    AddTaskDBError,
-    LookupTaskDBError,
-    LookupAllTasksDBError,
+    AddTaskDbError,
+    LookupTaskDbError,
+    LookupAllTasksDbError,
     UpdateTaskDbError,
-    DeleteTaskDBError,
+    DeleteTaskDbError,
     //Task END
 
     //Shop START
-    AddShopItemDBError,
-    UpdateShopItemDBError,
-    LookupAllShopItemsDBError,
-    DeleteShopItemDBError,
+    AddShopItemDbError,
+    UpdateShopItemDbError,
+    LookupAllShopItemsDbError,
+    DeleteShopItemDbError,
     BuyItemError,
     //Shop END
 
     // History START
-    AddHistoryDBError,
-    LookupAllHistoryDBError,
-    LoadHistoryDBError,
-    UpdateHistoryDBError,
-    DeleteHistoryDBError,
+    AddHistoryDbError,
+    LookupAllHistoryDbError,
+    LoadHistoryDbError,
+    UpdateHistoryDbError,
+    DeleteHistoryDbError,
     // History END
 
     // Group START
-    UpdateGroupDBError,
-    AddGroupDBError,
+    UpdateGroupDbError,
+    AddGroupDbError,
     // Group END
 
     //Profile START
-    UpdateProfileDBError,
+    UpdateProfileDbError,
     //Profile END
 
     //General START

@@ -11,13 +11,13 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Maximilian Patterson
 /// </summary>
 public class NotificationLogic : ILogic {
-    private readonly IDatabase notificationDB;
+    private readonly IDatabase _notificationDb;
 
     /// <summary>
     ///     NotificationLogic constructor
     /// </summary>
     public NotificationLogic() {
-        notificationDB = new NotificationDatabase();
+        _notificationDb = new NotificationDatabase();
     }
 
     /// <summary>
@@ -30,11 +30,11 @@ public class NotificationLogic : ILogic {
         Notification notificationToAdd = notification as Notification;
         logicError = AddNotificationCheck(notificationToAdd);
         if (LogicErrorType.NoError == logicError) {
-            DatabaseErrorType dbError = notificationDB.AddItem(notification);
+            DatabaseErrorType dbError = _notificationDb.AddItem(notification);
             if (DatabaseErrorType.NoError == dbError)
                 logicError = LogicErrorType.NoError;
             else
-                logicError = LogicErrorType.AddNotificationDBError;
+                logicError = LogicErrorType.AddNotificationDbError;
         }
 
         return logicError;
@@ -57,11 +57,11 @@ public class NotificationLogic : ILogic {
     /// <returns>LogicErrorType</returns>
     public LogicErrorType LookupItem(object profile) {
         LogicErrorType logicError;
-        DatabaseErrorType dbError = notificationDB.LookupFullItem(profile);
+        DatabaseErrorType dbError = _notificationDb.LookupFullItem(profile);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.LookupAllNotificationsDBError;
+            logicError = LogicErrorType.LookupAllNotificationsDbError;
         return logicError;
     }
 

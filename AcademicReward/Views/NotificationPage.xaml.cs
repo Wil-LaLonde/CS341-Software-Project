@@ -13,14 +13,14 @@ namespace AcademicReward.Views;
 ///     Reviewer: Maximilian Patterson
 /// </summary>
 public partial class NotificationPage : ContentPage {
-    private readonly ILogic notificationLogic;
+    private readonly ILogic _notificationLogic;
 
     /// <summary>
     ///     NotificationPage constructor
     /// </summary>
     public NotificationPage() {
         InitializeComponent();
-        notificationLogic = new NotificationLogic();
+        _notificationLogic = new NotificationLogic();
         //Gather all notifications
         PrepareNotificationList();
         RefreshNotificationList();
@@ -32,10 +32,10 @@ public partial class NotificationPage : ContentPage {
     /// </summary>
     private async void PrepareNotificationList() {
         LogicErrorType logicError;
-        logicError = notificationLogic.LookupItem(MauiProgram.Profile);
-        if (LogicErrorType.LookupAllNotificationsDBError == logicError)
-            await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle,
-                DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);
+        logicError = _notificationLogic.LookupItem(MauiProgram.Profile);
+        if (LogicErrorType.LookupAllNotificationsDbError == logicError)
+            await DisplayAlert(DataConstants.LookupNotificationDbErrorTitle,
+                DataConstants.LookupNotificationDbErrorMessage, DataConstants.Ok);
     }
 
     /// <summary>

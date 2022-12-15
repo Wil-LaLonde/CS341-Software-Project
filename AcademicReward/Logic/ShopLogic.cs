@@ -11,15 +11,15 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public class ShopLogic : ILogic {
-    private readonly IDatabase historyDB;
-    private readonly ShopItemDatabase shopDB;
+    private readonly IDatabase _historyDb;
+    private readonly ShopItemDatabase _shopDb;
 
     /// <summary>
     ///     ShopLogic constructor
     /// </summary>
     public ShopLogic() {
-        shopDB = new ShopItemDatabase();
-        historyDB = new HistoryDatabase();
+        _shopDb = new ShopItemDatabase();
+        _historyDb = new HistoryDatabase();
     }
 
     /// <summary>
@@ -33,14 +33,14 @@ public class ShopLogic : ILogic {
         //Checking user input
         logicError = CheckShopItem(shopItemToAdd);
         if (LogicErrorType.NoError == logicError) {
-            DatabaseErrorType dbError = shopDB.AddItem(shopItemToAdd);
+            DatabaseErrorType dbError = _shopDb.AddItem(shopItemToAdd);
             if (DatabaseErrorType.NoError == dbError)
                 //Adding new history item
-                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryAddShopItemTitle,
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryAddShopItemTitle,
                     string.Format(DataConstants.HistoryAddShopItemDescription, shopItemToAdd.Title,
                         shopItemToAdd.Group.GroupName)));
             else
-                logicError = LogicErrorType.AddShopItemDBError;
+                logicError = LogicErrorType.AddShopItemDbError;
         }
 
         return logicError;
@@ -53,17 +53,17 @@ public class ShopLogic : ILogic {
     /// <returns>LogicErrorType logicError</returns>
     public LogicErrorType DeleteItem(object shopItem) {
         LogicErrorType logicError;
-        DatabaseErrorType dbError = shopDB.DeleteItem(shopItem);
+        DatabaseErrorType dbError = _shopDb.DeleteItem(shopItem);
         if (DatabaseErrorType.NoError == dbError) {
             logicError = LogicErrorType.NoError;
             //Add new history item
             ShopItem shopItemToDelete = shopItem as ShopItem;
-            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryDeleteShopItemTitle,
+            _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryDeleteShopItemTitle,
                 string.Format(DataConstants.HistoryDeleteShopItemDescription, shopItemToDelete.Title,
                     shopItemToDelete.Group.GroupName)));
         }
         else {
-            logicError = LogicErrorType.DeleteShopItemDBError;
+            logicError = LogicErrorType.DeleteShopItemDbError;
         }
 
         return logicError;
@@ -76,11 +76,11 @@ public class ShopLogic : ILogic {
     /// <returns>LogicErrorType logicError</returns>
     public LogicErrorType LookupItem(object profile) {
         LogicErrorType logicError;
-        DatabaseErrorType dbError = shopDB.LookupFullItem(profile);
+        DatabaseErrorType dbError = _shopDb.LookupFullItem(profile);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.LookupAllShopItemsDBError;
+            logicError = LogicErrorType.LookupAllShopItemsDbError;
         return logicError;
     }
 
@@ -95,15 +95,15 @@ public class ShopLogic : ILogic {
         //Checking user input
         logicError = CheckShopItem(shopItemToUpdate);
         if (LogicErrorType.NoError == logicError) {
-            DatabaseErrorType dbError = shopDB.UpdateItem(shopItemToUpdate);
+            DatabaseErrorType dbError = _shopDb.UpdateItem(shopItemToUpdate);
             if (DatabaseErrorType.NoError == dbError)
                 //Adding new history item
-                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID,
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId,
                     DataConstants.HistoryUpdateShopItemTitle,
                     string.Format(DataConstants.HistoryUpdateShopItemDescription, shopItemToUpdate.Title,
                         shopItemToUpdate.Group.GroupName)));
             else
-                logicError = LogicErrorType.UpdateShopItemDBError;
+                logicError = LogicErrorType.UpdateShopItemDbError;
         }
 
         return logicError;
@@ -122,11 +122,11 @@ public class ShopLogic : ILogic {
     public LogicErrorType BuyItem(ShopItem shopItem) {
         LogicErrorType logicError = CheckBuyShopItem(MauiProgram.Profile, shopItem);
         if (LogicErrorType.NoError == logicError) {
-            DatabaseErrorType dbError = shopDB.BuyItem(shopItem);
+            DatabaseErrorType dbError = _shopDb.BuyItem(shopItem);
             if (DatabaseErrorType.NoError == dbError) {
                 logicError = LogicErrorType.NoError;
                 //Add new history item
-                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryBuyShopItemTitle,
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryBuyShopItemTitle,
                     string.Format(DataConstants.HistoryBuyShopItemDescription, shopItem.Title,
                         shopItem.Group.GroupName)));
             }

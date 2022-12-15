@@ -13,15 +13,15 @@ namespace AcademicReward;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class AddShopItemPage : Popup {
-    private readonly ILogic shopLogic;
+    private readonly ILogic _shopLogic;
 
     /// <summary>
     ///     AddShopItemPage constructor
     /// </summary>
-    /// <param name="ShopLogic">ILogic ShopLogic</param>
-    public AddShopItemPage(ILogic ShopLogic) {
+    /// <param name="shopLogic">ILogic ShopLogic</param>
+    public AddShopItemPage(ILogic shopLogic) {
         InitializeComponent();
-        shopLogic = ShopLogic;
+        _shopLogic = shopLogic;
         GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
@@ -44,7 +44,7 @@ public partial class AddShopItemPage : Popup {
                 if (isValidLevelRequirement) {
                     //Create ShopItem object
                     ShopItem shopItemToAdd = new(itemName, itemDescription, itemCost, levelRequirement, selectedGroup);
-                    logicError = shopLogic.AddItem(shopItemToAdd);
+                    logicError = _shopLogic.AddItem(shopItemToAdd);
                     //Shop item was added successfully
                     if (LogicErrorType.NoError == logicError) Close(shopItemToAdd);
                 }
@@ -131,9 +131,9 @@ public partial class AddShopItemPage : Popup {
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.InvalidShopItemDescriptionLengthMessage);
                 break;
-            case LogicErrorType.AddShopItemDBError:
+            case LogicErrorType.AddShopItemDbError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.AddShopItemDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.AddShopItemDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);

@@ -32,12 +32,12 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
             con.Open();
             //SQL to add task to table, also adding task to profiletask table
             string sql = "INSERT INTO tasks (tasktitle, taskdescription, points, groupid, ischecked, issubmitted)" +
-                $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupID}, {taskToAdd.IsApproved}, {taskToAdd.IsSubmitted}); " +
+                $"VALUES ('{taskToAdd.Title}', '{taskToAdd.Description}', {taskToAdd.Points}, {taskToAdd.GroupId}, {taskToAdd.IsApproved}, {taskToAdd.IsSubmitted}); " +
                 "INSERT INTO profiletask " +
                 "SELECT profileid, MAX(taskid), ischecked, ischecked " +
                 "FROM profilegroup, tasks " +
-                $"WHERE profilegroup.groupid = {taskToAdd.GroupID} " +
-                $"AND profileid != {MauiProgram.Profile.ProfileID} " +
+                $"WHERE profilegroup.groupid = {taskToAdd.GroupId} " +
+                $"AND profileid != {MauiProgram.Profile.ProfileId} " +
                 "GROUP BY profileid, ischecked;";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
@@ -49,7 +49,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong adding the task
             Console.WriteLine("Unexpected error while adding task: {0}", ex);
-            dbError = DatabaseErrorType.AddTaskDBError;
+            dbError = DatabaseErrorType.AddTaskDbError;
         }
 
         return dbError;
@@ -63,8 +63,8 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
     public DatabaseErrorType UpdateItem(object task) {
         DatabaseErrorType dbError;
         Task taskToUpdate = task as Task;
-        int profileId = MauiProgram.Profile.ProfileID;
-        int memberId = (int)FindById(taskToUpdate.TaskID);
+        int profileId = MauiProgram.Profile.ProfileId;
+        int memberId = (int)FindById(taskToUpdate.TaskId);
 
         if (taskToUpdate.IsApproved) //need to update the members view here not admin 
             //update the bool
@@ -75,7 +75,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
                 //SQL to update the task that is associated to a profile in profiletask table ADMIN VIEW
                 string sql = "UPDATE profiletask " +
                     $"SET isapproved = {taskToUpdate.IsApproved} " +
-                    $"WHERE profiletask.taskid = {taskToUpdate.TaskID}" +
+                    $"WHERE profiletask.taskid = {taskToUpdate.TaskId}" +
                     $"AND profiletask.profileid = {memberId};"; // member ID to update that specific task
 
                 //Executing the query.
@@ -98,7 +98,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
                 //SQL to update the task that is associated to a profile in profiletask table MEMBER VIEW
                 string sql = "UPDATE profiletask " +
                     $"SET issubmitted = {taskToUpdate.IsSubmitted} " +
-                    $"WHERE taskid = {taskToUpdate.TaskID} AND profileid = {profileId};";
+                    $"WHERE taskid = {taskToUpdate.TaskId} AND profileid = {profileId};";
                 //Executing the query.
                 using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
@@ -129,8 +129,8 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
             con.Open();
             //Insert SQL query for updating a profile (XP, POINTS, AND LEVEL)
             string sql = "Delete FROM profiletask " +
-                $"WHERE profileid = {MauiProgram.Profile.ProfileID}" +
-                $"AND taskid = {taskToDelete.TaskID};";
+                $"WHERE profileid = {MauiProgram.Profile.ProfileId}" +
+                $"AND taskid = {taskToDelete.TaskId};";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -141,7 +141,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while updating profile: {0}", ex);
-            dbError = DatabaseErrorType.DeleteTaskDBError;
+            dbError = DatabaseErrorType.DeleteTaskDbError;
         }
 
         return dbError;
@@ -162,7 +162,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
             //SQL to lookup tasks for a group
             string sql = "SELECT issubmitted, isapproved " +
                 "FROM profiletask " +
-                $"WHERE taskid = {taskToFind.TaskID} AND profileid = {MauiProgram.Profile.ProfileID};";
+                $"WHERE taskid = {taskToFind.TaskId} AND profileid = {MauiProgram.Profile.ProfileId};";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             using NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -181,7 +181,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong looking up the task
             Console.WriteLine("Unexpected error while looking up task: {0}", ex);
-            dbError = DatabaseErrorType.LookupAllTasksDBError;
+            dbError = DatabaseErrorType.LookupAllTasksDbError;
         }
 
         return dbError;
@@ -208,7 +208,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
                     "FROM profilegroup, profiles " +
                     "WHERE groupid IN (SELECT groupid " +
                     "FROM profilegroup " +
-                    $"WHERE profileid = {MauiProgram.Profile.ProfileID}) " +
+                    $"WHERE profileid = {MauiProgram.Profile.ProfileId}) " +
                     "AND profilegroup.profileid = profiles.profileid " +
                     "AND profiles.isAdmin = false) " +
                     "AND tasks.taskid = profiletask.taskid;";
@@ -230,7 +230,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
             catch (NpgsqlException ex) {
                 //Something went wrong looking up the task
                 Console.WriteLine("Unexpected error while looking up task: {0}", ex);
-                dbError = DatabaseErrorType.LookupAllTasksDBError;
+                dbError = DatabaseErrorType.LookupAllTasksDbError;
             }
         else //this is for fetching all tasks for MEMBER VIEW
             try {
@@ -240,7 +240,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
                 //SQL to lookup tasks for a group
                 string sql = "SELECT * " +
                     "FROM tasks " +
-                    $"WHERE taskid IN (SELECT taskid FROM profiletask WHERE profileid = {profileTasks.ProfileID});";
+                    $"WHERE taskid IN (SELECT taskid FROM profiletask WHERE profileid = {profileTasks.ProfileId});";
                 //Executing the query.
                 using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -259,7 +259,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
             catch (NpgsqlException ex) {
                 //Something went wrong looking up the task
                 Console.WriteLine("Unexpected error while looking up task: {0}", ex);
-                dbError = DatabaseErrorType.LookupAllTasksDBError;
+                dbError = DatabaseErrorType.LookupAllTasksDbError;
             }
 
         return dbError;
@@ -287,7 +287,7 @@ public class TaskDatabase : AcademicRewardsDatabase, IDatabase {
                 "FROM profilegroup, profiles " +
                 "WHERE groupid IN(SELECT groupid " +
                 "FROM profilegroup " +
-                $"WHERE profileid = {MauiProgram.Profile.ProfileID}) " +
+                $"WHERE profileid = {MauiProgram.Profile.ProfileId}) " +
                 "AND profilegroup.profileid = profiles.profileid " +
                 "AND profiles.isAdmin = false) " +
                 $"AND profiletask.taskid = {id}; ";

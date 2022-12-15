@@ -19,29 +19,29 @@ public class Notification : ObservableObject {
     /// </summary>
     /// <param name="title">string title</param>
     /// <param name="description">string description</param>
-    /// <param name="groupID">int groupID</param>
-    public Notification(string title, string description, int groupID) {
+    /// <param name="groupId">int groupID</param>
+    public Notification(string title, string description, int groupId) {
         Title = title;
         Description = description;
-        GroupID = groupID;
+        GroupId = groupId;
     }
 
     /// <summary>
     ///     Notification constructor (when getting exisiting Notifications)
     /// </summary>
-    /// <param name="notificationID">int notificationID</param>
+    /// <param name="notificationId">int notificationID</param>
     /// <param name="title">string title</param>
     /// <param name="description">string description</param>
-    /// <param name="groupID">int groupID</param>
-    public Notification(int notificationID, string title, string description, int groupID) {
-        NotificationID = notificationID;
+    /// <param name="groupId">int groupID</param>
+    public Notification(int notificationId, string title, string description, int groupId) {
+        NotificationId = notificationId;
         Title = title;
         Description = description;
-        GroupID = groupID;
+        GroupId = groupId;
     }
 
-    public int NotificationID { get; }
+    public int NotificationId { get; }
     public string Title { get; set; }
     public string Description { get; set; }
-    public int GroupID { get; set; }
+    public int GroupId { get; set; }
 }

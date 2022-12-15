@@ -24,14 +24,14 @@ public static class DataConstants {
     public const string IncorrectPasswordTitle = "Incorrect Password";
     public const string IncorrectPasswordMessage = "The password provided was incorrect, please try again.";
     public const string UsernameNotFoundMessage = "The username entered was not found.";
-    public const string AddProfileDBErrorTitle = "Add Profile Database Error";
-    public const string AddProfileDBErrorMessage = "A database error occurred while adding your account.";
+    public const string AddProfileDbErrorTitle = "Add Profile Database Error";
+    public const string AddProfileDbErrorMessage = "A database error occurred while adding your account.";
     public const string AddProfileSuccessTitle = "Account Creation Success!";
     public const string AddProfileSuccessMessage = "Your account has been created successfully.";
     public const string AddProfileUnknownTitle = "Account Creation Failure";
     public const string AddProfileUnknownMesage = "An unknown error occurred during account creation.";
-    public const string SignProfileInDBTitle = "Sign In Database Error";
-    public const string SignProfileInDBMessage = "An unexpected database error occurred while signing you in.";
+    public const string SignProfileInDbTitle = "Sign In Database Error";
+    public const string SignProfileInDbMessage = "An unexpected database error occurred while signing you in.";
     public const string SignProfileInUnkownTitle = "Sign In Unknown Error";
 
     public const string SignProfileInUnknownMessage = "An unknown error occurred while signing you in.";
@@ -71,9 +71,9 @@ public static class DataConstants {
     public const string CurrentPasswordErrorMessage =
         "The new password cannot be the same as the old password, please try again.";
 
-    public const string UpdatePasswordDBErrorTitle = "Update Password Databse Error";
+    public const string UpdatePasswordDbErrorTitle = "Update Password Databse Error";
 
-    public const string UpdatePasswordDBErrorMessage =
+    public const string UpdatePasswordDbErrorMessage =
         "An unexpected database error occurred while updating your password.";
 
     public const string UpdatePasswordUnknownTitle = "Update Password Unknown Error";
@@ -93,9 +93,9 @@ public static class DataConstants {
     public const string CreateNotificationSuccessTitle = "Notification Creation Success!";
     public const string CreateNotificationSuccessMessage = "Your notification has been created successfully.";
     public const string AddNotificationUnknownMessage = "An unknown error occurred during notification creation.";
-    public const string LookupNotificationDBErrorTitle = "Error Loading Notifications";
+    public const string LookupNotificationDbErrorTitle = "Error Loading Notifications";
 
-    public const string LookupNotificationDBErrorMessage = "There was an unexpected error loading your notifications.";
+    public const string LookupNotificationDbErrorMessage = "There was an unexpected error loading your notifications.";
     //Notification END
 
     //Task START
@@ -108,10 +108,10 @@ public static class DataConstants {
     public const string NegativeTaskPointsMessage = "Points cannot be negative.";
     public const string InvalidTaskTitleLengthMessage = "Task title must be between 1-50 characters.";
     public const string InvalidTaskDescriptionLengthMessage = "Task description must be between 1-250 characters.";
-    public const string AddTaskDBErrorMessage = "A database error occurred while adding your task.";
+    public const string AddTaskDbErrorMessage = "A database error occurred while adding your task.";
     public const string AddTaskUnknownMessage = "An unknown error occurred during task creation.";
-    public const string LookupTaskDBErrorTitle = "Error Loading Tasks";
-    public const string LookupTaskDBErrorMessage = "There was an unexpected error loading your tasks.";
+    public const string LookupTaskDbErrorTitle = "Error Loading Tasks";
+    public const string LookupTaskDbErrorMessage = "There was an unexpected error loading your tasks.";
 
     public const string UpdatingTask = "There was an unexpected error updating your task.";
     //Task END
@@ -143,7 +143,7 @@ public static class DataConstants {
     public const string EmptyGroupDescriptionMessage = "Please fill in the group description entry box.";
     public const string InvalidGroupNameLengthMessage = "Group name must be between 1-50 characters.";
     public const string InvalidGroupDescriptionMessage = "Group description must be between 1-250 characters.";
-    public const string CreateGroupDBErrorMessage = "An unexpected database error occurred while creating your group.";
+    public const string CreateGroupDbErrorMessage = "An unexpected database error occurred while creating your group.";
 
     public const string CreateGroupUnknownErrorMessage = "An unknown error occurred while creating your group.";
     //Create Group END
@@ -155,7 +155,7 @@ public static class DataConstants {
     public const string GroupAlreadyHasAdminMessage = "Only one admin can be in a group.";
     public const string AddMemberUserNameNotFoundMessage = "Member username not found.";
 
-    public const string AddMemberDBErrorMessage =
+    public const string AddMemberDbErrorMessage =
         "An unexpected datbase error occurred while adding the member to the group.";
 
     public const string AddMemberUnknownErrorMessage =
@@ -184,15 +184,15 @@ public static class DataConstants {
     public const string NegativeShopItemLevelRequirementMessage = "Level requirement must be at least 1.";
     public const string InvalidShopItemTitleLengthMessage = "Item title must be between 1-25 characters.";
     public const string InvalidShopItemDescriptionLengthMessage = "Item description must be between 1-250 characters.";
-    public const string AddShopItemDBErrorMessage = "An unexpected database error occurred while adding the shop item.";
+    public const string AddShopItemDbErrorMessage = "An unexpected database error occurred while adding the shop item.";
     public const string AddShopItemUnknownErrorMessage = "An unknown error occurred while adding the shop item.";
 
-    public const string UpdateShopItemDBErrorMessage =
+    public const string UpdateShopItemDbErrorMessage =
         "An unexpected database error occurred while updating the shop item.";
 
     public const string UpdateShopItemUnknownErrorMessage = "An unknown error occurred while updating the shop item.";
-    public const string LookupShopItemDBErrorTitle = "Error Loading Shop Items";
-    public const string LookupShopItemDBErrorMessage = "There was an unexpected error loading your shop items.";
+    public const string LookupShopItemDbErrorTitle = "Error Loading Shop Items";
+    public const string LookupShopItemDbErrorMessage = "There was an unexpected error loading your shop items.";
     public const string AddShopItemSuccessTitle = "Shop Item Add Success!";
     public const string AddShopItemSuccessMessage = "Your shop item has been added successfully.";
     public const string UpdateShopItemSuccessTitle = "Shop Item Update Success!";
@@ -201,7 +201,7 @@ public static class DataConstants {
     public const string DeleteShopItemSuccessMessage = "Your shop item has been deleted successfully.";
     public const string BuyShopItemLevelRequirementMessage = "Your level is not high enough.";
     public const string BuyShopItemNotEnoughPointsMessage = "Not enough points.";
-    public const string BuyShopItemDBErrorMessage = "An unexpected database error occurred while buying the shop item.";
+    public const string BuyShopItemDbErrorMessage = "An unexpected database error occurred while buying the shop item.";
     public const string BuyShopItemUnknownErrorMessage = "An unknown error occurred while buying the shop item.";
     public const string BuyShopItemSuccessTitle = "Shop Item Buy Success!";
 
@@ -209,7 +209,7 @@ public static class DataConstants {
     //Shop END
 
     //Display Alert START
-    public const string OK = "OK";
+    public const string Ok = "OK";
 
     public const string Cancel = "Cancel";
     //Display Alert END

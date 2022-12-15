@@ -14,9 +14,9 @@ namespace AcademicReward.PopUps;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class TaskPopUp : Popup {
-    private readonly bool isAdmin;
-    private readonly IDatabase lookUpTask;
-    private readonly ILogic updateTask;
+    private readonly bool _isAdmin;
+    private readonly IDatabase _lookUpTask;
+    private readonly ILogic _updateTask;
 
     /// <summary>
     ///     TaskPopUp constructor
@@ -35,12 +35,12 @@ public partial class TaskPopUp : Popup {
         title.Text = selectedTask.Title;
         description.Text = selectedTask.Description;
         points.Text = selectedTask.Points.ToString();
-        group.Text = MauiProgram.Profile.GetGroupNameUsingGroupID(selectedTask.GroupID);
+        group.Text = MauiProgram.Profile.GetGroupNameUsingGroupId(selectedTask.GroupId);
         SetErrorMessageBox(false, string.Empty);
-        isAdmin = MauiProgram.Profile.IsAdmin;
+        _isAdmin = MauiProgram.Profile.IsAdmin;
 
-        updateTask = new TaskLogic();
-        lookUpTask = new TaskDatabase();
+        _updateTask = new TaskLogic();
+        _lookUpTask = new TaskDatabase();
     }
 
     public Task SelectedTask { get; set; }
@@ -64,19 +64,19 @@ public partial class TaskPopUp : Popup {
         LogicErrorType logicError;
 
         //Lookup the selectedTask from the profiletask table
-        lookUpTask.LookupItem(SelectedTask);
-        if (isAdmin) {
+        _lookUpTask.LookupItem(SelectedTask);
+        if (_isAdmin) {
             //if profile is admin 
             //sql call to update the task if the ADMIN has recieved a task a MEMBER has compeleted\
             SelectedTask.IsSubmitted = true;
             SelectedTask.IsApproved = true; //isApproved means ADMIN HAS CHECKED TASK AS COMPLETED 
-            logicError = updateTask.UpdateItem(SelectedTask);
+            logicError = _updateTask.UpdateItem(SelectedTask);
             if (LogicErrorType.NoError == logicError) {
                 MauiProgram.Profile.RemoveTaskFromProfile(SelectedTask); //remove it from ADMIN task list
                 Close(SelectedTask);
             }
             else {
-                logicError = LogicErrorType.UpdateTaskDBError;
+                logicError = LogicErrorType.UpdateTaskDbError;
             }
         }
         else {
@@ -84,13 +84,13 @@ public partial class TaskPopUp : Popup {
 
             SelectedTask.IsSubmitted = true; //if that task is submitted for review then make this true
             //updates the task so that ADMIN can view the task 
-            logicError = updateTask.UpdateItem(SelectedTask);
+            logicError = _updateTask.UpdateItem(SelectedTask);
             if (LogicErrorType.NoError == logicError)
                 //Notification completedTaskNotification = new Notification("A new Task as been added", $"Task: {SelectedTask.Title}", SelectedTask.GroupID);
                 //need to send this notification to admin
                 Close(SelectedTask);
             else
-                logicError = LogicErrorType.UpdateTaskDBError;
+                logicError = LogicErrorType.UpdateTaskDbError;
         }
 
         if (logicError != LogicErrorType.NoError) SetErrorMessageBox(true, SetErrorMessageBody(logicError));
@@ -117,7 +117,7 @@ public partial class TaskPopUp : Popup {
     /// <returns>string errorMessage</returns>
     private string SetErrorMessageBody(LogicErrorType logicError) {
         StringBuilder errorMessageBuilder = new();
-        if (logicError == LogicErrorType.UpdateTaskDBError) {
+        if (logicError == LogicErrorType.UpdateTaskDbError) {
             errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
             errorMessageBuilder.Append(DataConstants.UpdatingTask);
         }

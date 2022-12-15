@@ -11,15 +11,15 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public class AddMemberLogic : ILogic {
-    private readonly IDatabase GroupDB;
-    private readonly IDatabase historyDB;
+    private readonly IDatabase _groupDb;
+    private readonly IDatabase _historyDb;
 
     /// <summary>
     ///     LoginGroupLogic constructor
     /// </summary>
     public AddMemberLogic() {
-        GroupDB = new GroupDatabase();
-        historyDB = new HistoryDatabase();
+        _groupDb = new GroupDatabase();
+        _historyDb = new HistoryDatabase();
     }
 
     /// <summary>
@@ -34,14 +34,14 @@ public class AddMemberLogic : ILogic {
         logicError = AddMemberCheck(arguments[0] as string);
         if (LogicErrorType.NoError == logicError) {
             // Find profile by username
-            Profile profile = GroupProfileRelationship.findByUsername(arguments[0] as string);
+            Profile profile = GroupProfileRelationship.FindByUsername(arguments[0] as string);
 
             // Set group from arguments
             Group group = arguments[1] as Group;
-            logicError = GroupProfileRelationship.addProfileToGroup(profile, group);
+            logicError = GroupProfileRelationship.AddProfileToGroup(profile, group);
             if (LogicErrorType.NoError == logicError)
                 //Add history item
-                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID,
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId,
                     DataConstants.HistoryAddMemberToGroupGroupTitle,
                     string.Format(DataConstants.HistoryAddMemberToGroupGroupDescription, profile.Username,
                         group.GroupName)));
@@ -57,7 +57,7 @@ public class AddMemberLogic : ILogic {
     /// <returns>LogicErrorType logicType</returns>
     public LogicErrorType UpdateItem(object obj) {
         // Update database
-        DatabaseErrorType dbError = GroupDB.UpdateItem(obj);
+        DatabaseErrorType dbError = _groupDb.UpdateItem(obj);
         return LogicErrorType.NoError;
     }
 

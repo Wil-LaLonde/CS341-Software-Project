@@ -86,8 +86,8 @@ public partial class ProfilePage : ContentPage {
         }
         else {
             Level.Text = MauiProgram.Profile.Level.ToString();
-            ProgressBar.Progress = MauiProgram.Profile.GetCurrentXPDouble();
-            Exp.Text = MauiProgram.Profile.GetCurrentXPInt() + DataConstants.SpaceSlashSpace +
+            ProgressBar.Progress = MauiProgram.Profile.GetCurrentXpDouble();
+            Exp.Text = MauiProgram.Profile.GetCurrentXpInt() + DataConstants.SpaceSlashSpace +
                 Profile.LevelUpRequirementInt;
         }
     }

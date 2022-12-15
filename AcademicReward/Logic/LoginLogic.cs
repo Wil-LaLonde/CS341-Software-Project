@@ -17,13 +17,13 @@ public class LoginLogic : ILogic {
     private const int SaltByteSize = 36;
     private const int HashIterationCount = 1500;
 
-    private readonly IDatabase loginDB;
+    private readonly IDatabase _loginDb;
 
     /// <summary>
     ///     LoginLogic constructor
     /// </summary>
     public LoginLogic() {
-        loginDB = new LoginDatabase();
+        _loginDb = new LoginDatabase();
     }
 
     /// <summary>
@@ -44,14 +44,14 @@ public class LoginLogic : ILogic {
             profileToAdd.Password = storedPasswordParts[PasswordIndex];
             profileToAdd.Salt = storedPasswordParts[SaltIndex];
             //Making our database call to store away our new profile
-            DatabaseErrorType dbError = loginDB.AddItem(profileToAdd);
+            DatabaseErrorType dbError = _loginDb.AddItem(profileToAdd);
             //Need to make some checks to see if it is valid first
             if (DatabaseErrorType.NoError == dbError)
                 logicError = LogicErrorType.NoError;
-            else if (DatabaseErrorType.UsernameTakenDBError == dbError)
+            else if (DatabaseErrorType.UsernameTakenDbError == dbError)
                 logicError = LogicErrorType.UsernameTaken;
             else
-                logicError = LogicErrorType.AddProfileDBError;
+                logicError = LogicErrorType.AddProfileDbError;
         }
 
         return logicError;
@@ -74,11 +74,11 @@ public class LoginLogic : ILogic {
             profileToUpdate.Password = storedPasswordParts[PasswordIndex];
             profileToUpdate.Salt = storedPasswordParts[SaltIndex];
             //Making database call to update salt and password (hash)
-            DatabaseErrorType dbError = loginDB.UpdateItem(profileToUpdate);
+            DatabaseErrorType dbError = _loginDb.UpdateItem(profileToUpdate);
             if (DatabaseErrorType.NoError == dbError)
                 logicError = LogicErrorType.NoError;
             else
-                logicError = LogicErrorType.UpdatePasswordDBError;
+                logicError = LogicErrorType.UpdatePasswordDbError;
         }
 
         return logicError;
@@ -101,23 +101,23 @@ public class LoginLogic : ILogic {
         logicError = SignInProfileCheck(profile);
         if (LogicErrorType.NoError == logicError) {
             //Looking up profile info from database.
-            DatabaseErrorType dbError = loginDB.LookupItem(signInProfile);
+            DatabaseErrorType dbError = _loginDb.LookupItem(signInProfile);
             if (DatabaseErrorType.NoError == dbError) {
                 //Checking if passwords match
                 if (IsValidLogin(MauiProgram.Profile.Salt, MauiProgram.Profile.Password, profile.Password)) {
                     //Need to make one more database call to get all user information
-                    dbError = loginDB.LookupFullItem(profile);
-                    if (DatabaseErrorType.NoError != dbError) logicError = LogicErrorType.SignProfileInDBError;
+                    dbError = _loginDb.LookupFullItem(profile);
+                    if (DatabaseErrorType.NoError != dbError) logicError = LogicErrorType.SignProfileInDbError;
                 }
                 else {
                     logicError = LogicErrorType.PasswordIncorrect;
                 }
             }
-            else if (DatabaseErrorType.UsernameNotFoundDBError == dbError) {
+            else if (DatabaseErrorType.UsernameNotFoundDbError == dbError) {
                 logicError = LogicErrorType.UsernameNotFound;
             }
             else {
-                logicError = LogicErrorType.SignProfileInDBError;
+                logicError = LogicErrorType.SignProfileInDbError;
             }
         }
 

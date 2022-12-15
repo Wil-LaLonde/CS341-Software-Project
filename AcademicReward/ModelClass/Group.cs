@@ -32,23 +32,23 @@ public class Group : ObservableObject {
     /// <summary>
     ///     Group constructor (when gathering all groups for a profile upon login)
     /// </summary>
-    /// <param name="groupID">int groupID</param>
+    /// <param name="groupId">int groupID</param>
     /// <param name="groupName">string groupName</param>
     /// <param name="groupDescription">string groupDescription</param>
-    /// <param name="adminProfileID">int adminProfileID</param>
-    public Group(int groupID, string groupName, string groupDescription, int adminProfileID) {
-        GroupID = groupID;
+    /// <param name="adminProfileId">int adminProfileID</param>
+    public Group(int groupId, string groupName, string groupDescription, int adminProfileId) {
+        GroupId = groupId;
         GroupName = groupName;
         GroupDescription = groupDescription;
-        AdminProfileID = adminProfileID;
+        AdminProfileId = adminProfileId;
         GroupMemberList = new ObservableCollection<Profile>();
     }
 
-    public int GroupID { get; set; }
+    public int GroupId { get; set; }
     public string GroupName { get; set; }
     public string GroupDescription { get; set; }
     public Profile GroupAdmin { get; private set; }
-    public int AdminProfileID { get; set; }
+    public int AdminProfileId { get; set; }
     public ObservableCollection<Profile> GroupMemberList { get; }
 
     /// <summary>

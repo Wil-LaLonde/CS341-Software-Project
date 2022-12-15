@@ -13,7 +13,7 @@ namespace AcademicReward.PopUps;
 ///     Reviewer: Xee Lo
 /// </summary>
 public partial class AddNotificationPopUp : Popup {
-    private readonly ILogic notificationLogic;
+    private readonly ILogic _notificationLogic;
 
     /// <summary>
     ///     AddNotificationPopUp constructor
@@ -22,7 +22,7 @@ public partial class AddNotificationPopUp : Popup {
         InitializeComponent();
         //Set group picker item source
         GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
-        notificationLogic = new NotificationLogic();
+        _notificationLogic = new NotificationLogic();
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
     }
@@ -49,8 +49,8 @@ public partial class AddNotificationPopUp : Popup {
             string title = NotificationTitleEntry.Text ?? string.Empty;
             string description = NotificationDescriptionEntry.Text ?? string.Empty;
             //Creating new notification object
-            Notification notification = new(title, description, selectedGroup.GroupID);
-            logicError = notificationLogic.AddItem(notification);
+            Notification notification = new(title, description, selectedGroup.GroupId);
+            logicError = _notificationLogic.AddItem(notification);
             if (LogicErrorType.NoError == logicError) {
                 MauiProgram.Profile.AddNotificationToProfile(notification);
                 Close(notification);

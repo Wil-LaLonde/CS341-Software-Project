@@ -12,16 +12,16 @@ namespace AcademicReward.Views;
 ///     Reviewer: Xee Lo
 /// </summary>
 public partial class EditProfilePage : ContentPage {
-    private readonly IDatabase historyDB;
-    private readonly ILogic loginLogic;
+    private readonly IDatabase _historyDb;
+    private readonly ILogic _loginLogic;
 
     /// <summary>
     ///     EditProfilePage constructor
     /// </summary>
     public EditProfilePage() {
         InitializeComponent();
-        loginLogic = new LoginLogic();
-        historyDB = new HistoryDatabase();
+        _loginLogic = new LoginLogic();
+        _historyDb = new HistoryDatabase();
     }
 
     /// <summary>
@@ -38,60 +38,60 @@ public partial class EditProfilePage : ContentPage {
         //Creating temp profile object
         Profile profile = new(MauiProgram.Profile.Username, oldPassword, newPassword, reEnterNewPassword);
         //Trying to update the password
-        logicError = loginLogic.UpdateItem(profile);
+        logicError = _loginLogic.UpdateItem(profile);
         if (LogicErrorType.NoError == logicError) {
             //Adding a history item for updating a user's password
-            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryEditPasswordTitle,
+            _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryEditPasswordTitle,
                 string.Format(DataConstants.HistoryEditPasswordDescription, DateTime.Now.ToString())));
             await DisplayAlert(DataConstants.UpdatePasswordSuccessTitle, DataConstants.UpdatePasswordSuccessMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
             //Sending the user back to the profile page, see ya!
             await Shell.Current.GoToAsync(DataConstants.GoBack);
         }
         else if (LogicErrorType.EmptyOldPassword == logicError) {
             await DisplayAlert(DataConstants.EmptyOldPasswordTitle, DataConstants.EmptyOldPasswordMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.EmptyNewPassword == logicError) {
             await DisplayAlert(DataConstants.EmptyNewPasswordTitle, DataConstants.EmptyNewPasswordMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.EmptyReEnterNewPassword == logicError) {
             await DisplayAlert(DataConstants.EmptyReEnterNewPasswordTitle, DataConstants.EmptyReEnterNewPasswordMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.PasswordMismatch == logicError) {
             await DisplayAlert(DataConstants.PasswordMismatchTitle, DataConstants.PasswordMismatchMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.InvalidOldPasswordLength == logicError) {
             await DisplayAlert(DataConstants.InvalidOldPasswordLengthTitle,
-                DataConstants.InvalidOldPasswordLengthMessage, DataConstants.OK);
+                DataConstants.InvalidOldPasswordLengthMessage, DataConstants.Ok);
         }
         else if (LogicErrorType.InvalidNewPasswordLength == logicError) {
             await DisplayAlert(DataConstants.InvalidNewPasswordLengthTitle,
-                DataConstants.InvalidNewPasswordLengthMessage, DataConstants.OK);
+                DataConstants.InvalidNewPasswordLengthMessage, DataConstants.Ok);
         }
         else if (LogicErrorType.InvalidReEnterNewPasswordLength == logicError) {
             await DisplayAlert(DataConstants.InvalidReEnterNewPasswordLengthTitle,
-                DataConstants.InvalidReEnterNewPasswordLengthMessage, DataConstants.OK);
+                DataConstants.InvalidReEnterNewPasswordLengthMessage, DataConstants.Ok);
         }
         else if (LogicErrorType.PasswordIncorrect == logicError) {
             await DisplayAlert(DataConstants.IncorrectPasswordTitle, DataConstants.OldPasswordIncorrectMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.CurrentPasswordError == logicError) {
             await DisplayAlert(DataConstants.CurrentPasswordErrorTitle, DataConstants.CurrentPasswordErrorMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
-        else if (LogicErrorType.UpdatePasswordDBError == logicError) {
-            await DisplayAlert(DataConstants.UpdatePasswordDBErrorTitle, DataConstants.UpdatePasswordDBErrorMessage,
-                DataConstants.OK);
+        else if (LogicErrorType.UpdatePasswordDbError == logicError) {
+            await DisplayAlert(DataConstants.UpdatePasswordDbErrorTitle, DataConstants.UpdatePasswordDbErrorMessage,
+                DataConstants.Ok);
         }
         else {
             //Something odd happened, how did we get here???
             await DisplayAlert(DataConstants.UpdatePasswordUnknownTitle, DataConstants.UpdatePasswordUnknownMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
     }
 

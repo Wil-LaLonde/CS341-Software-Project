@@ -32,16 +32,16 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
             con.Open();
             //Insert SQL query for adding a profile
             string sql = "INSERT INTO shopitems (itemtitle, itemdescription, pointcost, levelrequirment, groupid) " +
-                $"VALUES ('{shopItemToAdd.Title}', '{shopItemToAdd.Description}', {shopItemToAdd.PointCost}, {shopItemToAdd.LevelRequirement}, {shopItemToAdd.Group.GroupID}) RETURNING shopitemid;";
+                $"VALUES ('{shopItemToAdd.Title}', '{shopItemToAdd.Description}', {shopItemToAdd.PointCost}, {shopItemToAdd.LevelRequirement}, {shopItemToAdd.Group.GroupId}) RETURNING shopitemid;";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             using NpgsqlDataReader reader = cmd.ExecuteReader();
             //Gathering new shopitemid
-            int shopItemID;
+            int shopItemId;
             while (reader.Read()) {
-                shopItemID = (int)reader[0];
+                shopItemId = (int)reader[0];
                 //Assigning new id to the shopItem object
-                shopItemToAdd.Id = shopItemID;
+                shopItemToAdd.Id = shopItemId;
                 MauiProgram.Profile.ProfileShop.AddShopItemToShop(shopItemToAdd);
             }
 
@@ -51,12 +51,12 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
         catch (PostgresException ex) {
             //Error adding shop item
             Console.WriteLine("Error while adding item: {0}", ex);
-            dbError = DatabaseErrorType.AddShopItemDBError;
+            dbError = DatabaseErrorType.AddShopItemDbError;
         }
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while adding item: {0}", ex);
-            dbError = DatabaseErrorType.AddShopItemDBError;
+            dbError = DatabaseErrorType.AddShopItemDbError;
         }
 
         return dbError;
@@ -92,7 +92,7 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong deleting the shop item
             Console.WriteLine("Unexpected error while deleting the shop item: {0}", ex);
-            dbError = DatabaseErrorType.DeleteShopItemDBError;
+            dbError = DatabaseErrorType.DeleteShopItemDbError;
         }
 
         return dbError;
@@ -128,16 +128,16 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
                     "FROM shopitems " +
                     "WHERE groupid IN (SELECT groupid " +
                     "FROM profilegroup " +
-                    $"WHERE profileid = {profileToLookup.ProfileID});";
+                    $"WHERE profileid = {profileToLookup.ProfileId});";
             else
                 //Members will be able to see all shop items they have not purhcased yet
                 sql = "SELECT * " +
                     "FROM shopitems " +
                     "WHERE groupid IN (SELECT groupid " +
                     "FROM profilegroup " +
-                    $"WHERE profileid = {profileToLookup.ProfileID} AND shopitemid NOT IN (SELECT shopitemid " +
+                    $"WHERE profileid = {profileToLookup.ProfileId} AND shopitemid NOT IN (SELECT shopitemid " +
                     "FROM purchasedshopitems " +
-                    $"WHERE profileid = {profileToLookup.ProfileID})" +
+                    $"WHERE profileid = {profileToLookup.ProfileId})" +
                     ");";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
@@ -145,7 +145,7 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
 
             while (reader.Read()) {
                 ShopItem shopItem = new((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3],
-                    (int)reader[4], profileToLookup.GetGroupUsingGroupID((int)reader[5]));
+                    (int)reader[4], profileToLookup.GetGroupUsingGroupId((int)reader[5]));
                 //Add shop item to the profile shop
                 MauiProgram.Profile.ProfileShop.AddShopItemToShop(shopItem);
             }
@@ -157,7 +157,7 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong looking up shop items
             Console.WriteLine("Unexpected error while looking up shopitems: {0}", ex);
-            dbError = DatabaseErrorType.LookupAllShopItemsDBError;
+            dbError = DatabaseErrorType.LookupAllShopItemsDbError;
         }
 
         return dbError;
@@ -195,7 +195,7 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong updating the shop item
             Console.WriteLine("Unexpected error updating the shopitem: {0}", ex);
-            dbError = DatabaseErrorType.UpdateShopItemDBError;
+            dbError = DatabaseErrorType.UpdateShopItemDbError;
         }
 
         return dbError;
@@ -215,7 +215,7 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
             con.Open();
             //Insert SQL query for adding a profile
             string sql = "INSERT INTO purchasedshopitems (profileid, shopitemid)" +
-                $"VALUES ({MauiProgram.Profile.ProfileID}, '{shopItemToBuy.Id}');";
+                $"VALUES ({MauiProgram.Profile.ProfileId}, '{shopItemToBuy.Id}');";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -226,8 +226,8 @@ public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
             //Update member points
             MauiProgram.Profile.RemovePointsFromMember(shopItemToBuy.PointCost);
             //Call database to update point values
-            IDatabase profileDB = new ProfileDatabase();
-            profileDB.UpdateItem(MauiProgram.Profile);
+            IDatabase profileDb = new ProfileDatabase();
+            profileDb.UpdateItem(MauiProgram.Profile);
             dbError = DatabaseErrorType.NoError;
         }
         catch (PostgresException ex) {

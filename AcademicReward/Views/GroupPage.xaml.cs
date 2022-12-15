@@ -13,7 +13,7 @@ namespace AcademicReward.Views;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class GroupPage : ContentPage {
-    public Group group;
+    public Group Group;
     public ObservableCollection<Profile> Members = new();
 
     /// <summary>
@@ -23,10 +23,10 @@ public partial class GroupPage : ContentPage {
     public GroupPage(Group group) {
         InitializeComponent();
 
-        this.group = group;
+        this.Group = group;
 
-        Members = GroupProfileRelationship.getProfilesInGroup(group);
-        UpdateMembersXP();
+        Members = GroupProfileRelationship.GetProfilesInGroup(group);
+        UpdateMembersXp();
         MembersLV.ItemsSource = Members;
 
         GroupDescriptionLbl.Text = group.GroupDescription;
@@ -47,7 +47,7 @@ public partial class GroupPage : ContentPage {
     public void ShowAdminName(Group group) {
         base.OnAppearing();
         LoginDatabase loginDatabase = new();
-        object admin = loginDatabase.FindById(group.AdminProfileID);
+        object admin = loginDatabase.FindById(group.AdminProfileId);
         Profile adminProfile = admin as Profile;
         GroupAdminLbl.Text = adminProfile.Username;
     }
@@ -59,14 +59,14 @@ public partial class GroupPage : ContentPage {
     /// <param name="e">EventArgs e</param>
     public async void AddMemberButtonClickedAsync(object sender, EventArgs e) {
         // Include reference to this page so that the listview of members can be updated
-        AddMemberPopUp addMemberPopUp = new(group, ref Members);
+        AddMemberPopUp addMemberPopUp = new(Group, ref Members);
 
         object result = await this.ShowPopupAsync(addMemberPopUp);
 
         if (result is ObservableCollection<Profile> membersResult)
             if (membersResult != null) {
-                Members = GroupProfileRelationship.getProfilesInGroup(group);
-                UpdateMembersXP();
+                Members = GroupProfileRelationship.GetProfilesInGroup(Group);
+                UpdateMembersXp();
                 MembersLV.ItemsSource = Members;
             }
     }
@@ -74,7 +74,7 @@ public partial class GroupPage : ContentPage {
     /// <summary>
     ///     Helper method used to properly show the correct amount of XP for a member
     /// </summary>
-    private void UpdateMembersXP() {
-        foreach (Profile member in Members) member.XP = member.GetCurrentXPInt();
+    private void UpdateMembersXp() {
+        foreach (Profile member in Members) member.Xp = member.GetCurrentXpInt();
     }
 }

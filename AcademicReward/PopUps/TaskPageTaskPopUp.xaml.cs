@@ -45,6 +45,6 @@ public partial class TaskPageTaskPopUp : Popup {
         TaskTitle.Text = task.Title;
         TaskDescription.Text = task.Description;
         TaskPoints.Text = task.Points.ToString();
-        TaskGroup.Text = MauiProgram.Profile.GetGroupNameUsingGroupID(task.GroupID);
+        TaskGroup.Text = MauiProgram.Profile.GetGroupNameUsingGroupId(task.GroupId);
     }
 }

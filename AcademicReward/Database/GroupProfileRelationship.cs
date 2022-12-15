@@ -17,9 +17,9 @@ public class GroupProfileRelationship : AcademicRewardsDatabase {
     /// </summary>
     /// <param name="group">Group group</param>
     /// <returns>ObservableCollection profiles</returns>
-    public static ObservableCollection<Profile> getProfilesInGroup(Group group) {
+    public static ObservableCollection<Profile> GetProfilesInGroup(Group group) {
         try {
-            int groupId = group.GroupID;
+            int groupId = group.GroupId;
             using NpgsqlConnection con = new NpgsqlConnection(InitializeConnectionString());
             con.Open();
             //Select SQL query for getting all profiles
@@ -58,16 +58,16 @@ public class GroupProfileRelationship : AcademicRewardsDatabase {
     /// <param name="profile">Profile profile</param>
     /// <param name="group">Group group</param>
     /// <returns>LogicErrorType logicError</returns>
-    public static LogicErrorType addProfileToGroup(Profile profile, Group group) {
+    public static LogicErrorType AddProfileToGroup(Profile profile, Group group) {
         try {
-            if (checkAdminExists(group) && profile.IsAdmin) {
+            if (CheckAdminExists(group) && profile.IsAdmin) {
                 // Group already has an admin
                 Console.WriteLine("Error while adding profile to group: Admin already exists");
                 return LogicErrorType.GroupAlreadyHasAdmin;
             }
 
-            int profileId = profile.ProfileID;
-            int groupId = group.GroupID;
+            int profileId = profile.ProfileId;
+            int groupId = group.GroupId;
             using NpgsqlConnection con = new NpgsqlConnection(InitializeConnectionString());
             con.Open();
             //Select SQL query for getting all profiles
@@ -91,7 +91,7 @@ public class GroupProfileRelationship : AcademicRewardsDatabase {
     /// </summary>
     /// <param name="username">string username</param>
     /// <returns>Profile profile</returns>
-    public static Profile findByUsername(string username) {
+    public static Profile FindByUsername(string username) {
         try {
             using NpgsqlConnection con = new NpgsqlConnection(InitializeConnectionString());
             con.Open();
@@ -135,9 +135,9 @@ public class GroupProfileRelationship : AcademicRewardsDatabase {
     /// </summary>
     /// <param name="group">Group group</param>
     /// <returns>true/false</returns>
-    public static bool checkAdminExists(Group group) {
+    public static bool CheckAdminExists(Group group) {
         try {
-            int groupId = group.GroupID;
+            int groupId = group.GroupId;
             using NpgsqlConnection con = new NpgsqlConnection(InitializeConnectionString());
             con.Open();
             //Select SQL query for getting all profiles

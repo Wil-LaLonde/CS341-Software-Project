@@ -14,9 +14,9 @@ namespace AcademicReward;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class ViewShopItemPage : Popup {
-    private readonly ShopItem shopItem;
-    private readonly ShopLogic shopLogic;
-    private readonly ShopPage shopPage;
+    private readonly ShopItem _shopItem;
+    private readonly ShopLogic _shopLogic;
+    private readonly ShopPage _shopPage;
 
     /// <summary>
     ///     ViewShopItemPage constructor
@@ -26,13 +26,13 @@ public partial class ViewShopItemPage : Popup {
     /// <param name="page">ShopPage page</param>
     public ViewShopItemPage(ShopItem viewedItem, ShopLogic log, ShopPage page) {
         InitializeComponent();
-        shopLogic = log;
-        shopItem = viewedItem;
-        ItemTitle.Text = shopItem.Title;
-        Desc.Text = shopItem.Description;
-        LevelRequirement.Text = shopItem.LevelRequirement.ToString();
-        Cost.Text = shopItem.PointCost.ToString();
-        shopPage = page;
+        _shopLogic = log;
+        _shopItem = viewedItem;
+        ItemTitle.Text = _shopItem.Title;
+        Desc.Text = _shopItem.Description;
+        LevelRequirement.Text = _shopItem.LevelRequirement.ToString();
+        Cost.Text = _shopItem.PointCost.ToString();
+        _shopPage = page;
         SetVisibility(MauiProgram.Profile.IsAdmin);
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
@@ -62,7 +62,7 @@ public partial class ViewShopItemPage : Popup {
     /// <param name="e">EventArgs e</param>
     private void EditClicked(object sender, EventArgs e) {
         Close();
-        shopPage.OpenEditPage(shopItem);
+        _shopPage.OpenEditPage(_shopItem);
     }
 
     /// <summary>
@@ -80,9 +80,9 @@ public partial class ViewShopItemPage : Popup {
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
     private void DeleteClicked(object sender, EventArgs e) {
-        LogicErrorType logicError = shopLogic.DeleteItem(shopItem);
-        if (LogicErrorType.NoError == logicError) shopItem.Id = ShopItem.DeleteShopItemSuccesValue;
-        Close(shopItem);
+        LogicErrorType logicError = _shopLogic.DeleteItem(_shopItem);
+        if (LogicErrorType.NoError == logicError) _shopItem.Id = ShopItem.DeleteShopItemSuccesValue;
+        Close(_shopItem);
     }
 
     /// <summary>
@@ -91,10 +91,10 @@ public partial class ViewShopItemPage : Popup {
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
     private void BuyClicked(object sender, EventArgs e) {
-        LogicErrorType logicError = shopLogic.BuyItem(shopItem);
+        LogicErrorType logicError = _shopLogic.BuyItem(_shopItem);
         if (LogicErrorType.NoError == logicError) {
-            shopItem.Id = ShopItem.BuyShopItemSuccessValue;
-            Close(shopItem);
+            _shopItem.Id = ShopItem.BuyShopItemSuccessValue;
+            Close(_shopItem);
         }
 
         //Something went wrong, show error message
@@ -133,7 +133,7 @@ public partial class ViewShopItemPage : Popup {
                 break;
             case LogicErrorType.BuyItemError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.BuyShopItemDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.BuyShopItemDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);

@@ -44,6 +44,6 @@ public partial class NotificationPopUp : Popup {
     private void SetNotificationLabels(Notification notification) {
         NotificationTitle.Text = notification.Title;
         NotificationDescription.Text = notification.Description;
-        NotificationGroup.Text = MauiProgram.Profile.GetGroupNameUsingGroupID(notification.GroupID);
+        NotificationGroup.Text = MauiProgram.Profile.GetGroupNameUsingGroupId(notification.GroupId);
     }
 }

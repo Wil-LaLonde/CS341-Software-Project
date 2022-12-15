@@ -11,13 +11,13 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Xee Lo
 /// </summary>
 public class TaskLogic : ILogic {
-    private readonly IDatabase taskDB;
+    private readonly IDatabase _taskDb;
 
     /// <summary>
     ///     TaskLogic constructor
     /// </summary>
     public TaskLogic() {
-        taskDB = new TaskDatabase();
+        _taskDb = new TaskDatabase();
     }
 
     /// <summary>
@@ -31,11 +31,11 @@ public class TaskLogic : ILogic {
         //Checking user input
         logicError = AddTaskCheck(taskToAdd);
         if (LogicErrorType.NoError == logicError) {
-            DatabaseErrorType dbError = taskDB.AddItem(taskToAdd);
+            DatabaseErrorType dbError = _taskDb.AddItem(taskToAdd);
             if (DatabaseErrorType.NoError == dbError)
                 logicError = LogicErrorType.NoError;
             else
-                logicError = LogicErrorType.AddTaskDBError;
+                logicError = LogicErrorType.AddTaskDbError;
         }
 
         return logicError;
@@ -49,11 +49,11 @@ public class TaskLogic : ILogic {
     public LogicErrorType UpdateItem(object task) {
         LogicErrorType logicError;
         Task taskToUpdate = task as Task;
-        DatabaseErrorType dbError = taskDB.UpdateItem(taskToUpdate);
+        DatabaseErrorType dbError = _taskDb.UpdateItem(taskToUpdate);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.UpdateTaskDBError;
+            logicError = LogicErrorType.UpdateTaskDbError;
         return logicError;
     }
 
@@ -65,11 +65,11 @@ public class TaskLogic : ILogic {
     public LogicErrorType DeleteItem(object task) {
         LogicErrorType logicError;
         Task taskToDelete = task as Task;
-        DatabaseErrorType dbError = taskDB.DeleteItem(taskToDelete);
+        DatabaseErrorType dbError = _taskDb.DeleteItem(taskToDelete);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.DeleteTaskDBError;
+            logicError = LogicErrorType.DeleteTaskDbError;
         return logicError;
     }
 
@@ -80,11 +80,11 @@ public class TaskLogic : ILogic {
     /// <returns>LogicErrorType</returns>
     public LogicErrorType LookupItem(object profile) {
         LogicErrorType logicError;
-        DatabaseErrorType dbError = taskDB.LookupFullItem(profile);
+        DatabaseErrorType dbError = _taskDb.LookupFullItem(profile);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.LookupAllTasksDBError;
+            logicError = LogicErrorType.LookupAllTasksDbError;
         return logicError;
     }
 

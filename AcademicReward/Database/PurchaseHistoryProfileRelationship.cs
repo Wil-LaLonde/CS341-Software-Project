@@ -14,7 +14,7 @@ internal class PurchaseHistoryProfileRelationship : AcademicRewardsDatabase {
     // Method to grab all purchase history items for a given profile
     public static ObservableCollection<PurchaseHistoryItem> GetPurchaseHistory(Profile profile) {
         try {
-            int profileId = profile.ProfileID;
+            int profileId = profile.ProfileId;
             using NpgsqlConnection con = new NpgsqlConnection(InitializeConnectionString());
             con.Open();
             //Select SQL query for getting all purchase history for the current user, also grab the title and description columns from the shopitems table

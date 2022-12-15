@@ -15,16 +15,16 @@ namespace AcademicReward.Views;
 ///     Reviewer: Xee Lo
 /// </summary>
 public partial class TaskPage : ContentPage {
-    private readonly IDatabase historyDB;
-    private readonly ILogic notificationLogic;
+    private readonly IDatabase _historyDb;
+    private readonly ILogic _notificationLogic;
 
     /// <summary>
     ///     TaskPage constructor
     /// </summary>
     public TaskPage() {
         InitializeComponent();
-        notificationLogic = new NotificationLogic();
-        historyDB = new HistoryDatabase();
+        _notificationLogic = new NotificationLogic();
+        _historyDb = new HistoryDatabase();
         //Gathering all current notifications
         PrepareNotificationList();
         //Gathering all currents tasks
@@ -36,10 +36,10 @@ public partial class TaskPage : ContentPage {
     /// </summary>
     private async void PrepareNotificationList() {
         LogicErrorType logicError;
-        logicError = notificationLogic.LookupItem(MauiProgram.Profile);
-        if (LogicErrorType.LookupAllNotificationsDBError == logicError)
-            await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle,
-                DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);
+        logicError = _notificationLogic.LookupItem(MauiProgram.Profile);
+        if (LogicErrorType.LookupAllNotificationsDbError == logicError)
+            await DisplayAlert(DataConstants.LookupNotificationDbErrorTitle,
+                DataConstants.LookupNotificationDbErrorMessage, DataConstants.Ok);
         else
             NotificationList.ItemsSource = MauiProgram.Profile.NotificationList;
     }
@@ -63,12 +63,12 @@ public partial class TaskPage : ContentPage {
         Notification notification = await this.ShowPopupAsync(addNotificationPopUp) as Notification;
         if (notification != null) {
             //Adding a history item for creating a notification
-            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID,
+            _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId,
                 DataConstants.HistoryCreateNotificationTitle,
                 string.Format(DataConstants.HistoryCreateNotificationDescription, notification.Title,
-                    MauiProgram.Profile.GetGroupNameUsingGroupID(notification.GroupID))));
+                    MauiProgram.Profile.GetGroupNameUsingGroupId(notification.GroupId))));
             await DisplayAlert(DataConstants.CreateNotificationSuccessTitle,
-                DataConstants.CreateNotificationSuccessMessage, DataConstants.OK);
+                DataConstants.CreateNotificationSuccessMessage, DataConstants.Ok);
         }
     }
 
@@ -108,11 +108,11 @@ public partial class TaskPage : ContentPage {
         Task task = await this.ShowPopupAsync(addTaskPopUp) as Task;
         if (task != null) {
             //Adding a history item for creating a task
-            historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateTaskTitle,
+            _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryCreateTaskTitle,
                 string.Format(DataConstants.HistoryCreateTaskDescription, task.Title,
-                    MauiProgram.Profile.GetGroupNameUsingGroupID(task.GroupID))));
+                    MauiProgram.Profile.GetGroupNameUsingGroupId(task.GroupId))));
             await DisplayAlert(DataConstants.CreateTaskSuccessTitle, DataConstants.CreateTaskSuccessMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
     }
 }

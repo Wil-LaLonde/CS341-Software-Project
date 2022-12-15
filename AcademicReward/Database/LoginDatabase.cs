@@ -31,7 +31,7 @@ public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
             con.Open();
             //Insert SQL query for adding a profile
             string sql = "INSERT INTO Profiles (username, xp, points, level, isadmin, salt, password)" +
-                $"VALUES ('{profileToAdd.Username}', {profileToAdd.XP}, {profileToAdd.Points}, {profileToAdd.Level}, {profileToAdd.IsAdmin}, '{profileToAdd.Salt}', '{profileToAdd.Password}');";
+                $"VALUES ('{profileToAdd.Username}', {profileToAdd.Xp}, {profileToAdd.Points}, {profileToAdd.Level}, {profileToAdd.IsAdmin}, '{profileToAdd.Salt}', '{profileToAdd.Password}');";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -42,12 +42,12 @@ public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
         catch (PostgresException ex) {
             //Username already exists.
             Console.WriteLine("Error while adding profile: {0}", ex);
-            dbError = DatabaseErrorType.UsernameTakenDBError;
+            dbError = DatabaseErrorType.UsernameTakenDbError;
         }
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while adding profile: {0}", ex);
-            dbError = DatabaseErrorType.AddProfileDBError;
+            dbError = DatabaseErrorType.AddProfileDbError;
         }
 
         return dbError;
@@ -68,7 +68,7 @@ public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
             //Insert SQL query for adding a profile
             string sql = "UPDATE profiles " +
                 $"SET salt = '{profileToUpdate.Salt}', password = '{profileToUpdate.Password}' " +
-                $"WHERE profileid = {MauiProgram.Profile.ProfileID};";
+                $"WHERE profileid = {MauiProgram.Profile.ProfileId};";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -81,7 +81,7 @@ public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while updating profile: {0}", ex);
-            dbError = DatabaseErrorType.UpdatePasswordDBError;
+            dbError = DatabaseErrorType.UpdatePasswordDbError;
         }
 
         return dbError;
@@ -122,12 +122,12 @@ public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
         catch (InvalidOperationException ex) {
             //Username given does not exist
             Console.WriteLine("Error while signing profile in: {0}", ex);
-            dbError = DatabaseErrorType.UsernameNotFoundDBError;
+            dbError = DatabaseErrorType.UsernameNotFoundDbError;
         }
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while signing profile in: {0}", ex);
-            dbError = DatabaseErrorType.LoginProfileDBError;
+            dbError = DatabaseErrorType.LoginProfileDbError;
         }
 
         return dbError;
@@ -165,12 +165,12 @@ public class LoginDatabase : AcademicRewardsDatabase, IDatabase {
         catch (InvalidOperationException ex) {
             //Username given does not exist
             Console.WriteLine("Error while signing profile in: {0}", ex);
-            dbError = DatabaseErrorType.UsernameNotFoundDBError;
+            dbError = DatabaseErrorType.UsernameNotFoundDbError;
         }
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while signing profile in: {0}", ex);
-            dbError = DatabaseErrorType.LoginProfileDBError;
+            dbError = DatabaseErrorType.LoginProfileDbError;
         }
 
         return dbError;

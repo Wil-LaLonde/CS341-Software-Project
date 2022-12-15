@@ -10,7 +10,7 @@ namespace AcademicReward.Views;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class HistoryPage : ContentPage {
-    private readonly IDatabase HistoryDatabase = new HistoryDatabase();
+    private readonly IDatabase _historyDatabase = new HistoryDatabase();
 
     // New observable collection of HistoryItem
     public ObservableCollection<object> HistoryItems = new();
@@ -22,7 +22,7 @@ public partial class HistoryPage : ContentPage {
         InitializeComponent();
         HistoryItemsLV.ItemsSource = HistoryItems;
 
-        string[] args = { MauiProgram.Profile.ProfileID.ToString() };
-        HistoryDatabase.LoadItems(HistoryItems, args);
+        string[] args = { MauiProgram.Profile.ProfileId.ToString() };
+        _historyDatabase.LoadItems(HistoryItems, args);
     }
 }

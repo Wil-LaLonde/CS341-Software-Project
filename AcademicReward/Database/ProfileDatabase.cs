@@ -36,8 +36,8 @@ public class ProfileDatabase : AcademicRewardsDatabase, IDatabase {
             con.Open();
             //Insert SQL query for updating a profile (XP, POINTS, AND LEVEL)
             string sql = "UPDATE profiles " +
-                $"SET xp = {profileToUpdate.XP}, points = {profileToUpdate.Points}, level = {profileToUpdate.Level} " +
-                $"WHERE profileid = {MauiProgram.Profile.ProfileID};";
+                $"SET xp = {profileToUpdate.Xp}, points = {profileToUpdate.Points}, level = {profileToUpdate.Level} " +
+                $"WHERE profileid = {MauiProgram.Profile.ProfileId};";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -48,7 +48,7 @@ public class ProfileDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Not sure what happened, log message
             Console.WriteLine("Unexpected error while updating profile: {0}", ex);
-            dbError = DatabaseErrorType.UpdateProfileDBError;
+            dbError = DatabaseErrorType.UpdateProfileDbError;
         }
 
         return dbError;

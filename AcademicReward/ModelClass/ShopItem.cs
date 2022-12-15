@@ -17,13 +17,13 @@ public class ShopItem : ObservableObject {
     public const int MinLevelRequirement = 1;
     public const int DeleteShopItemSuccesValue = -1;
     public const int BuyShopItemSuccessValue = -2;
-    private string description;
-    private Group group;
+    private string _description;
+    private Group _group;
 
-    private int id;
-    private int levelRequirement;
-    private int pointCost;
-    private string title;
+    private int _id;
+    private int _levelRequirement;
+    private int _pointCost;
+    private string _title;
 
     /// <summary>
     ///     ShopItem constructor
@@ -60,32 +60,32 @@ public class ShopItem : ObservableObject {
     }
 
     public int Id {
-        get => id;
-        set => SetProperty(ref id, value);
+        get => _id;
+        set => SetProperty(ref _id, value);
     }
 
     public string Title {
-        get => title;
-        set => SetProperty(ref title, value);
+        get => _title;
+        set => SetProperty(ref _title, value);
     }
 
     public string Description {
-        get => description;
-        set => SetProperty(ref description, value);
+        get => _description;
+        set => SetProperty(ref _description, value);
     }
 
     public int PointCost {
-        get => pointCost;
-        set => SetProperty(ref pointCost, value);
+        get => _pointCost;
+        set => SetProperty(ref _pointCost, value);
     }
 
     public int LevelRequirement {
-        get => levelRequirement;
-        set => SetProperty(ref levelRequirement, value);
+        get => _levelRequirement;
+        set => SetProperty(ref _levelRequirement, value);
     }
 
     public Group Group {
-        get => group;
-        set => SetProperty(ref group, value);
+        get => _group;
+        set => SetProperty(ref _group, value);
     }
 }

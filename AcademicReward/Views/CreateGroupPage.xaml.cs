@@ -13,14 +13,14 @@ namespace AcademicReward.Views;
 /// </summary>
 public partial class CreateGroupPage : ContentPage {
     // Group logic
-    private readonly GroupLogic groupLogic;
+    private readonly GroupLogic _groupLogic;
 
     /// <summary>
     ///     CreateGroupPage constructor
     /// </summary>
     public CreateGroupPage() {
         // Instantiate groupLogic
-        groupLogic = new GroupLogic();
+        _groupLogic = new GroupLogic();
         InitializeComponent();
         SetErrorMessageBox(false, string.Empty);
     }
@@ -36,7 +36,7 @@ public partial class CreateGroupPage : ContentPage {
         string groupDescription = GroupDescriptionEntry.Text;
         //Create group object from information supplied by admin user
         Group groupToAdd = new(groupName, groupDescription, MauiProgram.Profile);
-        LogicErrorType logicError = groupLogic.AddItem(groupToAdd);
+        LogicErrorType logicError = _groupLogic.AddItem(groupToAdd);
         if (LogicErrorType.NoError == logicError)
             // Navigate back to the group page
             Navigation.PopAsync();
@@ -85,7 +85,7 @@ public partial class CreateGroupPage : ContentPage {
                 break;
             case LogicErrorType.GroupCreateError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.CreateGroupDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.CreateGroupDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);

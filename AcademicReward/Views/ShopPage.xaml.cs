@@ -12,14 +12,14 @@ namespace AcademicReward.Views;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class ShopPage : ContentPage {
-    private readonly ShopLogic shopLogic;
+    private readonly ShopLogic _shopLogic;
 
     /// <summary>
     ///     ShopPage constructor
     /// </summary>
     public ShopPage() {
         InitializeComponent();
-        shopLogic = new ShopLogic();
+        _shopLogic = new ShopLogic();
         BindingContext = MauiProgram.Profile;
         Points.SetBinding(Label.TextProperty, nameof(MauiProgram.Profile.Points));
         SetVisibility(MauiProgram.Profile.IsAdmin);
@@ -51,10 +51,10 @@ public partial class ShopPage : ContentPage {
     /// </summary>
     private async void PrepareShopItemList() {
         LogicErrorType logicError;
-        logicError = shopLogic.LookupItem(MauiProgram.Profile);
+        logicError = _shopLogic.LookupItem(MauiProgram.Profile);
         if (LogicErrorType.NoError != logicError)
-            await DisplayAlert(DataConstants.LookupShopItemDBErrorTitle, DataConstants.LookupShopItemDBErrorMessage,
-                DataConstants.OK);
+            await DisplayAlert(DataConstants.LookupShopItemDbErrorTitle, DataConstants.LookupShopItemDbErrorMessage,
+                DataConstants.Ok);
     }
 
     /// <summary>
@@ -70,10 +70,10 @@ public partial class ShopPage : ContentPage {
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
     private async void Button_Clicked(object sender, EventArgs e) {
-        ShopItem shopItem = await this.ShowPopupAsync(new AddShopItemPage(shopLogic)) as ShopItem;
+        ShopItem shopItem = await this.ShowPopupAsync(new AddShopItemPage(_shopLogic)) as ShopItem;
         if (shopItem != null)
             await DisplayAlert(DataConstants.AddShopItemSuccessTitle, DataConstants.AddShopItemSuccessMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
     }
 
     /// <summary>
@@ -85,13 +85,13 @@ public partial class ShopPage : ContentPage {
         ShopItem selectedItem = e.SelectedItem as ShopItem;
         if (selectedItem != null) {
             ShopItem shopItem =
-                await this.ShowPopupAsync(new ViewShopItemPage(selectedItem, shopLogic, this)) as ShopItem;
+                await this.ShowPopupAsync(new ViewShopItemPage(selectedItem, _shopLogic, this)) as ShopItem;
             if (shopItem != null && shopItem.Id == ShopItem.DeleteShopItemSuccesValue)
                 await DisplayAlert(DataConstants.DeleteShopItemSuccessTitle, DataConstants.DeleteShopItemSuccessMessage,
-                    DataConstants.OK);
+                    DataConstants.Ok);
             else if (shopItem != null && shopItem.Id == ShopItem.BuyShopItemSuccessValue)
                 await DisplayAlert(DataConstants.BuyShopItemSuccessTitle, DataConstants.BuyShopItemSuccessMessage,
-                    DataConstants.OK);
+                    DataConstants.Ok);
         }
     }
 
@@ -100,9 +100,9 @@ public partial class ShopPage : ContentPage {
     /// </summary>
     /// <param name="toBeEditted">ShopItem toBeEditted</param>
     public async void OpenEditPage(ShopItem toBeEditted) {
-        ShopItem shopItem = await this.ShowPopupAsync(new EditShopItemPage(shopLogic, toBeEditted, this)) as ShopItem;
+        ShopItem shopItem = await this.ShowPopupAsync(new EditShopItemPage(_shopLogic, toBeEditted, this)) as ShopItem;
         if (shopItem != null)
             await DisplayAlert(DataConstants.UpdateShopItemSuccessTitle, DataConstants.UpdateShopItemSuccessMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
     }
 }

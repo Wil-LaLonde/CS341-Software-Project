@@ -11,13 +11,13 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Maximilian Patterson
 /// </summary>
 public class ProfileLogic : ILogic {
-    private readonly IDatabase profileDB;
+    private readonly IDatabase _profileDb;
 
     /// <summary>
     ///     ProfileLogic constructor
     /// </summary>
     public ProfileLogic() {
-        profileDB = new ProfileDatabase();
+        _profileDb = new ProfileDatabase();
     }
 
     //Currently not needed
@@ -35,11 +35,11 @@ public class ProfileLogic : ILogic {
         Profile profileToUpdate = profile as Profile;
 
         //Making database call to update profile XP,Points,and Level
-        DatabaseErrorType dbError = profileDB.UpdateItem(profileToUpdate);
+        DatabaseErrorType dbError = _profileDb.UpdateItem(profileToUpdate);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.UpdateProfileDBError;
+            logicError = LogicErrorType.UpdateProfileDbError;
 
         return logicError;
     }

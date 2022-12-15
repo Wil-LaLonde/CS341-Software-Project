@@ -13,7 +13,7 @@ public class AcademicRewardsDatabase {
     private const string BitApiKey = "v2_3vaWv_9N4SgRBSZweqRCh5mKAQ4BE";
     private const string BitUsername = "pattmax";
     private const string BitDatabaseName = "pattmax/AcademicRewards";
-    private string connectionString = string.Empty;
+    private string _connectionString = string.Empty;
 
     /// <summary>
     ///     InitDatabaseConnection opens up a new
@@ -23,9 +23,9 @@ public class AcademicRewardsDatabase {
     /// </summary>
     public NpgsqlConnection InitDatabaseConnection() {
         //Creating the connection string
-        connectionString = InitializeConnectionString();
+        _connectionString = InitializeConnectionString();
         //Establishing the connection
-        using NpgsqlConnection con = new NpgsqlConnection(connectionString);
+        using NpgsqlConnection con = new NpgsqlConnection(_connectionString);
         //Retuning the connection
         return con;
     }

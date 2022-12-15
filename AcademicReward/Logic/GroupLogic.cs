@@ -11,13 +11,13 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Wil LaLonde
 /// </summary>
 public class GroupLogic : ILogic {
-    private readonly IDatabase GroupDB;
+    private readonly IDatabase _groupDb;
 
     /// <summary>
     ///     GroupLogic constructor
     /// </summary>
     public GroupLogic() {
-        GroupDB = new GroupDatabase();
+        _groupDb = new GroupDatabase();
     }
 
     /// <summary>
@@ -32,10 +32,10 @@ public class GroupLogic : ILogic {
         logicError = AddGroupCheck(groupToAdd);
         if (LogicErrorType.NoError == logicError) {
             // Add to database
-            DatabaseErrorType dbError = GroupDB.AddItem(groupToAdd);
+            DatabaseErrorType dbError = _groupDb.AddItem(groupToAdd);
             if (DatabaseErrorType.NoError == dbError) {
-                IDatabase historyDB = new HistoryDatabase();
-                historyDB.AddItem(new HistoryItem(MauiProgram.Profile.ProfileID, DataConstants.HistoryCreateGroupTitle,
+                IDatabase historyDb = new HistoryDatabase();
+                historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryCreateGroupTitle,
                     string.Format(DataConstants.HistoryCreateGroupDescription, groupToAdd.GroupName)));
             }
             else {
@@ -53,7 +53,7 @@ public class GroupLogic : ILogic {
     /// <returns>LogicErrorType logicError</returns>
     public LogicErrorType UpdateItem(object obj) {
         // Update database
-        DatabaseErrorType dbError = GroupDB.UpdateItem(obj);
+        DatabaseErrorType dbError = _groupDb.UpdateItem(obj);
         return LogicErrorType.NoError;
     }
 

@@ -34,7 +34,7 @@ public class GroupDatabase : AcademicRewardsDatabase, IDatabase {
             // SQL to add group to table and return created row
             string sql = "INSERT INTO groups (groupname, groupdescription, adminprofileid)" +
                 " VALUES ('" + $"{groupToAdd.GroupName}" + "', '" + $"{groupToAdd.GroupDescription}" + "', '" +
-                $"{groupToAdd.GroupAdmin.ProfileID}" + "') RETURNING groupid;";
+                $"{groupToAdd.GroupAdmin.ProfileId}" + "') RETURNING groupid;";
 
             // Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
@@ -50,16 +50,16 @@ public class GroupDatabase : AcademicRewardsDatabase, IDatabase {
             con.Close();
             dbError = DatabaseErrorType.NoError;
 
-            groupToAdd.GroupID = id;
-            GroupProfileRelationship.addProfileToGroup(MauiProgram.Profile, groupToAdd);
+            groupToAdd.GroupId = id;
+            GroupProfileRelationship.AddProfileToGroup(MauiProgram.Profile, groupToAdd);
 
-            groupToAdd.AdminProfileID = MauiProgram.Profile.ProfileID;
+            groupToAdd.AdminProfileId = MauiProgram.Profile.ProfileId;
             MauiProgram.Profile.AddGroupToProfile(groupToAdd); // Update list for current profile
         }
         catch (NpgsqlException ex) {
             //Something went wrong adding the group
             Console.WriteLine("Unexpected error while adding group: {0}", ex);
-            dbError = DatabaseErrorType.AddGroupDBError;
+            dbError = DatabaseErrorType.AddGroupDbError;
         }
 
         return dbError;
@@ -81,8 +81,8 @@ public class GroupDatabase : AcademicRewardsDatabase, IDatabase {
 
             //SQL to add task to table, also adding task to profiletask table
             string sql = "UPDATE groups SET groupname = '" + $"{groupToAdd.GroupName}" + "', groupdescription = '" +
-                $"{groupToAdd.GroupDescription}" + "', adminprofileid = '" + $"{groupToAdd.AdminProfileID}" +
-                "' WHERE groupid = '" + $"{groupToAdd.GroupID}" + "';";
+                $"{groupToAdd.GroupDescription}" + "', adminprofileid = '" + $"{groupToAdd.AdminProfileId}" +
+                "' WHERE groupid = '" + $"{groupToAdd.GroupId}" + "';";
 
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -93,7 +93,7 @@ public class GroupDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong updating the group
             Console.WriteLine("Unexpected error while updating group: {0}", ex);
-            dbError = DatabaseErrorType.UpdateGroupDBError;
+            dbError = DatabaseErrorType.UpdateGroupDbError;
         }
 
         return dbError;

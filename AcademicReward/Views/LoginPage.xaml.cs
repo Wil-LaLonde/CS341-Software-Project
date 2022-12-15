@@ -13,15 +13,15 @@ namespace AcademicReward.Views;
 ///     Reviewer: Xee Lo / Maximilian Patterson
 /// </summary>
 public partial class LoginPage : ContentPage {
-    private readonly ILogic loginLogic;
-    private readonly ILogic loginGroupLogic;
+    private readonly ILogic _loginLogic;
+    private readonly ILogic _loginGroupLogic;
 
     /// <summary>
     ///     LoginPage constructor
     /// </summary>
     public LoginPage() {
-        loginLogic = new LoginLogic();
-        loginGroupLogic = new LoginGroupLogic();
+        _loginLogic = new LoginLogic();
+        _loginGroupLogic = new LoginGroupLogic();
         InitializeComponent();
     }
 
@@ -37,7 +37,7 @@ public partial class LoginPage : ContentPage {
         //Create temp profile
         Profile profile = new(username, password);
 
-        LogicErrorType loginType = loginLogic.LookupItem(profile);
+        LogicErrorType loginType = _loginLogic.LookupItem(profile);
         if (LogicErrorType.NoError == loginType) {
             //Creating new AppShell to show different tab bars
             AppShell appShell = new();
@@ -48,44 +48,44 @@ public partial class LoginPage : ContentPage {
                 appShell.SetTabBars(isAdmin);
             Application.Current.MainPage = appShell;
             //Need to gather all the groups for the given profile.
-            LogicErrorType loginGroupType = loginGroupLogic.LookupItem(MauiProgram.Profile);
+            LogicErrorType loginGroupType = _loginGroupLogic.LookupItem(MauiProgram.Profile);
             //There was an issue gathering all the groups, display error message.
-            if (LogicErrorType.LoginGroupCollectionDBError == loginGroupType)
+            if (LogicErrorType.LoginGroupCollectionDbError == loginGroupType)
                 await DisplayAlert(DataConstants.LoginGroupCollectionTitle, DataConstants.LoginGroupCollectionMessage,
-                    DataConstants.OK);
+                    DataConstants.Ok);
             //Sending user off to the home page!
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
         else if (LogicErrorType.EmptyUsername == loginType) {
-            await DisplayAlert(DataConstants.EmptyUsernameTitle, DataConstants.EmptyUsernameMessage, DataConstants.OK);
+            await DisplayAlert(DataConstants.EmptyUsernameTitle, DataConstants.EmptyUsernameMessage, DataConstants.Ok);
         }
         else if (LogicErrorType.EmptyPassword == loginType) {
-            await DisplayAlert(DataConstants.EmptyPasswordTitle, DataConstants.EmptyPasswordMessage, DataConstants.OK);
+            await DisplayAlert(DataConstants.EmptyPasswordTitle, DataConstants.EmptyPasswordMessage, DataConstants.Ok);
         }
         else if (LogicErrorType.InvalidUsernameLength == loginType) {
             await DisplayAlert(DataConstants.UsernameLengthTitle, DataConstants.UsernameLengthMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.InvalidPasswordLength == loginType) {
             await DisplayAlert(DataConstants.PasswordLengthTitle, DataConstants.PasswordLengthMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.UsernameNotFound == loginType) {
             await DisplayAlert(DataConstants.UsernameNotFoundTitle, DataConstants.UsernameNotFoundMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
         else if (LogicErrorType.PasswordIncorrect == loginType) {
             await DisplayAlert(DataConstants.IncorrectPasswordTitle, DataConstants.IncorrectPasswordMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
-        else if (LogicErrorType.SignProfileInDBError == loginType) {
-            await DisplayAlert(DataConstants.SignProfileInDBTitle, DataConstants.SignProfileInDBMessage,
-                DataConstants.OK);
+        else if (LogicErrorType.SignProfileInDbError == loginType) {
+            await DisplayAlert(DataConstants.SignProfileInDbTitle, DataConstants.SignProfileInDbMessage,
+                DataConstants.Ok);
         }
         else {
             //some unknown error has happened here...how did we get here???
             await DisplayAlert(DataConstants.SignProfileInUnkownTitle, DataConstants.SignProfileInUnknownMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
         }
     }
 
@@ -100,7 +100,7 @@ public partial class LoginPage : ContentPage {
         Profile newProfile = await this.ShowPopupAsync(loginPopUp) as Profile;
         if (newProfile != null)
             await DisplayAlert(DataConstants.AddProfileSuccessTitle, DataConstants.AddProfileSuccessMessage,
-                DataConstants.OK);
+                DataConstants.Ok);
     }
 
     /// <summary>

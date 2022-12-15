@@ -15,10 +15,10 @@ namespace AcademicReward.PopUps;
 ///     Reviewer: Maximilian Patterson
 /// </summary>
 public partial class AddMemberPopUp : Popup {
-    public Group group;
+    public Group Group;
 
     // Reference to groupage so that the listview can be updated
-    public ObservableCollection<Profile> memberList;
+    public ObservableCollection<Profile> MemberList;
 
     /// <summary>
     ///     AddMemberPopUp constructor
@@ -27,8 +27,8 @@ public partial class AddMemberPopUp : Popup {
     /// <param name="memberList">ObservableCollection memberList</param>
     public AddMemberPopUp(Group group, ref ObservableCollection<Profile> memberList) {
         InitializeComponent();
-        this.group = group;
-        this.memberList = memberList;
+        this.Group = group;
+        this.MemberList = memberList;
         SetErrorMessageBox(false, string.Empty);
     }
 
@@ -54,12 +54,12 @@ public partial class AddMemberPopUp : Popup {
             // Add member logic
             AddMemberLogic addMemberLogic = new AddMemberLogic();
             // Create an array with two elements, the current group and the member name
-            object[] obj = { memberName, group };
+            object[] obj = { memberName, Group };
             logicError = addMemberLogic.AddItemWithArgs(obj);
             if (LogicErrorType.NoError == logicError) {
                 // Update the listview
-                memberList = GroupProfileRelationship.getProfilesInGroup(group);
-                Close(memberList);
+                MemberList = GroupProfileRelationship.GetProfilesInGroup(Group);
+                Close(MemberList);
             }
         }
         else {
@@ -76,7 +76,7 @@ public partial class AddMemberPopUp : Popup {
     /// <param name="username">string username</param>
     /// <returns>true/false</returns>
     private bool IsMemberNotInGroup(string username) {
-        foreach (Profile member in memberList) {
+        foreach (Profile member in MemberList) {
             if (member.Username.Equals(username)) return false;
         }
 

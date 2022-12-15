@@ -32,11 +32,11 @@ public class NotificationDatabase : AcademicRewardsDatabase, IDatabase {
             //SQL statement to add the notification to our notifications table
             //Also adding all profileids and the new notificationid to the profilenotification table
             string sql = "INSERT INTO notifications (notificationtitle, notificationdescription, groupid)" +
-                $"VALUES ('{notificationToAdd.Title}', '{notificationToAdd.Description}', {notificationToAdd.GroupID});" +
+                $"VALUES ('{notificationToAdd.Title}', '{notificationToAdd.Description}', {notificationToAdd.GroupId});" +
                 "INSERT INTO profilenotification " +
                 "SELECT profileid, MAX(notificationid) " +
                 "FROM profilegroup, notifications " +
-                $"WHERE profilegroup.groupid = {notificationToAdd.GroupID} " +
+                $"WHERE profilegroup.groupid = {notificationToAdd.GroupId} " +
                 "GROUP BY profileid;";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
@@ -48,7 +48,7 @@ public class NotificationDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong adding the task
             Console.WriteLine("Unexpected error while adding notification: {0}", ex);
-            dbError = DatabaseErrorType.AddNotificationDBError;
+            dbError = DatabaseErrorType.AddNotificationDbError;
         }
 
         return dbError;
@@ -84,7 +84,7 @@ public class NotificationDatabase : AcademicRewardsDatabase, IDatabase {
             //SQL to lookup notifications for a group
             string sql = "SELECT * " +
                 "FROM notifications " +
-                $"WHERE notificationid IN (SELECT notificationid FROM profilenotification WHERE profileid = {profileNotifications.ProfileID});";
+                $"WHERE notificationid IN (SELECT notificationid FROM profilenotification WHERE profileid = {profileNotifications.ProfileId});";
             //Executing the query.
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
             using NpgsqlDataReader reader = cmd.ExecuteReader();
@@ -103,7 +103,7 @@ public class NotificationDatabase : AcademicRewardsDatabase, IDatabase {
         catch (NpgsqlException ex) {
             //Something went wrong adding the task
             Console.WriteLine("Unexpected error while looking up notification: {0}", ex);
-            dbError = DatabaseErrorType.LookupAllNotificationsDBError;
+            dbError = DatabaseErrorType.LookupAllNotificationsDbError;
         }
 
         return dbError;

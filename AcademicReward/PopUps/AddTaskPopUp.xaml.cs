@@ -14,7 +14,7 @@ namespace AcademicReward.PopUps;
 ///     Reviewer: Xee Lo
 /// </summary>
 public partial class AddTaskPopUp : Popup {
-    private readonly ILogic taskLogic;
+    private readonly ILogic _taskLogic;
 
     /// <summary>
     ///     AddTaskPopUp constructor
@@ -23,7 +23,7 @@ public partial class AddTaskPopUp : Popup {
         InitializeComponent();
         //Gather all the groups for the select list
         GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
-        taskLogic = new TaskLogic();
+        _taskLogic = new TaskLogic();
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
     }
@@ -53,9 +53,9 @@ public partial class AddTaskPopUp : Popup {
             bool isPointsValid = int.TryParse(points, out int intPoints);
             if (isPointsValid) {
                 //Create a new Task object
-                Task task = new(title, description, intPoints, selectedGroup.GroupID);
+                Task task = new(title, description, intPoints, selectedGroup.GroupId);
                 //Check for any logic/database errors
-                logicError = taskLogic.AddItem(task);
+                logicError = _taskLogic.AddItem(task);
                 if (LogicErrorType.NoError == logicError) {
                     MauiProgram.Profile.AddTaskToProfile(task);
                     Close(task);
@@ -123,9 +123,9 @@ public partial class AddTaskPopUp : Popup {
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.InvalidTaskDescriptionLengthMessage);
                 break;
-            case LogicErrorType.AddTaskDBError:
+            case LogicErrorType.AddTaskDbError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.AddTaskDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.AddTaskDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);

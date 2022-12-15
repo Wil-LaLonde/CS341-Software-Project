@@ -10,13 +10,13 @@ namespace AcademicReward.Logic;
 ///     Reviewer: Maximilian Patterson
 /// </summary>
 public class LoginGroupLogic : ILogic {
-    private readonly IDatabase loginGroupDB;
+    private readonly IDatabase _loginGroupDb;
 
     /// <summary>
     ///     LoginGroupLogic constructor
     /// </summary>
     public LoginGroupLogic() {
-        loginGroupDB = new LoginGroupDatabase();
+        _loginGroupDb = new LoginGroupDatabase();
     }
 
     //Currently not needed
@@ -41,11 +41,11 @@ public class LoginGroupLogic : ILogic {
     /// <returns>LogicErrorType logicError</returns>
     public LogicErrorType LookupItem(object profile) {
         LogicErrorType logicError;
-        DatabaseErrorType dbError = loginGroupDB.LookupFullItem(profile);
+        DatabaseErrorType dbError = _loginGroupDb.LookupFullItem(profile);
         if (DatabaseErrorType.NoError == dbError)
             logicError = LogicErrorType.NoError;
         else
-            logicError = LogicErrorType.LoginGroupCollectionDBError;
+            logicError = LogicErrorType.LoginGroupCollectionDbError;
         return logicError;
     }
 

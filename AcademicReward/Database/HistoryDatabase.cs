@@ -32,11 +32,11 @@ public class HistoryDatabase : AcademicRewardsDatabase, IDatabase {
         }
         catch (PostgresException ex) {
             Console.WriteLine("Error while adding history: {0}", ex);
-            dbError = DatabaseErrorType.AddHistoryDBError;
+            dbError = DatabaseErrorType.AddHistoryDbError;
         }
         catch (NpgsqlException ex) {
             Console.WriteLine("Error while adding history: {0}", ex);
-            dbError = DatabaseErrorType.AddHistoryDBError;
+            dbError = DatabaseErrorType.AddHistoryDbError;
         }
 
         return dbError;
@@ -61,11 +61,11 @@ public class HistoryDatabase : AcademicRewardsDatabase, IDatabase {
         }
         catch (PostgresException ex) {
             Console.WriteLine("Error while deleting history: {0}", ex);
-            dbError = DatabaseErrorType.DeleteHistoryDBError;
+            dbError = DatabaseErrorType.DeleteHistoryDbError;
         }
         catch (NpgsqlException ex) {
             Console.WriteLine("Error while deleting history: {0}", ex);
-            dbError = DatabaseErrorType.DeleteHistoryDBError;
+            dbError = DatabaseErrorType.DeleteHistoryDbError;
         }
 
         return dbError;
@@ -92,11 +92,11 @@ public class HistoryDatabase : AcademicRewardsDatabase, IDatabase {
         }
         catch (PostgresException ex) {
             Console.WriteLine("Error while editing history: {0}", ex);
-            dbError = DatabaseErrorType.UpdateHistoryDBError;
+            dbError = DatabaseErrorType.UpdateHistoryDbError;
         }
         catch (NpgsqlException ex) {
             Console.WriteLine("Error while editing history: {0}", ex);
-            dbError = DatabaseErrorType.UpdateHistoryDBError;
+            dbError = DatabaseErrorType.UpdateHistoryDbError;
         }
 
         return dbError;
@@ -110,22 +110,22 @@ public class HistoryDatabase : AcademicRewardsDatabase, IDatabase {
     /// <returns></returns>
     public DatabaseErrorType LoadItems(ObservableCollection<object> historyItems, string[] args) {
         DatabaseErrorType dbError;
-        int ProfileId = int.Parse(args[0]);
+        int profileId = int.Parse(args[0]);
         try {
             using NpgsqlConnection con = new NpgsqlConnection(InitializeConnectionString());
             con.Open();
-            string sql = "SELECT * FROM history WHERE profileid = " + $"'{ProfileId}';";
+            string sql = "SELECT * FROM history WHERE profileid = " + $"'{profileId}';";
             using NpgsqlCommand cmd = new NpgsqlCommand(sql, con);
-            NpgsqlDataReader HistoryItemsReader = cmd.ExecuteReader();
+            NpgsqlDataReader historyItemsReader = cmd.ExecuteReader();
 
             // Add all the items from HistoryItemsReader to HistoryItems
-            while (HistoryItemsReader.Read()) {
+            while (historyItemsReader.Read()) {
                 historyItems.Add(new HistoryItem
                 (
-                    (int)HistoryItemsReader.GetDouble(0), // historyid
-                    (int)HistoryItemsReader.GetDouble(1), // ProfileId
-                    HistoryItemsReader.GetString(2),      // title
-                    HistoryItemsReader.GetString(3)       // Description
+                    (int)historyItemsReader.GetDouble(0), // historyid
+                    (int)historyItemsReader.GetDouble(1), // ProfileId
+                    historyItemsReader.GetString(2),      // title
+                    historyItemsReader.GetString(3)       // Description
                 ));
             }
 
@@ -134,7 +134,7 @@ public class HistoryDatabase : AcademicRewardsDatabase, IDatabase {
         }
         catch (PostgresException ex) {
             Console.WriteLine("Error while grabbing history: {0}", ex);
-            dbError = DatabaseErrorType.LoadHistoryDBError;
+            dbError = DatabaseErrorType.LoadHistoryDbError;
         }
 
         return dbError;

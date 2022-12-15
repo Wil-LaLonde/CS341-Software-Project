@@ -13,13 +13,13 @@ namespace AcademicReward.PopUps;
 ///     Reviewer: Xee Lo / Maximilian Patterson
 /// </summary>
 public partial class LoginPopUp : Popup {
-    private readonly ILogic loginLogic;
+    private readonly ILogic _loginLogic;
 
     /// <summary>
     ///     LoginPopUp constructor
     /// </summary>
     public LoginPopUp() {
-        loginLogic = new LoginLogic();
+        _loginLogic = new LoginLogic();
         InitializeComponent();
         //Hide all the error elements
         SetErrorMessageBox(false, string.Empty);
@@ -52,7 +52,7 @@ public partial class LoginPopUp : Popup {
             Profile newProfile = new(username, password, reEnterPassword, string.Empty, admin);
             ;
             //Need to make some profile checks here
-            addProfileError = loginLogic.AddItem(newProfile);
+            addProfileError = _loginLogic.AddItem(newProfile);
             //If all is good, the account was created successfully!
             if (LogicErrorType.NoError == addProfileError) Close(newProfile);
         }
@@ -162,9 +162,9 @@ public partial class LoginPopUp : Popup {
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.UsernameTakenMessage);
                 break;
-            case LogicErrorType.AddProfileDBError:
+            case LogicErrorType.AddProfileDbError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.AddProfileDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.AddProfileDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);

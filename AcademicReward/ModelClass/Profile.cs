@@ -17,7 +17,7 @@ public class Profile : ObservableObject {
     public const int LevelUpRequirementInt = 100;
     public const double LevelUpRequirementDouble = 100.0;
 
-    private int points;
+    private int _points;
 
     /// <summary>
     ///     Profile constructor (when searching a profile)
@@ -42,7 +42,7 @@ public class Profile : ObservableObject {
         ReEnterPassword = reEnterPassword;
         Salt = salt;
         IsAdmin = isAdmin;
-        XP = 0;
+        Xp = 0;
         Level = 1;
         Points = 0;
     }
@@ -81,7 +81,7 @@ public class Profile : ObservableObject {
     /// <param name="xp">int xp</param>
     public Profile(string username, int xp, int level) {
         Username = username;
-        XP = xp;
+        Xp = xp;
         Level = level;
     }
 
@@ -89,7 +89,7 @@ public class Profile : ObservableObject {
     ///     Profile constructor (when fully logged in)
     ///     Parameters match the DB columns
     /// </summary>
-    /// <param name="profileID">int profileID</param>
+    /// <param name="profileId">int profileID</param>
     /// <param name="username">string username</param>
     /// <param name="xp">int xp</param>
     /// <param name="points">int points</param>
@@ -97,11 +97,11 @@ public class Profile : ObservableObject {
     /// <param name="isAdmin">bool isAdmin</param>
     /// <param name="salt">string salt</param>
     /// <param name="password">string password</param>
-    public Profile(int profileID, string username, int xp, int points, int level, bool isAdmin, string salt,
+    public Profile(int profileId, string username, int xp, int points, int level, bool isAdmin, string salt,
         string password) {
-        ProfileID = profileID;
+        ProfileId = profileId;
         Username = username;
-        XP = xp;
+        Xp = xp;
         Points = points;
         Level = level;
         IsAdmin = isAdmin;
@@ -114,19 +114,19 @@ public class Profile : ObservableObject {
         ProfileShop = new Shop();
     }
 
-    public int ProfileID { get; }
+    public int ProfileId { get; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string NewPassword { get; set; }
     public string ReEnterPassword { get; set; }
     public string Salt { get; set; }
     public bool IsAdmin { get; }
-    public int XP { get; set; }
+    public int Xp { get; set; }
     public int Level { get; set; }
 
     public int Points {
-        get => points;
-        set => SetProperty(ref points, value);
+        get => _points;
+        set => SetProperty(ref _points, value);
     }
 
     public Shop ProfileShop { get; }
@@ -163,7 +163,7 @@ public class Profile : ObservableObject {
         if (points > 0) {
             Points += points;
             //Points also count towards XP, add XP to the profile
-            AddXPToMember(points);
+            AddXpToMember(points);
         }
     }
 
@@ -179,11 +179,11 @@ public class Profile : ObservableObject {
     ///     Adds XP to a Member
     /// </summary>
     /// <param name="xp">int xp</param>
-    public void AddXPToMember(int xp) {
+    public void AddXpToMember(int xp) {
         if (xp > 0) {
-            XP += xp;
+            Xp += xp;
             //Checking for a level up
-            int currentLevel = XP / LevelUpRequirementInt + 1;
+            int currentLevel = Xp / LevelUpRequirementInt + 1;
             //Could be a case where we need to level up more than once
             while (currentLevel > Level) LevelUpMember();
         }
@@ -215,11 +215,11 @@ public class Profile : ObservableObject {
     /// <summary>
     ///     Method used to get the group name from the groupID
     /// </summary>
-    /// <param name="groupID">int groupID</param>
+    /// <param name="groupId">int groupID</param>
     /// <returns>string GroupName</returns>
-    public string GetGroupNameUsingGroupID(int groupID) {
+    public string GetGroupNameUsingGroupId(int groupId) {
         foreach (Group group in GroupList)
-            if (group.GroupID == groupID)
+            if (group.GroupId == groupId)
                 return group.GroupName;
         return string.Empty;
     }
@@ -227,11 +227,11 @@ public class Profile : ObservableObject {
     /// <summary>
     ///     Method used to get the group object using the groupID
     /// </summary>
-    /// <param name="groupID">int groupID</param>
+    /// <param name="groupId">int groupID</param>
     /// <returns>Group group</returns>
-    public Group GetGroupUsingGroupID(int groupID) {
+    public Group GetGroupUsingGroupId(int groupId) {
         foreach (Group group in GroupList)
-            if (group.GroupID == groupID)
+            if (group.GroupId == groupId)
                 return group;
         return null;
     }
@@ -240,8 +240,8 @@ public class Profile : ObservableObject {
     ///     Method used to get current XP (90 / 100)
     /// </summary>
     /// <returns>int xp</returns>
-    public int GetCurrentXPInt() {
-        return XP % LevelUpRequirementInt;
+    public int GetCurrentXpInt() {
+        return Xp % LevelUpRequirementInt;
     }
 
     /// <summary>
@@ -249,8 +249,8 @@ public class Profile : ObservableObject {
     ///     For the progress bar since it requires a double
     /// </summary>
     /// <returns>double xp</returns>
-    public double GetCurrentXPDouble() {
-        return XP % LevelUpRequirementDouble / LevelUpRequirementInt;
+    public double GetCurrentXpDouble() {
+        return Xp % LevelUpRequirementDouble / LevelUpRequirementInt;
     }
 
     /// <summary>
