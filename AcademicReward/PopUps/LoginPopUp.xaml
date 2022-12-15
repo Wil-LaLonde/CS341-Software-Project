@@ -1,6 +1,6 @@
-<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="AcademicReward.PopUps.LoginPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
                Color="White"
@@ -16,42 +16,44 @@
                 HeightRequest="50"
                 Clicked="BackButtonClicked"
                 VerticalOptions="Start"
-                Margin="10"/>
-            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                Margin="10" />
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand">
                 <Label
                     Text="Create Account"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
                     HorizontalOptions="StartAndExpand"
-                    TextDecorations="Underline"/>
+                    TextDecorations="Underline" />
             </Frame>
         </StackLayout>
-        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}"
+               BorderColor="{StaticResource ErrorBorderColor}" Margin="10, 0">
             <StackLayout x:Name="ErrorStackLayout">
                 <Label
                     Text="Error with account creation: "
                     x:Name="ErrorMessageHeader"
                     FontSize="22"
                     Margin="0, 5"
-                    FontAttributes="Bold"/>
+                    FontAttributes="Bold" />
                 <Label
                     Text=""
                     x:Name="ErrorMessageBody"
                     TextType="Html"
-                    FontSize="20"/>
+                    FontSize="20" />
             </StackLayout>
         </Frame>
         <StackLayout Margin="10, 30">
             <Label
                 Text="Welcome!"
-                FontSize="40"/>
+                FontSize="40" />
             <Label
                 Text="Please provide the information below to get started"
                 FontFamily="SecondaryFont"
                 FontSize="20"
                 FontAttributes="Italic"
-                TextColor="{StaticResource Gray600}"/>
+                TextColor="{StaticResource Gray600}" />
         </StackLayout>
         <StackLayout Margin="10">
             <Label
@@ -59,9 +61,11 @@
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" x:Name="UsernameEntry"  Placeholder="Username..." PlaceholderColor="{StaticResource Gray400}" IsPassword="False" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry FontSize="20" x:Name="UsernameEntry" Placeholder="Username..."
+                       PlaceholderColor="{StaticResource Gray400}" IsPassword="False"
+                       BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <StackLayout Orientation="Horizontal" Margin="0, 5">
                 <Label
@@ -69,28 +73,30 @@
                     FontSize="22"
                     Margin="0, 5"
                     FontAttributes="Bold"
-                    VerticalOptions="Center"/>
+                    VerticalOptions="Center" />
                 <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand">
                     <ImageButton
-                            x:Name="ShowPassword"
-                            Source="showpasswordblue.png"
-                            Clicked="PasswordShowPasswordClicked"
-                            WidthRequest="35"
-                            HeightRequest="35"
-                            Margin="0, 0, 15, 0"
-                            IsVisible="True"/>
+                        x:Name="ShowPassword"
+                        Source="showpasswordblue.png"
+                        Clicked="PasswordShowPasswordClicked"
+                        WidthRequest="35"
+                        HeightRequest="35"
+                        Margin="0, 0, 15, 0"
+                        IsVisible="True" />
                     <ImageButton
-                            x:Name="HidePassword"
-                            Source="hidepasswordblue.png"
-                            Clicked="PasswordHidePasswordClicked"
-                            WidthRequest="35"
-                            HeightRequest="35"
-                            Margin="0, 0, 15, 0"
-                            IsVisible="False"/>
+                        x:Name="HidePassword"
+                        Source="hidepasswordblue.png"
+                        Clicked="PasswordHidePasswordClicked"
+                        WidthRequest="35"
+                        HeightRequest="35"
+                        Margin="0, 0, 15, 0"
+                        IsVisible="False" />
                 </StackLayout>
             </StackLayout>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" x:Name="PasswordEntry" Placeholder="Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry FontSize="20" x:Name="PasswordEntry" Placeholder="Password..."
+                       PlaceholderColor="{StaticResource Gray400}" IsPassword="True"
+                       BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <StackLayout Orientation="Horizontal" Margin="0, 5">
                 <Label
@@ -98,28 +104,30 @@
                     FontSize="22"
                     Margin="0, 5"
                     FontAttributes="Bold"
-                    VerticalOptions="Center"/>
+                    VerticalOptions="Center" />
                 <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand">
                     <ImageButton
-                            x:Name="ShowReEnterPassword"
-                            Source="showpasswordblue.png"
-                            Clicked="ReEnterPasswordShowPasswordClicked"
-                            WidthRequest="35"
-                            HeightRequest="35"
-                            Margin="0, 0, 15, 0"
-                            IsVisible="True"/>
+                        x:Name="ShowReEnterPassword"
+                        Source="showpasswordblue.png"
+                        Clicked="ReEnterPasswordShowPasswordClicked"
+                        WidthRequest="35"
+                        HeightRequest="35"
+                        Margin="0, 0, 15, 0"
+                        IsVisible="True" />
                     <ImageButton
-                            x:Name="HideReEnterPassword"
-                            Source="hidepasswordblue.png"
-                            Clicked="ReEnterPasswordHidePasswordClicked"
-                            WidthRequest="35"
-                            HeightRequest="35"
-                            Margin="0, 0, 15, 0"
-                            IsVisible="False"/>
+                        x:Name="HideReEnterPassword"
+                        Source="hidepasswordblue.png"
+                        Clicked="ReEnterPasswordHidePasswordClicked"
+                        WidthRequest="35"
+                        HeightRequest="35"
+                        Margin="0, 0, 15, 0"
+                        IsVisible="False" />
                 </StackLayout>
             </StackLayout>
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry FontSize="20" x:Name="ReEnterPasswordEntry" Placeholder="Re-enter Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry FontSize="20" x:Name="ReEnterPasswordEntry" Placeholder="Re-enter Password..."
+                       PlaceholderColor="{StaticResource Gray400}" IsPassword="True"
+                       BackgroundColor="{StaticResource Gray200}" />
             </Frame>
         </StackLayout>
         <StackLayout Margin="10, 0" Orientation="Horizontal">
@@ -128,31 +136,30 @@
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
-            <RadioButton 
+                VerticalOptions="Center" />
+            <RadioButton
                 Content="Admin"
                 x:Name="AdminRadioButton"
                 FontSize="22"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Label
                 Text=" // "
                 FontSize="22"
                 FontFamily="BoldFont"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <RadioButton
                 Content="Member"
                 x:Name="MemberRadioButton"
                 FontSize="22"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
-            <Button 
-                Text="Sign up" 
+            <Button
+                Text="Sign up"
                 Clicked="SignUpButtonClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
-                BorderColor="{StaticResource BlueButton}"/>
+                BorderColor="{StaticResource BlueButton}" />
         </StackLayout>
     </StackLayout>
 </toolkit:Popup>
-    

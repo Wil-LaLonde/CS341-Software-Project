@@ -1,32 +1,32 @@
-namespace AcademicReward;
-
+using System.Text;
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
+using AcademicReward.Resources;
 using AcademicReward.Views;
 using CommunityToolkit.Maui.Views;
-using System.Text;
-using AcademicReward.Resources;
+
+namespace AcademicReward;
 
 /// <summary>
-/// EditShopItemPage is the popup to edit a shop item
-/// Primary Author: Sean Stille
-/// Secondary Author: None
-/// Reviewer: Wil LaLonde
+///     EditShopItemPage is the popup to edit a shop item
+///     Primary Author: Sean Stille
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class EditShopItemPage : Popup {
-	ILogic shopLogic;
-	ShopItem shopItem;
-	ShopPage shopPage;
+    private readonly ShopItem shopItem;
+    private readonly ILogic shopLogic;
+    private ShopPage shopPage;
 
-	/// <summary>
-	/// EditShopItemPage constructor
-	/// </summary>
-	/// <param name="ShopLogic">ILogic ShopLogic</param>
-	/// <param name="toBeChanged">ShopItem toBeChanged</param>
-	/// <param name="shop">ShopPage shop</param>
-	public EditShopItemPage(ILogic ShopLogic, ShopItem toBeChanged, ShopPage shop) {
-		InitializeComponent();
-		shopLogic = ShopLogic;
+    /// <summary>
+    ///     EditShopItemPage constructor
+    /// </summary>
+    /// <param name="ShopLogic">ILogic ShopLogic</param>
+    /// <param name="toBeChanged">ShopItem toBeChanged</param>
+    /// <param name="shop">ShopPage shop</param>
+    public EditShopItemPage(ILogic ShopLogic, ShopItem toBeChanged, ShopPage shop) {
+        InitializeComponent();
+        shopLogic = ShopLogic;
         shopItem = toBeChanged;
         shopPage = shop;
         GroupPicker.ItemsSource = MauiProgram.Profile.GroupList;
@@ -40,12 +40,12 @@ public partial class EditShopItemPage : Popup {
         SetErrorMessageBox(false, string.Empty);
     }
 
-	/// <summary>
-	/// Method called when a user clicks the update button
-	/// </summary>
-	/// <param name="sender">object sender</param>
-	/// <param name="e">EventArgs e</param>
-	private void UpdateClicked(object sender, EventArgs e) {
+    /// <summary>
+    ///     Method called when a user clicks the update button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
+    private void UpdateClicked(object sender, EventArgs e) {
         LogicErrorType logicError;
         Group selectedGroup = GroupPicker.SelectedItem as Group;
         if (selectedGroup != null) {
@@ -56,7 +56,8 @@ public partial class EditShopItemPage : Popup {
                 bool isValidLevelRequirement = int.TryParse(levelRec.Text, out int levelRequirement);
                 if (isValidLevelRequirement) {
                     //Create shop item that will replace the old one
-                    ShopItem shopItemToUpdate = new ShopItem(shopItem.Id, itemName, itemDescription, itemCost, levelRequirement, selectedGroup);
+                    ShopItem shopItemToUpdate = new(shopItem.Id, itemName, itemDescription, itemCost, levelRequirement,
+                        selectedGroup);
                     logicError = shopLogic.UpdateItem(shopItemToUpdate);
                     //Shop item was updated successfully
                     if (LogicErrorType.NoError == logicError) {
@@ -72,26 +73,31 @@ public partial class EditShopItemPage : Popup {
                 else {
                     logicError = LogicErrorType.InvalidLevel;
                 }
-            } else {
+            }
+            else {
                 logicError = LogicErrorType.InvalidCost;
             }
-        } else {
+        }
+        else {
             logicError = LogicErrorType.EmptyShopItemGroup;
         }
+
         // There was some kind of error, show messages
         SetErrorMessageBox(true, SetErrorMessageBody(logicError));
-	}
-
-	/// <summary>
-	/// Method called when a user clicks the back button
-	/// </summary>
-	/// <param name="sender">object sender</param>
-	/// <param name="e">EventArgs e</param>
-    private void BackButtonClicked(object sender, EventArgs e) => Close();
+    }
 
     /// <summary>
-    /// Helper method used to either show or hide the error message box
-    /// This is done since a popup cannot have another popup
+    ///     Method called when a user clicks the back button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
+    private void BackButtonClicked(object sender, EventArgs e) {
+        Close();
+    }
+
+    /// <summary>
+    ///     Helper method used to either show or hide the error message box
+    ///     This is done since a popup cannot have another popup
     /// </summary>
     /// <param name="isVisible">bool isVisible</param>
     /// <param name="errorMessage">string errorMessage</param>
@@ -104,14 +110,13 @@ public partial class EditShopItemPage : Popup {
     }
 
     /// <summary>
-    /// Helper method used to determine what error message to display.
+    ///     Helper method used to determine what error message to display.
     /// </summary>
     /// <param name="logicError">LogicErrorType logicError</param>
     /// <returns>string errorMessage</returns>
     private string SetErrorMessageBody(LogicErrorType logicError) {
-        StringBuilder errorMessageBuilder = new StringBuilder();
-        switch (logicError)
-        {
+        StringBuilder errorMessageBuilder = new();
+        switch (logicError) {
             case LogicErrorType.EmptyShopItemGroup:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.EmptyShopItemGroupMessage);
@@ -157,6 +162,7 @@ public partial class EditShopItemPage : Popup {
                 errorMessageBuilder.Append(DataConstants.UpdateShopItemUnknownErrorMessage);
                 break;
         }
+
         return errorMessageBuilder.ToString();
     }
 }

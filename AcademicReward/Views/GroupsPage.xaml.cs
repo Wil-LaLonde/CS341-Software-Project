@@ -1,19 +1,19 @@
-using AcademicReward.ModelClass;
 using System.Collections.ObjectModel;
+using AcademicReward.ModelClass;
 
 namespace AcademicReward.Views;
 
 /// <summary>
-/// GroupsPage is the page that shows all groups for a given profile
-/// Primary Author: Maximilian Patterson
-/// Secondary Author: None
-/// Reviewer: Wil LaLonde
+///     GroupsPage is the page that shows all groups for a given profile
+///     Primary Author: Maximilian Patterson
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class GroupsPage : ContentPage {
-    public ObservableCollection<object> Groups = new ObservableCollection<object>();
+    public ObservableCollection<object> Groups = new();
 
     /// <summary>
-    /// GroupPage constructor
+    ///     GroupPage constructor
     /// </summary>
     public GroupsPage() {
         InitializeComponent();
@@ -27,7 +27,7 @@ public partial class GroupsPage : ContentPage {
     }
 
     /// <summary>
-    /// Method called when a user clicks on the add group button
+    ///     Method called when a user clicks on the add group button
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
@@ -36,14 +36,12 @@ public partial class GroupsPage : ContentPage {
     }
 
     /// <summary>
-    /// Method called when a user selects a group
+    ///     Method called when a user selects a group
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">SelectedItemChangedEventArgs e</param>
     private void SelectedGroup(object sender, SelectedItemChangedEventArgs e) {
         Group selectedGroup = e.SelectedItem as Group;
-        if (selectedGroup != null) {
-            Navigation.PushAsync(new GroupPage(selectedGroup));
-        }
+        if (selectedGroup != null) Navigation.PushAsync(new GroupPage(selectedGroup));
     }
 }

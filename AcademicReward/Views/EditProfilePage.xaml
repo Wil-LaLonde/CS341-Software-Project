@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.EditProfilePage"
@@ -14,13 +15,13 @@
                         Text="Edit Profile"
                         FontSize="45"
                         FontAttributes="Bold"
-                        TextDecorations="Underline"/>
+                        TextDecorations="Underline" />
                     <Label
                         Text="Provide the information below to update your profile"
                         FontFamily="SecondaryFont"
                         FontSize="20"
                         FontAttributes="Italic"
-                        TextColor="{StaticResource Gray600}"/>
+                        TextColor="{StaticResource Gray600}" />
                 </StackLayout>
             </Frame>
             <StackLayout Margin="0, 20">
@@ -30,7 +31,7 @@
                         FontSize="26"
                         Margin="0, 5"
                         FontAttributes="Bold"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center" />
                     <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                         <ImageButton
                             x:Name="ShowOldPassword"
@@ -39,7 +40,7 @@
                             WidthRequest="38"
                             HeightRequest="38"
                             Margin="0, 0, 15, 0"
-                            IsVisible="True"/>
+                            IsVisible="True" />
                         <ImageButton
                             x:Name="HideOldPassword"
                             Source="hidepasswordblue.png"
@@ -47,11 +48,13 @@
                             WidthRequest="38"
                             HeightRequest="38"
                             Margin="0, 0, 15, 0"
-                            IsVisible="False"/>
+                            IsVisible="False" />
                     </StackLayout>
                 </StackLayout>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry x:Name="OldPasswordEntry" FontSize="22" Placeholder="Old Password..." PlaceholderColor="{StaticResource Gray400}" IsPassword="True" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="OldPasswordEntry" FontSize="22" Placeholder="Old Password..."
+                           PlaceholderColor="{StaticResource Gray400}" IsPassword="True"
+                           BackgroundColor="{StaticResource Gray200}" />
                 </Frame>
                 <StackLayout Orientation="Horizontal">
                     <Label
@@ -59,7 +62,7 @@
                         FontSize="26"
                         Margin="0, 5"
                         FontAttributes="Bold"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center" />
                     <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                         <ImageButton
                             x:Name="ShowNewPassword"
@@ -68,7 +71,7 @@
                             WidthRequest="38"
                             HeightRequest="38"
                             Margin="0, 0, 15, 0"
-                            IsVisible="True"/>
+                            IsVisible="True" />
                         <ImageButton
                             x:Name="HideNewPassowrd"
                             Source="hidepasswordblue.png"
@@ -76,11 +79,12 @@
                             WidthRequest="38"
                             HeightRequest="38"
                             Margin="0, 0, 15, 0"
-                            IsVisible="False"/>
+                            IsVisible="False" />
                     </StackLayout>
                 </StackLayout>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry x:Name="NewPasswordEntry" FontSize="22" Placeholder="New Password..." IsPassword="True" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="NewPasswordEntry" FontSize="22" Placeholder="New Password..." IsPassword="True"
+                           PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}" />
                 </Frame>
                 <StackLayout Orientation="Horizontal">
                     <Label
@@ -88,7 +92,7 @@
                         FontSize="26"
                         Margin="0, 5"
                         FontAttributes="Bold"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center" />
                     <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                         <ImageButton
                             x:Name="ShowReEnterPassword"
@@ -97,7 +101,7 @@
                             WidthRequest="38"
                             HeightRequest="38"
                             Margin="0, 0, 15, 0"
-                            IsVisible="True"/>
+                            IsVisible="True" />
                         <ImageButton
                             x:Name="HideReEnterPassword"
                             Source="hidepasswordblue.png"
@@ -105,23 +109,25 @@
                             WidthRequest="38"
                             HeightRequest="38"
                             Margin="0, 0, 15, 0"
-                            IsVisible="False"/>
+                            IsVisible="False" />
                     </StackLayout>
                 </StackLayout>
                 <Frame BackgroundColor="{StaticResource Gray200}" Margin="0, 5" BorderColor="{StaticResource Gray200}">
-                    <Entry x:Name="ReEnterNewPasswordEntry" FontSize="22" Placeholder="Re-enter New Password..." IsPassword="True" PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                    <Entry x:Name="ReEnterNewPasswordEntry" FontSize="22" Placeholder="Re-enter New Password..."
+                           IsPassword="True" PlaceholderColor="{StaticResource Gray400}"
+                           BackgroundColor="{StaticResource Gray200}" />
                 </Frame>
             </StackLayout>
-            <Button 
+            <Button
                 x:Name="Save"
                 Clicked="SaveButtonClicked"
-                Text="Save" 
+                Text="Save"
                 FontSize="25"
                 FontFamily="BoldFont"
                 Padding="20"
                 Margin="250, 10"
-                VerticalOptions="EndAndExpand"/>
+                VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ScrollView>
-    
+
 </ContentPage>

@@ -1,104 +1,106 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace AcademicReward.ModelClass {
+namespace AcademicReward.ModelClass; 
+
+/// <summary>
+///     Model class used to represent a task
+///     Primary Author: Xee Lo
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
+/// </summary>
+public class Task : ObservableObject {
+    public const int MinTitleLength = 0;
+    public const int MaxTitleLength = 50;
+    public const int MinDescriptionLength = 0;
+    public const int MaxDescriptionLength = 250;
+    public const int MinPointValue = 0;
+
+    private bool approve;
+    private bool submitted;
+
     /// <summary>
-    /// Model class used to represent a task
-    /// Primary Author: Xee Lo
-    /// Secondary Author: None
-    /// Reviewer: Wil LaLonde
+    ///     Task constructor
     /// </summary>
-    public class Task : ObservableObject {
-        public const int MinTitleLength = 0;
-        public const int MaxTitleLength = 50;
-        public const int MinDescriptionLength = 0;
-        public const int MaxDescriptionLength = 250;
-        public const int MinPointValue = 0;
+    /// <param name="isChecked">bool isChecked</param>
+    /// <param name="title">string title</param>
+    /// <param name="description">string description</param>
+    /// <param name="points">int points</param>
+    public Task(bool isChecked, string title, string description, int points) {
+        approve = isChecked;
+        Title = title;
+        Description = description;
+        Points = points;
+    }
 
-        public int TaskID { get; private set; }
-        public bool IsApproved {
-            get { return approve; }
-            set { SetProperty(ref approve, value); }
-        }
-        public string Title { get; set;}
-        public string Description { get; set; }
-        public int Points { get; set; }
-        public int GroupID { get; private set; }
+    /// <summary>
+    ///     Task constructor (used when creating a new task)
+    /// </summary>
+    /// <param name="title">string title</param>
+    /// <param name="description">string description</param>
+    /// <param name="points">int points</param>
+    /// <param name="groupID">int groupID</param>
+    public Task(string title, string description, int points, int groupID) {
+        approve = false;
+        submitted = false;
+        Title = title;
+        Description = description;
+        Points = points;
+        GroupID = groupID;
+    }
 
-        public bool IsSubmitted {
-            get { return submitted; }
-            set { SetProperty(ref submitted, value); }
-        }
+    /// <summary>
+    ///     Task constructor (used when gathering a task)
+    /// </summary>
+    /// <param name="taskID">int taskID</param>
+    /// <param name="title">string title</param>
+    /// <param name="description">string description</param>
+    /// <param name="points">int points</param>
+    /// <param name="groupID">int groupID</param>
+    /// <param name="isChecked">bool isChecked</param>
+    public Task(int taskID, string title, string description, int points, int groupID, bool isChecked) {
+        approve = isChecked;
+        TaskID = taskID;
+        Title = title;
+        Description = description;
+        Points = points;
+        GroupID = groupID;
+    }
 
-        private bool approve;
-        private bool submitted;
+    /// <summary>
+    ///     Task constructor (used for checking if the task should be displayed for memeber or admin)
+    /// </summary>
+    /// <param name="taskID"></param>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    /// <param name="points"></param>
+    /// <param name="groupID"></param>
+    /// <param name="isChecked"></param>
+    /// <param name="isSubmitted"></param>
+    public Task(int taskID, string title, string description, int points, int groupID, bool isChecked,
+        bool isSubmitted) {
+        approve = isChecked;
+        submitted = isSubmitted;
+        TaskID = taskID;
+        Title = title;
+        Description = description;
+        Points = points;
+        GroupID = groupID;
+    }
 
-        /// <summary>
-        /// Task constructor
-        /// </summary>
-        /// <param name="isChecked">bool isChecked</param>
-        /// <param name="title">string title</param>
-        /// <param name="description">string description</param>
-        /// <param name="points">int points</param>
-        public Task(bool isChecked, string title, string description, int points) {
-            approve = isChecked;
-            Title = title;
-            Description = description;
-            Points = points;
-        }  
-        
-        /// <summary>
-        /// Task constructor (used when creating a new task)
-        /// </summary>
-        /// <param name="title">string title</param>
-        /// <param name="description">string description</param>
-        /// <param name="points">int points</param>
-        /// <param name="groupID">int groupID</param>
-        public Task(string title, string description, int points, int groupID) {
-            approve = false;
-            submitted = false;
-            Title = title;
-            Description = description;
-            Points = points;
-            GroupID = groupID;
-        }
+    public int TaskID { get; }
 
-        /// <summary>
-        /// Task constructor (used when gathering a task)
-        /// </summary>
-        /// <param name="taskID">int taskID</param>
-        /// <param name="title">string title</param>
-        /// <param name="description">string description</param>
-        /// <param name="points">int points</param>
-        /// <param name="groupID">int groupID</param>
-        /// <param name="isChecked">bool isChecked</param>
-        public Task(int taskID, string title, string description, int points, int groupID, bool isChecked) {
-            approve = isChecked;
-            TaskID = taskID;
-            Title = title;
-            Description = description;
-            Points = points;
-            GroupID = groupID;
-        }
+    public bool IsApproved {
+        get => approve;
+        set => SetProperty(ref approve, value);
+    }
 
-        /// <summary>
-        /// Task constructor (used for checking if the task should be displayed for memeber or admin)
-        /// </summary>
-        /// <param name="taskID"></param>
-        /// <param name="title"></param>
-        /// <param name="description"></param>
-        /// <param name="points"></param>
-        /// <param name="groupID"></param>
-        /// <param name="isChecked"></param>
-        /// <param name="isSubmitted"></param>
-        public Task(int taskID, string title, string description, int points, int groupID, bool isChecked, bool isSubmitted)
-        {
-            approve = isChecked;
-            submitted = isSubmitted;
-            TaskID = taskID;
-            Title = title;
-            Description = description;
-            Points = points;
-            GroupID = groupID;
-        }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public int Points { get; set; }
+    public int GroupID { get; }
+
+    public bool IsSubmitted {
+        get => submitted;
+        set => SetProperty(ref submitted, value);
     }
 }

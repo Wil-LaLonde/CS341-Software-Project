@@ -1,23 +1,23 @@
+using System.Collections.ObjectModel;
 using AcademicReward.Database;
 using AcademicReward.ModelClass;
 using AcademicReward.PopUps;
 using CommunityToolkit.Maui.Views;
-using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
 /// <summary>
-/// GroupPage is the page that is shown when a user clicks on a group
-/// Primary Author: Maximilian Patterson 
-/// Secondary Author: None
-/// Reviewer: Wil LaLonde
+///     GroupPage is the page that is shown when a user clicks on a group
+///     Primary Author: Maximilian Patterson
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class GroupPage : ContentPage {
     public Group group;
-    public ObservableCollection<Profile> Members = new ObservableCollection<Profile>();
+    public ObservableCollection<Profile> Members = new();
 
     /// <summary>
-    /// GroupPage constructor
+    ///     GroupPage constructor
     /// </summary>
     /// <param name="group">Group group</param>
     public GroupPage(Group group) {
@@ -41,43 +41,40 @@ public partial class GroupPage : ContentPage {
     }
 
     /// <summary>
-    /// Method used to show the admin name
+    ///     Method used to show the admin name
     /// </summary>
     /// <param name="group">Group group</param>
     public void ShowAdminName(Group group) {
         base.OnAppearing();
-        LoginDatabase loginDatabase = new LoginDatabase();
-        Object admin = loginDatabase.FindById(group.AdminProfileID);
+        LoginDatabase loginDatabase = new();
+        object admin = loginDatabase.FindById(group.AdminProfileID);
         Profile adminProfile = admin as Profile;
         GroupAdminLbl.Text = adminProfile.Username;
     }
 
     /// <summary>
-    /// Method called when a user clicks on the add member button
+    ///     Method called when a user clicks on the add member button
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
     public async void AddMemberButtonClickedAsync(object sender, EventArgs e) {
         // Include reference to this page so that the listview of members can be updated
-        AddMemberPopUp addMemberPopUp = new AddMemberPopUp(group, ref Members);
+        AddMemberPopUp addMemberPopUp = new(group, ref Members);
 
-        var result = await this.ShowPopupAsync(addMemberPopUp);
+        object result = await this.ShowPopupAsync(addMemberPopUp);
 
-        if (result is ObservableCollection<Profile> membersResult) {
+        if (result is ObservableCollection<Profile> membersResult)
             if (membersResult != null) {
                 Members = GroupProfileRelationship.getProfilesInGroup(group);
                 UpdateMembersXP();
                 MembersLV.ItemsSource = Members;
             }
-        }
     }
 
     /// <summary>
-    /// Helper method used to properly show the correct amount of XP for a member
+    ///     Helper method used to properly show the correct amount of XP for a member
     /// </summary>
     private void UpdateMembersXP() {
-        foreach(Profile member in Members) {
-            member.XP = member.GetCurrentXPInt();
-        }
+        foreach (Profile member in Members) member.XP = member.GetCurrentXPInt();
     }
 }

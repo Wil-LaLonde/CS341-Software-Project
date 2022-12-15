@@ -1,174 +1,174 @@
-﻿namespace AcademicReward.Resources {
-    /// <summary>
-    /// Enumerations holds all our LogicErrorTypes and DatabaseErrorTypes
-    /// Primary Author: Wil LaLonde 
-    /// Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
-    /// Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson
-    /// </summary>
+﻿namespace AcademicReward.Resources; 
 
-    //Add logic error types to this enum
-    public enum LogicErrorType {
-        //LoginPage START
-        EmptyUsername,
-        EmptyPassword,
-        EmptyReEnterPassword,
-        EmptyAdminMemberRadioButton,
-        PasswordMismatch,
-        InvalidUsernameLength,
-        InvalidPasswordLength,
-        UsernameTaken,
-        UsernameNotFound,
-        PasswordIncorrect,
-        AddProfileDBError,
-        SignProfileInDBError,
-        //LoginPage END
+/// <summary>
+///     Enumerations holds all our LogicErrorTypes and DatabaseErrorTypes
+///     Primary Author: Wil LaLonde
+///     Secondary Author: Sean Stille, Xee Lo, Maximilian Patterson
+///     Reviewer: Wil LaLonde, Sean Stille, Xee Lo, Maximilian Patterson
+/// </summary>
 
-        //Login Group Collection START
-        LoginGroupCollectionDBError,
-        //Login Group Collection END
+//Add logic error types to this enum
+public enum LogicErrorType {
+    //LoginPage START
+    EmptyUsername,
+    EmptyPassword,
+    EmptyReEnterPassword,
+    EmptyAdminMemberRadioButton,
+    PasswordMismatch,
+    InvalidUsernameLength,
+    InvalidPasswordLength,
+    UsernameTaken,
+    UsernameNotFound,
+    PasswordIncorrect,
+    AddProfileDBError,
+    SignProfileInDBError,
+    //LoginPage END
 
-        //Edit Profile Page START
-        EmptyOldPassword,
-        EmptyNewPassword,
-        EmptyReEnterNewPassword,
-        InvalidOldPasswordLength,
-        InvalidNewPasswordLength,
-        InvalidReEnterNewPasswordLength,
-        CurrentPasswordError,
-        UpdatePasswordDBError,
-        //Edit Profile Page END
+    //Login Group Collection START
+    LoginGroupCollectionDBError,
+    //Login Group Collection END
 
-        //Notification START
-        EmptyNotificationGroup,
-        EmptyNotificationTitle,
-        EmptyNotificationDescription,
-        InvalidNotificationtitleLength,
-        InvalidNotificationDescriptionLength,
-        AddNotificationDBError,
-        LookupAllNotificationsDBError,
-        //Notification END
+    //Edit Profile Page START
+    EmptyOldPassword,
+    EmptyNewPassword,
+    EmptyReEnterNewPassword,
+    InvalidOldPasswordLength,
+    InvalidNewPasswordLength,
+    InvalidReEnterNewPasswordLength,
+    CurrentPasswordError,
+    UpdatePasswordDBError,
+    //Edit Profile Page END
 
-        //Task START
-        EmptyTaskGroup,
-        InvalidTaskPoints,
-        EmptyTaskTitle,
-        EmptyTaskDescription,
-        NegativeTaskPoints,
-        InvalidTaskTitleLength,
-        InvalidTaskDescriptionLength,
-        AddTaskDBError,
-        LookupAllTasksDBError,
-        UpdateTaskDBError,
-        DeleteTaskDBError,
-        //Task END
+    //Notification START
+    EmptyNotificationGroup,
+    EmptyNotificationTitle,
+    EmptyNotificationDescription,
+    InvalidNotificationtitleLength,
+    InvalidNotificationDescriptionLength,
+    AddNotificationDBError,
+    LookupAllNotificationsDBError,
+    //Notification END
 
-        //Shop START
-        EmptyShopItemGroup,
-        InvalidCost,
-        InvalidLevel,
-        EmptyShopItemTitle,
-        EmptyShopItemDescription,
-        NegativeShopItemCost,
-        NegativeShopItemLevelRequirement,
-        InvalidShopItemLength,
-        InvalidShopItemDescriptionLength,
-        LookupAllShopItemsDBError,
-        AddShopItemDBError,
-        UpdateShopItemDBError,
-        DeleteShopItemDBError,
-        UnsuccessfulDBAdd,
-        NotEnoughDoubloons,
-        NeedHigherLevel,
-        BuyItemError,
-        //Shop END
+    //Task START
+    EmptyTaskGroup,
+    InvalidTaskPoints,
+    EmptyTaskTitle,
+    EmptyTaskDescription,
+    NegativeTaskPoints,
+    InvalidTaskTitleLength,
+    InvalidTaskDescriptionLength,
+    AddTaskDBError,
+    LookupAllTasksDBError,
+    UpdateTaskDBError,
+    DeleteTaskDBError,
+    //Task END
 
-        //History START (history calls are often made from LogicClasses
-        HistoryAddError,
-        //History END
+    //Shop START
+    EmptyShopItemGroup,
+    InvalidCost,
+    InvalidLevel,
+    EmptyShopItemTitle,
+    EmptyShopItemDescription,
+    NegativeShopItemCost,
+    NegativeShopItemLevelRequirement,
+    InvalidShopItemLength,
+    InvalidShopItemDescriptionLength,
+    LookupAllShopItemsDBError,
+    AddShopItemDBError,
+    UpdateShopItemDBError,
+    DeleteShopItemDBError,
+    UnsuccessfulDBAdd,
+    NotEnoughDoubloons,
+    NeedHigherLevel,
+    BuyItemError,
+    //Shop END
 
-        //Group START
-        EmptyGroupName,
-        EmptyGroupDescription,
-        InvalidGroupNameLength,
-        InvalidGroupDescriptionLength,
-        GroupCreateError,
-        //Group END
+    //History START (history calls are often made from LogicClasses
+    HistoryAddError,
+    //History END
 
-        //Add Member START
-        GroupAlreadyHasAdmin,
-        MemberAlreadyInGroup,
-        //Add Member END
+    //Group START
+    EmptyGroupName,
+    EmptyGroupDescription,
+    InvalidGroupNameLength,
+    InvalidGroupDescriptionLength,
+    GroupCreateError,
+    //Group END
 
-        //Profile START
-        UpdateProfileDBError,
-        //Profile END
+    //Add Member START
+    GroupAlreadyHasAdmin,
+    MemberAlreadyInGroup,
+    //Add Member END
 
-        //General START
-        NoError,
-        NotImplemented
-        //General END
+    //Profile START
+    UpdateProfileDBError,
+    //Profile END
 
+    //General START
+    NoError,
 
-    }
+    NotImplemented
+    //General END
+}
 
-    //Add database error types to this enum
-    public enum DatabaseErrorType {
-        //LoginPage START
-        AddProfileDBError,
-        LoginProfileDBError,
-        UsernameNotFoundDBError,
-        UsernameTakenDBError,
-        //LoginPage END
+//Add database error types to this enum
+public enum DatabaseErrorType {
+    //LoginPage START
+    AddProfileDBError,
+    LoginProfileDBError,
+    UsernameNotFoundDBError,
+    UsernameTakenDBError,
+    //LoginPage END
 
-        //Login Group Collection START
-        LoginGroupCollectionDBError,
-        //Login Group Collection END
+    //Login Group Collection START
+    LoginGroupCollectionDBError,
+    //Login Group Collection END
 
-        //Edit Profile Page START
-        UpdatePasswordDBError,
-        //Edit Profile Page END
+    //Edit Profile Page START
+    UpdatePasswordDBError,
+    //Edit Profile Page END
 
-        //Notification START
-        AddNotificationDBError,
-        LookupAllNotificationsDBError,
-        //Notification END
+    //Notification START
+    AddNotificationDBError,
+    LookupAllNotificationsDBError,
+    //Notification END
 
-        //Task START
-        AddTaskDBError,
-        LookupTaskDBError,
-        LookupAllTasksDBError,
-        UpdateTaskDbError,
-        DeleteTaskDBError,
-        //Task END
+    //Task START
+    AddTaskDBError,
+    LookupTaskDBError,
+    LookupAllTasksDBError,
+    UpdateTaskDbError,
+    DeleteTaskDBError,
+    //Task END
 
-        //Shop START
-        AddShopItemDBError,
-        UpdateShopItemDBError,
-        LookupAllShopItemsDBError,
-        DeleteShopItemDBError,
-        BuyItemError,
-        //Shop END
+    //Shop START
+    AddShopItemDBError,
+    UpdateShopItemDBError,
+    LookupAllShopItemsDBError,
+    DeleteShopItemDBError,
+    BuyItemError,
+    //Shop END
 
-        // History START
-        AddHistoryDBError,
-        LookupAllHistoryDBError,
-        LoadHistoryDBError,
-        UpdateHistoryDBError,
-        DeleteHistoryDBError,
-        // History END
+    // History START
+    AddHistoryDBError,
+    LookupAllHistoryDBError,
+    LoadHistoryDBError,
+    UpdateHistoryDBError,
+    DeleteHistoryDBError,
+    // History END
 
-        // Group START
-        UpdateGroupDBError,
-        AddGroupDBError,
-        // Group END
+    // Group START
+    UpdateGroupDBError,
+    AddGroupDBError,
+    // Group END
 
-        //Profile START
-        UpdateProfileDBError,
-        //Profile END
+    //Profile START
+    UpdateProfileDBError,
+    //Profile END
 
-        //General START
-        NoError,
-        NotImplemented
-        //General END
-    }
+    //General START
+    NoError,
+
+    NotImplemented
+    //General END
 }
