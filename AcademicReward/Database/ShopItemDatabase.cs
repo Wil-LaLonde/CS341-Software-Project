@@ -1,7 +1,6 @@
 ﻿using AcademicReward.Resources;
 using AcademicReward.ModelClass;
 using Npgsql;
-using AcademicReward.Logic;
 using System.Collections.ObjectModel;
 
 namespace AcademicReward.Database {
@@ -13,45 +12,47 @@ namespace AcademicReward.Database {
     /// Reviewer: Wil LaLonde
     /// </summary>
     public class ShopItemDatabase : AcademicRewardsDatabase, IDatabase {
-        ShopLogic logic;
 
         /// <summary>
         /// ShopItemDatabase constructor
         /// </summary>
-        /// <param name="ShopLogic">ShopLogic shoplogic</param>
-        public ShopItemDatabase(ShopLogic ShopLogic) {
-            logic = ShopLogic;
-        }
-        public DatabaseErrorType BuyItem(object obj)
-        {
-            DatabaseErrorType dbError = DatabaseErrorType.BuyItemError;
-            try
-            {
-                ShopItem item = (ShopItem)obj;
+        public ShopItemDatabase() { }
+
+        /// <summary>
+        /// Method used to buy a shop item (database)
+        /// </summary>
+        /// <param name="shopItem">object shopItem</param>
+        /// <returns>DatabaseErrorType</returns>
+        public DatabaseErrorType BuyItem(object shopItem) {
+            DatabaseErrorType dbError;
+            ShopItem shopItemToBuy = shopItem as ShopItem;
+            try {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //Insert SQL query for adding a profile
                 var sql = "INSERT INTO purchasedshopitems (profileid, shopitemid)" +
-                          $"VALUES ({MauiProgram.Profile.ProfileID}, '{item.Id}');";
+                          $"VALUES ({MauiProgram.Profile.ProfileID}, '{shopItemToBuy.Id}');";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 //Closing the connection.
                 con.Close();
+                //Remove shop item from member view
+                MauiProgram.Profile.ProfileShop.RemoveShopItemFromShop(shopItemToBuy);
+                //Update member points
+                MauiProgram.Profile.RemovePointsFromMember(shopItemToBuy.PointCost);
+                //Call database to update point values
+                IDatabase profileDB = new ProfileDatabase();
+                profileDB.UpdateItem(MauiProgram.Profile);
                 dbError = DatabaseErrorType.NoError;
-            }
-            catch (PostgresException ex)
-            {
-                //Username already exists.
-                Console.WriteLine("Error while adding item: {0}", ex);
-
-            }
-            catch (NpgsqlException ex)
-            {
+            } catch (PostgresException ex) {
+                Console.WriteLine("Error while buying item: {0}", ex);
+                dbError = DatabaseErrorType.BuyItemError;
+            } catch (NpgsqlException ex) {
                 //Not sure what happened, log message
-                Console.WriteLine("Unexpected error while adding item: {0}", ex);
-
+                Console.WriteLine("Unexpected error while buying item: {0}", ex);
+                dbError = DatabaseErrorType.BuyItemError;
             }
             return dbError;
         }
@@ -60,37 +61,41 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Method used to add a shop item (database)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="shopItem">object shopItem</param>
         /// <returns>DatabaseErrorType dbError</returns>
-        public DatabaseErrorType AddItem(object obj) {
-            DatabaseErrorType dbError = DatabaseErrorType.NoError;
+        public DatabaseErrorType AddItem(object shopItem) {
+            DatabaseErrorType dbError;
+            ShopItem shopItemToAdd = shopItem as ShopItem;
             try {
-                ShopItem item = (ShopItem)obj;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //Insert SQL query for adding a profile
-                var sql = "INSERT INTO shopitems (shopitemid, itemtitle, itemdescription, pointcost, levelrequirment, groupid)" +
-                          $"VALUES ({item.Id}, '{item.Title}', '{item.Description}', {item.PointCost}, {item.LevelRequirement}, {item.Group.GroupID});";
+                var sql = "INSERT INTO shopitems (itemtitle, itemdescription, pointcost, levelrequirment, groupid) " +
+                          $"VALUES ('{shopItemToAdd.Title}', '{shopItemToAdd.Description}', {shopItemToAdd.PointCost}, {shopItemToAdd.LevelRequirement}, {shopItemToAdd.Group.GroupID}) RETURNING shopitemid;";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
-                cmd.ExecuteNonQuery();
-                //Closing the connection.
-                sql = "INSERT INTO history (profileid, title, description) VALUES " +
-                    $"({MauiProgram.Profile.ProfileID}, 'Added a shop item','Added an item to group: {item.Group.GroupName}');";
-                using var secondCmd = new NpgsqlCommand(sql, con);
-
-                secondCmd.ExecuteNonQuery();
+                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                //Gathering new shopitemid
+                int shopItemID;
+                while(reader.Read()) {
+                    shopItemID = (int)reader[0];
+                    //Assigning new id to the shopItem object
+                    shopItemToAdd.Id = shopItemID;
+                    MauiProgram.Profile.ProfileShop.AddShopItemToShop(shopItemToAdd);
+                }
                 con.Close();
                 dbError = DatabaseErrorType.NoError;
             }
             catch (PostgresException ex) {
                 //Error adding shop item
                 Console.WriteLine("Error while adding item: {0}", ex);
+                dbError = DatabaseErrorType.AddShopItemDBError;
             }
             catch (NpgsqlException ex) {
                 //Not sure what happened, log message
                 Console.WriteLine("Unexpected error while adding item: {0}", ex);
+                dbError = DatabaseErrorType.AddShopItemDBError;
             }
             return dbError;
         }
@@ -98,29 +103,36 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Method used to delete a shop item
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="shopItem">object shopItem</param>
         /// <returns>DatabaseErrorType dbError</returns>
-        public DatabaseErrorType DeleteItem(object obj) {
+        public DatabaseErrorType DeleteItem(object shopItem) {
+            DatabaseErrorType dbError;
+            ShopItem shopItemToDelete = shopItem as ShopItem;
             try {
-                ShopItem item = obj as ShopItem;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                //SQL to lookup notifications for a group
-                var sql = "DELETE FROM shopitems WHERE shopitemid = '" + item.Id + "';"; 
+                //SQL to delete the shop item
+                var sql = "DELETE FROM shopitems " +
+                         $"WHERE shopitemid = {shopItemToDelete.Id};" +
+                          "DELETE FROM purchasedshopitems " +
+                         $"WHERE shopitemid = {shopItemToDelete.Id};"; 
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
-                using NpgsqlDataReader reader = cmd.ExecuteReader();
-
+                cmd.ExecuteNonQuery();
+                
                 //Closing the connection.
                 con.Close();
-                return DatabaseErrorType.NoError;
+                //Remove item from shopitem list
+                MauiProgram.Profile.ProfileShop.RemoveShopItemFromShop(shopItemToDelete);
+                dbError = DatabaseErrorType.NoError;
             }
             catch (NpgsqlException ex) {
                 //Something went wrong deleting the shop item
                 Console.WriteLine("Unexpected error while deleting the shop item: {0}", ex);
+                dbError = DatabaseErrorType.DeleteShopItemDBError;
             }
-            return DatabaseErrorType.NoError;
+            return dbError;
         }
 
         //Currently not needed
@@ -136,67 +148,53 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Method used to lookup all shop items (database)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="profile">object profile</param>
         /// <returns>DatabaseErrorType dbError</returns>
-        public DatabaseErrorType LookupFullItem(object obj) {
-            ObservableCollection<ShopItem> newList = new ObservableCollection<ShopItem>();
+        public DatabaseErrorType LookupFullItem(object profile) {
+            DatabaseErrorType dbError;
+            Profile profileToLookup = profile as Profile;
             try {
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
-                //SQL to lookup notifications for a group
-                var sql = "SELECT * " +
-                            "FROM shopitems;";
+                //SQL to lookup shop items for a given profile
+                var sql = "";
+                if(profileToLookup.IsAdmin) {
+                    //Admins will be able to see all shop items for their groups
+                    sql = "SELECT * " +
+                          "FROM shopitems " +
+                          "WHERE groupid IN (SELECT groupid " +
+                                            "FROM profilegroup " +
+                                           $"WHERE profileid = {profileToLookup.ProfileID});";
+                } else {
+                    //Members will be able to see all shop items they have not purhcased yet
+                    sql = "SELECT * " +
+                          "FROM shopitems " +
+                          "WHERE groupid IN (SELECT groupid " +
+                                            "FROM profilegroup " +
+                                           $"WHERE profileid = {profileToLookup.ProfileID} AND shopitemid NOT IN (SELECT shopitemid " +
+                                                                                                                 "FROM purchasedshopitems " +
+                                                                                                                $"WHERE profileid = {profileToLookup.ProfileID})" +
+                                           ");";
+                }
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
                 using NpgsqlDataReader reader = cmd.ExecuteReader();
                     
-
-                    while (reader.Read())
-                    {
-                        Profile profile = MauiProgram.Profile;
-                        int groupID = (int)reader[5]; //Getting group ID
-                        bool idPresent = false;
-                        Group gettingGroup = null;
-                        bool alreadyPurchased = false;
-                        foreach (Group g in profile.GroupList) //Check the group list for this profile to see if it uses that ID
-                        {
-                            if(g.GroupID == groupID) //If it does use that ID, mark the corresponding group and mark that the user is part of this group
-                            {
-                            idPresent = true;   
-                            gettingGroup = g;
-                            }
-                        }
-                        foreach( ShopItem i in profile.PurchaseItems)
-                        {
-                            if( i.Id == (int)reader[0])
-                            {
-                                alreadyPurchased = true;
-                            }
-                        }
-                        if (idPresent && ! alreadyPurchased)  //If the item is for a group this user is in,
-                                                              //and the item hasn't already been purchased,
-                                                              //add the item to the list the user will see
-                        {
-                        ShopItem item = new ShopItem((int)reader[0], reader[1] as string, reader[2] as string, 
-                            (int)reader[3], (int)reader[4], gettingGroup);
-
-                        newList.Add(item);
-                        }
-                      
-                        
+                while (reader.Read()) {
+                    ShopItem shopItem = new ShopItem((int)reader[0], reader[1] as string, reader[2] as string, (int)reader[3], (int)reader[4], profileToLookup.GetGroupUsingGroupID((int)reader[5]));
+                    //Add shop item to the profile shop
+                    MauiProgram.Profile.ProfileShop.AddShopItemToShop(shopItem);
                 }
-                logic.ItemList = newList;
                 //Closing the connection.
                 con.Close();
-                return DatabaseErrorType.NoError;
-            }
-            catch (NpgsqlException ex) {
+                dbError = DatabaseErrorType.NoError;
+            } catch (NpgsqlException ex) {
                 //Something went wrong looking up shop items
                 Console.WriteLine("Unexpected error while looking up shopitems: {0}", ex);
-                   
-            }
-            return DatabaseErrorType.NoError;
+                dbError = DatabaseErrorType.LookupAllShopItemsDBError;
+            } 
+            return dbError;
         }
 
         //Currently not needed
@@ -207,31 +205,33 @@ namespace AcademicReward.Database {
         /// <summary>
         /// Method used to update a shop item (database)
         /// </summary>
-        /// <param name="obj">object obj</param>
+        /// <param name="shopItem">object shopItem</param>
         /// <returns>DatabaseErrorType dbError</returns>
-        public DatabaseErrorType UpdateItem(object obj) {
+        public DatabaseErrorType UpdateItem(object shopItem) {
+            DatabaseErrorType dbError;
             try {
-                ShopItem item = obj as ShopItem;
+                ShopItem shopItemToUpdate = shopItem as ShopItem;
                 //Opening the connection
                 using var con = new NpgsqlConnection(InitializeConnectionString());
                 con.Open();
                 //SQL to lookup notifications for a group
-                var sql = "UPDATE shopitems SET  " +
-                    $"itemtitle='{item.Title}', itemdescription='{item.Description}', pointcost={item.PointCost}, " +
-                    $"levelrequirment={item.LevelRequirement} WHERE shopitemid={item.Id};";
+                var sql = "UPDATE shopitems SET " +
+                    $"itemtitle = '{shopItemToUpdate.Title}', itemdescription = '{shopItemToUpdate.Description}', pointcost = {shopItemToUpdate.PointCost}, " +
+                    $"levelrequirment = {shopItemToUpdate.LevelRequirement} WHERE shopitemid = {shopItemToUpdate.Id};";
                 //Executing the query.
                 using var cmd = new NpgsqlCommand(sql, con);
-                using NpgsqlDataReader reader = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
 
                 //Closing the connection.
                 con.Close();
-                return DatabaseErrorType.NoError;
+                dbError = DatabaseErrorType.NoError;
             }
             catch (NpgsqlException ex) {
                 //Something went wrong updating the shop item
                 Console.WriteLine("Unexpected error updating the shopitem: {0}", ex);
+                dbError = DatabaseErrorType.UpdateShopItemDBError;
             }
-            return DatabaseErrorType.NoError;
+            return dbError;
         }
     }
 }

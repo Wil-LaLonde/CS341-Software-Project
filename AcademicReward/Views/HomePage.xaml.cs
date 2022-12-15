@@ -36,6 +36,8 @@ public partial class HomePage : ContentPage {
         isAdmin = MauiProgram.Profile.IsAdmin;
         PrepareTaskList();
         RefreshTaskList();
+        BindingContext = MauiProgram.Profile;
+        Points.SetBinding(Label.TextProperty, nameof(MauiProgram.Profile.Points));
         UsernameDisplay(isAdmin);
     }
 
@@ -57,7 +59,6 @@ public partial class HomePage : ContentPage {
         }
 		else {
             //Need to map over all member values
-            Points.Text = MauiProgram.Profile.Points.ToString();
             Level.Text = MauiProgram.Profile.Level.ToString();
             ProgressBar.Progress = MauiProgram.Profile.GetCurrentXPDouble();
             Exp.Text = MauiProgram.Profile.GetCurrentXPInt() + DataConstants.SpaceSlashSpace + Profile.LevelUpRequirementInt;

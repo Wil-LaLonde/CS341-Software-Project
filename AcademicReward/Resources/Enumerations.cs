@@ -63,11 +63,23 @@
         //Task END
 
         //Shop START
+        EmptyShopItemGroup,
         InvalidCost,
         InvalidLevel,
+        EmptyShopItemTitle,
+        EmptyShopItemDescription,
+        NegativeShopItemCost,
+        NegativeShopItemLevelRequirement,
+        InvalidShopItemLength,
+        InvalidShopItemDescriptionLength,
+        LookupAllShopItemsDBError,
+        AddShopItemDBError,
+        UpdateShopItemDBError,
+        DeleteShopItemDBError,
         UnsuccessfulDBAdd,
         NotEnoughDoubloons,
         NeedHigherLevel,
+        BuyItemError,
         //Shop END
 
         //History START (history calls are often made from LogicClasses
@@ -130,6 +142,10 @@
         //Task END
 
         //Shop START
+        AddShopItemDBError,
+        UpdateShopItemDBError,
+        LookupAllShopItemsDBError,
+        DeleteShopItemDBError,
         BuyItemError,
         //Shop END
 
