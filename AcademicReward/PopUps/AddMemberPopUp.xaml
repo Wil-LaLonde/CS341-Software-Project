@@ -1,6 +1,6 @@
-<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="AcademicReward.PopUps.AddMemberPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
                Color="White"
@@ -16,28 +16,30 @@
                 HeightRequest="50"
                 Clicked="BackButtonClicked"
                 VerticalOptions="Start"
-                Margin="10"/>
-            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                Margin="10" />
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand">
                 <Label
                     Text="Add Member"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
-                    TextDecorations="Underline"/>
+                    TextDecorations="Underline" />
             </Frame>
         </StackLayout>
-        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}" BorderColor="{StaticResource ErrorBorderColor}"  Margin="10, 0">
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}"
+               BorderColor="{StaticResource ErrorBorderColor}" Margin="10, 0">
             <StackLayout x:Name="ErrorStackLayout">
                 <Label
                     Text="Error while adding member: "
                     x:Name="ErrorMessageHeader"
                     FontSize="22"
                     Margin="0, 5"
-                    FontAttributes="Bold"/>
+                    FontAttributes="Bold" />
                 <Label
                     Text=""
                     x:Name="ErrorMessageBody"
-                    FontSize="20"/>
+                    FontSize="20" />
             </StackLayout>
         </Frame>
         <StackLayout Margin="10">
@@ -46,18 +48,19 @@
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry x:Name="MemberNameEntry" FontSize="20" Placeholder="Member Username..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="MemberNameEntry" FontSize="20" Placeholder="Member Username..."
+                       PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
-            <Button 
-                Text="Add Member" 
+            <Button
+                Text="Add Member"
                 Clicked="AddMemberButtonClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
-                BorderColor="{StaticResource BlueButton}"/>
+                BorderColor="{StaticResource BlueButton}" />
         </StackLayout>
     </StackLayout>
 </toolkit:Popup>

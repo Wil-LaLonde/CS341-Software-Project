@@ -1,32 +1,32 @@
+using System.Text;
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
 using AcademicReward.Resources;
-using System.Text;
 
 namespace AcademicReward.Views;
 
 /// <summary>
-/// CreateGroupPage is the page that is shown for creating a new group
-/// Primary Author: Maximilian Patterson
-/// Secondary Author: None
-/// Reviewer: Wil LaLonde
+///     CreateGroupPage is the page that is shown for creating a new group
+///     Primary Author: Maximilian Patterson
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
 /// </summary>
 public partial class CreateGroupPage : ContentPage {
     // Group logic
-    private GroupLogic groupLogic;
+    private readonly GroupLogic _groupLogic;
 
     /// <summary>
-    /// CreateGroupPage constructor
+    ///     CreateGroupPage constructor
     /// </summary>
     public CreateGroupPage() {
         // Instantiate groupLogic
-        groupLogic = new GroupLogic();
+        _groupLogic = new GroupLogic();
         InitializeComponent();
         SetErrorMessageBox(false, string.Empty);
     }
 
     /// <summary>
-    /// Method called when a user clicks on the create group button
+    ///     Method called when a user clicks on the create group button
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">EventArgs e</param>
@@ -35,21 +35,19 @@ public partial class CreateGroupPage : ContentPage {
         string groupName = GroupNameEntry.Text;
         string groupDescription = GroupDescriptionEntry.Text;
         //Create group object from information supplied by admin user
-        Group groupToAdd = new Group(groupName, groupDescription, MauiProgram.Profile);
-        LogicErrorType logicError = groupLogic.AddItem(groupToAdd);
-        if(LogicErrorType.NoError == logicError) {
+        Group groupToAdd = new(groupName, groupDescription, MauiProgram.Profile);
+        LogicErrorType logicError = _groupLogic.AddItem(groupToAdd);
+        if (LogicErrorType.NoError == logicError)
             // Navigate back to the group page
             Navigation.PopAsync();
-        } else {
+        else
             //Something went wrong, display message.
             SetErrorMessageBox(true, SetErrorMessageBody(logicError));
-        }
-        
     }
 
     /// <summary>
-    /// Helper method used to either show or hide the error message box
-    /// This is done since a popup cannot have another popup
+    ///     Helper method used to either show or hide the error message box
+    ///     This is done since a popup cannot have another popup
     /// </summary>
     /// <param name="isVisible">bool isVisible</param>
     /// <param name="errorMessage">string errorMessage</param>
@@ -62,12 +60,12 @@ public partial class CreateGroupPage : ContentPage {
     }
 
     /// <summary>
-    /// Helper method used to determine what error message to display.
+    ///     Helper method used to determine what error message to display.
     /// </summary>
     /// <param name="logicError">LogicErrorType logicError</param>
     /// <returns>string errorMessage</returns>
     private string SetErrorMessageBody(LogicErrorType logicError) {
-        StringBuilder errorMessageBuilder = new StringBuilder();
+        StringBuilder errorMessageBuilder = new();
         switch (logicError) {
             case LogicErrorType.EmptyGroupName:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
@@ -87,13 +85,14 @@ public partial class CreateGroupPage : ContentPage {
                 break;
             case LogicErrorType.GroupCreateError:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
-                errorMessageBuilder.Append(DataConstants.CreateGroupDBErrorMessage);
+                errorMessageBuilder.Append(DataConstants.CreateGroupDbErrorMessage);
                 break;
             default:
                 errorMessageBuilder.Append(DataConstants.SpaceDashSpace);
                 errorMessageBuilder.Append(DataConstants.CreateGroupUnknownErrorMessage);
                 break;
         }
+
         return errorMessageBuilder.ToString();
     }
 }

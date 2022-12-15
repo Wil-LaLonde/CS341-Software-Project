@@ -1,6 +1,6 @@
-<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="AcademicReward.PopUps.NotificationPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False"
                Size="600, 1000"
@@ -16,14 +16,15 @@
                 HeightRequest="50"
                 Clicked="BackButtonClicked"
                 VerticalOptions="Start"
-                Margin="10"/>
-            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                Margin="10" />
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand">
                 <Label
                     Text="Notification Details"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
-                    TextDecorations="Underline"/>
+                    TextDecorations="Underline" />
             </Frame>
         </StackLayout>
         <StackLayout Margin="10">
@@ -32,36 +33,36 @@
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label x:Name="NotificationTitle" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="NotificationTitle" FontSize="20" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <Label
                 Text="Description: "
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label x:Name="NotificationDescription" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="NotificationDescription" FontSize="20" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <Label
                 Text="Group: "
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label x:Name="NotificationGroup" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="NotificationGroup" FontSize="20" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
-            <Button 
-                Text="Close" 
+            <Button
+                Text="Close"
                 Clicked="CloseNotificationButtonClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
-                BorderColor="{StaticResource BlueButton}"/>
+                BorderColor="{StaticResource BlueButton}" />
         </StackLayout>
     </StackLayout>
 </toolkit:Popup>

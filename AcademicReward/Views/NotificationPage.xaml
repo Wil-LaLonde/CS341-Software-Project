@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.NotificationPage"
@@ -10,42 +11,43 @@
         <StackLayout Margin="25">
             <Frame BorderColor="{StaticResource BlueButton}">
                 <StackLayout>
-                    <Label 
+                    <Label
                         Text="Notifications:"
                         FontSize="45"
                         FontAttributes="Bold"
                         TextDecorations="Underline"
                         VerticalOptions="Center"
-                        HorizontalOptions="Start"/>
+                        HorizontalOptions="Start" />
                     <Label
                         Text="Notifications from your group(s) are listed here."
                         FontFamily="SecondaryFont"
                         FontSize="20"
                         FontAttributes="Italic"
-                        TextColor="{StaticResource Gray600}"/>
+                        TextColor="{StaticResource Gray600}" />
                 </StackLayout>
             </Frame>
             <StackLayout Margin="0, 20">
                 <Frame BorderColor="Black" CornerRadius="0" Padding="0">
                     <!-- Will need to add some binding here -->
-                    <ListView x:Name="NotificationList" ItemSelected="SelectedNotification" SeparatorColor="Black" MaximumHeightRequest="900">
+                    <ListView x:Name="NotificationList" ItemSelected="SelectedNotification" SeparatorColor="Black"
+                              MaximumHeightRequest="900">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <Label 
-                                            Grid.Row="0" 
-                                            Grid.Column="0" 
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="0"
                                             Text="{Binding Title}"
                                             FontSize="25"
                                             Padding="5"
-                                            VerticalOptions="Center"/>
+                                            VerticalOptions="Center" />
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
