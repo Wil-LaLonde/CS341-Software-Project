@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.HomePage"
@@ -21,20 +22,20 @@
                                     x:Name="UsernameLabel"
                                     Text="Username: "
                                     FontSize="45"
-                                    FontAttributes="Bold"/>
+                                    FontAttributes="Bold" />
                                 <Label
                                     x:Name="Username"
                                     FontSize="45"
-                                    FontAttributes="Bold"/>
+                                    FontAttributes="Bold" />
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
                                 <Label
                                     x:Name="PointsLabel"
                                     Text="Points: "
-                                    FontSize="35"/>
+                                    FontSize="35" />
                                 <Label
                                     x:Name="Points"
-                                    FontSize="35"/>
+                                    FontSize="35" />
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand" Margin="0, 10">
@@ -42,27 +43,28 @@
                                 <Label
                                     x:Name="LevelLabel"
                                     Text="Lvl "
-                                    FontSize="45"/>
+                                    FontSize="45" />
                                 <Label
                                     x:Name="Level"
-                                    FontSize="45"/>
+                                    FontSize="45" />
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
-                    <ProgressBar x:Name="ProgressBar" ProgressColor="{StaticResource BlueButton}"/>
+                    <ProgressBar x:Name="ProgressBar" ProgressColor="{StaticResource BlueButton}" />
                     <StackLayout Orientation="Horizontal">
                         <Label
                             x:Name="ExpLabel"
                             Text="XP: "
                             FontSize="20"
-                            Margin="0, 5"/>
+                            Margin="0, 5" />
                         <Label
                             x:Name="Exp"
                             FontSize="20"
-                            Margin="0, 5"/>
+                            Margin="0, 5" />
                     </StackLayout>
                 </StackLayout>
             </Frame>
+
 
             <VerticalStackLayout Padding="20">
                 <!--Frame the Listview-->
@@ -72,52 +74,61 @@
                         <ListView.Header>
                             <StackLayout BackgroundColor="{StaticResource BlueButton}">
                                 <Label Margin="10,10,0,0"
-                                        Text="Task"
-                                        FontSize="30"
-                                        FontAttributes="Bold" 
-                                       />
+                                       Text="Task"
+                                       FontSize="30"
+                                       FontAttributes="Bold" />
                             </StackLayout>
                         </ListView.Header>
                         <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid RowSpacing="3" ColumnSpacing="1">
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid RowSpacing="3" ColumnSpacing="1">
 
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
 
-                                    </Grid.RowDefinitions>
+                                        </Grid.RowDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto"/>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
 
-                                    </Grid.ColumnDefinitions>
-                                    <!--This is displaying the Checkbox and Task object with correct attributes-->
-                                    <CheckBox x:Name="checkBox3" Color="Black" CheckedChanged="TaskCheckBox" Margin="0,0,20,0" Grid.Row="0" Grid.Column="0"  />
-                                    <Label Grid.Row="0" Grid.Column="1" Text="Title: " TextColor="Black" FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Title}" TextColor="Black" FontSize="20.0" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="3" Text="Description: " TextColor="Black" FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="4" Text="{Binding Description}" TextColor="Black" FontSize="20.0" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="5" Text="Points:" TextColor="Black" FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="6" Text="{Binding Points}" TextColor="Black" FontSize="20.0" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="7" Text="GroupID: " TextColor="Black" FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0"/>
-                                    <Label Grid.Row="0" Grid.Column="8" Text="{Binding GroupID}" TextColor="Black" FontSize="20.0" Margin="0,10,20,0"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--This is displaying the Checkbox and Task object with correct attributes-->
+                                        <CheckBox x:Name="MyCheckBox" IsChecked="{Binding IsSubmitted}" Color="Blue"
+                                                  Margin="0,0,20,0" Grid.Row="0" Grid.Column="0" />
+
+                                        <Label Grid.Row="0" Grid.Column="1" Text="Title: " TextColor="Black"
+                                               FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding Title}" TextColor="Black"
+                                               FontSize="20.0" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="3" Text="Description: " TextColor="Black"
+                                               FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="4" Text="{Binding Description}"
+                                               TextColor="Black" FontSize="20.0" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="5" Text="Points:" TextColor="Black"
+                                               FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="6" Text="{Binding Points}" TextColor="Black"
+                                               FontSize="20.0" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="7" Text="GroupID: " TextColor="Black"
+                                               FontSize="20.0" FontAttributes="Bold" Margin="0,10,20,0" />
+                                        <Label Grid.Row="0" Grid.Column="8" Text="{Binding GroupID}" TextColor="Black"
+                                               FontSize="20.0" Margin="0,10,20,0" />
 
 
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <!--Listview-->
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!--Listview-->
                 </Frame>
                 <!--Frame the Listview-->
             </VerticalStackLayout>

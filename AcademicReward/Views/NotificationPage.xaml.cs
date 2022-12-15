@@ -1,26 +1,26 @@
 using AcademicReward.Logic;
 using AcademicReward.ModelClass;
+using AcademicReward.PopUps;
 using AcademicReward.Resources;
 using CommunityToolkit.Maui.Views;
-using System.Collections.ObjectModel;
-using AcademicReward.PopUps;
 
 namespace AcademicReward.Views;
 
 /// <summary>
-/// Primary Author: Wil LaLonde
-/// Secondary Author: None
-/// Reviewer: Maximilian Patterson
+///     NotificationPage shows all notifications for the signed in member
+///     Primary Author: Wil LaLonde
+///     Secondary Author: None
+///     Reviewer: Maximilian Patterson
 /// </summary>
 public partial class NotificationPage : ContentPage {
-    ILogic notificationLogic;
+    private readonly ILogic _notificationLogic;
 
     /// <summary>
-    /// NotificationPage constructor
+    ///     NotificationPage constructor
     /// </summary>
-	public NotificationPage() {
-		InitializeComponent();
-        notificationLogic = new NotificationLogic();
+    public NotificationPage() {
+        InitializeComponent();
+        _notificationLogic = new NotificationLogic();
         //Gather all notifications
         PrepareNotificationList();
         RefreshNotificationList();
@@ -28,42 +28,33 @@ public partial class NotificationPage : ContentPage {
 
 
     /// <summary>
-    /// Helper method used to gather all notifications
+    ///     Helper method used to gather all notifications
     /// </summary>
     private async void PrepareNotificationList() {
         LogicErrorType logicError;
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            logicError = notificationLogic.LookupItem(group);
-            if (LogicErrorType.LookupAllNotificationsDBError == logicError) {
-                await DisplayAlert(DataConstants.LookupNotificationDBErrorTitle, DataConstants.LookupNotificationDBErrorMessage, DataConstants.OK);
-                break;
-            }
-        }
+        logicError = _notificationLogic.LookupItem(MauiProgram.Profile);
+        if (LogicErrorType.LookupAllNotificationsDbError == logicError)
+            await DisplayAlert(DataConstants.LookupNotificationDbErrorTitle,
+                DataConstants.LookupNotificationDbErrorMessage, DataConstants.Ok);
     }
 
     /// <summary>
-    /// Method called when a user selects a notification
+    ///     Method called when a user selects a notification
     /// </summary>
     /// <param name="sender">object sender</param>
     /// <param name="e">SelectedItemChangedEventArgs e</param>
     private void SelectedNotification(object sender, SelectedItemChangedEventArgs e) {
         Notification selectedNotification = e.SelectedItem as Notification;
         if (selectedNotification != null) {
-            NotificationPopUp notificationPopup = new NotificationPopUp(selectedNotification);
+            NotificationPopUp notificationPopup = new(selectedNotification);
             this.ShowPopup(notificationPopup);
         }
     }
 
     /// <summary>
-    /// Helper method used to refresh the notification list
+    ///     Helper method used to refresh the notification list
     /// </summary>
     private void RefreshNotificationList() {
-        ObservableCollection<Notification> notificationList = new ObservableCollection<Notification>();
-        foreach (Group group in MauiProgram.Profile.GroupList) {
-            foreach (Notification notification in group.GroupNotificationList) {
-                notificationList.Add(notification);
-            }
-        }
-        NotificationList.ItemsSource = notificationList;
+        NotificationList.ItemsSource = MauiProgram.Profile.NotificationList;
     }
 }

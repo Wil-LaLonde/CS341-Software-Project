@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="AcademicReward.PopUps.TaskPopUp"
                CanBeDismissedByTappingOutsideOfPopup="False">
     <!-- Primary Author: Xee Lo -->
@@ -10,8 +11,8 @@
 
     <!--Layout of the popup-->
     <StackLayout Margin="25" WidthRequest="600" BackgroundColor="White">
-     <!--Layout of the popup-->
-        
+        <!--Layout of the popup-->
+
         <StackLayout Orientation="Horizontal" Margin="0, 30">
             <!--Backbutton-->
             <ImageButton
@@ -20,7 +21,7 @@
                 HeightRequest="50"
                 Clicked="BackButtonClicked"
                 VerticalOptions="Start"
-                Margin="10"/>
+                Margin="10" />
             <!--Backbutton-->
             <Frame BorderColor="{StaticResource BlueButton}" WidthRequest="500">
                 <Label
@@ -28,51 +29,68 @@
                     FontSize="28"
                     FontAttributes="Bold"
                     TextDecorations="Underline"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center" />
             </Frame>
         </StackLayout>
+        <!--ERROR BODY MESSAGE-->
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}"
+               BorderColor="{StaticResource ErrorBorderColor}" Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error with task creation: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold" />
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    TextType="Html"
+                    FontSize="20" />
+            </StackLayout>
+        </Frame>
+        <!--ERROR BODY MESSAGE-->
         <StackLayout Margin="10">
             <!--Description-->
             <Label
                 Text="Description:"
                 FontSize="28"
                 Margin="0, 5"
-                FontAttributes="Bold"/>
+                FontAttributes="Bold" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
                 <Label
                     x:Name="description"
-                    FontSize="20" 
+                    FontSize="20"
                     Margin="0, 5"
-                    BackgroundColor="{StaticResource Gray200}"/>
+                    BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <!--Description-->
-            
+
             <!--Points-->
-            <HorizontalStackLayout >
+            <HorizontalStackLayout>
                 <Label
-                Text="Points:"
-                FontSize="28"
-                Margin="0, 5, 10,0"
-                FontAttributes="Bold"/>
+                    Text="Points:"
+                    FontSize="28"
+                    Margin="0, 5, 10,0"
+                    FontAttributes="Bold" />
                 <Label
-                x:Name="points"
-                FontSize="28"
-                Margin="0, 5"/>
+                    x:Name="points"
+                    FontSize="28"
+                    Margin="0, 5" />
             </HorizontalStackLayout>
             <!--Points-->
 
             <!--Group-->
-            <HorizontalStackLayout >
+            <HorizontalStackLayout>
                 <Label
-                Text="GroupID:"
-                FontSize="28"
-                Margin="0, 5, 10,0" 
-                FontAttributes="Bold"/>
+                    Text="Group Name:"
+                    FontSize="28"
+                    Margin="0, 5, 10,0"
+                    FontAttributes="Bold" />
                 <Label
-                x:Name="group"
-                FontSize="28"
-                Margin="0, 5"
-                />
+                    x:Name="group"
+                    FontSize="28"
+                    Margin="0, 5" />
             </HorizontalStackLayout>
             <!--Group-->
 
@@ -81,21 +99,22 @@
                 Text="Feedback:"
                 FontSize="28"
                 Margin="0, 5"
-                FontAttributes="Bold"/>
+                FontAttributes="Bold" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Editor FontSize="20" Placeholder="Write Feedback Here" PlaceholderColor="{StaticResource Gray400}" HeightRequest="250" BackgroundColor="{StaticResource Gray200}"/>
+                <Editor FontSize="20" Placeholder="Write Feedback Here" PlaceholderColor="{StaticResource Gray400}"
+                        HeightRequest="250" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <!--Feedback-->
 
             <!--SubmitButton-->
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
-            <Button 
-                Text="Submit" 
+            <Button
+                Text="Submit"
                 Clicked="SubmitTask"
                 FontSize="25"
                 FontFamily="BoldFont"
-                BorderColor="{StaticResource BlueButton}"/>
+                BorderColor="{StaticResource BlueButton}" />
         </StackLayout>
         <!--SubmitButton-->
     </StackLayout>

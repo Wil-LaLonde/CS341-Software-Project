@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.GroupPage"
@@ -16,21 +17,27 @@
                         FontSize="45"
                         TextDecorations="Underline"
                         FontAttributes="Bold"
-                        HorizontalOptions="Center"/>
-                    <Label
-                        x:Name="GroupAdminLbl"
-                        Text="{ Binding AdminName }"
-                        FontSize="35"
-                        FontFamily="SecondaryFont"
-                        TextColor="{StaticResource Gray600}"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label
+                            Text="Admin: "
+                            FontSize="35"
+                            FontFamily="SecondaryFont"
+                            TextColor="{StaticResource Gray600}" />
+                        <Label
+                            x:Name="GroupAdminLbl"
+                            Text="{ Binding AdminName }"
+                            FontSize="35"
+                            FontFamily="SecondaryFont"
+                            TextColor="{StaticResource Gray600}" />
+                    </StackLayout>
                     <Label
                         x:Name="GroupDescriptionLbl"
                         Text="{ Binding GroupDescription }"
                         FontSize="35"
                         FontFamily="SecondaryFont"
                         TextColor="{StaticResource Gray600}"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center" />
                 </StackLayout>
             </Frame>
             <StackLayout Margin="0, 10" Orientation="Horizontal">
@@ -40,38 +47,67 @@
                     FontAttributes="Bold"
                     Margin="0, 10"
                     TextDecorations="Underline"
-                    VerticalOptions="Center"/>
+                    VerticalOptions="Center" />
                 <Label
+                    x:Name="AddMemberLbl"
                     Text="Add Member:  "
                     FontFamily="SecondaryFont"
                     FontSize="24"
                     TextColor="{StaticResource Gray600}"
                     VerticalOptions="Center"
-                    HorizontalOptions="EndAndExpand"/>
+                    HorizontalOptions="EndAndExpand" />
                 <Button
+                    x:Name="AddMemberBtn"
                     Text="+"
-                    Clicked="AddMemberButtonClicked"
+                    Clicked="AddMemberButtonClickedAsync"
                     FontSize="30"
                     Padding="18, 8"
                     FontAttributes="Bold"
                     FontFamily="BoldFont"
                     BorderColor="{StaticResource BlueButton}"
-                    VerticalOptions="Center"/>
+                    VerticalOptions="Center" />
             </StackLayout>
             <Frame CornerRadius="0" BorderColor="Black" Padding="0">
                 <ListView x:Name="MembersLV" ItemsSource="{Binding Members}" SeparatorColor="Black">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Label
-                                    FontSize="25"
-                                    Text="{Binding Username}"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="{Binding Level, StringFormat='Lvl: {0}'}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="{Binding Username}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="{Binding XP, StringFormat='XP: {0}/100'}"
+                                        FontSize="25"
+                                        Padding="5"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="EndAndExpand" />
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
-                </ListView.ItemTemplate>
-             </ListView>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Frame>
         </StackLayout>
     </ScrollView>

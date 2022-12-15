@@ -1,110 +1,218 @@
 ﻿using AcademicReward.Database;
-using AcademicReward.Resources;
 using AcademicReward.ModelClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
-namespace AcademicReward.Logic
-{
-    /**
- *  Primary Author: Sean Stille
- *  Reviewer: TBD
- *  Desc:   The logic implementation for items within the shop, adding them, deleting them, etc.
- *          NOTE: Currently the groupID gets set to one regardless of input, this will get changed in
- *                the next sprint, keeping it as null right now (it goes into the database as 1) since
- *                member shop view hasn't been implemented yet.
- */
-    public class ShopLogic : ILogic
-    {
-        IDatabase ShopData;
-        public ObservableCollection<ShopItem> ItemList;
-        public ShopLogic()
-        {
-            ShopData = new ShopItemDatabase(this);
-            ItemList = new ObservableCollection<ShopItem>();
-        }
-        public LogicErrorType AddItem(object obj)
-        {
-            ModelClass.ShopItem toBeAdded;
-            String[] AddItemVals = (String[])obj;
-            int cost = -1;
-            int level = -1;
-            if(! int.TryParse(AddItemVals[2], out cost)) //Testing cost, if it doesn't work, throw exception
-            {
-                return LogicErrorType.InvalidCost;
-            }
-            if( !int.TryParse(AddItemVals[3], out level)) // Testing level
-            {
-                return LogicErrorType.InvalidLevel;
-            }
-            
-            toBeAdded = new ShopItem(AddItemVals[0], AddItemVals[1], cost, level, null);
-            
-            
-            ItemList.Add(toBeAdded);
-            if (ShopData.AddItem(toBeAdded) == DatabaseErrorType.NoError)
-            {
-                return LogicErrorType.NoError;
-            }
+using AcademicReward.Resources;
+
+namespace AcademicReward.Logic; 
+
+/// <summary>
+///     The logic implementation for items within the shop, adding them, deleting them, etc.
+///     Primary Author: Sean Stille
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
+/// </summary>
+public class ShopLogic : ILogic {
+    private readonly IDatabase _historyDb;
+    private readonly ShopItemDatabase _shopDb;
+
+    /// <summary>
+    ///     ShopLogic constructor
+    /// </summary>
+    public ShopLogic() {
+        _shopDb = new ShopItemDatabase();
+        _historyDb = new HistoryDatabase();
+    }
+
+    /// <summary>
+    ///     Method used to add a shop item (logic)
+    /// </summary>
+    /// <param name="shopItem">object shopItem</param>
+    /// <returns>LogicErrorType logicError</returns>
+    public LogicErrorType AddItem(object shopItem) {
+        LogicErrorType logicError;
+        ShopItem shopItemToAdd = shopItem as ShopItem;
+        //Checking user input
+        logicError = CheckShopItem(shopItemToAdd);
+        if (LogicErrorType.NoError == logicError) {
+            DatabaseErrorType dbError = _shopDb.AddItem(shopItemToAdd);
+            if (DatabaseErrorType.NoError == dbError)
+                //Adding new history item
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryAddShopItemTitle,
+                    string.Format(DataConstants.HistoryAddShopItemDescription, shopItemToAdd.Title,
+                        shopItemToAdd.Group.GroupName)));
             else
-            {
-                return LogicErrorType.UnsuccessfulDBAdd;
-            }
+                logicError = LogicErrorType.AddShopItemDbError;
         }
 
-        public LogicErrorType DeleteItem(object obj)
-        {
-            ShopItem item = obj as ShopItem;
-            ShopItem toBeRemoved = null;
-            foreach ( ShopItem i in ItemList)
-            {
-                if (i.Id == item.Id)
-                {
-                    toBeRemoved = i;
-                }
-            }
-            ItemList.Remove(toBeRemoved);
-            ShopData.DeleteItem(toBeRemoved);
-            return LogicErrorType.NoError;
+        return logicError;
+    }
+
+    /// <summary>
+    ///     Method used to delete a shop item (logic)
+    /// </summary>
+    /// <param name="shopItem">object shopItem</param>
+    /// <returns>LogicErrorType logicError</returns>
+    public LogicErrorType DeleteItem(object shopItem) {
+        LogicErrorType logicError;
+        DatabaseErrorType dbError = _shopDb.DeleteItem(shopItem);
+        if (DatabaseErrorType.NoError == dbError) {
+            logicError = LogicErrorType.NoError;
+            //Add new history item
+            ShopItem shopItemToDelete = shopItem as ShopItem;
+            _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryDeleteShopItemTitle,
+                string.Format(DataConstants.HistoryDeleteShopItemDescription, shopItemToDelete.Title,
+                    shopItemToDelete.Group.GroupName)));
+        }
+        else {
+            logicError = LogicErrorType.DeleteShopItemDbError;
         }
 
-        public LogicErrorType LookupItem(object obj)
-        {
-            ShopData.LookupFullItem(null);
-            return LogicErrorType.NoError;
-        }
+        return logicError;
+    }
 
-        public LogicErrorType UpdateItem(object obj)
-        {
-            ModelClass.ShopItem toBeAdded;
-            String[] AddItemVals = (String[])obj;
-            int cost = -1;
-            int level = -1;
-            if (!int.TryParse(AddItemVals[2], out cost)) //Testing cost, if it doesn't work, throw exception
-            {
-                return LogicErrorType.InvalidCost;
-            }
-            if (!int.TryParse(AddItemVals[3], out level)) // Testing level
-            {
-                return LogicErrorType.InvalidLevel;
-            }
+    /// <summary>
+    ///     Method used to lookup all shop items (logic)
+    /// </summary>
+    /// <param name="profile">object profile</param>
+    /// <returns>LogicErrorType logicError</returns>
+    public LogicErrorType LookupItem(object profile) {
+        LogicErrorType logicError;
+        DatabaseErrorType dbError = _shopDb.LookupFullItem(profile);
+        if (DatabaseErrorType.NoError == dbError)
+            logicError = LogicErrorType.NoError;
+        else
+            logicError = LogicErrorType.LookupAllShopItemsDbError;
+        return logicError;
+    }
 
-            toBeAdded = new ShopItem(int.Parse(AddItemVals[5]), AddItemVals[0], AddItemVals[1], cost, level, null);
-
-            
-            if (ShopData.UpdateItem(toBeAdded) == DatabaseErrorType.NoError)
-            {
-                return LogicErrorType.NoError;
-            }
+    /// <summary>
+    ///     Method used to update a shop item (logic)
+    /// </summary>
+    /// <param name="shopItem">object shopItem</param>
+    /// <returns>LogicErrorType logicError</returns>
+    public LogicErrorType UpdateItem(object shopItem) {
+        LogicErrorType logicError;
+        ShopItem shopItemToUpdate = shopItem as ShopItem;
+        //Checking user input
+        logicError = CheckShopItem(shopItemToUpdate);
+        if (LogicErrorType.NoError == logicError) {
+            DatabaseErrorType dbError = _shopDb.UpdateItem(shopItemToUpdate);
+            if (DatabaseErrorType.NoError == dbError)
+                //Adding new history item
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId,
+                    DataConstants.HistoryUpdateShopItemTitle,
+                    string.Format(DataConstants.HistoryUpdateShopItemDescription, shopItemToUpdate.Title,
+                        shopItemToUpdate.Group.GroupName)));
             else
-            {
-                return LogicErrorType.UnsuccessfulDBAdd;
-            }
-            throw new NotImplementedException();
+                logicError = LogicErrorType.UpdateShopItemDbError;
         }
+
+        return logicError;
+    }
+
+    //Currently not needed
+    public LogicErrorType AddItemWithArgs(object[] obj) {
+        return LogicErrorType.NotImplemented;
+    }
+
+    /// <summary>
+    ///     Method used to buy a shop item (logic)
+    /// </summary>
+    /// <param name="shopItem">ShopItem shopItem</param>
+    /// <returns>LogicErrorType logicError</returns>
+    public LogicErrorType BuyItem(ShopItem shopItem) {
+        LogicErrorType logicError = CheckBuyShopItem(MauiProgram.Profile, shopItem);
+        if (LogicErrorType.NoError == logicError) {
+            DatabaseErrorType dbError = _shopDb.BuyItem(shopItem);
+            if (DatabaseErrorType.NoError == dbError) {
+                logicError = LogicErrorType.NoError;
+                //Add new history item
+                _historyDb.AddItem(new HistoryItem(MauiProgram.Profile.ProfileId, DataConstants.HistoryBuyShopItemTitle,
+                    string.Format(DataConstants.HistoryBuyShopItemDescription, shopItem.Title,
+                        shopItem.Group.GroupName)));
+            }
+            else {
+                logicError = LogicErrorType.BuyItemError;
+            }
+        }
+
+        return logicError;
+    }
+
+    /// <summary>
+    ///     Helper method used to check a shop item
+    /// </summary>
+    /// <param name="shopItem">ShopItem shopItem</param>
+    private LogicErrorType CheckShopItem(ShopItem shopItem) {
+        LogicErrorType logicError;
+        if (string.IsNullOrEmpty(shopItem.Title))
+            logicError = LogicErrorType.EmptyShopItemTitle;
+        else if (string.IsNullOrEmpty(shopItem.Description))
+            logicError = LogicErrorType.EmptyShopItemDescription;
+        else if (CheckPointValue(shopItem.PointCost))
+            logicError = LogicErrorType.NegativeShopItemCost;
+        else if (CheckLevelRequirement(shopItem.LevelRequirement))
+            logicError = LogicErrorType.NegativeShopItemLevelRequirement;
+        else if (CheckItemTitleLength(shopItem.Title))
+            logicError = LogicErrorType.InvalidShopItemLength;
+        else if (CheckItemDescriptionLength(shopItem.Description))
+            logicError = LogicErrorType.InvalidShopItemDescriptionLength;
+        else
+            logicError = LogicErrorType.NoError;
+        return logicError;
+    }
+
+    /// <summary>
+    ///     Helper method for checking when buying a shop item
+    /// </summary>
+    /// <param name="profile">Profile profile</param>
+    /// <param name="shopItem">ShopItem shopItem</param>
+    /// <returns>LogicErrorType logicError</returns>
+    private LogicErrorType CheckBuyShopItem(Profile profile, ShopItem shopItem) {
+        LogicErrorType logicError;
+        if (profile.Level < shopItem.LevelRequirement)
+            logicError = LogicErrorType.NeedHigherLevel;
+        else if (profile.Points < shopItem.PointCost)
+            logicError = LogicErrorType.NotEnoughDoubloons;
+        else
+            logicError = LogicErrorType.NoError;
+        return logicError;
+    }
+
+    /// <summary>
+    ///     Helper method used to check a point value
+    /// </summary>
+    /// <returns>true/false</returns>
+    private bool CheckPointValue(int points) {
+        return points < ShopItem.MinCostValue;
+    }
+
+    /// <summary>
+    ///     Helper method used to check a level requirement
+    /// </summary>
+    /// <param name="levelRequirement">int levelRequirement</param>
+    /// <returns>true/false</returns>
+    private bool CheckLevelRequirement(int levelRequirement) {
+        return levelRequirement < ShopItem.MinLevelRequirement;
+    }
+
+    /// <summary>
+    ///     Helper method used to check a title's length
+    /// </summary>
+    /// <param name="itemTitle">string itemTitle</param>
+    /// <returns>true/false</returns>
+    private bool CheckItemTitleLength(string itemTitle) {
+        int itemTitleLength = itemTitle.Length;
+        return itemTitleLength < ShopItem.MinTitleLength || itemTitleLength > ShopItem.MaxTitleLength;
+    }
+
+    /// <summary>
+    ///     Helper method used to check a description's length
+    /// </summary>
+    /// <param name="itemDescription">string itemDescription</param>
+    /// <returns>true/false</returns>
+    private bool CheckItemDescriptionLength(string itemDescription) {
+        int itemDescriptionLength = itemDescription.Length;
+        return itemDescriptionLength < ShopItem.MinDescriptionLength ||
+            itemDescriptionLength > ShopItem.MaxDescriptionLength;
     }
 }

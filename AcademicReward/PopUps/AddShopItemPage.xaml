@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<mct:Popup  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-            x:Class="AcademicReward.AddShopItemPage"
-            CanBeDismissedByTappingOutsideOfPopup="False"
-            Color="White">
+<?xml version="1.0" encoding="utf-8"?>
+
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           x:Class="AcademicReward.AddShopItemPage"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           Color="White"
+           Size="600, 1100">
     <!-- Primary Author: Sean Stille -->
     <!-- Secondary Author: Wil LaLonde -->
     <!-- Reviewer: Wil LaLonde -->
@@ -16,84 +18,92 @@
                 HeightRequest="50"
                 Clicked="BackButtonClicked"
                 VerticalOptions="Start"
-                Margin="10"/>
-            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                Margin="10" />
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand">
                 <Label
                     Text="Create Shop Item"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
-                    TextDecorations="Underline"/>
+                    TextDecorations="Underline" />
             </Frame>
         </StackLayout>
-
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}"
+               BorderColor="{StaticResource ErrorBorderColor}" Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error while adding shop item: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold" />
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    FontSize="20" />
+            </StackLayout>
+        </Frame>
         <StackLayout Margin="10">
             <Label
                 Text="Item Name:"
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry x:Name="name" FontSize="20" Placeholder="Item Name..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="name" FontSize="20" Placeholder="Item Name..."
+                       PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <Label
                 Text="Item Description:"
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry x:Name="description" FontSize="20" Placeholder="Item Description..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="description" FontSize="20" Placeholder="Item Description..."
+                       PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <Label
                 Text="Item Cost:"
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry x:Name="cost" FontSize="20" Placeholder="Item Cost..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="cost" FontSize="20" Placeholder="Item Cost..."
+                       PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <Label
                 Text="Level Requirement:"
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Entry x:Name="levelRec" FontSize="20" Placeholder="Level Requirement..." PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}"/>
+                <Entry x:Name="levelRec" FontSize="20" Placeholder="Level Requirement..."
+                       PlaceholderColor="{StaticResource Gray400}" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
             <Label
                 Text="Group: "
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Group 1</x:String>
-                            <x:String>Group 2</x:String>
-                            <x:String>Group 3</x:String>
-                            <x:String>Group 4</x:String>
-                            <x:String>Group 5</x:String>
-                            <x:String>Group 6</x:String>
-                            <x:String>Group 7</x:String>
-                            <x:String>Group 8</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                <Picker Title="Select A Group..." x:Name="GroupPicker" FontSize="20"
+                        ItemDisplayBinding="{Binding GroupName}" />
+
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10">
-            <Button 
-                Text="Add" 
+            <Button
+                Text="Add"
                 Clicked="AddClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
-                BorderColor="{StaticResource BlueButton}"/>
+                BorderColor="{StaticResource BlueButton}" />
         </StackLayout>
     </StackLayout>
 </mct:Popup>

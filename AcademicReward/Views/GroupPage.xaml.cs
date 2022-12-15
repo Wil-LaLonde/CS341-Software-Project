@@ -1,42 +1,80 @@
+using System.Collections.ObjectModel;
 using AcademicReward.Database;
 using AcademicReward.ModelClass;
 using AcademicReward.PopUps;
 using CommunityToolkit.Maui.Views;
-using System.Collections.ObjectModel;
 
 namespace AcademicReward.Views;
 
 /// <summary>
-/// Primary Author: Maximilian Patterson 
-/// Secondary Author: None
-/// Reviewer: Wil LaLonde
+///     GroupPage is the page that is shown when a user clicks on a group
+///     Primary Author: Maximilian Patterson
+///     Secondary Author: None
+///     Reviewer: Wil LaLonde
 /// </summary>
-public partial class GroupPage : ContentPage
-{
-    public ObservableCollection<Profile> Members = new ObservableCollection<Profile>();
-    public GroupPage(Group group)
-    {
+public partial class GroupPage : ContentPage {
+    public Group Group;
+    public ObservableCollection<Profile> Members = new();
+
+    /// <summary>
+    ///     GroupPage constructor
+    /// </summary>
+    /// <param name="group">Group group</param>
+    public GroupPage(Group group) {
         InitializeComponent();
-        
-        Members = GroupProfileRelationship.getProfilesInGroup(group);
+
+        this.Group = group;
+
+        Members = GroupProfileRelationship.GetProfilesInGroup(group);
+        UpdateMembersXp();
         MembersLV.ItemsSource = Members;
-        
+
         GroupDescriptionLbl.Text = group.GroupDescription;
         GroupNameLbl.Text = group.GroupName;
         ShowAdminName(group);
+
+        // Hide add group button and text if user is not an admin
+        if (!MauiProgram.Profile.IsAdmin) {
+            AddMemberBtn.IsVisible = false;
+            AddMemberLbl.IsVisible = false;
+        }
     }
 
-    public void ShowAdminName(Group group)
-    {
+    /// <summary>
+    ///     Method used to show the admin name
+    /// </summary>
+    /// <param name="group">Group group</param>
+    public void ShowAdminName(Group group) {
         base.OnAppearing();
-        LoginDatabase loginDatabase= new LoginDatabase();
-        Object admin = loginDatabase.FindById(group.AdminProfileID);
+        LoginDatabase loginDatabase = new();
+        object admin = loginDatabase.FindById(group.AdminProfileId);
         Profile adminProfile = admin as Profile;
         GroupAdminLbl.Text = adminProfile.Username;
     }
 
-    public void AddMemberButtonClicked(object sender, EventArgs e) {
-        AddMemberPopUp addMemberPopUp = new AddMemberPopUp();
-        this.ShowPopup(addMemberPopUp);
+    /// <summary>
+    ///     Method called when a user clicks on the add member button
+    /// </summary>
+    /// <param name="sender">object sender</param>
+    /// <param name="e">EventArgs e</param>
+    public async void AddMemberButtonClickedAsync(object sender, EventArgs e) {
+        // Include reference to this page so that the listview of members can be updated
+        AddMemberPopUp addMemberPopUp = new(Group, ref Members);
+
+        object result = await this.ShowPopupAsync(addMemberPopUp);
+
+        if (result is ObservableCollection<Profile> membersResult)
+            if (membersResult != null) {
+                Members = GroupProfileRelationship.GetProfilesInGroup(Group);
+                UpdateMembersXp();
+                MembersLV.ItemsSource = Members;
+            }
+    }
+
+    /// <summary>
+    ///     Helper method used to properly show the correct amount of XP for a member
+    /// </summary>
+    private void UpdateMembersXp() {
+        foreach (Profile member in Members) member.Xp = member.GetCurrentXpInt();
     }
 }

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AcademicReward.Views.ProfilePage"
@@ -18,20 +19,20 @@
                                     x:Name="UsernameLabel"
                                     Text="Username: "
                                     FontSize="45"
-                                    FontAttributes="Bold"/>
+                                    FontAttributes="Bold" />
                                 <Label
                                     x:Name="Username"
                                     FontSize="45"
-                                    FontAttributes="Bold"/>
+                                    FontAttributes="Bold" />
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
                                 <Label
                                     x:Name="PointsLabel"
                                     Text="Points: "
-                                    FontSize="35"/>
+                                    FontSize="35" />
                                 <Label
                                     x:Name="Points"
-                                    FontSize="35"/>
+                                    FontSize="35" />
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand" Margin="0, 10">
@@ -39,54 +40,61 @@
                                 <Label
                                     x:Name="LevelLabel"
                                     Text="Lvl "
-                                    FontSize="45"/>
+                                    FontSize="45" />
                                 <Label
                                     x:Name="Level"
-                                    FontSize="45"/>
+                                    FontSize="45" />
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
-                    <ProgressBar x:Name="ProgressBar" ProgressColor="{StaticResource BlueButton}"/>
+                    <ProgressBar x:Name="ProgressBar" ProgressColor="{StaticResource BlueButton}" />
                     <StackLayout Orientation="Horizontal">
                         <Label
                             x:Name="ExpLabel"
                             Text="XP: "
                             FontSize="20"
-                            Margin="0, 5"/>
+                            Margin="0, 5" />
                         <Label
                             x:Name="Exp"
                             FontSize="20"
-                            Margin="0, 5"/>
+                            Margin="0, 5" />
                     </StackLayout>
                 </StackLayout>
             </Frame>
             <StackLayout Orientation="Vertical" Margin="0, 40" Spacing="15">
-                <Button Text="Groups" 
+                <Button Text="Groups"
                         FontSize="42"
                         FontFamily="BoldFont"
                         Clicked="ShowGroupsView"
                         Margin="65, 5"
-                        Padding="0, 25"/>
-                <Button Text="History" 
+                        Padding="0, 25" />
+                <Button Text="History"
                         FontSize="42"
                         FontFamily="BoldFont"
                         Clicked="ShowHistoryView"
                         Margin="65, 5"
-                        Padding="0, 25"/>
-                <Button Text="Edit Profile" 
+                        Padding="0, 25" />
+                <Button x:Name="PurchaseHistoryBtn"
+                        Text="Purchase History"
+                        FontSize="42"
+                        FontFamily="BoldFont"
+                        Clicked="ShowPurchaseHistoryView"
+                        Margin="65, 5"
+                        Padding="0, 25" />
+                <Button Text="Edit Profile"
                         FontSize="42"
                         FontFamily="BoldFont"
                         Clicked="ShowEditProfileView"
                         Margin="65, 5"
-                        Padding="0, 25"/>
+                        Padding="0, 25" />
             </StackLayout>
             <Button Text="Sign Out"
-                        FontSize="42"
-                        FontFamily="BoldFont"
-                        Clicked="SignOutButtonClicked"
-                        Margin="250, 5"
-                        Padding="0, 25"
-                        VerticalOptions="EndAndExpand"/>
+                    FontSize="42"
+                    FontFamily="BoldFont"
+                    Clicked="SignOutButtonClicked"
+                    Margin="250, 5"
+                    Padding="0, 25"
+                    VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

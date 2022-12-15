@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<mct:Popup  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-            x:Class="AcademicReward.ViewShopItemPage"
-            CanBeDismissedByTappingOutsideOfPopup="False"
-            Color="White">
+<?xml version="1.0" encoding="utf-8"?>
+
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+           x:Class="AcademicReward.ViewShopItemPage"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           Color="White"
+           Size="600, 1100">
     <!-- Primary Author: Sean Stille -->
     <!-- Secondary Author: Wil LaLonde -->
     <!-- Reviewer: Wil LaLonde -->
@@ -16,58 +18,93 @@
                 HeightRequest="50"
                 Clicked="BackButtonClicked"
                 VerticalOptions="Start"
-                Margin="10"/>
-            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                Margin="10" />
+            <Frame BorderColor="{StaticResource BlueButton}" VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand">
                 <Label
                     x:Name="ItemTitle"
                     BackgroundColor="{StaticResource Gray200}"
                     FontSize="50"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
-                    TextDecorations="Underline"/>
+                    TextDecorations="Underline" />
             </Frame>
         </StackLayout>
         <StackLayout Margin="10" HorizontalOptions="Center">
-            <Frame BorderColor="Black" CornerRadius="0" Padding="0">
+            <Frame BorderColor="Black" CornerRadius="0" Padding="0" MaximumHeightRequest="350"
+                   MinimumHeightRequest="350">
                 <Image
                     Source="shop.png"
-                    Scale="0.5"/>
+                    Scale="0.5" />
             </Frame>
         </StackLayout>
+        <Frame x:Name="ErrorFrame" BackgroundColor="{StaticResource ErrorBackgroundColor}"
+               BorderColor="{StaticResource ErrorBorderColor}" Margin="10, 0">
+            <StackLayout x:Name="ErrorStackLayout">
+                <Label
+                    Text="Error while buying shop item: "
+                    x:Name="ErrorMessageHeader"
+                    FontSize="22"
+                    Margin="0, 5"
+                    FontAttributes="Bold" />
+                <Label
+                    Text=""
+                    x:Name="ErrorMessageBody"
+                    FontSize="20" />
+            </StackLayout>
+        </Frame>
         <StackLayout Margin="10">
-            <Label
-                Text="Item Cost: "
-                FontSize="22"
-                Margin="0, 5"
-                FontAttributes="Bold"
-                VerticalOptions="Center"/>
-            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label x:Name="Cost" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
-            </Frame>
             <Label
                 Text="Item Description: "
                 FontSize="22"
                 Margin="0, 5"
                 FontAttributes="Bold"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center" />
             <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
-                <Label x:Name="Desc" FontSize="20" BackgroundColor="{StaticResource Gray200}"/>
+                <Label x:Name="Desc" FontSize="20" BackgroundColor="{StaticResource Gray200}" />
+            </Frame>
+            <Label
+                Text="Level Requirement: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label x:Name="LevelRequirement" FontSize="20" BackgroundColor="{StaticResource Gray200}" />
+            </Frame>
+            <Label
+                Text="Item Cost: "
+                FontSize="22"
+                Margin="0, 5"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+            <Frame BackgroundColor="{StaticResource Gray200}" BorderColor="{StaticResource Gray200}" Margin="0, 5">
+                <Label x:Name="Cost" FontSize="20" BackgroundColor="{StaticResource Gray200}" />
             </Frame>
         </StackLayout>
         <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Center" Margin="10" Orientation="Horizontal">
-            <Button 
-                Text="Delete" 
+            <Button
+                x:Name="DeleteButton"
+                Text="Delete"
                 Clicked="DeleteClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
                 BorderColor="{StaticResource BlueButton}"
-                Margin="10, 0"/>
-            <Button 
-                Text="Edit" 
+                Margin="10, 0" />
+            <Button
+                x:Name="EditButton"
+                Text="Update"
                 Clicked="EditClicked"
                 FontSize="25"
                 FontFamily="BoldFont"
-                BorderColor="{StaticResource BlueButton}"/>
+                BorderColor="{StaticResource BlueButton}" />
+            <Button
+                x:Name="BuyButton"
+                Text="Buy"
+                Clicked="BuyClicked"
+                FontSize="25"
+                FontFamily="BoldFont"
+                BorderColor="{StaticResource BlueButton}" />
         </StackLayout>
     </StackLayout>
 </mct:Popup>
